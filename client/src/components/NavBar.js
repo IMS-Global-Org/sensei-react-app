@@ -6,42 +6,69 @@ import { handleLogout } from '../actions/auth';
 import { withRouter } from 'react-router-dom';
 
 class NavBar extends Component {
+  state={ activeItem: '' }
+
+  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+
   rightNavs = () => {
     const { user, dispatch, history } = this.props;
+    const { activeItem } = this.state
 
     if(user.id) {
       return(
         <Menu.Menu position='right'>
           <Menu.Item
-            name='Logout'
-            onClick={() => dispatch(handleLogout(history))}
-          />
+            name='settings'
+            as={ Link }
+            to='/settings'
+            active={activeItem === 'settings'}
+            onClick={this.handleItemClick} />
+          <Menu.Item
+            name='logout'
+            active={activeItem === 'logout'}
+            onClick={() => dispatch(handleLogout(history))} />
         </Menu.Menu>
-      );
+      )
     } else {
       return(
         <Menu.Menu position='right'>
-          <Link to='/register'>
-            <Menu.Item name='Register' />
-          </Link>
-          <Link to='/login'>
-            <Menu.Item name='Login' />
-          </Link>
+            <Menu.Item
+              as={ Link }
+              to='/register'
+              name='register'
+              active={activeItem === 'register'}
+              onClick={this.handleItemClick} />
+            <Menu.Item
+              as={ Link }
+              to='/login'
+              name='login'
+              active={activeItem === 'login'}
+              onClick={this.handleItemClick} />
         </Menu.Menu>
-      );
+      )
     }
   }
 
   render() {
+    const { activeItem } = this.state
     return (
-      <div>
-        <Menu pointing secondary>
-          <Link to='/'>
-            <Menu.Item name='home' />
-          </Link>
-          { this.rightNavs() }
-        </Menu>
-      </div>
+      <Menu pointing secondary style={{ backgroundColor: 'white'}}>
+        <Menu.Item
+          header
+          color='red'
+          name='sensei'
+          as={ Link }
+          to='/'
+          active={activeItem === 'sensei'}
+          onClick={this.handleItemClick} />
+        <Menu.Item
+          name='courses'
+          as={ Link }
+          to='/courses'
+          active={activeItem === 'courses'}
+          onClick={this.handleItemClick} />
+        { this.rightNavs() }
+      </Menu>
     )
   }
 }
