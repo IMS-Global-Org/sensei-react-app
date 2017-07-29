@@ -1,11 +1,21 @@
 import React, { Component } from 'react';
-import { Header } from 'semantic-ui-react';
+import { Grid } from 'semantic-ui-react';
 
 class Home extends Component {
   render() {
     return(
-      <Header as='h1' textAlign='center'>Home Component</Header>
-    );
+      <Grid columns={3}>
+        <Grid.Column width={3}>
+          Links Area
+        </Grid.Column>
+        <Grid.Column width={9}>
+          Main Area
+        </Grid.Column>
+        <Grid.Column width={4}>
+          Announcements
+        </Grid.Column>
+      </Grid>
+    )
   }
 }
 

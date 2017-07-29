@@ -7,7 +7,7 @@ import { Button } from 'semantic-ui-react';
 const fadeFlash = (dispatch) => {
   setTimeout( () => {
     dispatch(clearFlash());
-  }, 15000)
+  }, 5000)
 }
 
 const Flash = ({ flash, dispatch }) => {

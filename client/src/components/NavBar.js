@@ -52,7 +52,11 @@ class NavBar extends Component {
   render() {
     const { activeItem } = this.state
     return (
-      <Menu pointing secondary style={{ backgroundColor: 'white'}}>
+      <Menu
+        pointing
+        secondary
+        stackable
+        style={{ backgroundColor: 'white'}} >
         <Menu.Item
           header
           color='red'
