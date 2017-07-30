@@ -23,7 +23,7 @@ const Announcement = ({ data }) => {
           <Card.Header>{data.title}</Card.Header>
           <Card.Meta>Event Type:&nbsp;{data.category}</Card.Meta>
           <Card.Description>
-            Desc:&nbsp;{data.message}
+            Details:&nbsp;{data.message}
           </Card.Description>
         </Card.Content>
         <Card.Content>
@@ -45,6 +45,9 @@ const Announcement = ({ data }) => {
               </Column>
             </Row>
           </Grid>
+        </Card.Content>
+        <Card.Content>
+          Notice:&nbsp;{ data.extra ? data.extra : '' }
         </Card.Content>
       </Card>
     )

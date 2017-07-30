@@ -18,6 +18,8 @@ const AnnouncementsArea = styled(Segment)`
  * @version 0.0.1
  */
 class Announcements extends Component {
+  // NOTE 'hasMore' must be set to false until the initial data has loaded.
+  //      Eliminates pre-mature loading of data and unwanted race conditions
   state = { hasMore: false }
 
   /**
@@ -25,7 +27,9 @@ class Announcements extends Component {
    */
    componentDidMount = () => {
      let { dispatch } = this.props
+     // NOTE load the initial data that will be displayed in the component
      dispatch(indexAnnouncements())
+     // NOTE Once initial data has loaded, set the scroll to having more elements
      this.setState({ hasMore: true })
    }
 
@@ -34,8 +38,10 @@ class Announcements extends Component {
    */
   displayAnnouncements = () => {
     let { notices: { data } } = this.props
+    // NOTE load only when 'data' exists, not just the empty object/container
     if( data && data.length > 0 ) {
       return data.map( notice => {
+        // show presentation component
         return ( <Announcement key={notice.id} data={notice} /> )
       })
     }
@@ -48,10 +54,16 @@ class Announcements extends Component {
   loadMore = ( page ) => {
     let { notices: { pagination }, dispatch } = this.props
     let { hasMore } = this.state
+    // NOTE These two conditions must be meet to load more items
+    //      1) hasMore must be true, only after the initial loading
+    //      2) pagination info must be available to determining if more pages
+    //         can actually be loaded. 'total_pages' has to be set so comparison
+    //         will indicate if additional pages can be loaded.
     if( hasMore && pagination.total_pages ){
       if( page <= pagination.total_pages ){
         dispatch(indexAnnouncements(page))
       } else {
+        // NOTE set 'hasMore' to false only if there are no more pages to load
         this.setState({ hasMore: false })
       }
     }
@@ -69,6 +81,7 @@ class Announcements extends Component {
           hasMore={this.state.hasMore}
           loader={<div>Loading...</div>}
           useWindow={false} >
+          {/* additional 'div' elements are required by InfiniteScroll */}
           <div>
             { this.displayAnnouncements() }
           </div>
