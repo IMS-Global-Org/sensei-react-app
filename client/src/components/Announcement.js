@@ -28,7 +28,7 @@ const Announcement = ({ data }) => {
         </Card.Content>
         <Card.Content>
           <Grid>
-            <Row columns={2} top>
+            <Row columns={2} top={true} >
               <Column width={8}>
                 Begins:&nbsp;{data.start_date}
               </Column>
@@ -36,7 +36,7 @@ const Announcement = ({ data }) => {
                 Fee:&nbsp;{data.cost && `$${data.cost}`}
               </Column>
             </Row>
-            <Row columns={2} bottom>
+            <Row columns={2} bottom={true} >
               <Column width={8}>
                 Ends:&nbsp;{data.end_date}
               </Column>

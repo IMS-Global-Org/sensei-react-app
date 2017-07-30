@@ -17,6 +17,14 @@ class NavBar extends Component {
     if(user.id) {
       return(
         <Menu.Menu position='right'>
+          { user.permissions.split(',').includes('user') &&
+            <Menu.Item
+              name='notices'
+              as={ Link }
+              to='/announcements'
+              active={activeItem === 'notices'}
+              onClick={this.handleItemClick} />
+          }
           <Menu.Item
             name='settings'
             as={ Link }

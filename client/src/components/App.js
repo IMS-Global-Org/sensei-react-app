@@ -13,6 +13,7 @@ import styled from 'styled-components';
 // Custom Components
 import Settings from './Settings'
 import Courses from './Courses'
+import AnnouncementManager from './AnnouncementManager'
 
 // Custom Styled Components
 const MainDiv = styled.div`
@@ -38,6 +39,7 @@ class App extends Component {
             <Route exact path='/register' component={Register} />
             <ProtectedRoute exact path='/settings' component={Settings} />
             <ProtectedRoute path='/courses' component={Courses} />
+            <ProtectedRoute path='/announcements' componennt={AnnouncementManager} />
             <Route component={NoMatch} />
           </Switch>
         </FetchUser>
