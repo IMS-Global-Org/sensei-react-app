@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Grid, Segment } from 'semantic-ui-react'
 import AnnouncementForm from './AnnouncementForm'
+import AnnouncementsTable from './AnnouncementsTable'
 
 /**
  * @author Brennick Langston
@@ -19,7 +20,7 @@ class AnnouncementEdit extends Component {
         <Grid>
           <Grid.Row>
             <Grid.Column width={16}>
-              <Segment>Announcements Table</Segment>
+              <AnnouncementsTable />
             </Grid.Column>
           </Grid.Row>
           <Grid.Row>
