@@ -39,7 +39,7 @@ class App extends Component {
             <Route exact path='/register' component={Register} />
             <ProtectedRoute exact path='/settings' component={Settings} />
             <ProtectedRoute path='/courses' component={Courses} />
-            <ProtectedRoute path='/announcements' componennt={AnnouncementManager} />
+            <ProtectedRoute path='/announcements' component={AnnouncementManager} />
             <Route component={NoMatch} />
           </Switch>
         </FetchUser>

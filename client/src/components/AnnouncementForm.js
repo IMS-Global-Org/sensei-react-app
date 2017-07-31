@@ -1,14 +1,39 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Form } from 'semantic-ui-react'
+import { Form, Button } from 'semantic-ui-react'
+import Datetime from 'react-datetime'
+import moment from 'moment'
 
+// Redux Actions
+import { updateAnnouncement, createAnnouncement } from '../actions/announcements'
+
+// Custom CSS
+import 'react-datetime/css/react-datetime.css'
+
+/**
+ * Form respresenting a single announcement that can be edited
+ * or created from new
+ * @author Brennick Langston
+ * @version 0.0.1
+ */
 class AnnouncementForm extends Component {
   // Default form field values
   default = {
-    title: '', category: '', message:'', extra: ''
-    start_date: '', end_date: '', link: '', cost: '', registration: '' }
+    title: '', category: '', message: '', extra: '',
+    start_date: moment.utc(), end_date: moment.utc(),
+    link: '', cost: '', registration: false,
   }
-  state={ ...default }
+  state={ ...this.default }
+
+  /**
+   * Initializes states' data set
+   */
+  componentDidMount = () => {
+    /** @type {Object} announcement - a single announcement to load */
+    const { announcement: ann } = this.props
+    const data = ann ? ann : this.default
+    this.setState({ ...data })
+  }
 
   /**
    * Handler for Submitting new or changed to announcements
@@ -16,6 +41,10 @@ class AnnouncementForm extends Component {
    */
   handleSubmit = ( event ) => {
     event.preventDefault()
+    /** @type {String} dataType - string ['edit','create'] */
+    const { dispatch, dataType } = this.props
+    const method = dataType === 'edit' ? updateAnnouncement : createAnnouncement
+    dispatch(method(this.state))
     // TODO submit data to the rails database
   }
 
@@ -23,7 +52,7 @@ class AnnouncementForm extends Component {
    * Handler for form input field changes and updates
    * @param {Object} event - Form event object
    */
-  handleChange = ( event: { target: { id, value } } ) => {
+  handleChange = ( { target: { id, value } } ) => {
     this.setState({ [id]: value })
   }
 
@@ -32,8 +61,9 @@ class AnnouncementForm extends Component {
    * @param {Object} event - Form event object
    * @param {Object} data - Form data object
    */
-   handleChangeRadio = ( event, data: { id, value } ) => {
-     this.setState({ [id]: value })
+   handleChangeRadio = ( event, { id, value, checked } ) => {
+     if( checked )
+       this.setState({ [id]: value })
    }
 
    /**
@@ -52,10 +82,14 @@ class AnnouncementForm extends Component {
     this.setState({ end_date: date })
   }
 
-  render(){
+  /**
+   * Renders the actual form that is to be displayed
+   */
+  render() {
     const {
       title, category, message, extra,
-      start_date, end_date, link, cost
+      start_date, end_date, link, cost,
+      registration,
     } = this.state
 
     return (
@@ -80,18 +114,20 @@ class AnnouncementForm extends Component {
           id='extra'
           value={ extra }
           onChange={this.handleChange} />
-        <Form.Input
-          label='Start Date'
-          control={Datetime}
-          value={start_date}
-          id='start_date'
-          onChange={this.handleStartDatetime} />
-        <Form.Input
-          label='End Date'
-          control={Datetime}
-          value={end_date}
-          id='end_date'
-          onChange={this.handleEndDatetime} />
+        <Form.Group inline>
+          <Form.Field>
+            <label>Start Date</label>
+            <Datetime
+              value={start_date}
+              onChange={this.handleStartDatetime} />
+          </Form.Field>
+          <Form.Field>
+            <label>End Date</label>
+            <Datetime
+              value={end_date}
+              onChange={this.handleEndDatetime} />
+          </Form.Field>
+        </Form.Group>
         <Form.Input
           label='Link'
           type='url'
@@ -110,15 +146,17 @@ class AnnouncementForm extends Component {
             label='Yes'
             id='registration'
             value={ true }
-            onChangeRadio={this.handleChangeRadio} />
+            checked={ registration === true }
+            onChange={this.handleChangeRadio} />
           <Form.Radio
             label='No'
             id='registration'
             value={ false }
-            onChangeRadio={this.handleChangeRadio} />
+            checked={ registration === false }
+            onChange={this.handleChangeRadio} />
         </Form.Group>
-        <Button type='submit' name='submit'>
-          { this.prop.formType === 'create' ? 'Create' : 'Update' }
+        <Button type='submit' >
+          { this.props.formType === 'create' ? 'Create' : 'Update' }
         </Button>
       </Form>
     )
@@ -126,7 +164,7 @@ class AnnouncementForm extends Component {
 }
 
 const mapStateToProps = ( state ) => {
-  return { notices: state.announcement || [] }
+  return { notices: state.announcements }
 }
 
-export default AnnouncementForm
+export default connect(mapStateToProps)(AnnouncementForm)
