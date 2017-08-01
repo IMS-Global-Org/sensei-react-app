@@ -1,15 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Segment } from 'semantic-ui-react'
-import { indexAnnouncements } from '../actions/announcements'
-import InfiniteScroll from 'react-infinite-scroller'
-import styled from 'styled-components'
-
-// Custom Styled Components
-const TableArea = styled(Segment)`
-  height: 30vh;
-  overflow: auto;
-`
+import { Table } from 'semantic-ui-react'
+import moment from 'moment'
+import { tableAnnouncements } from '../actions/announcements'
+import Paginator from './Paginator'
 
 class AnnouncementsTable extends Component {
   state = { hasMore: false }
@@ -20,7 +14,7 @@ class AnnouncementsTable extends Component {
   componentDidMount = () => {
     const { notices, dispatch } = this.props
     if( !notices || notices.data.length <= 0 ) {
-      dispatch(indexAnnouncements())
+      dispatch(tableAnnouncements(1))
       this.setState({ hasMore: true })
     }
   }
@@ -30,55 +24,67 @@ class AnnouncementsTable extends Component {
     if( notices && notices.data.length > 0 ) {
       return notices.data.map( notice => {
         return (
-          <Segment>{notice.title}</Segment>
+          <Table.Row>
+            <Table.Cell>edit</Table.Cell>
+            <Table.Cell>
+              {notice.title}
+            </Table.Cell>
+            <Table.Cell>
+              { moment(notice.start_date).local().format('dd, MMM Do YYYY, h:mm a') }
+            </Table.Cell>
+            <Table.Cell>
+              { moment(notice.end_date).local().format('dd, MMM Do YYYY, h:mm a') }
+            </Table.Cell>
+            <Table.Cell>{ notice.registration ? 'Yes' : 'No' }</Table.Cell>
+          </Table.Row>
         )
       })
     }
   }
 
-  displayTableHeader = () => (
-    <Segment>
-      <Segment>
-        Title
-      </Segment>
-      <Segment>
-        Start Date
-      </Segment>
-      <Segment>
-        End Date
-      </Segment>
-      <Segment>
-        Registration
-      </Segment>
-    </Segment>
-  )
-
-  loadMore = ( page ) => {
+  loadMore = ( e, { name: page } ) => {
+    debugger
     let { hasMore } = this.state
     let { notices: { pagination }, dispatch } = this.props
     if( hasMore && pagination.total_pages ) {
       if( page <= pagination.total_pages ) {
-        dispatch(indexAnnouncements(page))
+        dispatch(tableAnnouncements(page))
+        this.setState({ activeItem: page })
       } else {
         this.setState({ hasMore: false })
       }
     }
   }
 
+  handleRowClick = ( event ) => {
+
+  }
+
   render() {
+    const { current_page, total_pages } = this.props.notices.pagination
     return (
-      <TableArea basic>
-          <InfiniteScroll
-            pageStart={0}
-            loadMore={this.loadMore}
-            hasMore={this.state.hasMore}
-            loader={<div>Loading...</div>}
-            useWindow={false} >
-            <div>
-              { this.displayTableRow() }
-            </div>
-          </InfiniteScroll>
-      </TableArea>
+      <Table celled selectable>
+        <Table.Header>
+          <Table.HeaderCell></Table.HeaderCell>
+          <Table.HeaderCell>Title</Table.HeaderCell>
+          <Table.HeaderCell>Start Date</Table.HeaderCell>
+          <Table.HeaderCell>End Date</Table.HeaderCell>
+          <Table.HeaderCell>Registration</Table.HeaderCell>
+        </Table.Header>
+        <Table.Body>
+          { this.displayTableRow() }
+        </Table.Body>
+        <Table.Footer>
+          <Table.Row>
+            <Table.HeaderCell colSpan={5}>
+              <Paginator
+                currentPage={current_page}
+                totalPages={total_pages}
+                loadMore={this.loadMore} />
+            </Table.HeaderCell>
+          </Table.Row>
+        </Table.Footer>
+      </Table>
     )
   }
 }

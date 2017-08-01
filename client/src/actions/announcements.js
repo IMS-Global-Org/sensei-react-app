@@ -65,3 +65,26 @@ export const createAnnouncement = ( data ) => {
     })
   }
 }
+
+/**
+ * Retrieves record sets by page for displaying in Table format only
+ * @param {Integer} page - page number or set to display
+ * @param {Integer} per - number of announceents to return per page
+ * @param {Function} callback - callback function
+ */
+export const tableAnnouncements = ( page = 1, per = 5, callback = null ) => {
+  const query = `page=${page}&per=${per}`
+  return (dispatch) => {
+    axios.get(`/api/announcements?${query}`)
+    .then( resp => {
+      dispatch({
+        type: 'TABLE_ANNOUNCEMENTS',
+        data: resp.data,
+        headers: resp.headers,
+      })
+    })
+    .catch( resp => {
+      dispatch(setFlash('No New Announcements Loaded!','error'))
+    })
+  }
+}

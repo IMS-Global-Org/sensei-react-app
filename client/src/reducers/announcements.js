@@ -16,6 +16,13 @@ const announcements = ( state = { data: [], pagination: {} }, action ) => {
           ...state.data,
         ],
       }
+    case 'TABLE_ANNOUNCEMENTS':
+    return {
+      data: [
+        ...action.data.data
+      ],
+      pagination: action.data.pagination,
+    }
     default:
       return state
   }
