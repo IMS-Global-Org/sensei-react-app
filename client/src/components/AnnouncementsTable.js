@@ -24,7 +24,7 @@ class AnnouncementsTable extends Component {
     if( notices && notices.data.length > 0 ) {
       return notices.data.map( notice => {
         return (
-          <Table.Row>
+          <Table.Row onClick={this.handleRowClick}>
             <Table.Cell>edit</Table.Cell>
             <Table.Cell>
               {notice.title}
@@ -43,7 +43,6 @@ class AnnouncementsTable extends Component {
   }
 
   loadMore = ( e, { name: page } ) => {
-    debugger
     let { hasMore } = this.state
     let { notices: { pagination }, dispatch } = this.props
     if( hasMore && pagination.total_pages ) {
@@ -57,11 +56,10 @@ class AnnouncementsTable extends Component {
   }
 
   handleRowClick = ( event ) => {
-
+    debugger
   }
 
   render() {
-    const { current_page, total_pages } = this.props.notices.pagination
     return (
       <Table celled selectable>
         <Table.Header>
@@ -78,8 +76,7 @@ class AnnouncementsTable extends Component {
           <Table.Row>
             <Table.HeaderCell colSpan={5}>
               <Paginator
-                currentPage={current_page}
-                totalPages={total_pages}
+                pagination={this.props.notices.pagination}
                 loadMore={this.loadMore} />
             </Table.HeaderCell>
           </Table.Row>

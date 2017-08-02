@@ -8,7 +8,7 @@ namespace :loader do
     end_date = Date.today()
 
     # load some examples
-    20.times do
+    50.times do
       Announcement.create(
         title: Faker::Lorem.sentence,
         category: Faker::Lorem.words(1)[0],

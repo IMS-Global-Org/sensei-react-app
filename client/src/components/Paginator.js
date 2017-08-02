@@ -27,17 +27,20 @@ class Paginator extends Component {
     let components = []
     // place the left menu chevron
     components.push(this.leftChevron(pageNums.shift()))
+    // store the right menu chevron
+    const right = this.rightChevron(pageNums.pop())
     // insert the middle paginator menu items
     pageNums.forEach( pageNum => {
       components.push(
         <Menu.Item
+          key={pageNum}
           name={pageNum}
           active={activeItem === pageNum}
-          onClick={loadMore} />
+          onClick={this.loadPage} />
       )
     })
-    // place the right menu chevron
-    components.push(this.rightChevron(pageNums.shift()))
+    // set the right chevron as the last available page
+    components.push(right)
     // return the components for displaying
     return components
   }
@@ -50,10 +53,11 @@ class Paginator extends Component {
     const { activeItem } = this.state
     return (
       <Menu.Item
+        key={pageNum}
         icon
         name={pageNum}
         active={activeItem === pageNum}
-        onClick={loadMore} >
+        onClick={this.loadPage} >
         <Icon name='left chevron' />
       </Menu.Item>
     )
@@ -67,44 +71,64 @@ class Paginator extends Component {
     const { activeItem } = this.state
     return (
       <Menu.Item
+        key={pageNum}
         icon
         name={pageNum}
         active={activeItem === pageNum}
-        onClick={loadMore} >
+        onClick={this.loadPage} >
         <Icon name='right chevron' />
       </Menu.Item>
     )
   }
 
+  /**
+   * Determine which pages will be placed in the paginator menu as items
+   */
   calculatePages = () => {
-    const { currentPage, totalPages, numSeparators } = this.props
+    const { pagination: {current_page, total_pages} } = this.props
     // For mutating purposes in paginated menu
-    const cp = parseInt(currentPage,10)
-    const tp = parseInt(totalPages,10)
-    // set the number of spanning page counters to display
-    const numSep = numSeparators ? numSeparators : 6
-    let pages = []
-    if( tp - cp === 0 ) {
-      // set the range of pages to display
-      const range = tp
-      // on the last page
-      pages = _.range(tp - 6, range, 1).map( num => num.toString() )
-
-      // pages remain to be viewed
-    } else if( tp - cp < numSep ) {
-      // set the range of pages to display
-      const range = numSep
-      const start = tp - numSep
-      pages = _.range(start, range, 1).map( num => num.toString() )
-    } else if( tp - cp <= 0 ) {
-      // no pages left to view
-    }
-    // turn into a range of strings
-    let pages = _.range(cp - 1, range, 1).map( num => num.toString() )
+    const cp = parseInt(current_page,10)
+    const tp = parseInt(total_pages,10)
+    // set the page number range to display
+    let pages = this.positions(cp,tp).map( pageNum => pageNum.toString())
     return pages
   }
 
+  /**
+   * Modified Algorithm from:
+   * GitHubGist: https://gist.github.com/keon/5380f81393ad98ec19e6.js
+   */
+  positions = (current, total) => {
+  	const pageLimit = 7;
+  	let upperLimit, lowerLimit;
+  	lowerLimit = upperLimit = Math.min(current, total);
 
+  	for (let b = 1; b < pageLimit && b < total;) {
+  	    if (lowerLimit > 1 ) {
+  	        lowerLimit--; b++;
+  	    }
+  	    if (b < pageLimit && upperLimit < total) {
+  	        upperLimit++; b++;
+  	    }
+  	}
+
+    return _.range(lowerLimit,upperLimit+1,1)
+  }
+
+  /**
+   * Helper for loading More pages
+   * @param {Object} e - event object
+   * @param {Object} data - event data object
+   */
+  loadPage = ( e, data ) => {
+    this.setState({
+      activeItem: data.name
+    }, () => this.props.loadMore( e, data ))
+  }
+
+  /**
+   * Renders the generated pagination menu
+   */
   render() {
     return (
       <Menu pagination size='mini' floated='right'>
