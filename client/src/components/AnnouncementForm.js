@@ -7,9 +7,6 @@ import moment from 'moment'
 // Redux Actions
 import { updateAnnouncement, createAnnouncement } from '../actions/announcements'
 
-// Custom CSS
-import 'react-datetime/css/react-datetime.css'
-
 /**
  * Form respresenting a single announcement that can be edited
  * or created from new

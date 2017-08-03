@@ -128,7 +128,7 @@ class Paginator extends Component {
    */
   render() {
     return (
-      <Menu pagination size='mini' floated='right'>
+      <Menu pagination size='tiny' floated='right'>
         { this.generatePages() }
       </Menu>
     )

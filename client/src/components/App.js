@@ -10,6 +10,9 @@ import { Switch, Route } from 'react-router-dom';
 import FetchUser from './FetchUser';
 import styled from 'styled-components';
 
+// Global Custom CSS Style Sheets
+import 'react-datetime/css/react-datetime.css'
+
 // Custom Components
 import Settings from './Settings'
 import Courses from './Courses'

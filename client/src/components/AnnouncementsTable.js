@@ -4,9 +4,10 @@ import { Table } from 'semantic-ui-react'
 import moment from 'moment'
 import { tableAnnouncements } from '../actions/announcements'
 import Paginator from './Paginator'
+import DateRange from './DateRange'
 
 class AnnouncementsTable extends Component {
-  state = { hasMore: false }
+  state={ hasMore: false }
 
   /**
    * Load the initial data set and allow more records to be obtained
@@ -81,6 +82,7 @@ class AnnouncementsTable extends Component {
         <Table.Footer>
           <Table.Row>
             <Table.HeaderCell colSpan={4}>
+              <DateRange inline />
               <Paginator
                 pagination={this.props.notices.pagination}
                 loadMore={this.loadMore} />
