@@ -24,8 +24,9 @@ class AnnouncementsTable extends Component {
     if( notices && notices.data.length > 0 ) {
       return notices.data.map( notice => {
         return (
-          <Table.Row onClick={this.handleRowClick}>
-            <Table.Cell>edit</Table.Cell>
+          <Table.Row
+            key={notice.id}
+            onClick={ () => this.handleRowClick(notice.id) }>
             <Table.Cell>
               {notice.title}
             </Table.Cell>
@@ -55,26 +56,31 @@ class AnnouncementsTable extends Component {
     }
   }
 
-  handleRowClick = ( event ) => {
-    debugger
+  handleRowClick = ( announcementId ) => {
+    let { notices: { data } } = this.props
+    let item = data.find( notice => {
+      return parseInt(notice.id,10) === parseInt(announcementId,10)
+    })
+    this.props.handleActiveAnnouncement(item)
   }
 
   render() {
     return (
       <Table celled selectable>
         <Table.Header>
-          <Table.HeaderCell></Table.HeaderCell>
-          <Table.HeaderCell>Title</Table.HeaderCell>
-          <Table.HeaderCell>Start Date</Table.HeaderCell>
-          <Table.HeaderCell>End Date</Table.HeaderCell>
-          <Table.HeaderCell>Registration</Table.HeaderCell>
+          <Table.Row>
+            <Table.HeaderCell>Title</Table.HeaderCell>
+            <Table.HeaderCell>Start Date</Table.HeaderCell>
+            <Table.HeaderCell>End Date</Table.HeaderCell>
+            <Table.HeaderCell>Registration</Table.HeaderCell>
+          </Table.Row>
         </Table.Header>
         <Table.Body>
           { this.displayTableRow() }
         </Table.Body>
         <Table.Footer>
           <Table.Row>
-            <Table.HeaderCell colSpan={5}>
+            <Table.HeaderCell colSpan={4}>
               <Paginator
                 pagination={this.props.notices.pagination}
                 loadMore={this.loadMore} />

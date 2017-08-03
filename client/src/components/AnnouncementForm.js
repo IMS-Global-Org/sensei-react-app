@@ -26,13 +26,16 @@ class AnnouncementForm extends Component {
   state={ ...this.default }
 
   /**
-   * Initializes states' data set
+   * Loads announcements passed to the component after its initial mount.
+   * NOTE: This ensures that new props are loaded into state before each re-render
+   * since the component only mounts once
+   * @param {Object} nextProps - The new set of props that are passed in
    */
-  componentDidMount = () => {
-    /** @type {Object} announcement - a single announcement to load */
-    const { announcement: ann } = this.props
-    const data = ann ? ann : this.default
-    this.setState({ ...data })
+  componentWillReceiveProps = ( nextProps ) => {
+    let { activeAnnouncement } = nextProps
+    if( activeAnnouncement && activeAnnouncement.id ) {
+      this.state = activeAnnouncement
+    }
   }
 
   /**
@@ -42,8 +45,8 @@ class AnnouncementForm extends Component {
   handleSubmit = ( event ) => {
     event.preventDefault()
     /** @type {String} dataType - string ['edit','create'] */
-    const { dispatch, dataType } = this.props
-    const method = dataType === 'edit' ? updateAnnouncement : createAnnouncement
+    const { dispatch, formType } = this.props
+    const method = formType === 'edit' ? updateAnnouncement : createAnnouncement
     dispatch(method(this.state))
     // TODO submit data to the rails database
   }
@@ -57,13 +60,12 @@ class AnnouncementForm extends Component {
   }
 
   /**
-   * Handler for form radio field changes and updates
+   * Handler for form checkbox field changes and updates
    * @param {Object} event - Form event object
    * @param {Object} data - Form data object
    */
-   handleChangeRadio = ( event, { id, value, checked } ) => {
-     if( checked )
-       this.setState({ [id]: value })
+   handleChangeCheckbox = ( event, { id, checked } ) => {
+     this.setState({ [id]: checked })
    }
 
    /**
@@ -80,6 +82,19 @@ class AnnouncementForm extends Component {
    */
   handleEndDatetime = ( date ) => {
     this.setState({ end_date: date })
+  }
+
+  handleClearForm = () => {
+    this.setState({
+      ...this.default
+    },this.props.clearAnnouncement)
+  }
+
+  handleDeleteAnnouncement = () => {
+    // TODO dispatch an axios call to the database and destroy Announcement
+    //      It would be better to simply inactivate the announcement instead of
+    //      removing it.
+    debugger
   }
 
   /**
@@ -118,13 +133,13 @@ class AnnouncementForm extends Component {
           <Form.Field>
             <label>Start Date</label>
             <Datetime
-              value={start_date}
+              value={moment.isMoment(start_date) ? start_date : moment.utc(start_date)}
               onChange={this.handleStartDatetime} />
           </Form.Field>
           <Form.Field>
             <label>End Date</label>
             <Datetime
-              value={end_date}
+              value={moment.isMoment(end_date) ? end_date : moment.utc(end_date)}
               onChange={this.handleEndDatetime} />
           </Form.Field>
         </Form.Group>
@@ -142,29 +157,30 @@ class AnnouncementForm extends Component {
           onChange={this.handleChange} />
         <Form.Group>
           <label>Registration Required</label>
-          <Form.Radio
+          <Form.Checkbox
             label='Yes'
             id='registration'
-            value={ true }
             checked={ registration === true }
-            onChange={this.handleChangeRadio} />
-          <Form.Radio
-            label='No'
-            id='registration'
-            value={ false }
-            checked={ registration === false }
-            onChange={this.handleChangeRadio} />
+            onChange={this.handleChangeCheckbox} />
         </Form.Group>
-        <Button type='submit' >
-          { this.props.formType === 'create' ? 'Create' : 'Update' }
-        </Button>
+        <Button.Group size='mini'>
+          <Button type='submit' >
+            { this.props.formType === 'create' ? 'Create' : 'Update' }
+          </Button>
+          <Button type='button' onClick={this.handleClearForm}>
+            Clear
+          </Button>
+          <Button type='button' onClick={this.handleDeleteAnnouncement}>
+            Remove
+          </Button>
+        </Button.Group>
       </Form>
     )
   }
 }
 
-const mapStateToProps = ( state ) => {
-  return { notices: state.announcements }
+const mapStateToProps = ( state, props ) => {
+  return {}
 }
 
 export default connect(mapStateToProps)(AnnouncementForm)

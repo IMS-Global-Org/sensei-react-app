@@ -88,3 +88,16 @@ export const tableAnnouncements = ( page = 1, per = 5, callback = null ) => {
     })
   }
 }
+
+export const destroyAnnouncement = ( id ) => {
+  return (dispatch) => {
+    axios.delete(`/api/announcements/${id}`)
+    .then( resp => {
+      dispatch({
+        type: 'DELETE_ANNOUNCEMENT',
+        data: id,
+        headers: resp.headers,
+      })
+    })
+  }
+}

@@ -17,12 +17,28 @@ const announcements = ( state = { data: [], pagination: {} }, action ) => {
         ],
       }
     case 'TABLE_ANNOUNCEMENTS':
-    return {
-      data: [
-        ...action.data.data
-      ],
-      pagination: action.data.pagination,
-    }
+      return {
+        data: [
+          ...action.data.data
+        ],
+        pagination: action.data.pagination,
+      }
+    case 'UPDATE_ANNOUNCEMENT':
+      const index = state.data.findIndex( ann => ann.id === action.data.id )
+      return {
+        ...state,
+        data: [
+          ...state.data.slice(0,index),
+          action.data,
+          ...state.data.slice(index+1),
+        ],
+      }
+    case 'DELETE_ANNOUNCEMENT':
+      const dataSet = state.data.filter( ann => ann.id !== action.data )
+      return {
+        ...state,
+        data: dataSet,
+      }
     default:
       return state
   }

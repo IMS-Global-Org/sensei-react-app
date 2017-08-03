@@ -52,11 +52,6 @@ class Api::AnnouncementsController < ApplicationController
     end
   end
 
-  # Return a single annoucement record
-  def edit
-    render json: @announcement
-  end
-
   # perminately removes a single announcement record
   def destroy
     @annoucement.destroy

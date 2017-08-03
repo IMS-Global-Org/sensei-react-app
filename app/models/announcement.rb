@@ -17,8 +17,8 @@
 #
 
 class Announcement < ApplicationRecord
-  validates_presence_of :title, :category, :message, :extra, :link
+  validates_presence_of :title, :category, :message, :extra, :link,
+                        :start_date, :end_date
   validates :cost, numericality: true
-  validates_datetime :start_date, :end_date
   validates :registration, inclusion: { in: [true, false] }
 end

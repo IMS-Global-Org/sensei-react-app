@@ -22,7 +22,6 @@ class Paginator extends Component {
    */
   generatePages = () => {
     const { activeItem } = this.state
-    const { loadMore } = this.props
     const pageNums = this.calculatePages()
     let components = []
     // place the left menu chevron
@@ -49,7 +48,6 @@ class Paginator extends Component {
    * Generates the left-hand most Menu.Item as a Chevron Icon
    */
   leftChevron = ( pageNum ) => {
-    const { loadMore } = this.props
     const { activeItem } = this.state
     return (
       <Menu.Item
@@ -67,7 +65,6 @@ class Paginator extends Component {
    * Generates the right-hand most Menu.Item as a Chevron Icon
    */
   rightChevron = ( pageNum ) => {
-    const { loadMore } = this.props
     const { activeItem } = this.state
     return (
       <Menu.Item

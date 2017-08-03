@@ -10,23 +10,40 @@ import AnnouncementsTable from './AnnouncementsTable'
  * Displays a simple Announcement for editing purposes only
  */
 class AnnouncementEdit extends Component {
-  state={}
+  state={ activeAnnouncement: null }
 
   componentDidMount = () => {}
 
+  handleActiveAnnouncement = ( activeAnnouncement ) => {
+    this.setState({
+      activeAnnouncement: activeAnnouncement
+    })
+  }
+
+  clearAnnouncement = () => {
+    this.setState({
+      activeAnnouncement: null
+    })
+  }
+
   render() {
+    const { activeAnnouncement } = this.state
     return (
       <Segment>
         <Grid>
           <Grid.Row>
             <Grid.Column width={16}>
-              <AnnouncementsTable />
+              <AnnouncementsTable
+                handleActiveAnnouncement={this.handleActiveAnnouncement} />
             </Grid.Column>
           </Grid.Row>
           <Grid.Row>
             <Grid.Column width={16}>
               <Segment>
-                <AnnouncementForm formType='edit' />
+                <AnnouncementForm
+                  activeAnnouncement={activeAnnouncement}
+                  clearAnnouncement={this.clearAnnouncement}
+                  formType={ activeAnnouncement ? 'edit' : 'create' } />
               </Segment>
             </Grid.Column>
           </Grid.Row>
@@ -42,7 +59,10 @@ class AnnouncementEdit extends Component {
 }
 
 const mapStateToProps = ( state ) => {
-  return { notices: state.announcement || [] }
+  return {
+    notices: state.announcement || [],
+    activeAnnouncement: state.activeAnnouncement || {},
+  }
 }
 
 export default connect(mapStateToProps)(AnnouncementEdit)
