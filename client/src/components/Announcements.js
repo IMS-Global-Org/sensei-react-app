@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Segment } from 'semantic-ui-react'
+import { Segment, Loader } from 'semantic-ui-react'
 import styled from 'styled-components'
 import Announcement from './Announcement'
-import { indexAnnouncements } from '../actions/announcements.js'
+import {
+  indexAnnouncements, emptyReduxAnnouncements
+} from '../actions/announcements.js'
 import InfiniteScroll from 'react-infinite-scroller'
 
 // Custom Styled Components
@@ -25,13 +27,21 @@ class Announcements extends Component {
   /**
    * Initialize the working series of announcements
    */
-   componentDidMount = () => {
-     let { dispatch } = this.props
-     // NOTE load the initial data that will be displayed in the component
-     dispatch(indexAnnouncements())
-     // NOTE Once initial data has loaded, set the scroll to having more elements
-     this.setState({ hasMore: true })
-   }
+  componentDidMount = () => {
+   let { dispatch } = this.props
+   // NOTE load the initial data that will be displayed in the component
+   dispatch(indexAnnouncements())
+   // NOTE Once initial data has loaded, set the scroll to having more elements
+   this.setState({ hasMore: true })
+  }
+
+  /**
+  * Clears the announcements redux store when unmounted
+  */
+  componentWillUnmount = () => {
+    let { dispatch } = this.props
+    dispatch(emptyReduxAnnouncements())
+  }
 
   /**
    * Presents the individual notices in a single group
@@ -79,7 +89,7 @@ class Announcements extends Component {
           pageStart={0}
           loadMore={this.loadMore}
           hasMore={this.state.hasMore}
-          loader={<div>Loading...</div>}
+          loader={<Segment><Loader active /></Segment>}
           useWindow={false} >
           {/* additional 'div' elements are required by InfiniteScroll */}
           <div>

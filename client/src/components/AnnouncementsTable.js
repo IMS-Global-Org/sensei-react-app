@@ -7,7 +7,7 @@ import Paginator from './Paginator'
 import DateRange from './DateRange'
 
 class AnnouncementsTable extends Component {
-  state={ hasMore: false }
+  state={ hasMore: false, dateRange: null }
 
   /**
    * Load the initial data set and allow more records to be obtained
@@ -15,7 +15,7 @@ class AnnouncementsTable extends Component {
   componentDidMount = () => {
     const { notices, dispatch } = this.props
     if( !notices || notices.data.length <= 0 ) {
-      dispatch(tableAnnouncements(1))
+      dispatch(tableAnnouncements(1,5,this.state.dateRange))
       this.setState({ hasMore: true })
     }
   }
@@ -49,7 +49,7 @@ class AnnouncementsTable extends Component {
     let { notices: { pagination }, dispatch } = this.props
     if( hasMore && pagination.total_pages ) {
       if( page <= pagination.total_pages ) {
-        dispatch(tableAnnouncements(page))
+        dispatch(tableAnnouncements(page,5,this.state.dateRange))
         this.setState({ activeItem: page })
       } else {
         this.setState({ hasMore: false })
@@ -63,6 +63,26 @@ class AnnouncementsTable extends Component {
       return parseInt(notice.id,10) === parseInt(announcementId,10)
     })
     this.props.handleActiveAnnouncement(item)
+  }
+
+  /**
+   * Handler for setting the current set of selected dates
+   * @param {Object} dateRange - start and end dates as moment objects
+   */
+  handleDateRange = ( dateRange ) => {
+    this.setState({ dateRange })
+  }
+
+  /**
+   * Handler for clearing set dates and then re-rendering the complete
+   * data set
+   */
+  handleShowAll = () => {
+    this.setState({
+      dateRange: null
+    }, () => {
+      this.loadMore( null, { name: 1 } )
+    })
   }
 
   render() {
@@ -82,7 +102,12 @@ class AnnouncementsTable extends Component {
         <Table.Footer>
           <Table.Row>
             <Table.HeaderCell colSpan={4}>
-              <DateRange inline />
+              <DateRange
+                inline
+                handleDateRange={this.handleDateRange}
+                button
+                handleDateQuery={this.loadMore}
+                handleShowAll={this.handleShowAll} />
               <Paginator
                 pagination={this.props.notices.pagination}
                 loadMore={this.loadMore} />

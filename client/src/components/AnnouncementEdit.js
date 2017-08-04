@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Grid, Segment } from 'semantic-ui-react'
+import { Container, Grid, Segment } from 'semantic-ui-react'
 import AnnouncementForm from './AnnouncementForm'
 import AnnouncementsTable from './AnnouncementsTable'
 
@@ -29,7 +29,7 @@ class AnnouncementEdit extends Component {
   render() {
     const { activeAnnouncement } = this.state
     return (
-      <Segment>
+      <Container>
         <Grid>
           <Grid.Row>
             <Grid.Column width={16}>
@@ -53,7 +53,7 @@ class AnnouncementEdit extends Component {
             </Grid.Column>
           </Grid.Row>
         </Grid>
-      </Segment>
+      </Container>
     )
   }
 }

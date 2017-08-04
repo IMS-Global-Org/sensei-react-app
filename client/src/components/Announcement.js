@@ -1,5 +1,5 @@
 import React from 'react'
-import { Grid, Card } from 'semantic-ui-react'
+import { Grid, Card, Icon } from 'semantic-ui-react'
 import styled from 'styled-components'
 
 // Custom Styled Components
@@ -21,7 +21,15 @@ const Announcement = ({ data }) => {
       <Card>
         <Card.Content extra >
           <Card.Header>{data.title}</Card.Header>
-          <Card.Meta>Event Type:&nbsp;{data.category}</Card.Meta>
+          <Card.Meta>
+            Event Type:&nbsp;{data.category}
+            { data.link &&
+              <span>
+                <br />
+                Web Site: <Icon link to={ data.link } name='external' />
+              </span>
+            }
+          </Card.Meta>
           <Card.Description>
             Details:&nbsp;{data.message}
           </Card.Description>

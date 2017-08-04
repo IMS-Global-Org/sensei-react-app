@@ -4,8 +4,10 @@ namespace :loader do
 
     # clean up database
     Announcement.destroy_all
-    start_date = 1.year.ago
-    end_date = Date.today()
+
+    # set working dates
+    start_date = 1.week.ago
+    end_date = 1.week.from_now
 
     # load some examples
     50.times do
@@ -14,8 +16,8 @@ namespace :loader do
         category: Faker::Lorem.words(1)[0],
         message: Faker::Lorem.sentence(1),
         extra: Faker::Lorem.paragraph(1),
-        start_date: Faker::Date.between(start_date,end_date),
-        end_date: Faker::Date.between(end_date, 1.year.from_now),
+        start_date: Faker::Date.between(start_date, Time.new.utc),
+        end_date: Faker::Date.between(Time.new.utc, end_date),
         link: Faker::Internet.url,
         cost: Faker::Number.decimal(2),
         registration: Faker::Boolean.boolean

@@ -29,7 +29,7 @@
 #                          PUT      /api/announcements/:id(.:format)       api/announcements#update
 #                          DELETE   /api/announcements/:id(.:format)       api/announcements#destroy
 #                          GET      /*other(.:format)                      static#index
-# 
+#
 
 Rails.application.routes.draw do
   mount_devise_token_auth_for 'User', at: 'api/auth'
@@ -37,6 +37,7 @@ Rails.application.routes.draw do
   namespace :api do
     # Routes for announcements
     resources :announcements
+    resources :home_page_postings
   end
 
   #Do not place any routes below this one

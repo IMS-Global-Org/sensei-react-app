@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Datetime from 'react-datetime'
 import moment from 'moment'
-import { Segment, Form } from 'semantic-ui-react'
+import { Segment, Form, Button } from 'semantic-ui-react'
 import styled from 'styled-components'
 
 // Custom Styled Components
@@ -12,6 +12,9 @@ const Spacer = styled.div`
 const RangeArea = styled(Segment)`
   margin: 0 0 !important;
   padding: 0 0 !important;
+`
+const Update = styled(Button.Group)`
+  margin-left: 1rem !important;
 `
 
 /**
@@ -24,18 +27,35 @@ const RangeArea = styled(Segment)`
  *      - handler for changes to the ending date
  */
 class DateRange extends Component {
-  state={ hasMore: false, start_date: moment.utc(), end_date: moment.utc() }
+  state={ start_date: moment.utc(), end_date: moment.utc() }
 
   /**
    * Handles the starting date
    * @param {moment} moment - current selected starting date
    */
-  handleStartDate = ( moment ) => this.setState({ start_date: moment })
+  handleStartDate = ( moment ) => {
+    this.setState({ start_date: moment },() => {
+      this.props.handleDateRange( this.state )
+    })
+  }
   /**
    * Handles the ending date
    * @param {moment} moment - current selected ending date
    */
-  handleEndDate = ( moment ) => this.setState({ end_date: moment })
+  handleEndDate = ( moment ) => {
+    this.setState({ end_date: moment }, () => {
+      this.props.handleDateRange( this.state )
+    })
+  }
+
+  handleShowAll = () => {
+    this.setState({
+      start_date: moment.utc(),
+      end_date: moment.utc(),
+    }, () => {
+      this.props.handleShowAll()
+    })
+  }
 
   render() {
     const { stacked, inline } = this.props
@@ -56,6 +76,18 @@ class DateRange extends Component {
               id='end_date'
               value={this.state.end_date}
               onChange={this.handleEndDate} />
+            { this.props.button &&
+              <Update size='tiny'>
+                <Button
+                  onClick={() => this.props.handleDateQuery(null,{name: 1})}>
+                  Update
+                </Button>
+                <Button
+                  onClick={this.handleShowAll}>
+                  Show All
+                </Button>
+              </Update>
+            }
           </Form.Group>
         </Form>
       </RangeArea>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Grid } from 'semantic-ui-react';
 import Announcements from './Announcements'
+import HomePage from './HomePage'
 
 class Home extends Component {
   render() {
@@ -11,7 +12,7 @@ class Home extends Component {
             Links Area
           </Grid.Column>
           <Grid.Column width={8}>
-            Main Area
+            <HomePage />
           </Grid.Column>
           <Grid.Column width={5}>
             <Announcements />

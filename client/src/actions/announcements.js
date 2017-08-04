@@ -70,10 +70,18 @@ export const createAnnouncement = ( data ) => {
  * Retrieves record sets by page for displaying in Table format only
  * @param {Integer} page - page number or set to display
  * @param {Integer} per - number of announceents to return per page
+ * @apram {Object} dateRange - range of dates to submit to the database
  * @param {Function} callback - callback function
  */
-export const tableAnnouncements = ( page = 1, per = 5, callback = null ) => {
-  const query = `page=${page}&per=${per}`
+export const tableAnnouncements = ( page = 1, per = 5, dateRange = null, callback = null ) => {
+  let query = null
+  if( dateRange ) {
+    const startDate = dateRange.start_date.format()
+    const endDate = dateRange.end_date.format()
+    query = `page=${page}&per=${per}&start_date=${startDate}&end_date=${endDate}`
+  } else {
+    query = `page=${page}&per=${per}`
+  }
   return (dispatch) => {
     axios.get(`/api/announcements?${query}`)
     .then( resp => {
@@ -89,6 +97,10 @@ export const tableAnnouncements = ( page = 1, per = 5, callback = null ) => {
   }
 }
 
+/**
+ * Destroys the announcement from the database
+ * @param {Integer} id - database id of the announcement to destroy
+ */
 export const destroyAnnouncement = ( id ) => {
   return (dispatch) => {
     axios.delete(`/api/announcements/${id}`)
@@ -99,5 +111,14 @@ export const destroyAnnouncement = ( id ) => {
         headers: resp.headers,
       })
     })
+  }
+}
+
+/**
+ * Sends the empty hash for setting and empty redux announcements object
+ */
+export const emptyReduxAnnouncements = () => {
+  return {
+    type: 'EMPTY_REDUX_ANNOUNCEMENTS',
   }
 }

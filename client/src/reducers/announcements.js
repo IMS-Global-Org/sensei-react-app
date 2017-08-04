@@ -39,6 +39,11 @@ const announcements = ( state = { data: [], pagination: {} }, action ) => {
         ...state,
         data: dataSet,
       }
+    case 'EMPTY_REDUX_ANNOUNCEMENTS':
+      return {
+        data: [],
+        pagination: {},
+      }
     default:
       return state
   }
