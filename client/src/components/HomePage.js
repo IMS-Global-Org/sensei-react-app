@@ -10,7 +10,7 @@ import styled from 'styled-components'
 
 // Custom Styled components
 const Postings = styled(Segment)`
-  height: 200px !important;
+  height: 90vh !important;
   overflow: auto;
 `
 
@@ -64,7 +64,8 @@ class HomePage extends Component {
     let { postings: { data } } = this.props
     if( data && data.length > 0 ) {
       return data.map( posting => {
-        return <Posting key={posting.id} data={posting} />
+        let { posting: { id }} = posting
+        return ( <Posting key={id} data={posting} /> )
       })
     }
   }

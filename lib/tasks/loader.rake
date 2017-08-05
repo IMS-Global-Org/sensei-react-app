@@ -33,7 +33,7 @@ namespace :loader do
     20.times do
       home_page_posting = HomePagePosting.create(
         title: Faker::Lorem.sentence,
-        message: Faker::Lorem.paragraph(2)
+        message: Faker::Lorem.paragraph(10)
       )
       3.times do
         HomePageVideo.create(
@@ -48,6 +48,7 @@ namespace :loader do
           title: Faker::Lorem.sentence,
           url: Faker::Internet.url,
           abbreviation: Faker::Lorem.characters(2),
+          description: Faker::Lorem.paragraph(3),
           home_page_posting: home_page_posting
         )
       end

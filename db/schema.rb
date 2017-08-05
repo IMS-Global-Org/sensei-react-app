@@ -32,7 +32,8 @@ ActiveRecord::Schema.define(version: 20170804155435) do
   create_table "home_page_links", force: :cascade do |t|
     t.string "title", null: false
     t.string "url", null: false
-    t.string "abbreviation", null: false
+    t.string "abbreviation"
+    t.text "description", null: false
     t.bigint "home_page_posting_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
