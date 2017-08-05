@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170729184153) do
+ActiveRecord::Schema.define(version: 20170804155435) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,33 @@ ActiveRecord::Schema.define(version: 20170729184153) do
     t.boolean "registration"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "home_page_links", force: :cascade do |t|
+    t.string "title", null: false
+    t.string "url", null: false
+    t.string "abbreviation", null: false
+    t.bigint "home_page_posting_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["home_page_posting_id"], name: "index_home_page_links_on_home_page_posting_id"
+  end
+
+  create_table "home_page_postings", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "message", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "home_page_videos", force: :cascade do |t|
+    t.string "title", null: false
+    t.string "identifier", null: false
+    t.string "source", null: false
+    t.bigint "home_page_posting_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["home_page_posting_id"], name: "index_home_page_videos_on_home_page_posting_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -59,4 +86,6 @@ ActiveRecord::Schema.define(version: 20170729184153) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  add_foreign_key "home_page_links", "home_page_postings"
+  add_foreign_key "home_page_videos", "home_page_postings"
 end

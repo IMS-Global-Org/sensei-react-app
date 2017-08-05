@@ -1,5 +1,5 @@
 namespace :loader do
-  desc "TODO"
+  desc "Load the database with random values for testing reasons"
   task announcements: :environment do
 
     # clean up database
@@ -22,6 +22,35 @@ namespace :loader do
         cost: Faker::Number.decimal(2),
         registration: Faker::Boolean.boolean
       )
+    end
+  end
+
+  task postings: :environment do
+    HomePagePosting.destroy_all
+    # HomePageVideo.destroy_all
+    # HomePageLink.destroy_all
+
+    20.times do
+      home_page_posting = HomePagePosting.create(
+        title: Faker::Lorem.sentence,
+        message: Faker::Lorem.paragraph(2)
+      )
+      3.times do
+        HomePageVideo.create(
+          title: Faker::Lorem.sentence,
+          identifier: Faker::Number.number(2),
+          source: Faker::Internet.url,
+          home_page_posting: home_page_posting
+        )
+      end
+      3.times do
+        HomePageLink.create(
+          title: Faker::Lorem.sentence,
+          url: Faker::Internet.url,
+          abbreviation: Faker::Lorem.characters(2),
+          home_page_posting: home_page_posting
+        )
+      end
     end
   end
 

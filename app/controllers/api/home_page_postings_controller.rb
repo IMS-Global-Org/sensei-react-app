@@ -3,9 +3,18 @@ class Api::HomePagePostingsController < ApplicationController
 
   # Requires pagination for displaying
   def index
-    render json: HomePagePosting
+    postings = HomePagePosting
+      .joins(:home_page_videos,:home_page_links)
       .order(:created_at)
       .page(params[:page]).per(params[:per])
+    render json: {
+      data: postings,
+      pagination: {
+        total_pages: postings.total_pages,
+        current_page: postings.current_page,
+        next_page: postings.next_page,
+      }
+    }
   end
 
   def show

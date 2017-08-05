@@ -28,8 +28,14 @@
 #                          PATCH    /api/announcements/:id(.:format)       api/announcements#update
 #                          PUT      /api/announcements/:id(.:format)       api/announcements#update
 #                          DELETE   /api/announcements/:id(.:format)       api/announcements#destroy
+#   api_home_page_postings GET      /api/home_page_postings(.:format)      api/home_page_postings#index
+#                          POST     /api/home_page_postings(.:format)      api/home_page_postings#create
+#    api_home_page_posting GET      /api/home_page_postings/:id(.:format)  api/home_page_postings#show
+#                          PATCH    /api/home_page_postings/:id(.:format)  api/home_page_postings#update
+#                          PUT      /api/home_page_postings/:id(.:format)  api/home_page_postings#update
+#                          DELETE   /api/home_page_postings/:id(.:format)  api/home_page_postings#destroy
 #                          GET      /*other(.:format)                      static#index
-#
+# 
 
 Rails.application.routes.draw do
   mount_devise_token_auth_for 'User', at: 'api/auth'
