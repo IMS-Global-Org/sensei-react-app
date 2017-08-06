@@ -8,8 +8,9 @@ import { setFlash } from './flash'
  * @param {Function} callback - callback function to execute
  */
 export const indexTablePostings = ( page, per = 10, callback = null ) => {
+  const query = `?page=${page}&per=${per}`
   return (dispatch) => {
-    axios.get(``)
+    axios.get(`/api/table_postings${query}`)
     .then( resp => {
       dispatch({
         type: 'INDEX_TABLE_POSTINGS',
