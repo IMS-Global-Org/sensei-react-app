@@ -16,6 +16,7 @@ import 'react-datetime/css/react-datetime.css'
 import Settings from './Settings'
 import Courses from './Courses'
 import AnnouncementManager from './AnnouncementManager'
+import HomePagePostings from './HomePagePostings'
 
 
 class App extends Component {
@@ -32,6 +33,7 @@ class App extends Component {
             <ProtectedRoute exact path='/settings' component={Settings} />
             <ProtectedRoute path='/courses' component={Courses} />
             <ProtectedRoute path='/announcements' component={AnnouncementManager} />
+            <ProtectedRoute path='/postings' component={HomePagePostings} />
             <Route component={NoMatch} />
           </Switch>
         </FetchUser>

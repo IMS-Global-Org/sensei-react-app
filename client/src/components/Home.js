@@ -7,11 +7,8 @@ class Home extends Component {
   render() {
     return(
       <Container>
-        <Grid columns={3}>
-          <Grid.Column width={3}>
-            Links Area
-          </Grid.Column>
-          <Grid.Column width={8}>
+        <Grid columns={2}>
+          <Grid.Column width={11}>
             <HomePage />
           </Grid.Column>
           <Grid.Column width={5}>

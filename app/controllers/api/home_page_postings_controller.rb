@@ -60,7 +60,14 @@ class Api::HomePagePostingsController < ApplicationController
   private
 
   def posting_params
-    params.required(:home_page_posting).permit(:title, :message)
+    params
+      .required(:home_page_posting)
+      .permit(
+        :title,
+        :message,
+        home_page_videos_attributes: [ :title, :identifier, :source ],
+        home_page_links_attributes: [ :title, :url, :abbreviation, :description]
+      )
   end
 
   def set_posting

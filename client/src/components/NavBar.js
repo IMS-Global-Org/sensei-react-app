@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Menu } from 'semantic-ui-react'
+import { Menu, Dropdown } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { handleLogout } from '../actions/auth';
@@ -18,12 +18,22 @@ class NavBar extends Component {
       return(
         <Menu.Menu position='right'>
           { user.permissions.split(',').includes('user') &&
-            <Menu.Item
-              name='notices'
-              as={ Link }
-              to='/announcements/edit'
-              active={activeItem === 'notices'}
-              onClick={this.handleItemClick} />
+            <Dropdown item text='Settings'>
+              <Dropdown.Menu>
+                <Menu.Item
+                  name='notices'
+                  as={ Link }
+                  to='/announcements/edit'
+                  active={activeItem === 'notices'}
+                  onClick={this.handleItemClick} />
+                <Menu.Item
+                  name='postings'
+                  as={ Link }
+                  to='/postings'
+                  active={activeItem === 'postings'}
+                  onClick={this.handleItemClick} />
+              </Dropdown.Menu>
+            </Dropdown>
           }
           <Menu.Item
             name='settings'
