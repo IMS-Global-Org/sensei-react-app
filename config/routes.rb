@@ -34,6 +34,12 @@
 #                          PATCH    /api/home_page_postings/:id(.:format)  api/home_page_postings#update
 #                          PUT      /api/home_page_postings/:id(.:format)  api/home_page_postings#update
 #                          DELETE   /api/home_page_postings/:id(.:format)  api/home_page_postings#destroy
+#      api_postings_tables GET      /api/postings_tables(.:format)         api/postings_tables#index
+#                          POST     /api/postings_tables(.:format)         api/postings_tables#create
+#       api_postings_table GET      /api/postings_tables/:id(.:format)     api/postings_tables#show
+#                          PATCH    /api/postings_tables/:id(.:format)     api/postings_tables#update
+#                          PUT      /api/postings_tables/:id(.:format)     api/postings_tables#update
+#                          DELETE   /api/postings_tables/:id(.:format)     api/postings_tables#destroy
 #                          GET      /*other(.:format)                      static#index
 # 
 
@@ -44,6 +50,7 @@ Rails.application.routes.draw do
     # Routes for announcements
     resources :announcements
     resources :home_page_postings
+    resources :postings_tables
   end
 
   #Do not place any routes below this one

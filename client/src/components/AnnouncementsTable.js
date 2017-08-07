@@ -44,7 +44,7 @@ class AnnouncementsTable extends Component {
     }
   }
 
-  loadMore = ( e, { name: page } ) => {
+  loadMore = ( page ) => {
     let { hasMore } = this.state
     let { notices: { pagination }, dispatch } = this.props
     if( hasMore && pagination.total_pages ) {

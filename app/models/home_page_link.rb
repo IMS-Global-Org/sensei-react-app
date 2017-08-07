@@ -5,7 +5,8 @@
 #  id                   :integer          not null, primary key
 #  title                :string           not null
 #  url                  :string           not null
-#  abbreviation         :string           not null
+#  abbreviation         :string
+#  description          :text             not null
 #  home_page_posting_id :integer
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null

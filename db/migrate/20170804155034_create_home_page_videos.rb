@@ -4,6 +4,7 @@ class CreateHomePageVideos < ActiveRecord::Migration[5.1]
       t.string :title, null: false
       t.string :identifier, null: false
       t.string :source, null: false
+      t.text :notes
       t.belongs_to :home_page_posting, foreign_key: true
 
       t.timestamps

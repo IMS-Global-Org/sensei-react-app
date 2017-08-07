@@ -6,6 +6,15 @@ import _ from 'lodash'
  * Generates a MenuBar Paginator for displaying as part of other components
  * @author Brennick Langston
  * @version 0.0.1
+ * NOTE
+ * 1. requires a full set of pagination controls
+ *    - total_pages
+ *    - current_page
+ *    - next_page
+ * 2. requires a callback function for loading more pages
+ *    - loadMore (etc.)
+ * 3. optional props
+ *    - size: the size of the menu items to display
  */
 class Paginator extends Component {
   state = { activeItem: '' }
@@ -120,15 +129,19 @@ class Paginator extends Component {
   loadPage = ( e, data ) => {
     this.setState({
       activeItem: data.name
-    }, () => this.props.loadMore( e, data ))
+    }, () => this.props.loadMore( data.name ))
   }
 
   /**
    * Renders the generated pagination menu
    */
   render() {
+    const { size } = this.props
     return (
-      <Menu pagination size='tiny' floated='right'>
+      <Menu
+        pagination
+        size={ size ? size : 'tiny'}
+        floated='right'>
         { this.generatePages() }
       </Menu>
     )
