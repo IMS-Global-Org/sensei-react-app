@@ -1,30 +1,44 @@
 import React, { Component } from 'react'
 import { Modal, Button, Form } from 'semantic-ui-react'
+import PostingsTableVideosSubForm from './PostingsTableVideosSubForm'
 
 class PostingsTableForm extends Component {
-  state = { open: false, dimmer: 'inverted', activeItem: null }
+  state = { open: false, dimmer: 'dimmer', activeItem: null, formType: null }
 
   componentWillReceiveProps = ( nextProps ) => {
     this.setState({ ...nextProps })
     // TODO load the active items information from the database
   }
 
-  close = () => this.setState({ open: false, dimmer: false })
+  close = () => this.setState({ open: false, dimmer: 'dimmer' })
 
+  // TODO Main form
+  // TODO independent videos subform
+  // TODO independent links subform
   render() {
-    const { dimmer, open } = this.state
+    const { dimmer, open, formType } = this.state
     return (
       <Modal
         open={open}
         dimmer={dimmer}
         onClose={this.close}>
-        <Modal.Header>Form Test</Modal.Header>
+        <Modal.Header>Postings Form</Modal.Header>
+        <Modal.Content>
+          <Form>
+            <PostingsTableVideosSubForm />
+          </Form>
+        </Modal.Content>
         <Modal.Actions>
           <Button.Group size='mini'>
             <Button
+              color='green'
+              onClick={this.close}>
+              { formType === 'edit' ? 'Update' : 'Create' }
+            </Button>
+            <Button
               color='red'
               onClick={this.close}>
-              Close
+              Cancel
             </Button>
           </Button.Group>
         </Modal.Actions>

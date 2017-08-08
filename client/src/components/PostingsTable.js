@@ -8,6 +8,7 @@ import {
 } from '../actions/postings'
 import moment from 'moment'
 import Paginator from './Paginator'
+import PostingsTableForm from './PostingsTableForm'
 
 // Custom Styled Components
 const TableBody = styled(Table.Body)`
