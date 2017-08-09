@@ -13,7 +13,7 @@ export const indexPostingsTable = ( page = 1, per = 5, callback = null ) => {
     axios.get(`/api/postings_tables${query}`)
     .then( resp => {
       dispatch({
-        type: 'INDEX_TABLE_POSTINGS',
+        type: 'INDEX_POSTINGS_TABLE',
         data: resp.data,
         headers: resp.headers,
       })
@@ -31,5 +31,21 @@ export const indexPostingsTable = ( page = 1, per = 5, callback = null ) => {
 export const emptyReduxPostings = () => {
   return {
     type: 'EMPTY_REDUX_POSTINGS',
+  }
+}
+
+export const showPostingsTable = ( id ) => {
+  return (dispatch) => {
+    axios.get(`/api/postings_tables/${id}`)
+    .then( resp => {
+      dispatch({
+        type: 'SHOW_POSTINGS_TABLE',
+        data: resp.data,
+        headers: resp.headers,
+      })
+    })
+    .catch( resp => {
+      dispatch(setFlash('Posting Not Located!','error'))
+    })
   }
 }

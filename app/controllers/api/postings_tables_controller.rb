@@ -29,7 +29,21 @@ class Api::PostingsTablesController < ApplicationController
   end
 
   def show
-    render json: @posting
+    if @posting
+      videos = HomePageVideo
+        .all.where('home_page_posting_id = ?', @posting.id)
+      links = HomePageLink
+        .all.where('home_page_posting_id = ?', @posting.id)
+      render json: {
+        id: @posting.id,
+        title: @posting.title,
+        message: @posting.message,
+        videos: videos,
+        links: links
+      }
+    else
+      render_error @posting
+    end
   end
 
   def create
@@ -56,7 +70,7 @@ class Api::PostingsTablesController < ApplicationController
   private
 
   def set_posting
-    @posting = HomePagePosting.find(param[:id])
+    @posting = HomePagePosting.find(params[:id])
   end
 
   def posting_params

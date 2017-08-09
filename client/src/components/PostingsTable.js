@@ -8,7 +8,7 @@ import {
 } from '../actions/postings'
 import moment from 'moment'
 import Paginator from './Paginator'
-import PostingsTableForm from './PostingsTableForm'
+import PostingsTableModal from './PostingsTableModal'
 
 // Custom Styled Components
 const TableBody = styled(Table.Body)`
@@ -17,7 +17,7 @@ const TableBody = styled(Table.Body)`
 `
 
 class PostingsTable extends Component {
-  state={ hasMore: false }
+  state = { hasMore: false, activeItem: null, open: false }
 
   componentDidMount = () => {
     let { dispatch } = this.props
@@ -40,7 +40,7 @@ class PostingsTable extends Component {
           <Table.Row
             key={posting.id}
             id={posting.id}
-            onClick={this.displayModalForm}>
+            onClick={(e) => this.displayModalForm(e,posting.id)}>
             <Table.Cell>{posting.title}</Table.Cell>
             <Table.Cell>{posting.videos}</Table.Cell>
             <Table.Cell>{posting.links}</Table.Cell>
@@ -53,10 +53,10 @@ class PostingsTable extends Component {
     }
   }
 
-  displayModalForm = ( event, data ) => {
+  displayModalForm = ( event, postingId ) => {
     this.setState({
       open: true,
-      activeItem: data.id,
+      activeItem: postingId,
     })
   }
 
@@ -73,6 +73,7 @@ class PostingsTable extends Component {
   }
 
   render() {
+    const { open, activeItem } = this.state
     return (
       <Table celled>
         <Table.Header>
@@ -88,9 +89,10 @@ class PostingsTable extends Component {
         </TableBody>
         <Table.Footer>
           <Table.HeaderCell colSpan={5}>
-            <PostingsTableForm
-              open={this.state.open}
-              activeItem={this.state.activeItem} />
+            <PostingsTableModal
+              open={open}
+              activePosting={activeItem}
+              formType={ activeItem ? 'edit' : 'new' } />
             <Paginator
               pagination={this.props.postings.pagination}
               loadMore={this.loadMore}
