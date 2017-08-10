@@ -12,6 +12,8 @@ const tablePostings = ( state = { data: [], pagination: {} }, action ) => {
         ...state,
         activePosting: action.data
       }
+    case 'UPDATE_POSTINGS_TABLE':
+    case 'CREATE_POSTINGS_TABLE':
     default:
       return state
   }

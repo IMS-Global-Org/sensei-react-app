@@ -149,9 +149,11 @@ class PostingsTableForm extends Component {
     let comp = this.state[set][index]
     comp[id] = value
     this.setState({
-      ...this.state[set].slice(0,index),
-      comp,
-      ...this.state[set].slice(index + 1),
+      [set]:[
+        ...this.state[set].slice(0,index),
+        comp,
+        ...this.state[set].slice(index + 1),
+      ]
     })
   }
 

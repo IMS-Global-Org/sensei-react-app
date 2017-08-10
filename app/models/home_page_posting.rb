@@ -17,6 +17,6 @@ class HomePagePosting < ApplicationRecord
   has_many :home_page_videos, dependent: :destroy
   has_many :home_page_links, dependent: :destroy
 
-  accepts_nested_attributes_for :home_page_videos
-  accepts_nested_attributes_for :home_page_links
+  accepts_nested_attributes_for :home_page_videos, reject_if: :all_blank, allow_destroy: true
+  accepts_nested_attributes_for :home_page_links, reject_if: :all_blank, allow_destroy: true
 end

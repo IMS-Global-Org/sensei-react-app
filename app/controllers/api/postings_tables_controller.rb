@@ -31,9 +31,9 @@ class Api::PostingsTablesController < ApplicationController
   def show
     if @posting
       videos = HomePageVideo
-        .all.where('home_page_posting_id = ?', @posting.id)
+        .all.where('home_page_posting_id = ?', @posting.id).order(updated_at: :desc)
       links = HomePageLink
-        .all.where('home_page_posting_id = ?', @posting.id)
+        .all.where('home_page_posting_id = ?', @posting.id).order(updated_at: :desc)
       render json: {
         id: @posting.id,
         title: @posting.title,
@@ -57,7 +57,17 @@ class Api::PostingsTablesController < ApplicationController
 
   def update
     if @posting.update(posting_params)
-      render json: @posting
+      videos = HomePageVideo
+        .all.where('home_page_posting_id = ?', @posting.id).order(updated_at: :desc)
+      links = HomePageLink
+        .all.where('home_page_posting_id = ?', @posting.id).order(updated_at: :desc)
+      render json: {
+        id: @posting.id,
+        title: @posting.title,
+        message: @posting.message,
+        videos: videos,
+        links: links
+      }
     else
       render_error @posting
     end
@@ -75,9 +85,13 @@ class Api::PostingsTablesController < ApplicationController
 
   def posting_params
     params.require(:home_page_posting)
-      .permit(:title, :message,
-        home_page_video_attributes: [:title, :identifier, :source, :notes],
-        home_page_links_attributes: [:title, :url, :abbreviation, :description]
+      .permit(:id, :title, :message,
+        home_page_videos_attributes:
+          [ :id, :title, :identifier, :source,
+            :notes, :home_page_posting_id, :_destroy ],
+        home_page_links_attributes:
+          [ :id, :title, :url, :abbreviation,
+            :description, :home_page_posting_id, :_destroy ]
       )
   end
 end

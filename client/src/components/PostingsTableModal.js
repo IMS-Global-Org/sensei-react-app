@@ -53,11 +53,29 @@ class PostingsTableModal extends Component {
     const { dispatch } = this.props
     const { formType } = this.state
     // TODO repackage the data so home_page_* are set. required by server
+    const updatedData = this.repackFormData(this.formState())
     if( formType === 'edit' ) {
-      dispatch(updatePostingsTable(this.formState()))
+      dispatch(updatePostingsTable(updatedData))
     } else if( formType === 'new' ) {
-      dispatch(createPostingsTable(this.formState()))
+      dispatch(createPostingsTable(updatedData))
     }
+  }
+
+  repackFormData = ( data ) => {
+    console.log(data)
+    let updated = Object.assign({},data)
+    delete updated.videos
+    delete updated.links
+    /**
+     * NOTE
+     * Must always include the _attributes attached to the end
+     * of the nested objects name if using the following cmd in the model
+     * 'accepts_nested_attributes_for'
+     */
+    updated.home_page_videos_attributes = data.videos
+    updated.home_page_links_attributes = data.links
+    console.log(updated)
+    return updated
   }
 
   render() {
