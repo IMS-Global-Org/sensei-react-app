@@ -33,6 +33,14 @@ class PostingsTableForm extends Component {
       this.setState({ ...nextProps.activePosting })
   }
 
+  componentDidUpdate = () => {
+    this.props.setStateCallback(this.stateCallback)
+  }
+
+  stateCallback = () => {
+    return this.state
+  }
+
   /**
    * Handler for Main Form component changes/updates
    * @param {Object} event - form event object

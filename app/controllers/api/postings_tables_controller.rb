@@ -56,7 +56,7 @@ class Api::PostingsTablesController < ApplicationController
   end
 
   def update
-    if @posting.update
+    if @posting.update(posting_params)
       render json: @posting
     else
       render_error @posting

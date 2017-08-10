@@ -49,3 +49,37 @@ export const showPostingsTable = ( id ) => {
     })
   }
 }
+
+export const updatePostingsTable = ( formData ) => {
+  return (dispatch) => {
+    axios.patch(
+      `/api/postings_tables/${formData.id}`,
+      {home_page_posting: formData } )
+    .then( resp => {
+      dispatch({
+        type: 'UPDATE_POSTINGS_TABLE',
+        data: resp.data,
+        headers: resp.headers,
+      })
+    })
+    .catch( resp => {
+      dispatch(setFlash('Posting Not Updated!','error'))
+    })
+  }
+}
+
+export const createPostingsTable = ( formData ) => {
+  return (dispatch) => {
+    axios.post(`/api/postings_tables`, { home_page_posting: formData } )
+    .then( resp => {
+      dispatch({
+        type: 'CREATE_POSTINGS_TABLE',
+        data: resp.data,
+        headers: resp.headers,
+      })
+    })
+    .catch( resp => {
+      dispatch(setFlash('Posting Not Created!','error'))
+    })
+  }
+}
