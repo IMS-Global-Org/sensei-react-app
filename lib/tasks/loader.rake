@@ -40,6 +40,7 @@ namespace :loader do
           title: Faker::Lorem.sentence,
           identifier: Faker::Number.number(2),
           source: Faker::Internet.url,
+          notes: Faker::Lorem.paragraph(3),
           home_page_posting: home_page_posting
         )
       end

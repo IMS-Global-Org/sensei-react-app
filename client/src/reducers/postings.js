@@ -13,6 +13,17 @@ const tablePostings = ( state = { data: [], pagination: {} }, action ) => {
         activePosting: action.data
       }
     case 'UPDATE_POSTINGS_TABLE':
+      const index = state.data.findIndex( posting => {
+        return posting.id === action.data.id
+      })
+      return {
+        ...state,
+        data: [
+          ...state.data.slice(0,index),
+          action.data,
+          ...state.data.slice(index+1),
+        ]
+      }
     case 'CREATE_POSTINGS_TABLE':
     default:
       return state

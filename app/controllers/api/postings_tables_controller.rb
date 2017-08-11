@@ -64,9 +64,10 @@ class Api::PostingsTablesController < ApplicationController
       render json: {
         id: @posting.id,
         title: @posting.title,
-        message: @posting.message,
-        videos: videos,
-        links: links
+        # message: @posting.message,
+        videos: videos.count,
+        links: links.count,
+        created_at: @posting.created_at
       }
     else
       render_error @posting
@@ -85,7 +86,7 @@ class Api::PostingsTablesController < ApplicationController
 
   def posting_params
     params.require(:home_page_posting)
-      .permit(:id, :title, :message,
+      .permit(:id, :title, :message, :created_at, :updated_at,
         home_page_videos_attributes:
           [ :id, :title, :identifier, :source,
             :notes, :home_page_posting_id, :_destroy ],

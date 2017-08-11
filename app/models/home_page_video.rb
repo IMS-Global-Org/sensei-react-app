@@ -12,7 +12,7 @@
 #
 
 class HomePageVideo < ApplicationRecord
-  validates_presence_of :title, :identifier, :source
+  validates_presence_of :title, :identifier, :source, :notes
 
   belongs_to :home_page_posting
 end

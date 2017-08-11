@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 20170804155435) do
     t.string "title", null: false
     t.string "identifier", null: false
     t.string "source", null: false
+    t.text "notes"
     t.bigint "home_page_posting_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

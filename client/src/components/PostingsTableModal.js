@@ -37,7 +37,10 @@ class PostingsTableModal extends Component {
   /**
    * Close the Modal and all Child components
    */
-  close = () => this.setState({ open: false, dimmer: 'dimmer' })
+  close = () => this.setState({
+    open: false,
+    dimmer: 'dimmer',
+  })
 
   /**
    * Sets the actual child components method that can be used to access
