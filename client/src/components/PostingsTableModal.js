@@ -29,6 +29,8 @@ class PostingsTableModal extends Component {
       this.setState({ ...nextProps }, () => {
         this.props.dispatch(showPostingsTable(newAp))
       })
+    } else {
+      this.forceUpdate()
     }
   }
 
@@ -59,10 +61,10 @@ class PostingsTableModal extends Component {
     } else if( formType === 'new' ) {
       dispatch(createPostingsTable(updatedData))
     }
+    this.close()
   }
 
   repackFormData = ( data ) => {
-    console.log(data)
     let updated = Object.assign({},data)
     delete updated.videos
     delete updated.links
@@ -74,7 +76,6 @@ class PostingsTableModal extends Component {
      */
     updated.home_page_videos_attributes = data.videos
     updated.home_page_links_attributes = data.links
-    console.log(updated)
     return updated
   }
 

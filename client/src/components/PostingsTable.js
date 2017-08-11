@@ -54,6 +54,7 @@ class PostingsTable extends Component {
   }
 
   displayModalForm = ( event, postingId ) => {
+    // FIXME reset the form for repeated selection of same posting is displayed
     this.setState({
       open: true,
       activeItem: postingId,

@@ -57,6 +57,7 @@ class PostingsTableForm extends Component {
     const { videos } = this.state
     if( videos && videos.length > 0 ) {
       return videos.map( (video,index) => {
+        if( video._destroy ){ return }
         return (
           <Segment basic key={index}>
             <Button
@@ -101,6 +102,7 @@ class PostingsTableForm extends Component {
     const { links } = this.state
     if( links && links.length > 0 ) {
       return links.map( (link,index) => {
+        if( link._destroy ){ return }
         return (
           <Segment basic key={index}>
             <Button
@@ -185,9 +187,23 @@ class PostingsTableForm extends Component {
    * @param {String} set - name of the set subform will be removed from
    */
   removeSetField = ( index, set ) => {
+    // empty the selected states attributes
+    let field = this.state[set][index]
+    let id = field.id
+    for( let attribute in field )
+      field[attribute] = ''
+    // reset or add needed attributes so the posting will be deleted
+    field.id = id
+    /**
+     * This is a trigger so Rails will know to remove the
+     * empty object from the database
+     */
+    field._destroy = 1
+    // update it's current state
     this.setState({
       [set]: [
         ...this.state[set].slice(0,index),
+        field,
         ...this.state[set].slice(index +1),
       ]
     })
