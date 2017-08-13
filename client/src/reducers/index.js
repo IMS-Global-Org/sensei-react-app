@@ -4,8 +4,10 @@ import flash from './flash'
 import announcements from './announcements'
 import postings from './homePage'
 import tablePostings from './postings'
+import calendar from './calendar/calendar'
 
 const rootReducer = combineReducers({
+  calendar,
   tablePostings,
   postings,
   announcements,

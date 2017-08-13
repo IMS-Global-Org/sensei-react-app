@@ -17,6 +17,7 @@ import Settings from './Settings'
 import Courses from './Courses'
 import AnnouncementManager from './AnnouncementManager'
 import HomePagePostings from './HomePagePostings'
+import Calendar from './calendar/Calendar'
 
 
 class App extends Component {
@@ -30,8 +31,9 @@ class App extends Component {
             <Route exact path='/' component={Home} />
             <Route exact path='/login' component={Login} />
             <Route exact path='/register' component={Register} />
+            <Route exact path='/calendar' component={Calendar} />
+            <Route exact path='/courses' component={Courses} />
             <ProtectedRoute exact path='/settings' component={Settings} />
-            <ProtectedRoute path='/courses' component={Courses} />
             <ProtectedRoute path='/announcements' component={AnnouncementManager} />
             <ProtectedRoute path='/postings' component={HomePagePostings} />
             <Route component={NoMatch} />
