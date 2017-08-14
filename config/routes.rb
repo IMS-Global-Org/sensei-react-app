@@ -40,6 +40,12 @@
 #                          PATCH    /api/postings_tables/:id(.:format)     api/postings_tables#update
 #                          PUT      /api/postings_tables/:id(.:format)     api/postings_tables#update
 #                          DELETE   /api/postings_tables/:id(.:format)     api/postings_tables#destroy
+#               api_events GET      /api/events(.:format)                  api/events#index
+#                          POST     /api/events(.:format)                  api/events#create
+#                api_event GET      /api/events/:id(.:format)              api/events#show
+#                          PATCH    /api/events/:id(.:format)              api/events#update
+#                          PUT      /api/events/:id(.:format)              api/events#update
+#                          DELETE   /api/events/:id(.:format)              api/events#destroy
 #                          GET      /*other(.:format)                      static#index
 # 
 
@@ -51,6 +57,7 @@ Rails.application.routes.draw do
     resources :announcements
     resources :home_page_postings
     resources :postings_tables
+    resources :events
   end
 
   #Do not place any routes below this one

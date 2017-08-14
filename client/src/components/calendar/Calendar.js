@@ -38,11 +38,17 @@ class Calendar extends Component {
    * FIXME create the database table that will hold the calendar information
    */
   componentDidMount = () => {
-    let { calendar, dispatch } = this.props
-    // retrieve the remote set of schedule items for the calendar
-    // if( !calendar.events || calendar.events.length <= 0 ) {
-    //   dispatch(indexCalendar( this.state.dates ))
-    // }
+    const { activeDate, calendar, dispatch } = this.props
+    retrieve the remote set of schedule items for the calendar
+    if( !calendar.events || calendar.events.length <= 0 ) {
+      const dates = {}
+      active = activeDate ? activeDate : this.state.activeDate
+      dates.start = moment.utc().year(active.year())
+        .month(active.month()).day(1)
+      dates.stop = moment.utc().year(active.year())
+        .month(active.month()).day(active.daysInMonth())
+      dispatch(indexCalendar( dates ))
+    }
   }
 
   //===============================================//
@@ -82,8 +88,25 @@ class Calendar extends Component {
     return calendarDays
   }
 
+  /**
+   * Determines which events belong to which day and attaches them accordingly
+   * @param {Array} calendarDays - All the days displayed in the calendar view
+   */
   addEventsToDates = ( calendarDays ) => {
-    const { calendar } = this.props
+    const { calendar: events } = this.props
+    if( events && events.length > 0 ) {
+      events.forEach( event => {
+        // TODO check start and end dates of the event
+        const eventStart = moment.utc(event.start)
+        const start = calendarDays.find( day => {
+          return eventStart.isSame(day,'day')
+        })
+        // TODO set first inline-flex on day object
+        if( start ) {
+          debugger
+        }
+      })
+    }
   }
 
   /**

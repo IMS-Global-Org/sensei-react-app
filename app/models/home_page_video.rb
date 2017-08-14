@@ -6,6 +6,7 @@
 #  title                :string           not null
 #  identifier           :string           not null
 #  source               :string           not null
+#  notes                :text
 #  home_page_posting_id :integer
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null

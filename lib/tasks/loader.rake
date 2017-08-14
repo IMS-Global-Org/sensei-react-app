@@ -56,4 +56,25 @@ namespace :loader do
     end
   end
 
+  task events: :environment do
+    # clean up any left in the database
+    Event.destroy_all
+    # create date limits
+    now = Time.now
+    start = now - 1.month
+    finish = now + 1.month
+    # Generic categories
+    categories = %w( aerobics weights cardio arms defense offense testing )
+    # load the database with lots of random events
+    50.times do
+      Event.create(
+        start: Faker::Time.between(start, now),
+        finish: Faker::Time.between(now, finish),
+        title: Faker::Lorem.sentence,
+        description: Faker::Lorem.paragraph(4),
+        category: categories.sample
+      )
+    end
+  end
+
 end
