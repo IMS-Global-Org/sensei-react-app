@@ -7,6 +7,7 @@ const WeekDay = styled.div`
   width: calc(100%/7);
   height: 100px;
   border-right: 1px solid grey;
+  ${ props => props.activeDay && 'background-color: #f2f2f2;' }
 `
 const LastWeekDay = WeekDay.extend`
   border-right: none;
@@ -18,19 +19,19 @@ const FirstWeekDay = WeekDay.extend`
 const CalendarDay = ({ day, dayType }) => {
   if( dayType === 'WeekDay' ){
     return (
-      <WeekDay>
+      <WeekDay activeDay={day.activeDay}>
         <CalendarDayTag day={day.date()} />
       </WeekDay>
     )
   } else if( dayType === 'FirstWeekDay' ) {
     return (
-      <FirstWeekDay>
+      <FirstWeekDay activeDay={day.activeDay}>
         <CalendarDayTag day={day.date()} />
       </FirstWeekDay>
     )
   } else if( dayType === 'LastWeekDay' ) {
     return (
-      <LastWeekDay>
+      <LastWeekDay activeDay={day.activeDay}>
         <CalendarDayTag day={day.date()} />
       </LastWeekDay>
     )

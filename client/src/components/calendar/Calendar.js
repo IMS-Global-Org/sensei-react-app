@@ -19,6 +19,8 @@ const CalendarArea = styled.div`
   flex-wrap: wrap;
   flex-direction: column;
   border: 1px solid grey;
+  border-radius: 5px;
+  background-color: white;
 `
 
 /**
@@ -28,31 +30,35 @@ const CalendarArea = styled.div`
  */
 class Calendar extends Component {
   state = {
-    // default dates for initializing the calendar
-    dates: {
-      start: moment.utc().subtract( 1, 'hour' ),
-      end: moment.utc().add( 1, 'hour' ),
-    },
+    activeDate: moment.utc()
   }
 
   /**
    * Initialize the calendar data and attributes
+   * FIXME create the database table that will hold the calendar information
    */
-  // componentDidMount = () => {
-    // let { calendar, dispatch } = this.props
-    // // retrieve the remote set of schedule items for the calendar
+  componentDidMount = () => {
+    let { calendar, dispatch } = this.props
+    // retrieve the remote set of schedule items for the calendar
     // if( !calendar.events || calendar.events.length <= 0 ) {
     //   dispatch(indexCalendar( this.state.dates ))
     // }
-  // }
+  }
+
+  //===============================================//
+  // Calendar Functions
+  //===============================================//
 
   /**
-   * Calendar Functions
+   * Setter method. Sets the information need for creating and displaying the
+   * days of the current month on the page. Creates an object with 'moment'
+   * objects representing the active days date, the first of the active month,
+   * as well as the end of the active month.
    */
-
   currentCalendarMonth = () => {
+    const { activeDate } = this.props
     let curr = {}
-    curr.today = moment.utc()
+    curr.today = activeDate ? activeDate : this.state.activeDate
     curr.start = moment.utc().year(curr.today.year())
       .month(curr.today.month()).date(1)
     curr.end = moment.utc().year(curr.today.year())
@@ -71,7 +77,13 @@ class Calendar extends Component {
     this.fillCurrentDayOfMonth( month.today, calendarDays )
     this.fillUntilFirstOfMonth( month.today, month.start, calendarDays )
     this.fillUntilLastOfMonth( month.today, month.end, calendarDays )
+    // TODO add events to each calendar day that will be displayed
+    this.addEventsToDates(calendarDays)
     return calendarDays
+  }
+
+  addEventsToDates = ( calendarDays ) => {
+    const { calendar } = this.props
   }
 
   /**
@@ -80,7 +92,10 @@ class Calendar extends Component {
    * @param {Array} calendarDays - container for new components
    */
   fillCurrentDayOfMonth = ( current, calendarDays ) => {
-    calendarDays.push( current.clone() )
+    // Mark it as the active day or date
+    let activeDate = current.clone()
+    activeDate.activeDay = true
+    calendarDays.push( activeDate )
   }
 
   /**
@@ -137,6 +152,10 @@ class Calendar extends Component {
     }
   }
 
+  /**
+   * Produces the actual components representing the individual weeks of
+   * the month. Each week is condsidered it's own row in the calendar
+   */
   generateCalendarWeeks = () => {
     let calendarDays = this.generateCalendarDays()
     let weekDays = this.generateWeekDays(calendarDays)
@@ -152,12 +171,18 @@ class Calendar extends Component {
     })
   }
 
+  /**
+   * Generate the individual weeks of the active month with the given set
+   * set of day.
+   * @param {Array} calendarDays - set of days for the given calendar month
+   * @return {Array} array of arrays containing 'moment' objects
+   */
   generateWeekDays = ( calendarDays ) => {
     let range = 7
     let weekDays = []
     let start = 0
     let finish = range
-    while( start <= calendarDays.length ) {
+    while( start < calendarDays.length ) {
       weekDays.push( calendarDays.slice( start, finish ) )
       start = finish
       finish += range
@@ -165,6 +190,12 @@ class Calendar extends Component {
     return weekDays
   }
 
+  /**
+   * Does the formatting for the individual days of the week depending
+   * on which weekday they represent
+   * @param {Array} weekDays - array of 'moment' objects for the given week
+   * @return {Array} array of components, one for each day of the week
+   */
   generateCalendarWeek = ( weekDays ) => {
     let week = []
     weekDays.forEach( (day,index) => {
@@ -179,6 +210,9 @@ class Calendar extends Component {
     return week
   }
 
+  /**
+   * Container for the Calendar that will be displayed as a single component
+   */
   generateCalendar = () => {
     return (
       <CalendarArea>

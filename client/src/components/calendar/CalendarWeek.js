@@ -1,16 +1,16 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const FirstWeek = styled.div`
+const Week = styled.div`
   display: inline-flex;
   flex-direction: row;
-  border-bottom: 1px solid grey;
+  border: none;
+  border-top: 1px solid grey;
 `
-const LastWeek = FirstWeek.extend`
-  border-bottom: none;
+const FirstWeek = Week.extend`
+  border: none;
 `
-const Week = FirstWeek.extend`
-  border-bottom: 1px solid blue;
+const LastWeek = Week.extend`
 `
 
 const CalendarWeek = ({ week, weekType }) => {
