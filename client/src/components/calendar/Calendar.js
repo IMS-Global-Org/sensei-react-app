@@ -19,8 +19,21 @@ const CalendarArea = styled.div`
   flex-wrap: wrap;
   flex-direction: column;
   border: 1px solid grey;
-  border-radius: 5px;
+  border-radius: 0 0 5px 5px;
   background-color: white;
+`
+const CalendarHeader = CalendarArea.extend`
+  flex-direction: row;
+  border-bottom: none;
+  border-radius: 5px 5px 0 0 ;
+`
+const HeaderDay = styled.div`
+  width: calc(100%/7);
+  padding: 1rem 0;
+  border-right: ${ props => props.last ? 'none' : '1px solid grey'};
+  text-align: center;
+  font-size: 1.25rem;
+  font-weight: bold;
 `
 
 /**
@@ -39,13 +52,13 @@ class Calendar extends Component {
    */
   componentDidMount = () => {
     const { activeDate, calendar, dispatch } = this.props
-    retrieve the remote set of schedule items for the calendar
+    // retrieve the remote set of schedule events for the calendar
     if( !calendar.events || calendar.events.length <= 0 ) {
       const dates = {}
-      active = activeDate ? activeDate : this.state.activeDate
+      const active = activeDate ? activeDate : this.state.activeDate
       dates.start = moment.utc().year(active.year())
         .month(active.month()).day(1)
-      dates.stop = moment.utc().year(active.year())
+      dates.finish = moment.utc().year(active.year())
         .month(active.month()).day(active.daysInMonth())
       dispatch(indexCalendar( dates ))
     }
@@ -93,20 +106,35 @@ class Calendar extends Component {
    * @param {Array} calendarDays - All the days displayed in the calendar view
    */
   addEventsToDates = ( calendarDays ) => {
-    const { calendar: events } = this.props
-    if( events && events.length > 0 ) {
-      events.forEach( event => {
-        // TODO check start and end dates of the event
-        const eventStart = moment.utc(event.start)
-        const start = calendarDays.find( day => {
-          return eventStart.isSame(day,'day')
+    let { calendar: { events } } = this.props
+    // TODO sort the events in asc order when pulling from the database
+    // for every day, find its events
+    if( events && events.length > 0 ){
+      events.forEach( this.eventToMoments )
+      calendarDays.forEach( day => {
+        // search only the events upto and including the current day
+        let todaysEvents = []
+        let good = events.every( event => {
+          if( day.isBetween(event.start, event.finish,'day','[]') ) {
+            todaysEvents.push( event )
+            return true
+          } else if( event.start.isAfter(day,'day') ) {
+            return false
+          }
         })
-        // TODO set first inline-flex on day object
-        if( start ) {
-          debugger
-        }
+        if( todaysEvents.length > 0 )
+          day.events = todaysEvents
       })
     }
+  }
+
+  /**
+   * Helper method for converting string timestamps to moment objects
+   * @param {Object} event - simple json event object from the database
+   */
+  eventToMoments = ( event ) => {
+    event.start = moment.utc(event.start)
+    event.finish = moment.utc(event.finish)
   }
 
   /**
@@ -244,11 +272,32 @@ class Calendar extends Component {
     )
   }
 
+  generateCalendarHeader = () => {
+    let week = moment.utc()
+    return [0,1,2,3,4,5,6].map( day => {
+      if( day !== 6 ) {
+        return (
+          <HeaderDay>
+            { week.day(day).format('dddd') }
+          </HeaderDay>
+        )
+      } else {
+        return (
+          <HeaderDay last>
+            { week.day(day).format('dddd') }
+          </HeaderDay>
+        )
+      }
+    })
+  }
 
   render() {
     return (
       <Container>
-          { this.generateCalendar() }
+        <CalendarHeader>
+          { this.generateCalendarHeader() }
+        </CalendarHeader>
+        { this.generateCalendar() }
       </Container>
     )
   }

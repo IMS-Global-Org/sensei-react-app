@@ -6,6 +6,7 @@ const DayTag = styled.div`
   text-align: center;
   border-right: 1px solid grey;
   border-bottom: 1px solid grey;
+  border-radius: 0 0 5px 0;
 `
 
 const CalendarDayTag = ({ day }) => {

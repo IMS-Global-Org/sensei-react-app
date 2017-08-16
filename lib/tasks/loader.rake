@@ -61,12 +61,12 @@ namespace :loader do
     Event.destroy_all
     # create date limits
     now = Time.now
-    start = now - 1.month
-    finish = now + 1.month
+    start = now - 5.days
+    finish = now + 5.days
     # Generic categories
     categories = %w( aerobics weights cardio arms defense offense testing )
     # load the database with lots of random events
-    50.times do
+    10.times do
       Event.create(
         start: Faker::Time.between(start, now),
         finish: Faker::Time.between(now, finish),

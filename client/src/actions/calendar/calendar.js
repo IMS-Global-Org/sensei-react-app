@@ -11,13 +11,13 @@ export const indexCalendar = ( dates = null ) => {
   // set default two month range for dates
   if( !dates ){
     dates.start = moment.utc().subtract(1,'months')
-    dates.end = moment.utc().add(1,'months')
+    dates.finish = moment.utc().add(1,'months')
   }
   // create the query string for acquiring dates from the remote database
-  query = `?start_date=${dates.start}&end_date=${dates.end}`
+  query = `?start=${dates.start.format()}&finish=${dates.finish.format()}`
   // query the remote database
   return (dispatch) => {
-    axios.get(`/api/calendar${query}`)
+    axios.get(`/api/events${query}`)
     .then( resp => {
       dispatch({
         type: 'INDEX_CALENDAR',

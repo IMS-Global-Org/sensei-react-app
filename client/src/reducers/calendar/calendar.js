@@ -2,7 +2,7 @@ const calendar = ( state = { events: [] }, action ) => {
   switch( action.type ) {
     case 'INDEX_CALENDAR':
       return {
-        events: action.data,
+        events: action.dates,
       }
     default:
       return state
