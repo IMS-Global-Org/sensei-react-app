@@ -46,6 +46,7 @@
 #                          PATCH    /api/events/:id(.:format)              api/events#update
 #                          PUT      /api/events/:id(.:format)              api/events#update
 #                          DELETE   /api/events/:id(.:format)              api/events#destroy
+#      api_events_paginate GET      /api/paginate/events(.:format)         api/events#paginate
 #                          GET      /*other(.:format)                      static#index
 # 
 
@@ -57,9 +58,11 @@ Rails.application.routes.draw do
     resources :announcements
     resources :home_page_postings
     resources :postings_tables
+    # Routes for calendar events
     resources :events
+    get '/paginate/events', to: 'events#paginate', as: 'events_paginate'
   end
 
-  #Do not place any routes below this one
+  # Do not place any routes below this one
   get '*other', to: 'static#index'
 end

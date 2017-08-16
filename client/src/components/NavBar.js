@@ -32,6 +32,12 @@ class NavBar extends Component {
                   to='/postings'
                   active={activeItem === 'postings'}
                   onClick={this.handleItemClick} />
+                <Menu.Item
+                  name='Calendar Events'
+                  as={ Link }
+                  to='/calendar/events'
+                  active={activeItem === 'Calendar Events'}
+                  onClick={this.handleItemClick} />
               </Dropdown.Menu>
             </Dropdown>
           }
@@ -93,7 +99,7 @@ class NavBar extends Component {
           as={ Link }
           to='/calendar'
           name='calendar'
-          active={activeItem === 'caledar'}
+          active={activeItem === 'calendar'}
           onClick={this.handleItemClick} />
         { this.rightNavs() }
       </Menu>

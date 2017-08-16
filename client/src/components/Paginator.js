@@ -7,7 +7,7 @@ import _ from 'lodash'
  * @author Brennick Langston
  * @version 0.0.1
  * NOTE
- * 1. requires a full set of pagination controls
+ * 1. requires a full set of pagination props
  *    - total_pages
  *    - current_page
  *    - next_page
@@ -15,6 +15,9 @@ import _ from 'lodash'
  *    - loadMore (etc.)
  * 3. optional props
  *    - size: the size of the menu items to display
+ * 4. Must set state variable 'hasMore' to false as it's initial state
+ * 5. Must implement the 'loadMore' callback or the main component
+ *    will not display at all.
  */
 class Paginator extends Component {
   state = { activeItem: '' }

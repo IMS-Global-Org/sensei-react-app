@@ -10,7 +10,8 @@ import CalendarDay from './CalendarDay'
 
 // Custom Actions
 import {
-  indexCalendar
+  indexCalendarEvents,
+  clearCalendar
 } from '../../actions/calendar/calendar'
 
 // Custom Styled Components
@@ -60,8 +61,13 @@ class Calendar extends Component {
         .month(active.month()).day(1)
       dates.finish = moment.utc().year(active.year())
         .month(active.month()).day(active.daysInMonth())
-      dispatch(indexCalendar( dates ))
+      dispatch(indexCalendarEvents( dates ))
     }
+  }
+
+  componentWillUnmount = () => {
+    const { dispatch } = this.props
+    dispatch(clearCalendar())
   }
 
   //===============================================//

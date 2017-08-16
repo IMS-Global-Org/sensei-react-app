@@ -3,21 +3,51 @@ class Api::EventsController < ApplicationController
 
   def index
     events = Event.all
-      .where('start >= ? AND finish <= ?',params[:start],params[:finish])
+      .where('start >= ? AND finish <= ?', params[:start], params[:finish])
       .order(start: :asc)
     render json: events
   end
 
+  def paginate
+    # get the events to display per page
+    events = Event.all
+      .where('start >= ? AND finish <= ?', params[:start], params[:finish])
+      .order(start: :asc)
+      .page(params[:page]).per(params[:per])
+    # return the events and page information as a json package
+    render json: {
+      events: events,
+      paginate: {
+        total_pages: events.total_pages,
+        current_page: events.current_page,
+        next_page: events.next_page
+      }
+    }
+  end
+
   def show
+    render json: @event
   end
 
   def update
+    if @event.update(event_params)
+      render json: @event
+    else
+      render_error @event
+    end
   end
 
   def create
+    event = Event.new(event_parms)
+    if event.save
+      render json: event
+    else
+      render_error event
+    end
   end
 
   def destroy
+    @event.destroy
   end
 
   private
