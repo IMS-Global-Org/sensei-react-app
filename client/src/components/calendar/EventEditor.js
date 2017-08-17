@@ -5,14 +5,26 @@ import moment from 'moment'
 
 // Custom Components
 import Paginator from '../Paginator'
+import EventEditorForm from './EventEditorForm'
 
 // Actions
 import {
   paginateCalendarEvents,
 } from '../../actions/calendar/calendar'
 
+/**
+ * Access to the calendar events for editing, creating and deleting
+ * @author Brennick Langston
+ * @version 0.0.1
+ */
 class EventEditor extends Component {
-  state = { dates: null, hasMore: false }
+  /**
+   * @type {Object}
+   * @property {Object} dates - default start and finish dates
+   * @property {Boolean} hasMore - Flag for obtaining more event records
+   * @property {Integer} eventId - event id number of the clicked event
+   */
+  state = { dates: null, hasMore: false, eventId: null }
 
   /**
    * Set the initial state of the component and retrieve the events for
@@ -37,6 +49,12 @@ class EventEditor extends Component {
     }
   }
 
+  /**
+   * Helper function for the loading the events that coincide with the
+   * current calendar month
+   * @param {Array} events - list of events for the current displayed month
+   * @param {Object} dates - start and finish dates for obtaining events
+   */
   loadCalendarEvents = ( events, dates ) => {
     const { dispatch } = this.props
     if( !events || events.length <= 0 ) {
@@ -45,6 +63,10 @@ class EventEditor extends Component {
     }
   }
 
+  /**
+   * Helper function for when the event editor has dates passed in as props
+   * @param {Object} nextProps - the props the component will receive
+   */
   componentWillReceiveProps = ( nextProps ) => {
     const { dates } = nextProps
     if( dates ) {
@@ -54,14 +76,21 @@ class EventEditor extends Component {
     }
   }
 
+  /**
+   * Displays the information for a single event in a table row format
+   */
   displayTableRows = () => {
     const { events } = this.props
     if( events && events.length > 0 ) {
       return events.map( event => {
         return (
-          <Table.Row>
-            <Table.Cell>{event.start}</Table.Cell>
-            <Table.Cell>{event.finish}</Table.Cell>
+          <Table.Row onClick={() => this.handleRowClick(event.id)}>
+            <Table.Cell>
+              {moment(event.start).format('DD MMM YYYY, HH:mm a')}
+            </Table.Cell>
+            <Table.Cell>
+              {moment(event.finish).format('DD MMM YYYY, HH:mm a')}
+            </Table.Cell>
             <Table.Cell>{event.title}</Table.Cell>
             <Table.Cell>{event.category}</Table.Cell>
             <Table.Cell>{event.description}</Table.Cell>
@@ -71,6 +100,12 @@ class EventEditor extends Component {
     }
   }
 
+  handleRowClick = ( eventId ) => this.setState({ eventId })
+
+  /**
+   * Loader for the calendar events. Loads by page number.
+   * @param {Integer} page - the page number of events that is to be rendered
+   */
   loadMore = ( page ) => {
     const { hasMore } = this.state
     const { paginate, dispatch } = this.props
@@ -84,6 +119,9 @@ class EventEditor extends Component {
     }
   }
 
+  /**
+   * Render function for the main component
+   */
   render() {
     return (
       <Container>
@@ -113,12 +151,15 @@ class EventEditor extends Component {
           </Table.Body>
           <Table.Footer>
             <Table.Row>
-              <Paginator
-                pagination={this.props.paginate}
-                loadMore={this.loadMore} />
+              <Table.HeaderCell colSpan={5}>
+                <Paginator
+                  pagination={this.props.paginate}
+                  loadMore={this.loadMore} />
+              </Table.HeaderCell>
             </Table.Row>
           </Table.Footer>
         </Table>
+        <EventEditorForm eventId={this.state.eventId} />
       </Container>
     )
   }

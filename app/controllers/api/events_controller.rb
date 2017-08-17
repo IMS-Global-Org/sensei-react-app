@@ -38,7 +38,7 @@ class Api::EventsController < ApplicationController
   end
 
   def create
-    event = Event.new(event_parms)
+    event = Event.new(event_params)
     if event.save
       render json: event
     else
@@ -54,7 +54,8 @@ class Api::EventsController < ApplicationController
 
   def event_params
     params.require(:event)
-      .permit(:start, :finish, :title, :category, :description )
+      .permit(:start, :finish, :title, :category, :description,
+        :created_at, :updated_at, :id )
   end
 
   def set_event

@@ -16,16 +16,21 @@ const calendar = ( state = { events: [], activeEvent: null, paginate: {} }, acti
       }
     case 'UPDATE_CALENDAR_EVENT':
       // FIXME update for updating a single event from the list of calendar events
+      let index = state.events.findIndex( e => e.id === action.data.id )
       return {
         ...state,
-        activeEvent: action.data,
+        events: [
+          ...state.events.slice(0,index),
+          action.data,
+          ...state.events.slice(index+1),
+        ],
       }
     case 'CREATE_CALENDAR_EVENT':
       return {
         ...state,
         events: [
+          action.data,
           ...state.events,
-          action.data
         ],
       }
     case 'CLEAR_CALENDAR_EVENTS':

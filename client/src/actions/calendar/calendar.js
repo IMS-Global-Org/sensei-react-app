@@ -89,7 +89,7 @@ export const showCalendarEvent = ( eventId ) => {
  */
 export const updateCalendarEvent = ( event ) => {
   return (dispatch) => {
-    axios.patch(`/api/events/${event.id}`)
+    axios.patch(`/api/events/${event.id}`, { event })
     .then( resp => {
       dispatch({
         type: 'UPDATE_CALENDAR_EVENT',
