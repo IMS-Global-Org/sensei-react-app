@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Container } from 'semantic-ui-react'
+import { Container, Button } from 'semantic-ui-react'
 import styled from 'styled-components'
 import moment from 'moment'
 
@@ -19,22 +19,41 @@ const CalendarArea = styled.div`
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
-  border: 1px solid grey;
+  border: 1px solid lightgrey;
   border-radius: 0 0 5px 5px;
   background-color: white;
 `
 const CalendarHeader = CalendarArea.extend`
   flex-direction: row;
   border-bottom: none;
+  border-radius: 0 0 0 0 ;
+`
+const CalendarNavBar = CalendarArea.extend`
+  flex-direction: row;
   border-radius: 5px 5px 0 0 ;
 `
 const HeaderDay = styled.div`
   width: calc(100%/7);
   padding: 1rem 0;
-  border-right: ${ props => props.last ? 'none' : '1px solid grey'};
+  border-right: ${ props => props.last ? 'none' : '1px solid lightgrey'};
   text-align: center;
   font-size: 1.25rem;
   font-weight: bold;
+`
+const Controls = styled.div`
+  flex-grow: 2;
+  flex-direction: column !important;
+  align-items: center !important;
+  padding: 0.75rem 2rem;
+`
+const DateDisplay = styled.div`
+  flex-grow: 1;
+  padding: 1.5rem 2rem;
+  text-align: right;
+  font-size: 2rem;
+  font-weight: bold;
+  color: 'grey';
+  vertical-align: center;
 `
 
 /**
@@ -57,12 +76,17 @@ class Calendar extends Component {
     if( !calendar.events || calendar.events.length <= 0 ) {
       const dates = {}
       const active = activeDate ? activeDate : this.state.activeDate
-      dates.start = moment.utc().year(active.year())
-        .month(active.month()).day(1)
-      dates.finish = moment.utc().year(active.year())
-        .month(active.month()).day(active.daysInMonth())
-      dispatch(indexCalendarEvents( dates ))
+      dispatch(indexCalendarEvents( this.queryDates( active ) ))
     }
+  }
+
+  queryDates = ( active ) => {
+    const dates = {}
+    dates.start = moment.utc().year(active.year())
+      .month(active.month()).date(1)
+    dates.finish = moment.utc().year(active.year())
+      .month(active.month()).date(active.daysInMonth())
+    return dates
   }
 
   componentWillUnmount = () => {
@@ -116,17 +140,24 @@ class Calendar extends Component {
     // TODO sort the events in asc order when pulling from the database
     // for every day, find its events
     if( events && events.length > 0 ){
+      // convert all the string dates to moment objects
       events.forEach( this.eventToMoments )
+      // find min and max date boundries
+      // search only the events within the events date range
+      const minEvent = moment.min(events.map(event=>event.start))
+      const maxEvent = moment.max(events.map(event=>event.finish))
+      // locate and adjoin each event to its proper calendar day
       calendarDays.forEach( day => {
-        // search only the events upto and including the current day
         let todaysEvents = []
         let good = events.every( event => {
-          if( day.isBetween(event.start, event.finish,'day','[]') ) {
-            todaysEvents.push( event )
-            return true
-          } else if( event.start.isAfter(day,'day') ) {
+          if( day.isBefore(minEvent,'date') || day.isAfter(maxEvent,'date') ) {
+            // exclude outliers
             return false
+          } else if( day.isBetween(event.start,event.finish,'date','[]') ) {
+            // if the event range matches the day then show or attach
+            todaysEvents.push(event)
           }
+          return true // required to keep the loop going
         })
         if( todaysEvents.length > 0 )
           day.events = todaysEvents
@@ -219,11 +250,11 @@ class Calendar extends Component {
     return weekDays.map( (days,index) => {
       const week = this.generateCalendarWeek( days )
       if( index === 0 ) {
-         return ( <CalendarWeek week={week} weekType='FirstWeek' /> )
+         return ( <CalendarWeek key={index} week={week} weekType='FirstWeek' /> )
       } else if( index === 4 ) {
-        return ( <CalendarWeek week={week} weekType='LastWeek' /> )
+        return ( <CalendarWeek key={index} week={week} weekType='LastWeek' /> )
       } else {
-        return ( <CalendarWeek week={week} weekType='Week' /> )
+        return ( <CalendarWeek key={index} week={week} weekType='Week' /> )
       }
     })
   }
@@ -257,11 +288,11 @@ class Calendar extends Component {
     let week = []
     weekDays.forEach( (day,index) => {
       if( index === 0 ) {
-        week.push( <CalendarDay day={day} dayType='FirstWeekDay' /> )
+        week.push( <CalendarDay key={index} day={day} dayType='FirstWeekDay' /> )
       } else if( index === 6 ) {
-        week.push( <CalendarDay day={day} dayType='LastWeekDay' />)
+        week.push( <CalendarDay key={index} day={day} dayType='LastWeekDay' />)
       } else {
-        week.push( <CalendarDay day={day} dayType='WeekDay' /> )
+        week.push( <CalendarDay key={index} day={day} dayType='WeekDay' /> )
       }
     })
     return week
@@ -280,16 +311,16 @@ class Calendar extends Component {
 
   generateCalendarHeader = () => {
     let week = moment.utc()
-    return [0,1,2,3,4,5,6].map( day => {
+    return [0,1,2,3,4,5,6].map( (day,index) => {
       if( day !== 6 ) {
         return (
-          <HeaderDay>
+          <HeaderDay key={index}>
             { week.day(day).format('dddd') }
           </HeaderDay>
         )
       } else {
         return (
-          <HeaderDay last>
+          <HeaderDay key={index} last>
             { week.day(day).format('dddd') }
           </HeaderDay>
         )
@@ -297,9 +328,33 @@ class Calendar extends Component {
     })
   }
 
+  handlePrevMonth = () => {
+    const { dispatch } = this.props
+    let activeDate = this.state.activeDate.clone().subtract(1,'month')
+    dispatch(indexCalendarEvents( this.queryDates( activeDate ) ))
+    this.setState({ activeDate })
+  }
+  handleNextMonth = () => {
+    const { dispatch } = this.props
+    let activeDate = this.state.activeDate.clone().add(1,'month')
+    dispatch(indexCalendarEvents( this.queryDates( activeDate ) ))
+    this.setState({ activeDate })
+  }
+
   render() {
     return (
       <Container>
+        <CalendarNavBar>
+          <Controls>
+            <Button.Group basic size='tiny'>
+              <Button icon='chevron left' onClick={this.handlePrevMonth}/>
+              <Button icon='chevron right' onClick={this.handleNextMonth} />
+            </Button.Group>
+          </Controls>
+          <DateDisplay>
+            { this.state.activeDate.format('MMMM YYYY') }
+          </DateDisplay>
+        </CalendarNavBar>
         <CalendarHeader>
           { this.generateCalendarHeader() }
         </CalendarHeader>

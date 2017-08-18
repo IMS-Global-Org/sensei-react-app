@@ -82,9 +82,9 @@ class EventEditor extends Component {
   displayTableRows = () => {
     const { events } = this.props
     if( events && events.length > 0 ) {
-      return events.map( event => {
+      return events.map( (event,index) => {
         return (
-          <Table.Row onClick={() => this.handleRowClick(event.id)}>
+          <Table.Row key={index} onClick={() => this.handleRowClick(event.id)}>
             <Table.Cell>
               {moment(event.start).format('DD MMM YYYY, HH:mm a')}
             </Table.Cell>
@@ -152,9 +152,9 @@ class EventEditor extends Component {
           <Table.Footer>
             <Table.Row>
               <Table.HeaderCell colSpan={5}>
-                <Paginator
-                  pagination={this.props.paginate}
-                  loadMore={this.loadMore} />
+                  <Paginator
+                    pagination={this.props.paginate}
+                    loadMore={this.loadMore} />
               </Table.HeaderCell>
             </Table.Row>
           </Table.Footer>

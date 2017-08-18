@@ -42,6 +42,11 @@ class EventEditorForm extends Component {
     }
   }
 
+  componentWillUnmount = () => {
+    const { dispatch } = this.props
+    dispatch(clearCalendar())
+  }
+
   handleStartTime = ( start ) => { this.setState({ start }) }
   handleFinishTime = ( finish ) => { this.setState({ finish }) }
   handleInputChange = ( event ) => {

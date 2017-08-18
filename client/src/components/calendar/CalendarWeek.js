@@ -5,7 +5,7 @@ const Week = styled.div`
   display: inline-flex;
   flex-direction: row;
   border: none;
-  border-top: 1px solid grey;
+  border-top: 1px solid lightgrey;
 `
 const FirstWeek = Week.extend`
   border: none;

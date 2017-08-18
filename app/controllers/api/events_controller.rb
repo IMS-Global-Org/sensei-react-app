@@ -3,8 +3,9 @@ class Api::EventsController < ApplicationController
 
   def index
     events = Event.all
-      .where('start >= ? AND finish <= ?', params[:start], params[:finish])
-      .order(start: :asc)
+    .where('(start, finish) OVERLAPS (?,?)', params[:start], params[:finish])
+    .order(start: :asc)
+      # .where('start >= ? AND finish <= ?', params[:start], params[:finish])
     render json: events
   end
 

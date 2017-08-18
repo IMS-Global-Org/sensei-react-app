@@ -26,7 +26,16 @@ class Paginator extends Component {
    * Initializes the page/Menu.Item that will be displayed as active
    */
   componentDidMount = () => {
-    this.setState({ activeItem: this.props.currentPage })
+    // const { pagination } = this.props
+    // if( pagination && pagination.current_page )
+    //   this.setState({ activeItem: pagination.current_page })
+  }
+
+  componentWillReceiveProps = ( nextProps ) => {
+    const { pagination } = nextProps
+    if( pagination && pagination.current_page ) {
+      this.setState({ activeItem: pagination.current_page })
+    }
   }
 
   /**
@@ -34,26 +43,28 @@ class Paginator extends Component {
    */
   generatePages = () => {
     const { activeItem } = this.state
-    const pageNums = this.calculatePages()
-    let components = []
-    // place the left menu chevron
-    components.push(this.leftChevron(pageNums.shift()))
-    // store the right menu chevron
-    const right = this.rightChevron(pageNums.pop())
-    // insert the middle paginator menu items
-    pageNums.forEach( pageNum => {
-      components.push(
-        <Menu.Item
-          key={pageNum}
-          name={pageNum}
-          active={activeItem === pageNum}
-          onClick={this.loadPage} />
-      )
-    })
-    // set the right chevron as the last available page
-    components.push(right)
-    // return the components for displaying
-    return components
+    if( typeof activeItem === 'number' ) {
+      const pageNums = this.calculatePages()
+      let components = []
+      // place the left menu chevron
+      components.push(this.leftChevron(pageNums.shift()))
+      // store the right menu chevron
+      const right = this.rightChevron(pageNums.pop())
+      // insert the middle paginator menu items
+      pageNums.forEach( pageNum => {
+        components.push(
+          <Menu.Item
+            key={pageNum+'M'}
+            name={pageNum}
+            active={activeItem === pageNum}
+            onClick={this.loadPage} />
+        )
+      })
+      // set the right chevron as the last available page
+      components.push(right)
+      // return the components for displaying
+      return components
+    }
   }
 
   /**
@@ -63,7 +74,7 @@ class Paginator extends Component {
     const { activeItem } = this.state
     return (
       <Menu.Item
-        key={pageNum}
+        key={pageNum+'L'}
         icon
         name={pageNum}
         active={activeItem === pageNum}
@@ -80,7 +91,7 @@ class Paginator extends Component {
     const { activeItem } = this.state
     return (
       <Menu.Item
-        key={pageNum}
+        key={pageNum+'R'}
         icon
         name={pageNum}
         active={activeItem === pageNum}

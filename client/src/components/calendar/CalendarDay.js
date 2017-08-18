@@ -8,7 +8,7 @@ const WeekDay = styled.div`
   width: calc(100%/7);
   height: 100px;
   overflow: auto;
-  border-right: 1px solid grey;
+  border-right: 1px solid lightgrey;
   ${ props => props.activeDay && 'background-color: #f2f2f2;' }
 `
 const LastWeekDay = WeekDay.extend`
@@ -39,7 +39,7 @@ const CalendarDay = ({ day, dayType }) => {
     <Day activeDay={ day.activeDay }>
       <CalendarDayTag day={day.date()} />
       { day.events && day.events.map( event =>
-        <CalendarEvent event={event} />
+        <CalendarEvent key={event.id} event={event} />
       )}
     </Day>
   )
