@@ -19,12 +19,13 @@ import AnnouncementManager from './AnnouncementManager'
 import HomePagePostings from './HomePagePostings'
 import Calendar from './calendar/Calendar'
 import EventEditor from './calendar/EventEditor'
-
+import Header from './header/Header'
 
 class App extends Component {
   render() {
     return (
       <div>
+        <Header />
         <NavBar />
         <Flash />
         <FetchUser>

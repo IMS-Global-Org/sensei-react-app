@@ -11,7 +11,7 @@ import {
 } from '../actions/postings'
 
 class PostingsTableModal extends Component {
-  state = { open: false, dimmer: 'dimmer', activePosting: null, formType: null }
+  state = { open: false, dimmer: true, activePosting: null, formType: null }
 
   /**
    * Callback function allowing the child's form component state to be accessed
@@ -87,7 +87,7 @@ class PostingsTableModal extends Component {
     return (
       <Modal
         open={open}
-        dimmer={dimmer}
+        dimmer={true}
         onClose={this.close}>
         <Modal.Header>Postings Form</Modal.Header>
         <Modal.Content>
