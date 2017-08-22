@@ -90,10 +90,10 @@ class NavBar extends Component {
           active={activeItem === 'sensei'}
           onClick={this.handleItemClick} />
         <Menu.Item
-          name='courses'
+          name='programs'
           as={ Link }
-          to='/courses'
-          active={activeItem === 'courses'}
+          to='/programs'
+          active={activeItem === 'programs'}
           onClick={this.handleItemClick} />
         <Menu.Item
           as={ Link }

@@ -14,7 +14,7 @@ import 'react-datetime/css/react-datetime.css'
 
 // Custom Components
 import Settings from './Settings'
-import Courses from './Courses'
+import Programs from './Programs'
 import AnnouncementManager from './AnnouncementManager'
 import HomePagePostings from './HomePagePostings'
 import Calendar from './calendar/Calendar'
@@ -35,7 +35,7 @@ class App extends Component {
             <Route exact path='/register' component={Register} />
             <Route exact path='/calendar' component={Calendar} />
             <Route exact path='/calendar/events' component={EventEditor} />
-            <Route exact path='/courses' component={Courses} />
+            <Route exact path='/programs' component={Programs} />
             <ProtectedRoute exact path='/settings' component={Settings} />
             <ProtectedRoute path='/announcements' component={AnnouncementManager} />
             <ProtectedRoute path='/postings' component={HomePagePostings} />

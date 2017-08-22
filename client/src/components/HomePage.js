@@ -64,8 +64,7 @@ class HomePage extends Component {
     let { postings: { data } } = this.props
     if( data && data.length > 0 ) {
       return data.map( posting => {
-        let { posting: { id }} = posting
-        return ( <Posting key={id} data={posting} /> )
+        return ( <Posting key={posting.id} {...posting} /> )
       })
     }
   }

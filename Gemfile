@@ -30,6 +30,7 @@ gem 'devise'
 gem 'devise_token_auth'
 gem 'dotenv'
 gem 'kaminari'
+gem 'will_paginate'
 gem 'validates_timeliness'
 
 group :development, :test do
