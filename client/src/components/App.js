@@ -14,7 +14,7 @@ import 'react-datetime/css/react-datetime.css'
 
 // Custom Components
 import Settings from './Settings'
-import Programs from './Programs'
+import Programs from './programs/Programs'
 import AnnouncementManager from './AnnouncementManager'
 import HomePagePostings from './HomePagePostings'
 import Calendar from './calendar/Calendar'
