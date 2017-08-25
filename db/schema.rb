@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170814203000) do
+ActiveRecord::Schema.define(version: 20170823135751) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,6 +68,24 @@ ActiveRecord::Schema.define(version: 20170814203000) do
     t.index ["home_page_posting_id"], name: "index_home_page_videos_on_home_page_posting_id"
   end
 
+  create_table "programs", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "description", null: false
+    t.string "level", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "requirements", force: :cascade do |t|
+    t.string "title", null: false
+    t.string "description"
+    t.string "level", null: false
+    t.bigint "program_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["program_id"], name: "index_requirements_on_program_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "provider", default: "email", null: false
     t.string "uid", default: "", null: false
@@ -100,4 +118,5 @@ ActiveRecord::Schema.define(version: 20170814203000) do
 
   add_foreign_key "home_page_links", "home_page_postings"
   add_foreign_key "home_page_videos", "home_page_postings"
+  add_foreign_key "requirements", "programs"
 end

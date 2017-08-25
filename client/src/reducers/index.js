@@ -5,8 +5,10 @@ import announcements from './announcements'
 import postings from './homePage'
 import tablePostings from './postings'
 import calendar from './calendar/calendar'
+import programs from './programs'
 
 const rootReducer = combineReducers({
+  programs,
   calendar,
   tablePostings,
   postings,

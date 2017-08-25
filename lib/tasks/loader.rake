@@ -77,4 +77,30 @@ namespace :loader do
     end
   end
 
+  task programs: :environment do
+    # destroy all existing programs and associated requirements
+    Program.destroy_all
+    # generate levels
+    program_levels = (1..20).to_a
+    # create the requirements
+
+    # create the parent programs with requirements attributes
+    20.times do
+      program = Program.create(
+        title: Faker::Lorem.sentence,
+        description: Faker::Lorem.paragraph(5),
+        level: program_levels.shift
+      )
+      requirement_levels = (1..10).to_a
+      10.times do
+        Requirement.create(
+          title: Faker::Lorem.sentence,
+          description: Faker::Lorem.paragraph(3),
+          level: requirement_levels.shift,
+          program_id: program.id
+        )
+      end
+    end
+  end
+
 end

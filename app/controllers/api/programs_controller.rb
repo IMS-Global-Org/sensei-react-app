@@ -6,13 +6,23 @@ class Api::ProgramsController < ApplicationController
 
   # Returns a page of programs
   def index
-    @programs =
-      select('p.title, p.description, p.level, count(r.*) as requirements')
-      .from('programs p')
-      .join('requirements r')
-      .order('p.level')
-      .paginate(page: params[:page], per_page: params[:per_page])
-    render json: @programs
+    programs = Program
+      .paginate_by_sql(
+        'SELECT p.id, p.title, p.description, p.level, count(r.*) as num_req ' \
+        'FROM programs p ' \
+        'LEFT JOIN requirements r ON r.program_id = p.id ' \
+        'GROUP BY p.id ' \
+        'ORDER BY p.level ',
+        page: params[:page], per_page: params[:per_page]
+      )
+    render json: {
+      programs: programs,
+      pagination: {
+        total_pages: programs.total_pages,
+        current_page: programs.current_page,
+        next_page: programs.next_page || 0
+      }
+    }
   end
 
   # Returns a single program record

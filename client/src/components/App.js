@@ -20,6 +20,7 @@ import HomePagePostings from './HomePagePostings'
 import Calendar from './calendar/Calendar'
 import EventEditor from './calendar/EventEditor'
 import Header from './header/Header'
+import ProgramTracker from './programs/ProgramTracker'
 
 class App extends Component {
   render() {
@@ -36,6 +37,7 @@ class App extends Component {
             <Route exact path='/calendar' component={Calendar} />
             <Route exact path='/calendar/events' component={EventEditor} />
             <Route exact path='/programs' component={Programs} />
+            <ProtectedRoute exact path='/program/tracker' component={ProgramTracker} />
             <ProtectedRoute exact path='/settings' component={Settings} />
             <ProtectedRoute path='/announcements' component={AnnouncementManager} />
             <ProtectedRoute path='/postings' component={HomePagePostings} />

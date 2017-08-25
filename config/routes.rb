@@ -47,6 +47,12 @@
 #                          PUT      /api/events/:id(.:format)              api/events#update
 #                          DELETE   /api/events/:id(.:format)              api/events#destroy
 #      api_events_paginate GET      /api/paginate/events(.:format)         api/events#paginate
+#             api_programs GET      /api/programs(.:format)                api/programs#index
+#                          POST     /api/programs(.:format)                api/programs#create
+#              api_program GET      /api/programs/:id(.:format)            api/programs#show
+#                          PATCH    /api/programs/:id(.:format)            api/programs#update
+#                          PUT      /api/programs/:id(.:format)            api/programs#update
+#                          DELETE   /api/programs/:id(.:format)            api/programs#destroy
 #                          GET      /*other(.:format)                      static#index
 # 
 
@@ -61,6 +67,8 @@ Rails.application.routes.draw do
     # Routes for calendar events
     resources :events
     get '/paginate/events', to: 'events#paginate', as: 'events_paginate'
+    # Routes for programs and requirements
+    resources :programs
   end
 
   # Do not place any routes below this one
