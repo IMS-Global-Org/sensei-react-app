@@ -18,6 +18,9 @@ import _ from 'lodash'
  * 4. Must set state variable 'hasMore' to false as it's initial state
  * 5. Must implement the 'loadMore' callback or the main component
  *    will not display at all.
+ * 6. Must set 'hasMore' to true after loading the initial set of items.
+ *    This is done in 'componentDidMount' after dispatching to the DB
+ *    for the first time.
  */
 class Paginator extends Component {
   state = { activeItem: '' }

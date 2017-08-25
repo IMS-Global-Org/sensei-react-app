@@ -1,4 +1,6 @@
-const programs = ( state = { data: [], pagination: {} }, action ) => {
+const programs = ( state, action ) => {
+  if( !state )
+    state = { data: [], pagination: {}, requirements: [] }
   switch( action.type ) {
     case 'INDEX_PROGRAMS':
       return {
@@ -7,13 +9,14 @@ const programs = ( state = { data: [], pagination: {} }, action ) => {
       }
     case 'UPDATE_PROGRAM':
       const index = state.data.findIndex( prog => prog.id === action.data.id )
+      action.data.num_req = state.data[index].num_req
       return {
-        data: [
-          state.data.slice(0,index),
-          action.data,
-          state.data.slice(index + 1),
-        ],
         ...state,
+        data: [
+          ...state.data.slice(0,index),
+          action.data,
+          ...state.data.slice(index + 1),
+        ],
       }
     default:
       return state

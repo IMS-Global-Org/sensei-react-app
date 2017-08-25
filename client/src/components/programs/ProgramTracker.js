@@ -1,20 +1,32 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Container, Table, Button } from 'semantic-ui-react'
+import { Container, Segment, Table, Button } from 'semantic-ui-react'
+import styled from 'styled-components'
 
 // Custom components
 import ProgramForm from './ProgramForm'
+import Paginator from '../Paginator'
+import RequirementsTracker from './RequirementsTracker'
 
 // Custom Actions
 import { indexPrograms } from '../../actions/programs'
+import { indexRequirements } from '../../actions/requirements'
+
+
+// Custom Components
+const Spacer = styled.div`
+  display: inline-block;
+  width: 3rem !important;
+`
 
 class ProgramTracker extends Component {
-  state = { hasMore: false, activeProgam: false }
+  state = { hasMore: false, activeProgam: '', programId: '' }
 
   componentDidMount = () => {
     const { programs, dispatch } = this.props
     if( programs.data.length <= 0 ) {
       dispatch(indexPrograms())
+      this.setState({ hasMore: true })
     }
   }
 
@@ -25,8 +37,13 @@ class ProgramTracker extends Component {
   }
 
   handleRowClick = ( programId ) => {
-    // Show Form with information
-    this.setState({ activeProgram: programId })
+    const { programs } = this.props
+    if( programId && programs ) {
+      this.setState({
+        programId: programId,
+        activeProgram: programs.data.find( prog => prog.id === programId )
+      })
+    }
   }
 
   displayPrograms = () => {
@@ -49,18 +66,36 @@ class ProgramTracker extends Component {
   }
 
   activeProgramDetails = () => {
-    const { activeProgram } = this.state
-    const { programs } = this.props
-    if( activeProgram && programs ) {
-      return programs.data.find( prog => prog.id === activeProgram )
-    }
+
   }
 
   closeActiveForm = () => {
-    this.setState({ activeProgram: false })
+    this.setState({ activeProgram: '', programId: '' })
   }
 
+  loadMore = ( page ) => {
+    const { hasMore } = this.state
+    const { dispatch, programs: {pagination} } = this.props
+    if( hasMore && pagination.total_pages ) {
+      if( page <= pagination.total_pages ) {
+        dispatch(indexPrograms(page))
+      } else {
+        this.setState({ hasMore: false })
+      }
+    }
+  }
+
+  handleEditRequirements = () => {
+    const { programId } = this.state
+    this.props.dispatch(indexRequirements())
+    this.setState({ activeProgram: '' })
+  }
+  handleDeleteRequirements = () => {}
+  handleCreateRequirement = () => {}
+
   render() {
+    const { activeProgram } = this.state
+    const { program: { requirements }} = this.props
     return (
       <Container>
         <Table celled>
@@ -79,17 +114,44 @@ class ProgramTracker extends Component {
           <Table.Footer>
             <Table.Row>
               <Table.HeaderCell colSpan={5} textAlign='right'>
-                <Button.Group size='tiny'>
-                  <Button>Click Me!</Button>
-                </Button.Group>
+                <Paginator
+                  size='mini'
+                  loadMore={this.loadMore}
+                  pagination={this.props.programs.pagination} />
               </Table.HeaderCell>
             </Table.Row>
           </Table.Footer>
         </Table>
-          { this.state.activeProgram &&
-            <ProgramForm
-              formDataObject={this.activeProgramDetails()}
-              closeActiveForm={this.closeActiveForm} />
+          { activeProgram &&
+            <Segment>
+              <ProgramForm
+                formDataObject={activeProgram}
+                closeActiveForm={this.closeActiveForm} />
+              <Segment basic clearing>
+                <label>
+                  Program has&nbsp;{activeProgram.num_req}&nbsp;requirements.
+                  Modify them by:
+                </label>
+                <Spacer />
+                <Button.Group size='mini'>
+                  <Button onClick={this.handleEditRequirements}>
+                    Editing
+                  </Button>
+                  <Button.Or />
+                  <Button onClick={this.handleDeleteRequirements}>
+                    Deleting
+                  </Button>
+                  <Button.Or />
+                  <Button onClick={this.handleCreateRequirement}>
+                    Newly Creating
+                  </Button>
+                </Button.Group>
+                <Spacer />
+              </Segment>
+            </Segment>
+          }
+          { requirements &&
+            <RequirementsTracker requirements={requirements} />
           }
       </Container>
     )

@@ -61,7 +61,7 @@ class Api::ProgramsController < ApplicationController
   # Checks for proper program paramters during submission
   # NOTE ('to self') submitted attributes must be labeled exactly as seen below
   def program_params
-    params.reqiure(:program).permit(
+    params.require(:program).permit(
       :title, :description, :level,
       requirements_attributes: %i[title description level]
     )
