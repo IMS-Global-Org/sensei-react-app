@@ -35,11 +35,13 @@ class EventEditor extends Component {
     const { events } = this.props
     if( !dates ) {
       const today = moment.utc()
+      const prev = today.clone().subtract(3,'months')
+      const next = today.clone().add(3,'months')
       dates = {
-        start: moment.utc().year(today.year())
-          .month(today.month()).date(1),
-        finish: moment.utc().year(today.year())
-          .month(today.month()).date(today.daysInMonth())
+        start: moment.utc().year(prev.year())
+          .month(prev.month()).date(1),
+        finish: moment.utc().year(next.year())
+          .month(next.month()).date(next.daysInMonth())
       }
       this.setState({ dates }, () => {
         this.loadCalendarEvents( events, dates )

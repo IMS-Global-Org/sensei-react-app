@@ -53,6 +53,12 @@
 #                          PATCH    /api/programs/:id(.:format)            api/programs#update
 #                          PUT      /api/programs/:id(.:format)            api/programs#update
 #                          DELETE   /api/programs/:id(.:format)            api/programs#destroy
+#         api_requirements GET      /api/requirements(.:format)            api/requirements#index
+#                          POST     /api/requirements(.:format)            api/requirements#create
+#          api_requirement GET      /api/requirements/:id(.:format)        api/requirements#show
+#                          PATCH    /api/requirements/:id(.:format)        api/requirements#update
+#                          PUT      /api/requirements/:id(.:format)        api/requirements#update
+#                          DELETE   /api/requirements/:id(.:format)        api/requirements#destroy
 #                          GET      /*other(.:format)                      static#index
 # 
 
@@ -69,6 +75,7 @@ Rails.application.routes.draw do
     get '/paginate/events', to: 'events#paginate', as: 'events_paginate'
     # Routes for programs and requirements
     resources :programs
+    resources :requirements
   end
 
   # Do not place any routes below this one

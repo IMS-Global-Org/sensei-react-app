@@ -10,7 +10,10 @@ import RequirementsTracker from './RequirementsTracker'
 
 // Custom Actions
 import { indexPrograms } from '../../actions/programs'
-import { indexRequirements } from '../../actions/requirements'
+import {
+  indexRequirements,
+  clearRequirements,
+} from '../../actions/requirements'
 
 
 // Custom Components
@@ -37,8 +40,9 @@ class ProgramTracker extends Component {
   }
 
   handleRowClick = ( programId ) => {
-    const { programs } = this.props
+    const { programs, dispatch } = this.props
     if( programId && programs ) {
+      dispatch(clearRequirements())
       this.setState({
         programId: programId,
         activeProgram: programs.data.find( prog => prog.id === programId )
@@ -65,10 +69,6 @@ class ProgramTracker extends Component {
     }
   }
 
-  activeProgramDetails = () => {
-
-  }
-
   closeActiveForm = () => {
     this.setState({ activeProgram: '', programId: '' })
   }
@@ -85,9 +85,23 @@ class ProgramTracker extends Component {
     }
   }
 
+  showActiveProgram = () => {
+    this.handleRowClick( this.state.programId )
+  }
+
+  updatePrograms = () => {
+    const { dispatch } = this.props
+    dispatch(indexPrograms())
+  }
+
+  //=============================================
+  // Methods for handling the requirements for a
+  // particular program.
+  //=============================================
+
   handleEditRequirements = () => {
     const { programId } = this.state
-    this.props.dispatch(indexRequirements())
+    this.props.dispatch(indexRequirements(programId))
     this.setState({ activeProgram: '' })
   }
   handleDeleteRequirements = () => {}
@@ -95,7 +109,7 @@ class ProgramTracker extends Component {
 
   render() {
     const { activeProgram } = this.state
-    const { program: { requirements }} = this.props
+    const { requirements } = this.props
     return (
       <Container>
         <Table celled>
@@ -135,23 +149,19 @@ class ProgramTracker extends Component {
                 <Spacer />
                 <Button.Group size='mini'>
                   <Button onClick={this.handleEditRequirements}>
-                    Editing
-                  </Button>
-                  <Button.Or />
-                  <Button onClick={this.handleDeleteRequirements}>
-                    Deleting
-                  </Button>
-                  <Button.Or />
-                  <Button onClick={this.handleCreateRequirement}>
-                    Newly Creating
+                    Modify Requirements
                   </Button>
                 </Button.Group>
                 <Spacer />
               </Segment>
             </Segment>
           }
-          { requirements &&
-            <RequirementsTracker requirements={requirements} />
+          { ( requirements && requirements.pagination.total_pages > 0 ) &&
+            <RequirementsTracker
+              requirements={requirements}
+              showActiveProgram={this.showActiveProgram}
+              programId={this.state.programId}
+              updatePrograms={this.updatePrograms} />
           }
       </Container>
     )
@@ -161,6 +171,7 @@ class ProgramTracker extends Component {
 const mapStateToProps = ( state ) => {
   return {
     programs: state.programs,
+    requirements: state.requirements,
   }
 }
 

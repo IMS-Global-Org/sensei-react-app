@@ -11,17 +11,17 @@ class Api::EventsController < ApplicationController
 
   def paginate
     # get the events to display per page
-    events = Event.all
+    events = Event
       .where('start >= ? AND finish <= ?', params[:start], params[:finish])
       .order(start: :asc)
-      .page(params[:page]).per(params[:per])
+      .page(params[:page]).per_page(params[:per])
     # return the events and page information as a json package
     render json: {
       events: events,
       paginate: {
         total_pages: events.total_pages,
         current_page: events.current_page,
-        next_page: events.next_page
+        next_page: events.next_page || 0
       }
     }
   end

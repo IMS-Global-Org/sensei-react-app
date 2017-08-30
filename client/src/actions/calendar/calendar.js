@@ -41,8 +41,8 @@ export const paginateCalendarEvents = (dates = null, page = 1, per = 5 ) => {
   let query = null
   // set default two month range for dates
   if( !dates ){
-    dates.start = moment.utc().subtract(1,'months')
-    dates.finish = moment.utc().add(1,'months')
+    dates.start = moment.utc().subtract(3,'months')
+    dates.finish = moment.utc().add(3,'months')
   }
   // create the query string for acquiring dates from the remote database
   query = `?start=${dates.start.format()}&finish=${dates.finish.format()}` +

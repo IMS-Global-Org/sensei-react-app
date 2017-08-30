@@ -3,7 +3,7 @@ class CreatePrograms < ActiveRecord::Migration[5.1]
     create_table :programs do |t|
       t.string :title, null: false
       t.text :description, null: false
-      t.string :level, null: false
+      t.integer :level, null: false
 
       t.timestamps
     end

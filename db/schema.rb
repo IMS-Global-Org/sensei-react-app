@@ -71,7 +71,7 @@ ActiveRecord::Schema.define(version: 20170823135751) do
   create_table "programs", force: :cascade do |t|
     t.string "title", null: false
     t.text "description", null: false
-    t.string "level", null: false
+    t.integer "level", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -79,7 +79,7 @@ ActiveRecord::Schema.define(version: 20170823135751) do
   create_table "requirements", force: :cascade do |t|
     t.string "title", null: false
     t.string "description"
-    t.string "level", null: false
+    t.integer "level", null: false
     t.bigint "program_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

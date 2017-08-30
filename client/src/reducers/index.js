@@ -6,8 +6,10 @@ import postings from './homePage'
 import tablePostings from './postings'
 import calendar from './calendar/calendar'
 import programs from './programs'
+import requirements from './requirements'
 
 const rootReducer = combineReducers({
+  requirements,
   programs,
   calendar,
   tablePostings,

@@ -5,7 +5,7 @@ class CreateHomePageLinks < ActiveRecord::Migration[5.1]
       t.string :url, null: false
       t.string :abbreviation
       t.text :description, null: false
-      t.belongs_to :home_page_posting, foreign_key: true
+      t.belongs_to :home_page_posting, foreign_key: true, index: true
 
       t.timestamps
     end

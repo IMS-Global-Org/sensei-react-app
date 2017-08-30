@@ -11,7 +11,8 @@
 #
 
 class Program < ApplicationRecord
-  validates_presence_of :title, :level, :description
+  validates_presence_of :title, :description
+  validates :level, presence: true, numericality: { only_integer: true }
 
   has_many :requirements, dependent: :destroy
   validates_associated :requirements, allow_blank: true

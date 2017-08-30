@@ -15,7 +15,7 @@ class Api::PostingsTablesController < ApplicationController
         'home_page_postings.id',
         'home_page_postings.title',
         'home_page_postings.created_at')
-      .page(params[:page]).per(params[:per])
+      .page(params[:page]).per_page(params[:per])
 
     # return a complete json object with pagination
     render json: {

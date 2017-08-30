@@ -1,6 +1,4 @@
-const programs = ( state, action ) => {
-  if( !state )
-    state = { data: [], pagination: {}, requirements: [] }
+const programs = ( state = { data: [], pagination: {}, requirements: [] }, action ) => {
   switch( action.type ) {
     case 'INDEX_PROGRAMS':
       return {

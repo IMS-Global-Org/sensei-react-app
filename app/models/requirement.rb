@@ -13,6 +13,7 @@
 
 class Requirement < ApplicationRecord
   belongs_to :program
-  validates_presence_of :title, :level
+  validates_presence_of :title
+  validates :level, presence: true, numericality: { only_integer: true }
   validates :description, presence: true, allow_blank: true
 end

@@ -92,6 +92,8 @@ class Paginator extends Component {
    */
   rightChevron = ( pageNum ) => {
     const { activeItem } = this.state
+    if( !pageNum || pageNum <= 0 )
+      pageNum = '1' // if no more pages, then show the first page (default)
     return (
       <Menu.Item
         key={pageNum+'R'}
