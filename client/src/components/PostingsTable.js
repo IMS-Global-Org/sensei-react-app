@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Segment, Table, Loader } from 'semantic-ui-react'
+import { Container, Segment, Table, Loader } from 'semantic-ui-react'
 import styled from 'styled-components'
 import {
   indexPostingsTable,

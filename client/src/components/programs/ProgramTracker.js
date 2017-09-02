@@ -23,7 +23,7 @@ const Spacer = styled.div`
 `
 
 class ProgramTracker extends Component {
-  state = { hasMore: false, activeProgam: '', programId: '' }
+  state = { hasMore: false, activeProgram: '', programId: '' }
 
   componentDidMount = () => {
     const { programs, dispatch } = this.props
@@ -144,7 +144,6 @@ class ProgramTracker extends Component {
               <Segment basic clearing>
                 <label>
                   Program has&nbsp;{activeProgram.num_req}&nbsp;requirements.
-                  Modify them by:
                 </label>
                 <Spacer />
                 <Button.Group size='mini'>

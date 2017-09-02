@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Segment } from 'semantic-ui-react'
+import { Container } from 'semantic-ui-react'
 import PostingsTable from './PostingsTable'
 
 /**
@@ -15,9 +15,9 @@ class HomePagePostings extends Component {
   // TODO give a list of postings to sort through
   render() {
     return (
-      <Segment>
+      <Container>
         <PostingsTable />
-      </Segment>
+      </Container>
     )
   }
 }

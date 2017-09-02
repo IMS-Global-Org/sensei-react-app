@@ -62,7 +62,7 @@ class Api::ProgramsController < ApplicationController
   # NOTE ('to self') submitted attributes must be labeled exactly as seen below
   def program_params
     params.require(:program).permit(
-      :title, :description, :level,
+      :id, :title, :description, :level,
       requirements_attributes: %i[title description level]
     )
   end

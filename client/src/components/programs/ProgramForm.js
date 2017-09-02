@@ -4,6 +4,7 @@ import { Segment, Form, Button } from 'semantic-ui-react'
 import {
   updateProgram,
   createProgram,
+  deleteProgram,
 } from '../../actions/programs'
 
 
@@ -27,19 +28,29 @@ class ProgramForm extends Component {
   handleOnSubmit = ( event ) => {
     event.preventDefault()
     const { dispatch } = this.props
-    dispatch(updateProgram(this.state))
+    if( this.state.id )
+      dispatch(updateProgram(this.state))
+    else
+      dispatch(createProgram(this.state))
     this.props.closeActiveForm()
   }
 
-  handleClearForm = () => this.setState({ ...this.defaults })
+  handleClearForm = () => this.setState( this.defaults )
   handleOnChange = ({target: {id,value}}) => this.setState({ [id]:value })
+
+  handleDeleteProgram = () => {
+    const { id } = this.state
+    const { dispatch } = this.props
+    dispatch(deleteProgram(id))
+    this.props.closeActiveForm()
+  }
 
   //====================================================
   // Methods for working with program requirements
   //====================================================
 
   render() {
-    const { title, description, level } = this.state
+    const { id, title, description, level } = this.state
     return (
       <Form onSubmit={this.handleOnSubmit}>
         <Form.Field>
@@ -69,17 +80,26 @@ class ProgramForm extends Component {
             <Button type='submit' color='green'>
               { this.state.id ? 'Update' : 'Create' }
             </Button>
+            <Button.Or />
+            <Button
+              type='button'
+              onClick={this.handleDeleteProgram}>
+              Delete
+            </Button>
+            <Button.Or />
             <Button
               type='button'
               color='red'
               onClick={this.props.closeActiveForm}>
               Cancel
             </Button>
+            <Button.Or />
             <Button
+              active={ id === '' ? false : true }
               type='button'
               color='orange'
               onClick={this.handleClearForm}>
-              Clear
+              Create New
             </Button>
           </Button.Group>
         </Segment>

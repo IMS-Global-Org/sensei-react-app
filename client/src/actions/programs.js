@@ -43,4 +43,41 @@ export const updateProgram = ( program ) => {
   }
 }
 
-export const createProgram = ( program ) => {}
+export const createProgram = ( program ) => {
+  // clear non-program variables
+  delete program.num_req
+  // submit
+  return (dispatch) => {
+    axios.post(`/api/programs`, { program } )
+    .then( resp => {
+      dispatch({
+        type: 'CREATE_PROGRAM',
+        data: resp.data,
+        headers: resp.headers,
+      })
+    })
+    .catch( resp => {
+      dispatch(
+        setFlash('Program not created!','error')
+      )
+    })
+  }
+}
+
+export const deleteProgram = ( programId ) => {
+  return (dispatch) => {
+    axios.delete(`/api/programs/${programId}`)
+    .then( resp => {
+      dispatch({
+        type: 'DELETE_PROGRAM',
+        data: programId,
+        headers: resp.headers,
+      })
+    })
+    .catch( resp => {
+      dispatch(
+        setFlash('Program Not Deleted!','error')
+      )
+    })
+  }
+}

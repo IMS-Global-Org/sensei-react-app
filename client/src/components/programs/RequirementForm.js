@@ -10,23 +10,22 @@ import {
 } from '../../actions/requirements'
 
 class RequirementForm extends Component {
-  defaults = { id: '', level: '', title: '', description: '' }
+  defaults = { id: '', level: '', title: '', description: '', program_id: '' }
   state = { ...this.defaults }
 
   componentDidMount = () => {
-    this.setRequirement(this.props.requirement)
+    this.setRequirement(this.props)
   }
 
   componentWillReceiveProps = ( nextProps ) => {
-    this.setRequirement(nextProps.requirement)
+    this.setRequirement(nextProps)
   }
 
-  setRequirement = ( requirement ) => {
-    if( requirement ) {
-      this.setState({
-        ...requirement
-      })
-    }
+  setRequirement = ( props ) => {
+    this.setState({
+      ...props.requirement,
+      program_id: props.programId,
+    })
   }
 
   handleChange = ( event ) => {
@@ -54,7 +53,7 @@ class RequirementForm extends Component {
 
   handleCreateNew = ( event ) => {
     event.preventDefault()
-    this.setState({ ...this.defaults })
+    this.setState({ ...this.defaults, program_id: this.props.programId })
   }
 
   handleDelete = ( requirementId ) => {

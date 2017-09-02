@@ -16,6 +16,20 @@ const programs = ( state = { data: [], pagination: {}, requirements: [] }, actio
           ...state.data.slice(index + 1),
         ],
       }
+    case 'CREATE_PROGRAM':
+      return {
+        ...state,
+        data: [
+          action.data,
+          ...state.data,
+        ],
+      }
+    case 'DELETE_PROGRAM':
+      const new_data = state.data.filter( prog => prog.id !== action.data )
+      return {
+        ...state,
+        data: new_data,
+      }
     default:
       return state
   }

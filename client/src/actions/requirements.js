@@ -80,7 +80,7 @@ export const deleteRequirement = ( requirementId ) => {
     .then( resp => {
       dispatch({
         type: 'DELETE_REQUIREMENT',
-        data: resp.data,
+        data: requirementId,
         headers: resp.headers,
       })
     })

@@ -115,7 +115,8 @@ class RequirementsTracker extends Component {
         </Table>
         <RequirementForm
           requirement={this.state.activeRequirement}
-          deleteRequirement={this.deleteRequirement} />
+          deleteRequirement={this.deleteRequirement}
+          programId={this.props.programId} />
       </Segment>
     )
   }

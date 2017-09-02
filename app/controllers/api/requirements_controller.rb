@@ -22,9 +22,9 @@ class Api::RequirementsController < ApplicationController
 
   def update
     if @requirement.update(requirement_params)
-      render json: @requirements
+      render json: @requirement
     else
-      render_errors @requirements
+      render_errors @requirement
     end
   end
 
