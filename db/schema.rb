@@ -10,10 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170823135751) do
+ActiveRecord::Schema.define(version: 20170904152940) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "addresses", force: :cascade do |t|
+    t.string "street1", null: false
+    t.string "street2"
+    t.string "city", null: false
+    t.string "state", null: false
+    t.string "zipcode", null: false
+    t.string "type", default: "Home", null: false
+    t.string "owner", default: "Parent", null: false
+    t.boolean "active", default: true
+    t.bigint "student_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["student_id"], name: "index_addresses_on_student_id"
+  end
 
   create_table "announcements", force: :cascade do |t|
     t.string "title", null: false
@@ -27,6 +42,18 @@ ActiveRecord::Schema.define(version: 20170823135751) do
     t.boolean "registration"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "emails", force: :cascade do |t|
+    t.string "address", null: false
+    t.string "type", null: false
+    t.string "owner", null: false
+    t.boolean "html", default: true
+    t.boolean "active", default: true
+    t.bigint "student_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["student_id"], name: "index_emails_on_student_id"
   end
 
   create_table "events", force: :cascade do |t|
@@ -68,6 +95,18 @@ ActiveRecord::Schema.define(version: 20170823135751) do
     t.index ["home_page_posting_id"], name: "index_home_page_videos_on_home_page_posting_id"
   end
 
+  create_table "phones", force: :cascade do |t|
+    t.integer "number", null: false
+    t.string "type", null: false
+    t.string "owner", null: false
+    t.boolean "text", default: true
+    t.boolean "active", default: true
+    t.bigint "student_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["student_id"], name: "index_phones_on_student_id"
+  end
+
   create_table "programs", force: :cascade do |t|
     t.string "title", null: false
     t.text "description", null: false
@@ -84,6 +123,18 @@ ActiveRecord::Schema.define(version: 20170823135751) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["program_id"], name: "index_requirements_on_program_id"
+  end
+
+  create_table "students", force: :cascade do |t|
+    t.string "first", null: false
+    t.string "last", null: false
+    t.date "birthday", null: false
+    t.string "gender", null: false
+    t.string "photo"
+    t.string "belt"
+    t.string "level"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -116,7 +167,10 @@ ActiveRecord::Schema.define(version: 20170823135751) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  add_foreign_key "addresses", "students"
+  add_foreign_key "emails", "students"
   add_foreign_key "home_page_links", "home_page_postings"
   add_foreign_key "home_page_videos", "home_page_postings"
+  add_foreign_key "phones", "students"
   add_foreign_key "requirements", "programs"
 end
