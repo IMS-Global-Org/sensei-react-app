@@ -44,6 +44,12 @@ class NavBar extends Component {
                   to='/program/tracker'
                   active={activeItem === 'Program Tracker'}
                   onClick={this.handleItemClick} />
+                <Menu.Item
+                  name='students'
+                  as={ Link }
+                  to='/students'
+                  active={activeItem === 'students'}
+                  onClick={this.handleItemClick} />
               </Dropdown.Menu>
             </Dropdown>
           }

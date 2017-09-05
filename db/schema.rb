@@ -21,8 +21,8 @@ ActiveRecord::Schema.define(version: 20170904152940) do
     t.string "city", null: false
     t.string "state", null: false
     t.string "zipcode", null: false
-    t.string "type", default: "Home", null: false
-    t.string "owner", default: "Parent", null: false
+    t.string "type_of", default: "Home", null: false
+    t.string "owner_of", default: "Parent", null: false
     t.boolean "active", default: true
     t.bigint "student_id"
     t.datetime "created_at", null: false
@@ -46,8 +46,8 @@ ActiveRecord::Schema.define(version: 20170904152940) do
 
   create_table "emails", force: :cascade do |t|
     t.string "address", null: false
-    t.string "type", null: false
-    t.string "owner", null: false
+    t.string "type_of", null: false
+    t.string "owner_of", null: false
     t.boolean "html", default: true
     t.boolean "active", default: true
     t.bigint "student_id"
@@ -96,10 +96,10 @@ ActiveRecord::Schema.define(version: 20170904152940) do
   end
 
   create_table "phones", force: :cascade do |t|
-    t.integer "number", null: false
-    t.string "type", null: false
-    t.string "owner", null: false
-    t.boolean "text", default: true
+    t.string "phone_number", null: false
+    t.string "type_of", null: false
+    t.string "owner_of", null: false
+    t.boolean "texting", default: true
     t.boolean "active", default: true
     t.bigint "student_id"
     t.datetime "created_at", null: false

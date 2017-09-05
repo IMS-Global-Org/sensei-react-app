@@ -1,4 +1,4 @@
-namespace :loader do
+namespace :loader do |loader_namespace|
   desc "Load the database with random values for testing reasons"
   task announcements: :environment do
 
@@ -103,4 +103,67 @@ namespace :loader do
     end
   end
 
+  task students: :environment do
+    # Remore any pre-existing student information in the database
+    Student.destroy_all
+    # Default value helpers
+    gender = %I[male female]
+    level = %I[A B C D E F G]
+    types = %I[Home Work Mobile Satallite]
+    owner_types = %I[Student Parent Relative Gardian]
+    belt = %I[black green yellow red purple]
+    active = %I[true false]
+    texting = %I[true false]
+
+    50.times do
+      student = Student.create(
+        first: Faker::Name.first_name,
+        last: Faker::Name.last_name,
+        birthday: Faker::Date.birthday(12,50),
+        gender: gender.sample,
+        photo: Faker::LoremPixel.image("50x60"),
+        belt: belt.sample,
+        level: Faker::Number.between(1,20).to_s + level.sample.to_s
+      )
+      3.times do
+        phone = Phone.create(
+          phone_number: Faker::PhoneNumber.cell_phone,
+          type_of: types.sample,
+          owner_of: owner_types.sample,
+          texting: texting.sample,
+          active: active.sample,
+          student_id: student.id
+        )
+      end
+      2.times do
+        Email.create(
+          address: Faker::Internet.email,
+          type_of: types.sample,
+          owner_of: owner_types.sample,
+          html: active.sample,
+          active: active.sample,
+          student_id: student.id
+        )
+      end
+      2.times do
+        Address.create(
+          street1: Faker::Address.street_address,
+          street2: Faker::Address.secondary_address,
+          city: Faker::Address.city,
+          state: Faker::Address.state,
+          zipcode: Faker::Address.zip_code,
+          type_of: types.sample,
+          owner_of: owner_types.sample,
+          active: active.sample,
+          student_id: student.id
+        )
+      end
+    end
+  end
+
+  task :all do
+    loader_namespace.tasks.each do |task|
+      Rake::Task[task].invoke
+    end
+  end
 end

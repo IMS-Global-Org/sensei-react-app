@@ -1,8 +1,24 @@
+# == Schema Information
+#
+# Table name: students
+#
+#  id         :integer          not null, primary key
+#  first      :string           not null
+#  last       :string           not null
+#  birthday   :date             not null
+#  gender     :string           not null
+#  photo      :string
+#  belt       :string
+#  level      :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 class Student < ApplicationRecord
   validates_presence_of :first, :last, :gender, :birthday
-  validates :photo, allow_blank: true
-  validates :belt, allow_blank: true
-  validates :level, allow_blank: true
+  validates :photo, presence: true, allow_blank: true
+  validates :belt, presence: true, allow_blank: true
+  validates :level, presence: true, allow_blank: true
 
   has_many :phones, dependent: :destroy
   has_many :emails, dependent: :destroy

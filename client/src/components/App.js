@@ -22,6 +22,7 @@ import EventEditor from './calendar/EventEditor'
 import Header from './header/Header'
 import ProgramTracker from './programs/ProgramTracker'
 import Location from './location/Location'
+import Students from './students/Students'
 
 class App extends Component {
   render() {
@@ -43,6 +44,7 @@ class App extends Component {
             <ProtectedRoute exact path='/settings' component={Settings} />
             <ProtectedRoute path='/announcements' component={AnnouncementManager} />
             <ProtectedRoute path='/postings' component={HomePagePostings} />
+            <ProtectedRoute path='/students' component={Students} />
             <Route component={NoMatch} />
           </Switch>
         </FetchUser>

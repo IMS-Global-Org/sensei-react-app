@@ -5,7 +5,7 @@
 #  id          :integer          not null, primary key
 #  title       :string           not null
 #  description :text             not null
-#  level       :string           not null
+#  level       :integer          not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #

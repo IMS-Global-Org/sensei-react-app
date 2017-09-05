@@ -7,8 +7,10 @@ import tablePostings from './postings'
 import calendar from './calendar/calendar'
 import programs from './programs'
 import requirements from './requirements'
+import students from './students'
 
 const rootReducer = combineReducers({
+  students,
   requirements,
   programs,
   calendar,

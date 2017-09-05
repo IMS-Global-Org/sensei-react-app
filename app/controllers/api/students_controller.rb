@@ -2,8 +2,11 @@ class Api::StudentsController < ApplicationController
   before_action :set_student, only: %I[show update destroy]
 
   def index
-    students = Students
-      .where('level == ? AND  belt == ?', params[:level], params[:belt])
+    students = Student
+      .where(
+        'level like ? AND  belt like ?',
+        params[:level] + '%', params[:belt] + '%'
+      )
       .order(belt: :asc, level: :asc)
       .page(params[:page]).per_page(params[:per_page])
 
@@ -15,6 +18,11 @@ class Api::StudentsController < ApplicationController
         next_page: students.next_page || 0
       }
     }
+  end
+
+  def query
+    puts 'Method Not implemented'
+    binding.pry
   end
 
   def show
@@ -46,7 +54,7 @@ class Api::StudentsController < ApplicationController
 
   def student_params
     params.require(:student)
-      .permit(:first, :last, :birthday, :gender, :photo, :belt, :level,
+      .permit(:id, :first, :last, :birthday, :gender, :photo, :belt, :level,
         phones_attributes: %I[number type owner text active],
         emails_attributes: %I[address type owner html active],
         addresses_attributes: %I[street1 street2 city state zipcode type owner active]
