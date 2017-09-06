@@ -21,8 +21,27 @@ class Api::StudentsController < ApplicationController
   end
 
   def query
-    puts 'Method Not implemented'
-    binding.pry
+    age = params[:query][:age]
+    students = Student
+      .where(
+        'first ~* ? AND last ~* ? AND belt ~* ? AND level ~* ? AND gender ~* ?'\
+        + (!age.empty? ? " AND date_part('years',age(now(),birthday)) = #{age}" : ''),
+        params[:query][:first] + '.*',
+        params[:query][:last] + '.*',
+        params[:query][:belt] + '.*',
+        params[:query][:level] + '.*',
+        "^#{params[:query][:gender]}.*"
+      )
+      .order(last: :asc, belt: :asc, level: :asc)
+      .page(params[:page]).per_page(params[:per_page])
+    render json: {
+      data: students,
+      pagination: {
+        total_pages: students.total_pages,
+        current_page: students.current_page,
+        next_page: students.next_page || 0
+      }
+    }
   end
 
   def show
@@ -31,7 +50,7 @@ class Api::StudentsController < ApplicationController
 
   def update
     if @student.update(student_params)
-      render @student
+      render json: @student
     else
       render_errors @student
     end

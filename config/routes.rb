@@ -59,6 +59,7 @@
 #                          PATCH    /api/requirements/:id(.:format)               api/requirements#update
 #                          PUT      /api/requirements/:id(.:format)               api/requirements#update
 #                          DELETE   /api/requirements/:id(.:format)               api/requirements#destroy
+#       query_api_students POST     /api/students/query(.:format)                 api/students#query
 #       api_student_phones GET      /api/students/:student_id/phones(.:format)    api/phones#index
 #                          POST     /api/students/:student_id/phones(.:format)    api/phones#create
 #                api_phone GET      /api/phones/:id(.:format)                     api/phones#show
@@ -84,7 +85,7 @@
 #                          PUT      /api/students/:id(.:format)                   api/students#update
 #                          DELETE   /api/students/:id(.:format)                   api/students#destroy
 #                          GET      /*other(.:format)                             static#index
-#
+# 
 
 Rails.application.routes.draw do
   mount_devise_token_auth_for 'User', at: 'api/auth'
@@ -102,6 +103,7 @@ Rails.application.routes.draw do
     resources :requirements
     # Routes for students and their information (shallow nesting of routes)
     resources :students, shallow: true do
+      post 'query', on: :collection
       resources :phones
       resources :emails
       resources :addresses

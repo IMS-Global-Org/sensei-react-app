@@ -21,6 +21,18 @@ import _ from 'lodash'
  * 6. Must set 'hasMore' to true after loading the initial set of items.
  *    This is done in 'componentDidMount' after dispatching to the DB
  *    for the first time.
+ * 7. example method for 'loadMore':
+ *     loadMore = ( page ) => {
+ *       const { pagination, dispatch } = this.props
+ *       const { hasMore, query } = this.state
+ *       if( hasMore && pagination.total_pages ) {
+ *         if( page <= pagination.total_pages ) {
+ *           dispatch(queryStudents(query,page))
+ *         } else {
+ *           this.setState({ hasMore: false })
+ *         }
+ *       }
+ *     }
  */
 class Paginator extends Component {
   state = { activeItem: '' }
