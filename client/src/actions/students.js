@@ -102,3 +102,53 @@ export const createStudent = ( student ) => {
     })
   }
 }
+
+export const deleteStudent = ( id ) => {
+  return (dispatch) => {
+    axios.delete(`/api/students/${id}`)
+    .then( resp => {
+      dispatch({
+        type: 'DELETE_STUDENT',
+        data: {id},
+        headers: resp.headers,
+      })
+    })
+    .catch( resp => {
+      dispatch(
+        setFlash('Student Not Deleted!','error')
+      )
+    })
+  }
+}
+
+export const inactivateStudent = ( id ) => {
+  return (dispatch) => {
+    axios.patch(`/api/students/inactivate`)
+    .then( resp => {
+      dispatch({
+        type: 'INACTIVATE_STUDENT',
+        data: resp.data,
+        headers: resp.headers,
+      })
+    })
+    .catch( resp => {
+      dispatch(
+        setFlash('Student Not Inactivated!','error')
+      )
+    })
+  }
+}
+
+export const pdfStudents = ( query ) => {
+  return (dispatch) => {
+    axios.post(`/api/students/pdf`, { query })
+    .then( resp => {
+      debugger
+    })
+    .catch( resp => {
+      dispatch(
+        setFlash('Student PDF Listing not Created!','error')
+      )
+    })
+  }
+}

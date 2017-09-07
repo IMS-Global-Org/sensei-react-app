@@ -22,7 +22,7 @@ class SearchBar extends Component {
     this.setState({ [id]: value })
   }
   handleClearForm = () => {
-    this.setState({ ...this.defaults })
+    this.setState({ ...this.defaults },()=>this.props.handleCancelForm())
   }
 
   render() {

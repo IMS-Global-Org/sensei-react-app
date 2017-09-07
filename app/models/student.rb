@@ -15,6 +15,8 @@
 #
 
 class Student < ApplicationRecord
+  include Pdfable # for generating a pdf file from the model/set
+
   validates_presence_of :first, :last, :gender, :birthday
   validates :photo, presence: true, allow_blank: true
   validates :belt, presence: true, allow_blank: true

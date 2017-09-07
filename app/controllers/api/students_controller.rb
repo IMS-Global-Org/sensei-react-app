@@ -69,6 +69,18 @@ class Api::StudentsController < ApplicationController
     @student.destroy
   end
 
+  def pdf
+    students = Student.all.limit(10)
+    binding.pry
+    render file: generate_pdf(students)
+  end
+
+  def excel
+  end
+
+  def inactivate
+  end
+
   private
 
   def student_params

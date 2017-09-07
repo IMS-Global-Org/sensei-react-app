@@ -1,16 +1,18 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Segment, Form, Input, Button } from 'semantic-ui-react'
+import DatePicker from 'react-datepicker'
 
 // Actions
 import {
   showStudent,
   updateStudent,
   createStudent,
+  deleteStudent,
+  inactivateStudent,
+  clearStudent,
 } from '../../actions/students'
 
-
-// TODO: date selector for the birthdate field of the form
 class StudentRecord extends Component {
   defaults = {
     first: '', last: '', birthday: '',
@@ -21,7 +23,9 @@ class StudentRecord extends Component {
 
   componentDidMount = () => {
     const { student, studentId } = this.props
-    if( studentId > 0 && !student.first ) {
+    if( studentId <= 0 ) {
+      this.setState({ ...this.defaults })
+    } else if( studentId > 0 ) {
       this.loadStudent( studentId )
     } else if( student && student.first ) {
       this.setState({ ...student })
@@ -31,7 +35,9 @@ class StudentRecord extends Component {
   componentWillReceiveProps = ( nextProps ) => {
     const { id } = this.state
     const { studentId, student } = nextProps
-    if( id && studentId !== id ) {
+    if( studentId <= 0) {
+      this.setState({ ...this.defaults })
+    } else if( studentId !== id ) {
       this.loadStudent( studentId )
     } else if( student && student.first ) {
       this.setState({ ...student })
@@ -64,6 +70,24 @@ class StudentRecord extends Component {
     }
   }
 
+  handleInactivateStudent = ( event ) => {
+    event.preventDefault()
+    const { dispatch } = this.props
+    dispatch(inactivateStudent(this.state.id))
+    this.props.handleCancelForm()
+  }
+
+  handleDeleteStudent = ( event ) => {
+    event.preventDefault()
+    const { dispatch } = this.props
+    dispatch(deleteStudent(this.state.id))
+    this.props.handleCancelForm()
+  }
+
+  handleDateChange = ( moment ) => {
+    this.setState({ birthday: moment.utc().format('YYYY/MM/DD') })
+  }
+
   render() {
     const { id, first, last, birthday, gender, belt, level, photo } = this.state
     return (
@@ -86,12 +110,17 @@ class StudentRecord extends Component {
         </Form.Group>
         <Form.Group widths='equal'>
           <Form.Field
-            control={Input}
+            control={DatePicker}
+            dateFormat="YYYY/MM/DD"
+            peekNextMonth
+            showMonthDropdown
+            showYearDropdown
+            dropdownMode="select"
             label='Birthday'
             id='birthday'
             value={birthday}
             placeholder='Birthday...'
-            onChange={this.handleChange} />
+            onChange={this.handleDateChange} />
           <Form.Field
             control={Input}
             label='Gender'
@@ -122,14 +151,27 @@ class StudentRecord extends Component {
             <Button.Or />
             <Button
               type='button'
-              onClick={this.props.handleCancelForm}>
-              Cancel
+              onClick={this.handleDeleteStudent}>
+              Delete
+            </Button>
+            <Button.Or />
+            <Button
+              type='button'
+              disabled={true}
+              onClick={this.handleInactivateStudent}>
+              Inactivate
             </Button>
             <Button.Or />
             <Button
               type='button'
               onClick={this.handleClearForm}>
               New Form
+            </Button>
+            <Button.Or />
+            <Button
+              type='button'
+              onClick={this.props.handleCancelForm}>
+              Cancel
             </Button>
           </Button.Group>
         </Segment>

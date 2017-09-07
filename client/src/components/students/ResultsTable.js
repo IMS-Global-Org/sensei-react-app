@@ -1,16 +1,24 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Segment, Header, Table } from 'semantic-ui-react'
+import { Segment, Header, Table, Button } from 'semantic-ui-react'
 import SearchBar from './SearchBar'
 import moment from 'moment'
 import Paginator from '../Paginator'
 import StudentRecord from './StudentRecord'
+import styled from 'styled-components'
 
 // Actions
 import {
   indexStudents,
   queryStudents,
+  pdfStudents,
 } from '../../actions/students'
+
+// Custom Components
+const ButtonGroupText = styled.div`
+  display: inline-block;
+  padding: 0 1rem 0 2rem;
+`
 
 class ResultsTable extends Component {
   state = { hasMore: false, query: '', studentId: '' }
@@ -23,8 +31,8 @@ class ResultsTable extends Component {
     }
   }
 
-  setQuery = ( query ) => {
-    this.setState({ query })
+  setQuery = ( query, studentId = '' ) => {
+    this.setState({ query, studentId })
   }
 
   loadMore = ( page ) => {
@@ -45,6 +53,17 @@ class ResultsTable extends Component {
 
   handleRowClick = ( studentId ) => this.setState({ studentId })
   handleCancelForm = () => this.setState({ studentId: '' })
+  handleNewStudent = () => this.setState({ studentId: -1 })
+
+  handleCreatePdf = () => {
+    const { query } = this.state
+    const { dispatch } = this.props
+    dispatch(pdfStudents(query))
+    debugger
+    // TODO: submit state.query
+    // TODO: create pdf server-side
+    // TODO: return through 'render file: pathway...'
+  }
 
   displayTableRows = () => {
     const { students } = this.props
@@ -75,7 +94,9 @@ class ResultsTable extends Component {
           <Table.Header>
             <Table.Row>
               <Table.HeaderCell colSpan={6}>
-                <SearchBar setQuery={this.setQuery} />
+                <SearchBar
+                  setQuery={this.setQuery}
+                  handleCancelForm={this.handleCancelForm} />
               </Table.HeaderCell>
             </Table.Row>
             <Table.Row>
@@ -103,6 +124,26 @@ class ResultsTable extends Component {
           <Table.Footer>
             <Table.Row>
               <Table.HeaderCell colSpan={6}>
+                <Button
+                  size='mini'
+                  type='button'
+                  onClick={this.handleNewStudent}>
+                  New Student
+                </Button>
+                <ButtonGroupText>Save Results as:</ButtonGroupText>
+                <Button.Group size='mini'>
+                  <Button
+                    type='button'
+                    onClick={this.handleCreateExcel}>
+                    Excel
+                  </Button>
+                  <Button.Or />
+                  <Button
+                    type='button'
+                    onClick={this.handleCreatePdf}>
+                    Pdf
+                  </Button>
+                </Button.Group>
                 <Paginator
                   loadMore={this.loadMore}
                   pagination={this.props.pagination}
@@ -111,7 +152,7 @@ class ResultsTable extends Component {
             </Table.Row>
           </Table.Footer>
         </Table>
-          { studentId &&
+          { Number.isInteger(studentId) &&
             <Segment>
               <Header as='h3' textAlign='center'>Student Record</Header>
               <p style={{ textAlign: 'center' }}>

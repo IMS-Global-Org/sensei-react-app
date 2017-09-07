@@ -11,6 +11,7 @@ import FetchUser from './FetchUser';
 
 // Global Custom CSS Style Sheets
 import 'react-datetime/css/react-datetime.css'
+import 'react-datepicker/dist/react-datepicker.min.css'
 
 // Custom Components
 import Settings from './Settings'

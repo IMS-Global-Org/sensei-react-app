@@ -60,6 +60,9 @@
 #                          PUT      /api/requirements/:id(.:format)               api/requirements#update
 #                          DELETE   /api/requirements/:id(.:format)               api/requirements#destroy
 #       query_api_students POST     /api/students/query(.:format)                 api/students#query
+#         pdf_api_students POST     /api/students/pdf(.:format)                   api/students#pdf
+#       excel_api_students POST     /api/students/excel(.:format)                 api/students#excel
+#  inactivate_api_students POST     /api/students/inactivate(.:format)            api/students#inactivate
 #       api_student_phones GET      /api/students/:student_id/phones(.:format)    api/phones#index
 #                          POST     /api/students/:student_id/phones(.:format)    api/phones#create
 #                api_phone GET      /api/phones/:id(.:format)                     api/phones#show
@@ -104,6 +107,9 @@ Rails.application.routes.draw do
     # Routes for students and their information (shallow nesting of routes)
     resources :students, shallow: true do
       post 'query', on: :collection
+      post 'pdf', on: :collection
+      post 'excel', on: :collection
+      post 'inactivate', on: :collection
       resources :phones
       resources :emails
       resources :addresses

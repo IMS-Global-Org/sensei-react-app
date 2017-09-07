@@ -29,9 +29,10 @@ gem 'omniauth'
 gem 'devise'
 gem 'devise_token_auth'
 gem 'dotenv'
-gem 'kaminari'
+# gem 'kaminari'
 gem 'will_paginate'
 gem 'validates_timeliness'
+gem 'prawn'
 
 group :development, :test do
   gem 'pry'

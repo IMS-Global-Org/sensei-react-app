@@ -42,7 +42,6 @@ const students = ( state = defaults, action ) => {
       const index = state.data.findIndex( student => {
         return parseInt(student.id) === parseInt(action.data.id)
       })
-      debugger
       return {
         ...state,
         data: [
@@ -56,10 +55,22 @@ const students = ( state = defaults, action ) => {
       return {
         ...state,
         data: [
-          ...action.data,
+          action.data,
           ...state.data,
         ],
         student: action.data
+      }
+    case 'DELETE_STUDENT':
+      return {
+        ...state,
+        data: state.data.filter( student => student.id !== action.data.id ),
+        student: defaults.student,
+      }
+    case 'INACTIVATE_STUDENT':
+      return {
+        ...state,
+        data: state.data.filter( student => student.id !== action.data.id ),
+        student: defaults.student,
       }
     default:
       return state
