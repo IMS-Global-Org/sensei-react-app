@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170912193639) do
+ActiveRecord::Schema.define(version: 20170912212656) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -110,6 +110,18 @@ ActiveRecord::Schema.define(version: 20170912193639) do
     t.index ["home_page_posting_id"], name: "index_home_page_videos_on_home_page_posting_id"
   end
 
+  create_table "mailers", force: :cascade do |t|
+    t.string "title", null: false
+    t.integer "interval", null: false
+    t.string "type_of", null: false
+    t.boolean "active", default: true, null: false
+    t.string "recipients", null: false
+    t.string "subject"
+    t.boolean "notify", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "phones", force: :cascade do |t|
     t.string "phone_number", null: false
     t.string "type_of", null: false
@@ -148,6 +160,7 @@ ActiveRecord::Schema.define(version: 20170912193639) do
     t.string "photo"
     t.string "belt"
     t.string "level"
+    t.boolean "active", default: true, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

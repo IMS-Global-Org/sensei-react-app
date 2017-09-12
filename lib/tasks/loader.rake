@@ -161,6 +161,26 @@ namespace :loader do |loader_namespace|
     end
   end
 
+  task mailers: :environment do
+    Mailer.destroy_all
+
+    intervals = %w[Daily Weekly Monthly Yearly]
+    types = %w[Birthday Billing Activity]
+    recipients = %w[Admin User Guest]
+
+    20.times do
+      Mailer.create(
+        title: Faker::Lorem.sentence,
+        interval: intervals.sample,
+        type_of: types.sample,
+        active: [true, false].sample,
+        recipients: recipients.sample,
+        subject: Faker::Lorem.paragraph(3),
+        notify: [true, false].sample
+      )
+    end
+  end
+
   task :all do
     loader_namespace.tasks.each do |task|
       Rake::Task[task].invoke

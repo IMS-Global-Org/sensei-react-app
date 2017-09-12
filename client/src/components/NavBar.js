@@ -18,7 +18,7 @@ class NavBar extends Component {
       return(
         <Menu.Menu position='right'>
           { user.permissions.split(',').includes('user') &&
-            <Dropdown item text='Settings'>
+            <Dropdown item text='Applications'>
               <Dropdown.Menu>
                 <Menu.Item
                   name='notices'

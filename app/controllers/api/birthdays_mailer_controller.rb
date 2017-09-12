@@ -3,7 +3,7 @@ class Api::BirthdaysMailerController < ApplicationController
   def create
     binding.pry
     BirthdaysJob.set(wait_until: Date.tomorrow.morning).perform_later({
-      birthday: 'daily'
+      interval: 'daily'
     })
     flash[:success] = 'Birthdays Mailer queued!'
     render json: { status: 'Good!' }

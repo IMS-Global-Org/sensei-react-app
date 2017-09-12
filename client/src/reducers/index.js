@@ -8,8 +8,10 @@ import calendar from './calendar/calendar'
 import programs from './programs'
 import requirements from './requirements'
 import students from './students'
+import mailers from './mailers'
 
 const rootReducer = combineReducers({
+  mailers,
   students,
   requirements,
   programs,

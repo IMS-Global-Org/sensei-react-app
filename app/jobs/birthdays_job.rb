@@ -2,7 +2,7 @@ class BirthdaysJob < ApplicationJob
   queue_as :default
 
   def perform(*args)
-    case birthdays_args[:birthday]
+    case birthdays_args[:interval]
     when 'weekly'
       BirthdaysMailer.weekly(args).deliver
     when 'monthly'
