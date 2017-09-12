@@ -12,6 +12,7 @@ import {
   indexStudents,
   queryStudents,
   pdfStudents,
+  csvStudents,
 } from '../../actions/students'
 
 // Custom Components
@@ -59,10 +60,12 @@ class ResultsTable extends Component {
     const { query } = this.state
     const { dispatch } = this.props
     dispatch(pdfStudents(query))
-    debugger
-    // TODO: submit state.query
-    // TODO: create pdf server-side
-    // TODO: return through 'render file: pathway...'
+  }
+
+  handleCreateCSV = () => {
+    const { query } = this.state
+    const { dispatch } = this.props
+    dispatch(csvStudents(query))
   }
 
   displayTableRows = () => {
@@ -134,8 +137,8 @@ class ResultsTable extends Component {
                 <Button.Group size='mini'>
                   <Button
                     type='button'
-                    onClick={this.handleCreateExcel}>
-                    Excel
+                    onClick={this.handleCreateCSV}>
+                    CVS
                   </Button>
                   <Button.Or />
                   <Button

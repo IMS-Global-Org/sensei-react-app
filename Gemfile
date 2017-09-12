@@ -33,11 +33,13 @@ gem 'dotenv'
 gem 'will_paginate'
 gem 'validates_timeliness'
 gem 'prawn'
+gem 'delayed_job_active_record'
 
 group :development, :test do
   gem 'pry'
   gem 'annotate'
   gem 'faker'
+  gem 'letter_opener'
 end
 
 group :development do

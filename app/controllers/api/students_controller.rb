@@ -1,4 +1,8 @@
 class Api::StudentsController < ApplicationController
+  include ActionController::MimeResponds
+  include StudentCSV
+  include StudentPdf
+
   before_action :set_student, only: %I[show update destroy]
 
   def index
@@ -70,16 +74,38 @@ class Api::StudentsController < ApplicationController
   end
 
   def pdf
-    students = Student.all.limit(10)
-    binding.pry
-    render file: generate_pdf(students)
+    age = params[:age]
+    students = Student
+      .where(
+        'first ~* ? AND last ~* ? AND belt ~* ? AND level ~* ? AND gender ~* ?'\
+        + (!age.empty? ? " AND date_part('years',age(now(),birthday)) = #{age}" : ''),
+        params[:first] + '.*',
+        params[:last] + '.*',
+        params[:belt] + '.*',
+        params[:level] + '.*',
+        "^#{params[:gender]}.*"
+      )
+      .order(last: :asc, belt: :asc, level: :asc)
+    render_pdf students
   end
 
-  def excel
+  def csv
+    age = params[:query][:age]
+    students = Student
+      .where(
+        'first ~* ? AND last ~* ? AND belt ~* ? AND level ~* ? AND gender ~* ?'\
+        + (!age.empty? ? " AND date_part('years',age(now(),birthday)) = #{age}" : ''),
+        params[:query][:first] + '.*',
+        params[:query][:last] + '.*',
+        params[:query][:belt] + '.*',
+        params[:query][:level] + '.*',
+        "^#{params[:query][:gender]}.*"
+      )
+      .order(last: :asc, belt: :asc, level: :asc)
+    render_csv students
   end
 
-  def inactivate
-  end
+  def inactivate; end
 
   private
 

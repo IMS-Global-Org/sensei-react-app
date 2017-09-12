@@ -1,4 +1,5 @@
 import axios from 'axios'
+import fileDownload from 'react-file-download'
 import { setFlash } from './flash'
 
 export const indexStudents = ( level, belt, page = 1, per_page = 5 ) => {
@@ -141,13 +142,33 @@ export const inactivateStudent = ( id ) => {
 
 export const pdfStudents = ( query ) => {
   return (dispatch) => {
-    axios.post(`/api/students/pdf`, { query })
+    axios.get(`/api/students/pdf`,
+    {
+      params: query,
+      headers: {'Content-Type': 'application/octet-stream'},
+    })
     .then( resp => {
-      debugger
+      const file_name=resp.headers['content-disposition'].split(';').map(x=> x.trim())[1].split('=')[1]
+      fileDownload(resp.data,file_name)
     })
     .catch( resp => {
       dispatch(
         setFlash('Student PDF Listing not Created!','error')
+      )
+    })
+  }
+}
+
+export const csvStudents = ( query ) => {
+  return (dispatch) => {
+    axios.post(`/api/students/csv`, { query })
+    .then( resp => {
+      const file_name=resp.headers['content-disposition'].split(';').map(x=> x.trim())[1].split('=')[1]
+      fileDownload(resp.data,file_name)
+    })
+    .catch( resp => {
+      dispatch(
+        setFlash('Student CSV Listing not Created!','error')
       )
     })
   }

@@ -18,6 +18,10 @@ Bundler.require(*Rails.groups)
 
 module SenseiReactApp
   class Application < Rails::Application
+    # Setup for delayed_job_active_record when used with mailers
+    # Brennick Langston
+    config.active_job.queue_adapter = :delayed_job
+
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.1
 
