@@ -112,7 +112,7 @@ ActiveRecord::Schema.define(version: 20170912212656) do
 
   create_table "mailers", force: :cascade do |t|
     t.string "title", null: false
-    t.integer "interval", null: false
+    t.string "interval", null: false
     t.string "type_of", null: false
     t.boolean "active", default: true, null: false
     t.string "recipients", null: false

@@ -1,5 +1,6 @@
 const defaults = {
   data: [],
+  mailer: {},
 }
 
 const mailers = ( state = defaults, action ) => {

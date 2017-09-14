@@ -2,7 +2,7 @@ class Api::MailersController < ApplicationController
   before_action :set_mailer, only: [:show, :update, :destroy]
 
   def index
-    render json: Mailers.all
+    render json: Mailer.all
   end
 
   def show

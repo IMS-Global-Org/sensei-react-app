@@ -169,15 +169,16 @@ namespace :loader do |loader_namespace|
     recipients = %w[Admin User Guest]
 
     20.times do
-      Mailer.create(
+      mailer = Mailer.create(
         title: Faker::Lorem.sentence,
         interval: intervals.sample,
         type_of: types.sample,
         active: [true, false].sample,
         recipients: recipients.sample,
-        subject: Faker::Lorem.paragraph(3),
+        subject: Faker::Lorem.sentence,
         notify: [true, false].sample
       )
+      p mailer
     end
   end
 
