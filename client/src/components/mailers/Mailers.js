@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Container, Segment, Table } from 'semantic-ui-react'
+import { Container, Segment, Table, Button } from 'semantic-ui-react'
 import MailerModal from './MailerModal'
 
 // Actions
@@ -39,11 +39,19 @@ class Mailers extends Component {
       <Table.Footer>
         <Table.Row>
           <Table.HeaderCell colSpan={7}>
-            Paginator Component
+            <Button
+              type='button'
+              onClick={this.displayNewForm}>
+              New Mailer
+            </Button>
           </Table.HeaderCell>
         </Table.Row>
       </Table.Footer>
     )
+  }
+
+  displayNewForm = () => {
+    this.setState({ mailerId: true })
   }
 
   displayTableBody = () => {

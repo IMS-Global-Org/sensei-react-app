@@ -21,7 +21,7 @@ export const indexMailers = () => {
 
 export const showMailer = ( mailerId ) => {
   return (dispatch) => {
-    axios.get(`/api/mailer/${mailerId}`)
+    axios.get(`/api/mailers/${mailerId}`)
     .then( resp => {
       dispatch({
         type: 'SHOW_MAILER',
@@ -39,7 +39,7 @@ export const showMailer = ( mailerId ) => {
 
 export const createMailer = ( mailer ) => {
   return (dispatch) => {
-    axios.post(`/api/mailer`, { mailer })
+    axios.post(`/api/mailers`, { mailer })
     .then( resp => {
       dispatch({
         type: 'CREATE_MAILER',
@@ -56,8 +56,10 @@ export const createMailer = ( mailer ) => {
 }
 
 export const updateMailer = ( mailer ) => {
+  delete mailer.created_at
+  delete mailer.updated_at
   return (dispatch) => {
-    axios.patch(`/api/mailer/${mailer.id}`, { mailer })
+    axios.patch(`/api/mailers/${mailer.id}`, { mailer })
     .then( resp => {
       dispatch({
         type: 'UPDATE_MAILER',
@@ -75,11 +77,11 @@ export const updateMailer = ( mailer ) => {
 
 export const deleteMailer = ( mailerId ) => {
   return (dispatch) => {
-    axios.delete(`/api/mailer/${mailer.id}`)
+    axios.delete(`/api/mailers/${mailerId}`)
     .then( resp => {
       dispatch({
         type: 'DELETE_MAILER',
-        data: resp.data,
+        data: mailerId,
         headers: resp.headers,
       })
     })
@@ -88,5 +90,11 @@ export const deleteMailer = ( mailerId ) => {
         setFlash('Mailer not Deleted!','error')
       )
     })
+  }
+}
+
+export const clearMailer = () => {
+  return {
+    type: 'CLEAR_MAILER',
   }
 }

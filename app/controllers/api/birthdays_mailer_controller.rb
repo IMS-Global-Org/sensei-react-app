@@ -1,7 +1,6 @@
 class Api::BirthdaysMailerController < ApplicationController
 
-  def create
-    binding.pry
+  def index
     BirthdaysJob.set(wait_until: Date.tomorrow.morning).perform_later({
       interval: 'daily'
     })

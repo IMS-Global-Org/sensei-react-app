@@ -1,6 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Segment, Form, Button, Input, Dropdown, Divider } from 'semantic-ui-react'
+import { Segment, Form, Button, Input, Dropdown } from 'semantic-ui-react'
+
+// Actions
+import {
+  createMailer,
+  updateMailer,
+  deleteMailer,
+} from '../../actions/mailers'
 
 class MailerForm extends Component {
   defaults = {
@@ -23,13 +30,17 @@ class MailerForm extends Component {
   ]
 
   type_of = [
-    { text: 'Birthday', value: 'Birthdays' },
+    { text: 'Birthday', value: 'Birthday' },
     { text: 'Activity', value: 'Activity' },
     { text: 'Billing', value: 'Billing' },
   ]
 
   componentDidMount = () => {
-    this.setState({ ...this.props.mailer })
+    const { mailerId, mailer } = this.props
+    if( typeof mailerId === 'boolean' )
+      this.setState({ ...this.defaults })
+    else if ( typeof mailerId === 'number' && mailerId > 0 )
+      this.setState({ ...this.props.mailer })
   }
 
   handleChange = ( event ) => {
@@ -51,12 +62,13 @@ class MailerForm extends Component {
   handleSubmit = ( event ) => {
     event.preventDefault()
     const { id } = this.state
-    const { dispatch } = this.props
+    const { dispatch, closeModal } = this.props
     if( id ) {
       dispatch(updateMailer(this.state))
     } else {
       dispatch(createMailer(this.state))
     }
+    closeModal()
   }
 
   render() {
@@ -105,7 +117,7 @@ class MailerForm extends Component {
             <Form.Field inline>
               <label>Recipient</label>
               <Dropdown
-                id='interval'
+                id='recipients'
                 selection
                 options={this.recipients}
                 placeholder='Recipient Group...'
@@ -118,13 +130,11 @@ class MailerForm extends Component {
             <Form.Radio
               id='active'
               label='Yes'
-              value={true}
               checked={active === true}
               onChange={this.handleBooleanChange} />
             <Form.Radio
               id='active'
               label='No'
-              value={false}
               checked={active === false}
               onChange={this.handleBooleanChange} />
           </Form.Group>
@@ -133,13 +143,11 @@ class MailerForm extends Component {
             <Form.Radio
               id='notify'
               label='Yes'
-              value={true}
               checked={notify === true}
               onChange={this.handleBooleanChange} />
             <Form.Radio
               id='notify'
               label='No'
-              value={false}
               checked={notify === false}
               onChange={this.handleBooleanChange} />
           </Form.Group>
@@ -158,6 +166,7 @@ class MailerForm extends Component {
               <Button.Or />
               <Button
                 type='button'
+                disabled={ id ? false : true }
                 onClick={this.handleNewForm}>
                 Create New
               </Button>
@@ -166,13 +175,6 @@ class MailerForm extends Component {
                 type='button'
                 onClick={this.handleDelete}>
                 Delete
-              </Button>
-              <Button.Or />
-              <Button
-                type='button'
-                disabled={true}
-                onClick={()=>{}}>
-                Something
               </Button>
             </Button.Group>
           </Segment>
@@ -184,7 +186,7 @@ class MailerForm extends Component {
 
 const mapStateToProps = ( state, props ) => {
   return {
-    mailer: state.mailers.data.find( mailer => mailer.id === props.mailerId ),
+    mailer: state.mailers.data.find( mailer => mailer.id === props.mailerId ) || {},
   }
 }
 

@@ -1,4 +1,5 @@
 class BirthdaysMailer < ApplicationMailer
+  default :from, 'sensei-react-app@blkdojos_unit.com'
   before_action :set_email_recipient
 
   # Subject can be set in your I18n file at config/locales/en.yml
@@ -6,7 +7,7 @@ class BirthdaysMailer < ApplicationMailer
   #
   #   en.birthdays_mailer.daily.subject
   #
-  def daily
+  def daily(some_args)
     @greeting = "Hi"
 
     mail to: @recipient, subject: 'Daily Birthdays'
@@ -17,7 +18,7 @@ class BirthdaysMailer < ApplicationMailer
   #
   #   en.birthdays_mailer.weekly.subject
   #
-  def weekly
+  def weekly(some_args)
     @greeting = "Hi"
 
     mail to: @recipient, subject: 'Weekly Birthdays'
@@ -28,7 +29,7 @@ class BirthdaysMailer < ApplicationMailer
   #
   #   en.birthdays_mailer.monthly.subject
   #
-  def monthly
+  def monthly(some_args)
     @greeting = "Hi"
 
     mail to: @recipient, subject: 'Monthly Birthdays'
@@ -39,7 +40,7 @@ class BirthdaysMailer < ApplicationMailer
   #
   #   en.birthdays_mailer.yearly.subject
   #
-  def yearly
+  def yearly(some_args)
     @greeting = "Hi"
 
     mail to: @recipient, subject: 'Yearly Birthdays'

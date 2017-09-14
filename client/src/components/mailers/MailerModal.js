@@ -14,6 +14,12 @@ class MailerModal extends Component {
     })
   }
 
+  closeModal = () => {
+    this.setState({ modalOpen: false },()=>{
+      this.props.resetMailer()
+    })
+  }
+
   render() {
     return (
       <Modal
@@ -21,7 +27,9 @@ class MailerModal extends Component {
         open={this.state.modalOpen}
         onClose={this.closeModal}>
         <Modal.Content>
-          <MailerForm mailerId={this.props.mailerId} />
+          <MailerForm
+            closeModal={this.closeModal}
+            mailerId={this.props.mailerId} />
         </Modal.Content>
       </Modal>
     )

@@ -14,7 +14,7 @@ class Api::MailersController < ApplicationController
     if mailer.save
       render json: mailer
     else
-      render_error mailer
+      render_errors mailer
     end
   end
 
@@ -38,6 +38,9 @@ class Api::MailersController < ApplicationController
 
   def mailer_params
     params.require(:mailer)
-      .permit(:title, :interval, :type_of, :active, :recipient, :subject, :notify)
+      .permit(
+        :id, :title, :interval, :type_of,
+        :active, :recipients, :subject, :notify
+      )
   end
 end
