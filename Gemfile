@@ -34,6 +34,7 @@ gem 'will_paginate'
 gem 'validates_timeliness'
 gem 'prawn'
 gem 'delayed_job_active_record'
+gem 'time_diff'
 
 group :development, :test do
   gem 'pry'

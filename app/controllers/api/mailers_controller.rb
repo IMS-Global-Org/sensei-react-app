@@ -1,6 +1,5 @@
 class Api::MailersController < ApplicationController
   before_action :set_mailer, only: [:show, :update, :destroy]
-  after_action :enqueue_mailers
 
   def index
     render json: Mailer.all
@@ -14,7 +13,7 @@ class Api::MailersController < ApplicationController
     mailer = Mailer.new(mailer_params)
     if mailer.save
       job = enqueue_type_of mailer
-      if mailer.update(job: job.id)
+      if mailer.update(job: job.job_id)
         render json: mailer
       else
         render_errors mailer
@@ -28,7 +27,7 @@ class Api::MailersController < ApplicationController
     if @mailer.update(mailer_params)
       dequeue_type_of @mailer
       job = enqueue_type_of @mailer
-      if @mailer.update(job: job.id)
+      if @mailer.update(job: job.job_id)
         render json: @mailer
       else
         render_errors @mailer
@@ -59,28 +58,38 @@ class Api::MailersController < ApplicationController
 
   def enqueue_type_of(mailer)
     # 'NameOfClass'.constantize.new will also work
+    params = {
+      interval: mailer.interval,
+      mailer_id: mailer.id
+    }
     case mailer.interval
     when 'Daily'
+      # .set(wait_until: (Date.today.at_beginning_of_day + 1.day))
       return Object::const_get("#{mailer.type_of}Job")
-        .set(wait_until: Date.today.at_beggining_of_day + 1.day)
-        .perform_later(interval: mailer.interval, mailer_id: mailer.id)
+        .set(wait_until: DateTime.current + 20.seconds)
+        .perform_later(params)
     when 'Weekly'
       return Object::const_get("#{mailer.type_of}Job")
-        .set(wait_until: Date.today.at_beggining_of_week + 1.week)
-        .perform_later(interval: mailer.interval, mailer_id: mailer.id)
+        .set(wait_until: (Date.today.at_beginning_of_week + 1.week).to_time(:utc))
+        .perform_later(params)
     when 'Monthly'
       return Object::const_get("#{mailer.type_of}Job")
-        .set(wait_until: Date.today.at_beggining_of_month + 1.month)
-        .perform_later(interval: mailer.interval, mailer_id: mailer.id)
+        .set(wait_until: (Date.today.at_beginning_of_month + 1.month).to_time(:utc))
+        .perform_later(params)
     when 'Yearly'
       return Object::const_get("#{mailer.type_of}Job")
-        .set(wait_until: Date.today.at_beggining_of_year + 1.year)
-        .perform_later(interval: mailer.interval, mailer_id: mailer.id)
+        .set(wait_until: (Date.today.at_beginning_of_year + 1.year).to_time(:utc))
+        .perform_later(params)
     end
   end
 
   def dequeue_type_of(mailer)
-    selected_mailer = Delayed::Job.find(mailer.id)
-    selected_mailer.delete
+    return unless mailer.job
+    begin
+      selected_mailer = Delayed::Job.find(mailer.job)
+      selected_mailer.delete if selected_mailer
+    rescue ActiveRecord::RecordNotFound
+      mailer.update(job: nil)
+    end
   end
 end

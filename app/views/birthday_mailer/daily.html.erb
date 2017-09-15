@@ -1,5 +1,45 @@
-<h1>Birthdays#daily</h1>
-
-<p>
-  <%= @greeting %>, find me in app/views/birthdays_mailer/daily.html.erb
-</p>
+<div class='container'>
+  <h3>Daily Student Birthday Report</h3>
+  <p>
+    Below is a list of Student Birthdays that will take place within the
+    next 7 days. This message is auto-generated on the server by calculating
+    what the date will be 7 days from today and returning any students who's
+    birthdays will take place between today and the calculated date. Please be
+    aware that some discrepencies may take place due to overlapping dates,
+    improper dates being stored for each student, and other issues that arrise
+    when creating the students records. If errors are found, please contact the
+    site administrator via e-mail, as soon as possible, so they can be fixed.
+  </p>
+  <table class='table'>
+    <thead>
+      <tr>
+        <th>Student Name</th>
+        <th>Birthday</th>
+        <th>Age</th>
+        <th>Day to B-Day</th>
+        <th>Belt</th>
+        <th>Level</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% unless @students.empty? %>
+      <% @students.each do |student| %>
+        <tr>
+          <td><%=student.last%>,<%=student.first%></td>
+          <td><%=student.birthday%></td>
+          <td><%=student.current_age%></td>
+          <td><%=student.days_left%></td>
+          <td><%=student.belt.capitalize%></td>
+          <td><%=student.level%></td>
+        </tr>
+      <% end %>
+    <% else %>
+      <tr>
+        <td colspan='6'>
+          No Students will have a Birthday within the next 7 days!
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>

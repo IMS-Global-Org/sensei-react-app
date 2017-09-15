@@ -21,5 +21,5 @@ class Mailer < ApplicationRecord
   validates :recipients, inclusion: { in: %w[Admin User Guest] }
   validates :subject, presence: true, allow_blank: true
   validates :notify, inclusion: { in: [true, false] }
-  validates :job, numericality: { greater_than: 0 }, allow_blank: true
+  validates :job, presence: true, allow_blank: true
 end

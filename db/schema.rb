@@ -118,6 +118,7 @@ ActiveRecord::Schema.define(version: 20170912212656) do
     t.string "recipients", null: false
     t.string "subject"
     t.boolean "notify", default: false, null: false
+    t.string "job"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

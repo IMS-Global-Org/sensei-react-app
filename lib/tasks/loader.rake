@@ -178,7 +178,6 @@ namespace :loader do |loader_namespace|
         subject: Faker::Lorem.sentence,
         notify: [true, false].sample
       )
-      p mailer
     end
   end
 
