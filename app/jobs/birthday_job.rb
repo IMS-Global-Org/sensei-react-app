@@ -1,32 +1,32 @@
 class BirthdayJob < ApplicationJob
   queue_as :default
 
-  def perform(params)
-    case params[:interval]
+  def perform(mailer)
+    case mailer.interval
     when 'Daily'
-      BirthdayMailer.daily(params[:mailer_id]).deliver
+      BirthdayMailer.daily(mailer).deliver
       # reset the job
       BirthdayJob
         .set(wait_until: (Date.today.at_beginning_of_day + 1.day))
-        .perform_later(params)
+        .perform_later(mailer)
     when 'Weekly'
-      BirthdayMailer.weekly(params[:mailer_id]).deliver
+      BirthdayMailer.weekly(mailer).deliver
       # reset the job
       BirthdayJob
         .set(wait_until: (Date.today.at_beginning_of_week + 1.week).to_time(:utc))
-        .perform_later(params)
+        .perform_later(mailer)
     when 'Monthly'
-      BirthdayMailer.monthly(params[:mailer_id]).deliver
+      BirthdayMailer.monthly(mailer).deliver
       # reset the job
       BirthdayJob
         .set(wait_until: (Date.today.at_beginning_of_month + 1.month).to_time(:utc))
-        .perform_later(params)
+        .perform_later(mailer)
     when 'Yearly'
-      BirthdayMailer.yearly(params[:mailer_id]).deliver
+      BirthdayMailer.yearly(mailer).deliver
       # reset the job
       BirthdayJob
         .set(wait_until: (Date.today.at_beginning_of_year + 1.year).to_time(:utc))
-        .perform_later(params)
+        .perform_later(mailer)
     else
       raise 'No Birthday type was passed.'
     end

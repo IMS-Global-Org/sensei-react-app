@@ -58,28 +58,24 @@ class Api::MailersController < ApplicationController
 
   def enqueue_type_of(mailer)
     # 'NameOfClass'.constantize.new will also work
-    params = {
-      interval: mailer.interval,
-      mailer_id: mailer.id
-    }
     case mailer.interval
     when 'Daily'
       # .set(wait_until: (Date.today.at_beginning_of_day + 1.day))
       return Object::const_get("#{mailer.type_of}Job")
-        .set(wait_until: DateTime.current + 20.seconds)
-        .perform_later(params)
+        .set(wait_until: Date.today.at_beginning_of_day + 1.day)
+        .perform_later(mailer)
     when 'Weekly'
       return Object::const_get("#{mailer.type_of}Job")
         .set(wait_until: (Date.today.at_beginning_of_week + 1.week).to_time(:utc))
-        .perform_later(params)
+        .perform_later(mailer)
     when 'Monthly'
       return Object::const_get("#{mailer.type_of}Job")
         .set(wait_until: (Date.today.at_beginning_of_month + 1.month).to_time(:utc))
-        .perform_later(params)
+        .perform_later(mailer)
     when 'Yearly'
       return Object::const_get("#{mailer.type_of}Job")
         .set(wait_until: (Date.today.at_beginning_of_year + 1.year).to_time(:utc))
-        .perform_later(params)
+        .perform_later(mailer)
     end
   end
 

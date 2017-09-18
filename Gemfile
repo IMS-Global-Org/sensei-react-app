@@ -35,6 +35,7 @@ gem 'validates_timeliness'
 gem 'prawn'
 gem 'delayed_job_active_record'
 gem 'time_diff'
+gem 'text-table'
 
 group :development, :test do
   gem 'pry'

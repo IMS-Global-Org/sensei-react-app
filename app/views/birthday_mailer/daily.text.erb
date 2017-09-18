@@ -1,3 +1,16 @@
-Birthdays#daily
+Daily Student Birthday Report
 
-<%= @greeting %>, find me in app/views/birthdays_mailer/daily.text.erb
+Below is a list of Student Birthdays that will take place within the
+next 7 days. This message is auto-generated on the server by calculating
+what the date will be 7 days from today and returning any students who's
+birthdays will take place between today and the calculated date. Please be
+aware that some discrepencies may take place due to overlapping dates,
+improper dates being stored for each student, and other issues that arrise
+when creating the students records. If errors are found, please contact the
+site administrator via e-mail, as soon as possible, so they can be fixed.
+
+<% unless @students_text_table.nil? %>
+<%=@students_text_table%>
+<% else %>
+  No Students where found to have a birthday comming up soon.
+<% end %>

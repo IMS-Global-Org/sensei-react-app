@@ -25,7 +25,7 @@
     <% unless @students.empty? %>
       <% @students.each do |student| %>
         <tr>
-          <td><%=student.last%>,<%=student.first%></td>
+          <td><%=student.last%>,&nbsp;<%=student.first%></td>
           <td><%=student.birthday%></td>
           <td><%=student.current_age%></td>
           <td><%=student.days_left%></td>
