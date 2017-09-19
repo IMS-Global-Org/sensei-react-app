@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Segment } from 'semantic-ui-react'
 import NoMatch from './NoMatch';
 import NavBar from './NavBar';
 import Login from './Login';
@@ -12,6 +13,7 @@ import FetchUser from './FetchUser';
 // Global Custom CSS Style Sheets
 import 'react-datetime/css/react-datetime.css'
 import 'react-datepicker/dist/react-datepicker.min.css'
+import '../styles/background.css'
 
 // Custom Components
 import Settings from './Settings'
@@ -32,25 +34,27 @@ class App extends Component {
       <div>
         <Header />
         <NavBar />
-        <Flash />
-        <FetchUser>
-          <Switch>
-            <Route exact path='/' component={Home} />
-            <Route exact path='/login' component={Login} />
-            <Route exact path='/register' component={Register} />
-            <Route exact path='/calendar' component={Calendar} />
-            <Route exact path='/calendar/events' component={EventEditor} />
-            <Route exact path='/programs' component={Programs} />
-            <Route exact path='/location' component={Location} />
-            <ProtectedRoute exact path='/program/tracker' component={ProgramTracker} />
-            <ProtectedRoute exact path='/settings' component={Settings} />
-            <ProtectedRoute path='/announcements' component={AnnouncementManager} />
-            <ProtectedRoute path='/postings' component={HomePagePostings} />
-            <ProtectedRoute path='/students' component={Students} />
-            <ProtectedRoute path='/mailers' component={Mailers} />
-            <Route component={NoMatch} />
-          </Switch>
-        </FetchUser>
+        <div className='multi-bg-images'>
+          <Flash />
+          <FetchUser>
+            <Switch>
+              <Route exact path='/' component={Home} />
+              <Route exact path='/login' component={Login} />
+              <Route exact path='/register' component={Register} />
+              <Route exact path='/calendar' component={Calendar} />
+              <Route exact path='/calendar/events' component={EventEditor} />
+              <Route exact path='/programs' component={Programs} />
+              <Route exact path='/location' component={Location} />
+              <ProtectedRoute exact path='/program/tracker' component={ProgramTracker} />
+              <ProtectedRoute exact path='/settings' component={Settings} />
+              <ProtectedRoute path='/announcements' component={AnnouncementManager} />
+              <ProtectedRoute path='/postings' component={HomePagePostings} />
+              <ProtectedRoute path='/students' component={Students} />
+              <ProtectedRoute path='/mailers' component={Mailers} />
+              <Route component={NoMatch} />
+            </Switch>
+          </FetchUser>
+        </div>
       </div>
     );
   }

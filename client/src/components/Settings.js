@@ -1,8 +1,12 @@
 import React, { Component } from 'react'
-import { Segment } from 'semantic-ui-react'
+import { Container, Segment } from 'semantic-ui-react'
 
 const Settings = () => {
-  return (<Segment>Settings Page</Segment>)
+  return (
+    <Container>
+      <Segment>Settings Page</Segment>
+    </Container>
+  )
 }
 
 export default Settings

@@ -26,51 +26,49 @@ class Programs extends Component {
 
   render() {
     return (
-      <Dragons>
-        <Container>
-          <Videos>
-            <Header as='h2' icon textAlign='center'>
-              <Icon name='video play outline' size='massive' />
-              <Header.Content>
-                Program Videos
-              </Header.Content>
-              <Header.Subheader>
-                Individual Program Videos for Students and Instructors
-              </Header.Subheader>
-            </Header>
-            <p>
-              Videos are provided by Bobby Lawrence Karate. Videos corresponding
-              to individual student curriculum are available. To access the videos,
-              a password is required. Password access is acquired through your
-              current instructor. Please see your current instructor for obtaining
-              a password and visual rights to the your corresponding curriculum
-              videos.
-            </p>
-            <Message>
-              <Message.Header>
-                Access Bobby Lawrence Karate Curriculum Videos
-              </Message.Header>
-              <Message.List>
-                <Message.Item>
-                  Contact your instructor to setup your student account access.
-                </Message.Item>
-                <Message.Item>
-                  Create a password that you'll remember easily.
-                </Message.Item>
-                <Message.Item>
-                  Visit
-                  <a
-                    href='http://www.blkdojos.com/students-2/curriculum-assistance/'
-                    target='_blank'
-                    rel="noopener noreferrer">
-                    BLK curriculum videos
-                  </a>.
-                </Message.Item>
-              </Message.List>
-            </Message>
-          </Videos>
-        </Container>
-      </Dragons>
+      <Container>
+        <Videos>
+          <Header as='h2' icon textAlign='center'>
+            <Icon name='video play outline' size='massive' />
+            <Header.Content>
+              Program Videos
+            </Header.Content>
+            <Header.Subheader>
+              Individual Program Videos for Students and Instructors
+            </Header.Subheader>
+          </Header>
+          <p>
+            Videos are provided by Bobby Lawrence Karate. Videos corresponding
+            to individual student curriculum are available. To access the videos,
+            a password is required. Password access is acquired through your
+            current instructor. Please see your current instructor for obtaining
+            a password and visual rights to the your corresponding curriculum
+            videos.
+          </p>
+          <Message>
+            <Message.Header>
+              Access Bobby Lawrence Karate Curriculum Videos
+            </Message.Header>
+            <Message.List>
+              <Message.Item>
+                Contact your instructor to setup your student account access.
+              </Message.Item>
+              <Message.Item>
+                Create a password that you'll remember easily.
+              </Message.Item>
+              <Message.Item>
+                Visit
+                <a
+                  href='http://www.blkdojos.com/students-2/curriculum-assistance/'
+                  target='_blank'
+                  rel="noopener noreferrer">
+                  BLK curriculum videos
+                </a>.
+              </Message.Item>
+            </Message.List>
+          </Message>
+        </Videos>
+      </Container>
     )
   }
 }
