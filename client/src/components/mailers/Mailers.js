@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Container, Segment, Table, Button } from 'semantic-ui-react'
+import {
+  Container, Segment, Table,
+  Button, Header, Icon
+} from 'semantic-ui-react'
 import MailerModal from './MailerModal'
 
 // Actions
@@ -86,6 +89,26 @@ class Mailers extends Component {
     const { mailerId } = this.state
     return (
       <Container>
+        <Segment>
+          <Header as='h1' icon circular textAlign='center'>
+            <Icon name='info circle' />
+            <Header.Content>
+              Information
+            </Header.Content>
+          </Header>
+          <p style={{ textAlign: 'justify', margin: '2rem 5rem' }}>
+            Mailers are for automating certain tasks that need to be run
+            during specific times so that recipients are informed of
+            activities or reports that are pertinent to blk students.
+            By clicking on a table row that corresponds to a mailer,
+            the mailer's information will be presented below the table in
+            a form. This is where mailers can be created, updated or deleted
+            as needed. Please contact the&nbsp;
+            <a href='mailto:sensei_ou_unit@blkdojos.com'>Sensei</a>
+            &nbsp; with any questions or problems relating to the mailers.
+            Thanks!
+          </p>
+        </Segment>
         <Table celled>
           { this.displayTableHeaders() }
           <Table.Body>

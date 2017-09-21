@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Container, Table } from 'semantic-ui-react'
+import { Container, Table, Segment, Header, Icon } from 'semantic-ui-react'
 import moment from 'moment'
 
 // Custom Components
@@ -127,6 +127,26 @@ class EventEditor extends Component {
   render() {
     return (
       <Container>
+        <Segment>
+          <Header as='h1' icon circular textAlign='center'>
+            <Icon name='info circle' />
+            Information
+            <Header.Subheader style={{ textAlign: 'justify', margin: '2rem 3rem' }}>
+              A calendar event can be either created or modified, depending on
+              whether or not the event already exists. If a new event needs to
+              be created, please click on the corresponding 'New Event' button.
+              If an existing event needs to be updated or deleted, click on it's
+              corresponding table row and the event's information will be
+              automatically loaded into the form below it. Once the event's
+              information has been updated, click the 'Update' button to save
+              the event back to the database. All events can be view in realtime.
+              Please contact the&nbsp;
+              <a href='mailto:sensei_ou_unit@blkdojos.com'>Sensei</a>
+              &nbsp; with any questions regarding the creation or maintenance of
+              the events.
+            </Header.Subheader>
+          </Header>
+        </Segment>
         <Table celled>
           <Table.Header>
             <Table.Row>

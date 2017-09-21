@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import { Container, Header, Segment, Form, Button } from 'semantic-ui-react';
+import {
+  Container, Header, Segment,
+  Form, Button, Image,
+} from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { handleLogin } from '../actions/auth';
 
@@ -53,6 +56,9 @@ class Login extends Component {
               <Button primary type='submit'>Submit</Button>
             </Segment>
           </Form>
+        </Segment>
+        <Segment basic>
+          <Image src='../../images/login.jpg' className='login' />
         </Segment>
       </Container>
     );

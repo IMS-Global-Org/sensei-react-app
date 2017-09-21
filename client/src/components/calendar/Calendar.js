@@ -1,8 +1,14 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Container, Button } from 'semantic-ui-react'
+import {
+  Container, Segment, Header,
+  Icon, Button, Image
+} from 'semantic-ui-react'
 import styled from 'styled-components'
 import moment from 'moment'
+
+// Custom CSS
+import '../../styles/martial_arts.css'
 
 // Custom Components
 import CalendarWeek from './CalendarWeek'
@@ -344,6 +350,25 @@ class Calendar extends Component {
   render() {
     return (
       <Container>
+        <Segment style={{ margin: '5% 25%' }}>
+          <Header as='h3' icon textAlign='center'>
+            <Icon name='calendar' circular size='massive' />
+            <Header.Content>
+              Bobby Lawrence Karate Dojo<br />Orangeville, Utah
+            </Header.Content>
+          </Header>
+          <p style={{ textAlign: 'justify' }}>
+            Welcome to Bobby Lowrence Karate Dojos calendar for the
+            Orangeville, Utah unit. The Calendar below list all of our
+            major events, training sessions, and testing modules for
+            students of all ages and levels. Details regarding each of the
+            individual events can be found by dragging your cursor over the
+            respective event. The details you are seeking will present
+            themselves in a popup. If further details regarding a specific
+            event are needed, please feel free to contact the units&nbsp;
+            <a href='mailto:sensei_ou_unit@blkdojos.com'>Sensei</a>.
+            </p>
+        </Segment>
         <CalendarNavBar>
           <Controls>
             <Button.Group basic size='tiny'>
@@ -359,6 +384,9 @@ class Calendar extends Component {
           { this.generateCalendarHeader() }
         </CalendarHeader>
         { this.generateCalendar() }
+        <Segment basic padded={false}>
+          <Image src='../../images/7-5-3.jpg' className='image-7-5-3' />
+        </Segment>
       </Container>
     )
   }

@@ -47,11 +47,6 @@ class AnnouncementEdit extends Component {
               </Segment>
             </Grid.Column>
           </Grid.Row>
-          <Grid.Row>
-            <Grid.Column width={16}>
-              <Segment>Controls Area</Segment>
-            </Grid.Column>
-          </Grid.Row>
         </Grid>
       </Container>
     )

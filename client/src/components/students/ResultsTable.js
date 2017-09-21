@@ -105,10 +105,15 @@ class ResultsTable extends Component {
             <Table.Row>
               <Table.HeaderCell colSpan={6}>
                 <Header as='h3' textAlign='center'>Student Listing</Header>
-                <p style={{ textAlign: 'center' }}>
+                <p style={{ textAlign: 'justify', margin: '1rem 3rem' }}>
                   Listing of current and previously enrolled students. Please
                   use the query fields above to filter the visible list of
-                  students if needed.
+                  students if needed. Otherwise, click on a students corresponding
+                  row to display their current record. Modifications and deletions
+                  can be made to individual students. Click on the 'New Student'
+                  button to create a new student record. Contact the&nbsp;
+                  <a href='mailto:sensei_ou_unit@blkdojos.com'>Sensei</a>
+                  &nbsp; with any matters related to student records.
                 </p>
               </Table.HeaderCell>
             </Table.Row>

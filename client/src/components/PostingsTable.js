@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Container, Segment, Table, Loader } from 'semantic-ui-react'
+import { Container, Segment, Table, Loader, Header } from 'semantic-ui-react'
 import styled from 'styled-components'
 import {
   indexPostingsTable,
@@ -78,6 +78,20 @@ class PostingsTable extends Component {
     return (
       <Table celled>
         <Table.Header>
+          <Table.Row>
+            <Table.HeaderCell colSpan={4}>
+              <Header as='h1' textAlign='center'>Instructions</Header>
+              <p style={{ textAlign: 'justify', margin: '2rem 5rem' }}>
+                To create, modify or delete a posting's content, click on the
+                table row displaying the postings content. This will open a form
+                that allows each of the postings information fields to be
+                modified if it already exists, or created if a new posting is
+                being formed. Please contact the&nbsp;
+                <a href='mailto:sensei_ou_unit@blkdojos.com'>Sensei</a>
+                &nbsp;with any questions regarding the postings. Thanks!
+              </p>
+            </Table.HeaderCell>
+          </Table.Row>
           <Table.Row>
             <Table.HeaderCell>Title</Table.HeaderCell>
             <Table.HeaderCell># of Videos</Table.HeaderCell>

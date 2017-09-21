@@ -1,0 +1,43 @@
+.forms-all {
+  background-image: url('../images/FormsAll.png');
+  background-repeat: no-repeat;
+  background-size: 100% 900px;
+  background-position: center;
+  min-height: 900px;
+  width: 90%;
+  margin: 5% 5%;
+  padding: 0;
+}
+
+.image-7-5-3 {
+  background-image: url('../images/7-5-3.jpg');
+  background-repeat: no-repeat;
+  background-size: 100% 900px;
+  background-position: center;
+  min-height: 900px;
+  width: 90%;
+  margin: 5% 5%;
+  padding: 0;
+}
+
+.motivation {
+  background-image: url('../images/motivation.jpg');
+  background-repeat: no-repeat;
+  background-size: 100% 900px;
+  background-position: center;
+  min-height: 900px;
+  width: 70%;
+  margin: 5% 15%;
+  padding: 0;
+}
+
+.login {
+  background-image: url('../images/login.jpg');
+  background-repeat: no-repeat;
+  background-size: 100% 1000px;
+  background-position: center;
+  min-height: 1000px;
+  width: 70%;
+  margin: 5% 15%;
+  padding: 0;
+}

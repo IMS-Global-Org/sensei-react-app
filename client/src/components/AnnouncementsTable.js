@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Table } from 'semantic-ui-react'
+import { Table, Header } from 'semantic-ui-react'
 import moment from 'moment'
 import { tableAnnouncements } from '../actions/announcements'
 import Paginator from './Paginator'
@@ -89,6 +89,26 @@ class AnnouncementsTable extends Component {
     return (
       <Table celled selectable>
         <Table.Header>
+          <Table.Row>
+            <Table.HeaderCell colSpan={4}>
+              <Header as='h1' textAlign='center'>
+                Instructions
+              </Header>
+              <p style={{ textAlign: 'justify', margin: '2rem 5rem' }}>
+                Below you will find a table listing the notices that are
+                currently in the database. Next you will find a form that
+                allows you to create, update or remove notices from the
+                database. If a current notice needs to be updated or changed
+                simply click on the table row where the notice is being listed
+                and its information will appear in the form below the table.
+                Make any changes that you see fit and then click the update
+                button. The form also has functions for creating new notices,
+                deleting old ones, and so forth. Please contact the&nbsp;
+                <a href='mailto:sensei_ou_unit@blkdojos.com'>Sensei</a>&nbsp;
+                with any questions or problems that are found. Thanks!
+              </p>
+            </Table.HeaderCell>
+          </Table.Row>
           <Table.Row>
             <Table.HeaderCell>Title</Table.HeaderCell>
             <Table.HeaderCell>Start Date</Table.HeaderCell>

@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { Container, Segment, Header, Icon, Message } from 'semantic-ui-react'
+import { Container, Segment, Header, Icon, Message, Image } from 'semantic-ui-react'
 import styled from 'styled-components'
+
+import '../../styles/martial_arts.css'
 
 // Custom Styled Components
 const Dragons = styled.div`
@@ -37,7 +39,7 @@ class Programs extends Component {
               Individual Program Videos for Students and Instructors
             </Header.Subheader>
           </Header>
-          <p>
+          <p style={{ textAlign: 'justify' }}>
             Videos are provided by Bobby Lawrence Karate. Videos corresponding
             to individual student curriculum are available. To access the videos,
             a password is required. Password access is acquired through your
@@ -68,6 +70,9 @@ class Programs extends Component {
             </Message.List>
           </Message>
         </Videos>
+        <Segment basic padded={false}>
+          <Image src='../../images/FormsAll.png' className='forms-all' />
+        </Segment>
       </Container>
     )
   }
