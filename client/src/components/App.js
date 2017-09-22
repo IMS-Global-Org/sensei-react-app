@@ -42,9 +42,9 @@ class App extends Component {
               <Route exact path='/login' component={Login} />
               <Route exact path='/register' component={Register} />
               <Route exact path='/calendar' component={Calendar} />
-              <Route exact path='/calendar/events' component={EventEditor} />
               <Route exact path='/programs' component={Programs} />
               <Route exact path='/location' component={Location} />
+              <ProtectedRoute exact path='/calendar/events' component={EventEditor} />
               <ProtectedRoute exact path='/program/tracker' component={ProgramTracker} />
               <ProtectedRoute exact path='/settings' component={Settings} />
               <ProtectedRoute path='/announcements' component={AnnouncementManager} />

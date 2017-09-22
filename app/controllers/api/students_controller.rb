@@ -25,11 +25,13 @@ class Api::StudentsController < ApplicationController
   end
 
   def query
-    age = params[:query][:age]
+    min_age = params[:query][:min_age]
+    max_age = params[:query][:max_age]
     students = Student
       .where(
         'first ~* ? AND last ~* ? AND belt ~* ? AND level ~* ? AND gender ~* ?'\
-        + (!age.empty? ? " AND date_part('years',age(now(),birthday)) = #{age}" : ''),
+        + (!min_age.empty? ? " AND date_part('years',age(now(),birthday)) >= #{min_age}" : ' ') \
+        + (!max_age.empty? ? " AND date_part('years',age(now(),birthday)) <= #{max_age}" : ' '),
         params[:query][:first] + '.*',
         params[:query][:last] + '.*',
         params[:query][:belt] + '.*',
@@ -74,11 +76,13 @@ class Api::StudentsController < ApplicationController
   end
 
   def pdf
-    age = params[:age]
+    min_age = params[:min_age]
+    max_age = params[:max_age]
     students = Student
       .where(
         'first ~* ? AND last ~* ? AND belt ~* ? AND level ~* ? AND gender ~* ?'\
-        + (!age.empty? ? " AND date_part('years',age(now(),birthday)) = #{age}" : ''),
+        + (!min_age.empty? ? " AND date_part('years',age(now(),birthday)) >= #{min_age}" : ' ') \
+        + (!max_age.empty? ? " AND date_part('years',age(now(),birthday)) <= #{max_age}" : ' '),
         params[:first] + '.*',
         params[:last] + '.*',
         params[:belt] + '.*',
@@ -90,11 +94,13 @@ class Api::StudentsController < ApplicationController
   end
 
   def csv
-    age = params[:query][:age]
+    min_age = params[:query][:min_age]
+    max_age = params[:query][:max_age]
     students = Student
       .where(
         'first ~* ? AND last ~* ? AND belt ~* ? AND level ~* ? AND gender ~* ?'\
-        + (!age.empty? ? " AND date_part('years',age(now(),birthday)) = #{age}" : ''),
+        + (!min_age.empty? ? " AND date_part('years',age(now(),birthday)) >= #{min_age}" : ' ') \
+        + (!max_age.empty? ? " AND date_part('years',age(now(),birthday)) <= #{max_age}" : ' '),
         params[:query][:first] + '.*',
         params[:query][:last] + '.*',
         params[:query][:belt] + '.*',

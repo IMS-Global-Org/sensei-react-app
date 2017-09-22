@@ -72,7 +72,8 @@ class ResultsTable extends Component {
     const { students } = this.props
     if( students && students.length > 0 ) {
       return students.map( student => {
-        const age = moment().years() - moment(student.birthday).years()
+        // const age = moment().years() - moment(student.birthday).years()
+        const age = moment().diff(moment(student.birthday),'years')
         return (
           <Table.Row
             key={student.id}

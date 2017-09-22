@@ -4,17 +4,24 @@ import { Segment, Form, Input, Button } from 'semantic-ui-react'
 import {
   queryStudents,
 } from '../../actions/students'
+import AgeRangeError from './AgeRangeError'
 
 class SearchBar extends Component {
-  defaults = { first: '', last: '', belt: '', level: '', age: '', gender: '' }
+  defaults = {
+    first: '', last: '', belt: '',
+    level: '', min_age: '', max_age: '', gender: '' }
   state = { ...this.defaults }
 
   handleSubmit = ( event ) => {
     event.preventDefault()
     const { dispatch, setQuery } = this.props
-    dispatch(queryStudents(this.state))
-    if( setQuery ) {
-      setQuery(this.state)
+    if( this.agesWithinRange() ) {
+      dispatch(queryStudents(this.state))
+      if( setQuery ) {
+        setQuery(this.state)
+      }
+    } else {
+      this.setState({ min_age: -1, max_age: '' })
     }
   }
   handleChange = ( event ) => {
@@ -25,10 +32,21 @@ class SearchBar extends Component {
     this.setState({ ...this.defaults },()=>this.props.handleCancelForm())
   }
 
+  agesWithinRange = () => {
+    const { min_age, max_age } = this.state
+    if( max_age <= min_age ){
+      return false
+    }
+    return true
+  }
+
   render() {
-    const { first, last, belt, level, age, gender } = this.state
+    const { first, last, belt, level, min_age, max_age, gender } = this.state
     return (
       <Segment basic>
+        { min_age < 0 &&
+          <AgeRangeError />
+        }
         <Form onSubmit={this.handleSubmit}>
           <Form.Group widths='equal'>
             <Form.Field
@@ -54,11 +72,21 @@ class SearchBar extends Component {
               type='number'
               max={100}
               min={0}
-              label='Age'
-              id='age'
-              value={age}
+              label='Min. Age'
+              id='min_age'
+              value={min_age < 0 ? '' : min_age }
               onChange={this.handleChange}
-              placeholder='Age...' />
+              placeholder='#...' />
+            <Form.Field
+              control={Input}
+              type='number'
+              max={100}
+              min={0}
+              label='Max. Age'
+              id='max_age'
+              value={max_age}
+              onChange={this.handleChange}
+              placeholder='#...' />
             <Form.Field
               control={Input}
               label='Gender'
