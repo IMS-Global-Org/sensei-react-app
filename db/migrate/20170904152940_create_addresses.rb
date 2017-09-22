@@ -9,7 +9,6 @@ class CreateAddresses < ActiveRecord::Migration[5.1]
       t.string :type_of, null: false, default: 'Home'
       t.string :owner_of, null: false, default: 'Parent'
       t.boolean :active, default: true
-      t.belongs_to :student, foreign_key: true, index: true
 
       t.timestamps
     end
