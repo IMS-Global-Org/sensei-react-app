@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170912212656) do
+ActiveRecord::Schema.define(version: 20170922204554) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,12 @@ ActiveRecord::Schema.define(version: 20170912212656) do
     t.index ["student_id"], name: "index_addresses_on_student_id"
   end
 
+  create_table "addresses_contractees", id: false, force: :cascade do |t|
+    t.bigint "contractee_id", null: false
+    t.bigint "address_id", null: false
+    t.index ["contractee_id", "address_id"], name: "index_addresses_contractees_on_contractee_id_and_address_id"
+  end
+
   create_table "announcements", force: :cascade do |t|
     t.string "title", null: false
     t.string "category", null: false
@@ -42,6 +48,50 @@ ActiveRecord::Schema.define(version: 20170912212656) do
     t.boolean "registration"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "contractees", force: :cascade do |t|
+    t.string "first", null: false
+    t.string "last", null: false
+    t.datetime "birthdate"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "contractees_contracts", id: false, force: :cascade do |t|
+    t.bigint "contractee_id", null: false
+    t.bigint "contract_id", null: false
+    t.index ["contractee_id", "contract_id"], name: "index_contractees_contracts_on_contractee_id_and_contract_id"
+  end
+
+  create_table "contractees_emails", id: false, force: :cascade do |t|
+    t.bigint "contractee_id", null: false
+    t.bigint "email_id", null: false
+    t.index ["contractee_id", "email_id"], name: "index_contractees_emails_on_contractee_id_and_email_id"
+  end
+
+  create_table "contractees_phones", id: false, force: :cascade do |t|
+    t.bigint "contractee_id", null: false
+    t.bigint "phone_id", null: false
+    t.index ["contractee_id", "phone_id"], name: "index_contractees_phones_on_contractee_id_and_phone_id"
+  end
+
+  create_table "contracts", force: :cascade do |t|
+    t.datetime "start_date", null: false
+    t.datetime "end_date", null: false
+    t.float "amount", null: false
+    t.integer "interval", null: false
+    t.boolean "status", null: false
+    t.bigint "contractee_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["contractee_id"], name: "index_contracts_on_contractee_id"
+  end
+
+  create_table "contracts_payments", id: false, force: :cascade do |t|
+    t.bigint "contract_id", null: false
+    t.bigint "payment_id", null: false
+    t.index ["contract_id", "payment_id"], name: "index_contracts_payments_on_contract_id_and_payment_id"
   end
 
   create_table "delayed_jobs", force: :cascade do |t|
@@ -123,6 +173,17 @@ ActiveRecord::Schema.define(version: 20170912212656) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "payments", force: :cascade do |t|
+    t.datetime "charged", null: false
+    t.string "method", null: false
+    t.float "amount", null: false
+    t.string "verified", null: false
+    t.bigint "contract_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["contract_id"], name: "index_payments_on_contract_id"
+  end
+
   create_table "phones", force: :cascade do |t|
     t.string "phone_number", null: false
     t.string "type_of", null: false
@@ -197,9 +258,11 @@ ActiveRecord::Schema.define(version: 20170912212656) do
   end
 
   add_foreign_key "addresses", "students"
+  add_foreign_key "contracts", "contractees"
   add_foreign_key "emails", "students"
   add_foreign_key "home_page_links", "home_page_postings"
   add_foreign_key "home_page_videos", "home_page_postings"
+  add_foreign_key "payments", "contracts"
   add_foreign_key "phones", "students"
   add_foreign_key "requirements", "programs"
 end

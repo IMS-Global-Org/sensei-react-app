@@ -19,4 +19,7 @@ class Phone < ApplicationRecord
   validates_presence_of :phone_number, :type_of, :owner_of
   validates :texting, inclusion: { in: [true, false] }
   validates :active, inclusion: { in: [true, false] }
+
+  has_and_belongs_to_many :contractees
+
 end
