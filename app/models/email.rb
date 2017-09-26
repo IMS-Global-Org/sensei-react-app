@@ -14,12 +14,11 @@
 #
 
 class Email < ApplicationRecord
-  belongs_to :student
-
   validates_presence_of :address, :type_of, :owner_of
   validates :html, presence: true, allow_blank: true
   validates :active, presence: true, allow_blank: true
 
+  has_and_belongs_to_many :students
   has_and_belongs_to_many :contractees
 
 end

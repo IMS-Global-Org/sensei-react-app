@@ -17,12 +17,11 @@
 #
 
 class Address < ApplicationRecord
-  belongs_to :student
+  has_and_belongs_to_many :students
+  has_and_belongs_to_many :contractees
 
   validates_presence_of :street1, :city, :state, :zipcode
   validates_presence_of :type_of, :owner_of
   validates :street2, presence: true, allow_blank: true
-
-  has_and_belongs_to_many :contractees
 
 end

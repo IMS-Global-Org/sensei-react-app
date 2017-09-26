@@ -126,27 +126,25 @@ namespace :loader do |loader_namespace|
         level: Faker::Number.between(1,20).to_s + level.sample.to_s
       )
       3.times do
-        phone = Phone.create(
+        student.phones.create(
           phone_number: Faker::PhoneNumber.cell_phone,
           type_of: types.sample,
           owner_of: owner_types.sample,
           texting: texting.sample,
-          active: active.sample,
-          student_id: student.id
+          active: active.sample
         )
       end
       2.times do
-        Email.create(
+        student.emails.create(
           address: Faker::Internet.email,
           type_of: types.sample,
           owner_of: owner_types.sample,
           html: active.sample,
-          active: active.sample,
-          student_id: student.id
+          active: active.sample
         )
       end
       2.times do
-        Address.create(
+        student.addresses.create(
           street1: Faker::Address.street_address,
           street2: Faker::Address.secondary_address,
           city: Faker::Address.city,
@@ -154,8 +152,7 @@ namespace :loader do |loader_namespace|
           zipcode: Faker::Address.zip_code,
           type_of: types.sample,
           owner_of: owner_types.sample,
-          active: active.sample,
-          student_id: student.id
+          active: active.sample
         )
       end
     end

@@ -60,23 +60,28 @@ namespace :contracts do
         contractee.contracts.create(
           start_date: Faker::Date.between(8.months.ago, Date.today),
           end_date: Faker::Date.between(2.months.ago, 4.months.from_now),
-          amount: Faker::Number.between(25, 50),
+          amount: Faker::Number.decimal(2),
           interval: intervals.sample,
           status: statuses.sample
         )
-        end
+      end
 
-        contractee.contracts.all.each do |contract|
-          2.times do contract.create(
-            charged_date: Faker::Date.between(8.months.ago, 4.months.from_now),
+      contractee.contracts.all.each do |contract|
+        2.times do
+          contract.payments.create(
+            charged: Faker::Date.between(8.months.ago, 4.months.from_now),
             method: methods.sample,
-            amount: Faker::Number.between(25, 50),
+            amount: Faker::Number.decimal(2),
             verified: verifieds.sample
           )
         end
       end
-
     end
   end
 
+  task :all do
+    loader_namespace.tasks.each do |task|
+      Rake::Task[task].invoke
+    end
+  end
 end

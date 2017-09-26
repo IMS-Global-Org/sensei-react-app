@@ -6,7 +6,6 @@ class CreateContracts < ActiveRecord::Migration[5.1]
       t.float :amount, null: false
       t.integer :interval, null: false
       t.boolean :status, null: false
-      t.belongs_to :contractee, foreign_key: true
 
       t.timestamps
     end
