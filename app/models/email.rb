@@ -8,7 +8,6 @@
 #  owner_of   :string           not null
 #  html       :boolean          default(TRUE)
 #  active     :boolean          default(TRUE)
-#  student_id :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #

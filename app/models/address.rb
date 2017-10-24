@@ -11,7 +11,6 @@
 #  type_of    :string           default("Home"), not null
 #  owner_of   :string           default("Parent"), not null
 #  active     :boolean          default(TRUE)
-#  student_id :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #

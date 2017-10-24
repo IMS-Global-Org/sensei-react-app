@@ -85,7 +85,7 @@ ActiveRecord::Schema.define(version: 20170926203012) do
     t.datetime "end_date", null: false
     t.float "amount", null: false
     t.integer "interval", null: false
-    t.boolean "status", null: false
+    t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

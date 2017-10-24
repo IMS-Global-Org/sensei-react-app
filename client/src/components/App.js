@@ -27,6 +27,7 @@ import ProgramTracker from './programs/ProgramTracker'
 import Location from './location/Location'
 import Students from './students/Students'
 import Mailers from './mailers/Mailers'
+import Contracts from './contracts/Contracts'
 
 class App extends Component {
   render() {
@@ -51,6 +52,7 @@ class App extends Component {
               <ProtectedRoute path='/postings' component={HomePagePostings} />
               <ProtectedRoute path='/students' component={Students} />
               <ProtectedRoute path='/mailers' component={Mailers} />
+              <ProtectedRoute path='/contracts' component={Contracts} />
               <Route component={NoMatch} />
             </Switch>
           </FetchUser>

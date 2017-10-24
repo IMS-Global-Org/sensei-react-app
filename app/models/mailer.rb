@@ -4,12 +4,13 @@
 #
 #  id         :integer          not null, primary key
 #  title      :string           not null
-#  interval   :integer          not null
+#  interval   :string           not null
 #  type_of    :string           not null
 #  active     :boolean          default(TRUE), not null
 #  recipients :string           not null
 #  subject    :string
 #  notify     :boolean          default(FALSE), not null
+#  job        :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #

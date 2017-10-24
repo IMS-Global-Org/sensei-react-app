@@ -1,4 +1,4 @@
-namespace :contracts do
+namespace :contracts do |loader_namespace|
   desc "Loading database with Test Contractee information"
   task contractee: :environment do
     Contractee.destroy_all
