@@ -18,7 +18,7 @@ class Contractee < ApplicationRecord
   has_and_belongs_to_many :emails, dependent: :destroy
   has_and_belongs_to_many :phones, dependent: :destroy
 
-  has_many :contracts, through: :contractee_contract, dependent: :destroy
+  has_many :contracts, through: :contractee_contract
 
   validates_associated :phones, allow_blank: true
   validates_associated :addresses, allow_blank: true

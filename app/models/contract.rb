@@ -7,7 +7,7 @@
 #  end_date   :datetime         not null
 #  amount     :float            not null
 #  interval   :integer          not null
-#  status     :boolean          not null
+#  status     :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #

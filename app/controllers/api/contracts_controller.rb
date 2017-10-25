@@ -16,7 +16,7 @@ class Api::ContractsController < ApplicationController
   def query
     p = params[:query]
 
-    interval = p[:interval].empty? ? '6,12' : p[:interval]
+    interval = p[:interval].is_a?(Fixnum) ? p[:interval] : '6,12'
     status = p[:status].is_a?(Fixnum) ? p[:status] : '1,0'
     start_date = p[:start_date].empty? ? 2.years.ago : p[:start_date]
     end_date = p[:end_date].empty? ? DateTime.current() : p[:end_date]
@@ -48,6 +48,25 @@ class Api::ContractsController < ApplicationController
 
   def show
     render json: @contract
+  end
+
+  def details
+    contract = Contract
+      .select(
+        'contracts.*, json_agg(contractees.*) as holders '
+      )
+      .joins(
+        'LEFT JOIN contractees_contracts ON contractees_contracts.contract_id = contracts.id ' \
+        'LEFT JOIN contractees ON contractees.id = contractees_contracts.contractee_id '
+      )
+      .where(
+        "contracts.id = #{params[:id]}"
+      )
+      .group(
+        'contracts.id'
+      )
+
+    render json: contract[0]
   end
 
   def create

@@ -57,7 +57,7 @@ class PostingsTableForm extends Component {
     const { videos } = this.state
     if( videos && videos.length > 0 ) {
       return videos.map( (video,index) => {
-        if( video._destroy ){ return }
+        if( video._destroy ){ return '' }
         return (
           <Segment basic key={index}>
             <Button
@@ -102,7 +102,7 @@ class PostingsTableForm extends Component {
     const { links } = this.state
     if( links && links.length > 0 ) {
       return links.map( (link,index) => {
-        if( link._destroy ){ return }
+        if( link._destroy ){ return ''}
         return (
           <Segment basic key={index}>
             <Button

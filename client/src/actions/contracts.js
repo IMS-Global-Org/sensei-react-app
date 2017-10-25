@@ -44,3 +44,27 @@ export const queryContracts = ( query, page = 1, per = 10 ) => {
     })
   }
 }
+
+export const resetContract = () => {
+  return {
+    type: 'RESET_CONTRACT',
+  }
+}
+
+export const showContract = ( contractId ) => {
+  return (dispatch) => {
+    axios.get(`/api/contracts/${contractId}/details`)
+    .then( resp => {
+      dispatch({
+        type: 'SHOW_CONTRACT',
+        data: resp.data,
+        headers: resp.headers,
+      })
+    })
+    .catch( resp => {
+      dispatch(
+        setFlash('Contract not found!','error')
+      )
+    })
+  }
+}

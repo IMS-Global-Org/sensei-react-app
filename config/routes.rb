@@ -100,6 +100,7 @@
 #                          PUT      /api/payments/:id(.:format)                    api/payments#update
 #                          DELETE   /api/payments/:id(.:format)                    api/payments#destroy
 #      query_api_contracts POST     /api/contracts/query(.:format)                 api/contracts#query
+#     details_api_contract GET      /api/contracts/:id/details(.:format)           api/contracts#details
 #            api_contracts GET      /api/contracts(.:format)                       api/contracts#index
 #                          POST     /api/contracts(.:format)                       api/contracts#create
 #             api_contract GET      /api/contracts/:id(.:format)                   api/contracts#show
@@ -139,6 +140,7 @@ Rails.application.routes.draw do
     resources :contracts, shallow: true do
       resources :payments
       post 'query', on: :collection
+      get 'details', on: :member
     end
   end
 

@@ -5,6 +5,11 @@ import {
   Header, Icon, Button } from 'semantic-ui-react'
 import Paginator from '../Paginator'
 import ContractSearchModal from './ContractSearchModal'
+import moment from 'moment'
+import _ from 'lodash'
+import ShowContractInfoModal from './ShowContractInfoModal'
+import EditContractDetailsModal from './EditContractInfoModal'
+import ArchiveContractInfoModal from './ArchiveContractInfoModal'
 
 // Actions
 import {
@@ -13,7 +18,15 @@ import {
 } from '../../actions/contracts'
 
 class Contracts extends Component {
-  state = { hasMore: false, showSearchModal: false, query: {} }
+  defaults = {
+    showSearchModal: false, query: {},
+    showContractInfo: false,
+    editContractDetails: false,
+    archiveContractInfo: false,
+    contractId: ''
+  }
+  state = { hasMore: false, ...this.defaults }
+  dateFormat = 'ddd, MMM Do YYYY'
 
   componentDidMount = () => {
     const { dispatch, contracts } = this.props
@@ -28,25 +41,74 @@ class Contracts extends Component {
     if( contracts && contracts.length > 0 ) {
       return contracts.map( contract => {
         return (
-          <Table.Row key={contract.id}>
-            <Table.Cell>{contract.start_date}</Table.Cell>
-            <Table.Cell>{contract.end_date}</Table.Cell>
-            <Table.Cell>{contract.amount}</Table.Cell>
+          <Table.Row
+            key={contract.id}>
+            <Table.Cell>
+              {moment(contract.start_date).format(this.dateFormat)}
+            </Table.Cell>
+            <Table.Cell>
+              {moment(contract.end_date).format(this.dateFormat)}
+            </Table.Cell>
+            <Table.Cell>${contract.amount}</Table.Cell>
             <Table.Cell>{contract.interval}</Table.Cell>
-            <Table.Cell>{contract.status ? 'Active' : 'InActive' }</Table.Cell>
+            <Table.Cell>{contract.status ? 'Active' : 'Inactive' }</Table.Cell>
+            <Table.Cell textAlign='center' verticalAlign='center'>
+              <Button.Group size='mini'>
+                <Button
+                  type='button'
+                  onClick={()=>this.displayContractInfo(contract.id)} >
+                  View
+                </Button>
+                <Button.Or />
+                <Button
+                  type='button'
+                  onClick={()=>this.editContractDetails(contract.id)} >
+                  Edit
+                </Button>
+                <Button.Or />
+                <Button
+                  type='button'
+                  onClick={()=>this.archiveContractInfo(contract.id)} >
+                  Archive
+                </Button>
+              </Button.Group>
+            </Table.Cell>
           </Table.Row>
         )
       })
     }
   }
 
+  displayContractInfo = ( contractId ) => {
+    this.setState({
+      ...this.defaults,
+      showContractInfo: true,
+      contractId: contractId
+    })
+  }
+  editContractDetails = ( contractId ) => {
+    this.setState({
+      ...this.defaults,
+      editContractDetails: true,
+      contractId: contractId
+    })
+  }
+  archiveContractInfo = ( contractId ) => {
+    this.setState({
+      ...this.defaults,
+      archiveContractInfo: true,
+      contractId: contractId
+    })
+  }
+  closeModals = () => this.setState({ ...this.defaults })
+
   loadMore = ( page ) => {
     const { pagination, dispatch } = this.props
     const { hasMore, query } = this.state
     if( hasMore && pagination.total_pages ) {
       if( page <= pagination.total_pages ) {
-        query ?
-          dispatch(queryContracts(query,page)) : dispatch(indexContracts(page))
+        _.isEmpty(query) ?
+          dispatch(indexContracts(page)) : dispatch(queryContracts(query,page))
       } else {
         this.setState({ hasMore: false })
       }
@@ -62,14 +124,21 @@ class Contracts extends Component {
   }
 
   render() {
-    const { showSearchModal } = this.state
+    const {
+      showSearchModal,
+      showContractInfo,
+      editContractDetails,
+      archiveContractInfo,
+      contractId,
+    } = this.state
+
     return (
       <Container>
         <Table celled>
           <Table.Header>
             <Table.Row>
-              <Table.HeaderCell colSpan={5}>
-                <Header as='h1' icon circular textAlign='center'>
+              <Table.HeaderCell colSpan={6}>
+                <Header as='h1' icon textAlign='center'>
                   <Icon name='law' />
                   <Header.Content>
                     Student Contracts
@@ -91,6 +160,7 @@ class Contracts extends Component {
               <Table.HeaderCell>Amount</Table.HeaderCell>
               <Table.HeaderCell>Interval</Table.HeaderCell>
               <Table.HeaderCell>Status</Table.HeaderCell>
+              <Table.HeaderCell>&nbsp;</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
           <Table.Body>
@@ -98,14 +168,14 @@ class Contracts extends Component {
           </Table.Body>
           <Table.Footer>
             <Table.Row>
-              <Table.HeaderCell colSpan={5}>
+              <Table.HeaderCell colSpan={6}>
                 <Paginator
                   loadMore={this.loadMore}
                   pagination={this.props.pagination} />
               </Table.HeaderCell>
             </Table.Row>
             <Table.Row>
-              <Table.HeaderCell colSpan={5}>
+              <Table.HeaderCell colSpan={6}>
                 <Button.Group size='tiny'>
                   <Button
                     onClick={this.showSearchModal}>
@@ -118,6 +188,21 @@ class Contracts extends Component {
         </Table>
         { showSearchModal &&
           <ContractSearchModal queryContracts={this.queryContracts} />
+        }
+        { showContractInfo &&
+          <ShowContractInfoModal
+            contractId={contractId}
+            closeModals={this.closeModals} />
+        }
+        { editContractDetails &&
+          <EditContractDetailsModal
+            contractId={contractId}
+            closeModals={this.closeModals} />
+        }
+        { archiveContractInfo &&
+          <ArchiveContractInfoModal
+            contractId={contractId}
+            closeModals={this.closeModals} />
         }
       </Container>
     )
