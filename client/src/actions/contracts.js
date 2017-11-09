@@ -126,13 +126,13 @@ export const createContractInfo = ( contract ) => {
 /*
   Actions for Archived Contracts
 */
-export const indexArchived = ( page = 1, per = 10 ) => {
-  const query = `?page=${page}&per=${per}`
+export const indexArchivedContracts = ( query = '', page = 1, per = 10 ) => {
+  query = `?page=${page}&per=${per}`
   return (dispatch) => {
     axios.get(`/api/contracts/archived${query}`)
     .then( resp => {
       dispatch({
-        type: 'INDED_ARCHIVED',
+        type: 'INDEX_ARCHIVED_CONTRACTS',
         data: resp.data,
         headers: resp.headers,
       })
@@ -140,6 +140,31 @@ export const indexArchived = ( page = 1, per = 10 ) => {
     .catch( resp => {
       dispatch(
         setFlash('Archived Contracts not Indexed!','error')
+      )
+    })
+  }
+}
+
+export const resetArchivedContracts = () => {
+  return {
+    type: 'RESET_ARCHIVED_CONTRACTS',
+  }
+}
+
+export const queryArchivedContracts = ( query = '', page = 1, per = 10 ) => {
+  const pagination = `?page=${page}&per=${per}`
+  return (dispatch) => {
+    axios.post(`/api/contracts/query_archived${pagination}`, { query })
+    .then( resp => {
+      dispatch({
+        type: 'QUERY_CONTRACTS',
+        data: resp.data,
+        headers: resp.headers,
+      })
+    })
+    .catch( resp => {
+      dispatch(
+        setFlash('Contracts not found!','error')
       )
     })
   }

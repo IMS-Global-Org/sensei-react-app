@@ -7,7 +7,15 @@ const defaults = {
   },
   contract: {
     data: {},
-  }
+  },
+  archived: {
+    data: [],
+    pagination: {
+      total_pages: '',
+      current_page: '',
+      next_page: '',
+    },
+  },
 }
 
 const contracts = ( state = defaults, action ) => {
@@ -55,6 +63,19 @@ const contracts = ( state = defaults, action ) => {
           action.data,
           ...state.data,
         ],
+      }
+    case 'INDEX_ARCHIVED_CONTRACTS':
+      return {
+        ...state,
+        archived: {
+          data: action.data.data,
+          pagination: action.data.pagination,
+        }
+      }
+    case 'RESET_ARCHIVED_CONTRACTS':
+      return {
+        ...state,
+        archived: { ...defaults.archived },
       }
     default:
       return state

@@ -2,13 +2,18 @@ namespace :contracts do |loader_namespace|
   desc "Loading database with Test Contractee information"
   task contractee: :environment do
     Contractee.destroy_all
+    Address.destroy_all
+    Email.destroy_all
+    # Contract.destroy_all
+    Payment.destroy_all
+    Phone.destroy_all
 
     true_false = [true, false]
     intervals = [6, 12]
     statuses = true_false
     methods = %w[Cash Check Visa Mastercard Discovery MoneyOrder]
     verifieds = true_false
-    level = %I[A B C D E F G]
+    # level = %I[A B C D E F G]
     types = %I[Home Work Mobile Satallite]
     owner_types = %I[Student Parent Relative Gardian]
     active = true_false
@@ -62,7 +67,8 @@ namespace :contracts do |loader_namespace|
           end_date: Faker::Date.between(2.months.ago, 4.months.from_now),
           amount: Faker::Number.decimal(2),
           interval: intervals.sample,
-          status: statuses.sample
+          status: statuses.sample,
+          archived: statuses.sample
         )
       end
 
