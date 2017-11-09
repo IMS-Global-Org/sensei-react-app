@@ -2,7 +2,9 @@ class Api::ContractsController < ApplicationController
   before_action :set_contract, only: [:show, :update, :destroy]
 
   def index
-    contracts = Contract.all.page(params[:page]).per_page(params[:per])
+    contracts = Contract.all
+      .order(created_at: :desc, updated_at: :desc)
+      .page(params[:page]).per_page(params[:per])
     render json: {
       data: contracts,
       pagination: {
@@ -34,6 +36,7 @@ class Api::ContractsController < ApplicationController
         " AND contracts.start_date > '#{start_date}'" \
         " AND contracts.end_date < '#{end_date}'"
       )
+      .order(created_at: :desc, updated_at: :desc)
       .page(params[:page]).per_page(params[:per])
 
     render json: {
@@ -87,7 +90,26 @@ class Api::ContractsController < ApplicationController
   end
 
   def destroy
-    @contract.destroy
+    if @contract.update(archived: 1)
+      render json: @contract
+    else
+      render_errors @contract
+    end
+  end
+
+  def archived
+    archived = Contract
+      .where(archived: 1)
+      .order(created_at: :desc, updated_at: :desc)
+      .page(params[:page]).per_page(params[:per])
+    render json: {
+      data: archived,
+      pagination: {
+        total_pages: archived.total_pages,
+        current_page: archived.current_page,
+        next_page: archived.next_page
+      }
+    }
   end
 
   private
@@ -100,6 +122,7 @@ class Api::ContractsController < ApplicationController
     params.require(:contract)
       .permit(
         :id, :start_date, :end_date, :amount, :interval, :status,
+        :archived, :created_at, :updated_at,
         payments_attributes: %I[charged_date method amount verified]
       )
   end

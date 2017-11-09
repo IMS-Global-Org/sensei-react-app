@@ -10,6 +10,7 @@ import _ from 'lodash'
 import ShowContractInfoModal from './ShowContractInfoModal'
 import EditContractDetailsModal from './EditContractInfoModal'
 import ArchiveContractInfoModal from './ArchiveContractInfoModal'
+import ArchivedContractsTable from './ArchivedContractsTable'
 
 // Actions
 import {
@@ -23,6 +24,7 @@ class Contracts extends Component {
     showContractInfo: false,
     editContractDetails: false,
     archiveContractInfo: false,
+    showArchivedContracts: false,
     contractId: ''
   }
   state = { hasMore: false, ...this.defaults }
@@ -100,6 +102,18 @@ class Contracts extends Component {
       contractId: contractId
     })
   }
+  showArchivedContracts = () => {
+    const { showArchivedContracts } = this.state
+    this.setState({
+      ...this.defaults,
+      showArchivedContracts: !showArchivedContracts,
+    })
+  }
+  newContractForm = () => this.setState({
+    ...this.defaults,
+    editContractDetails: true,
+    contractId: ''
+  })
   closeModals = () => this.setState({ ...this.defaults })
 
   loadMore = ( page ) => {
@@ -129,6 +143,7 @@ class Contracts extends Component {
       showContractInfo,
       editContractDetails,
       archiveContractInfo,
+      showArchivedContracts,
       contractId,
     } = this.state
 
@@ -181,6 +196,20 @@ class Contracts extends Component {
                     onClick={this.showSearchModal}>
                     Search Filter
                   </Button>
+                  <Button.Or />
+                  <Button
+                    type='button'
+                    color='green'
+                    onClick={this.newContractForm}>
+                    New Contract
+                  </Button>
+                  <Button.Or />
+                  <Button
+                    type='button'
+                    color='blue'
+                    onClick={this.showArchivedContracts}>
+                    View Archived
+                  </Button>
                 </Button.Group>
               </Table.HeaderCell>
             </Table.Row>
@@ -203,6 +232,9 @@ class Contracts extends Component {
           <ArchiveContractInfoModal
             contractId={contractId}
             closeModals={this.closeModals} />
+        }
+        { showArchivedContracts &&
+          <ArchivedContractsTable />
         }
       </Container>
     )

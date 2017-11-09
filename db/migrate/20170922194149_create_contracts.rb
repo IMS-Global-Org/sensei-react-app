@@ -5,7 +5,8 @@ class CreateContracts < ActiveRecord::Migration[5.1]
       t.timestamp :end_date, null: false
       t.float :amount, null: false
       t.integer :interval, null: false
-      t.integer :status, null: 0
+      t.integer :status, null: false, default: 0
+      t.integer :archived, null: false, default: 0
 
       t.timestamps
     end

@@ -38,6 +38,24 @@ const contracts = ( state = defaults, action ) => {
           data: action.data,
         }
       }
+    case 'UPDATE_CONTRACT':
+      const index = state.data.findIndex( c => c.id === action.data.id )
+      return {
+        ...state,
+        data: [
+          ...state.data.splice(0,index),
+          action.data,
+          ...state.data.splice(index + 1),
+        ],
+      }
+    case 'CREATE_CONTRACT':
+      return {
+        ...state,
+        data: [
+          action.data,
+          ...state.data,
+        ],
+      }
     default:
       return state
   }

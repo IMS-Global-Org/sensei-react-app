@@ -68,3 +68,79 @@ export const showContract = ( contractId ) => {
     })
   }
 }
+
+export const archiveContractInfo = ( contractId ) => {
+  return ( dispatch ) => {
+    axios.delete(`/api/contracts/${contractId}/archive`)
+    .then( resp => {
+      dispatch({
+        type: 'ARCHIVE_CONTRACT',
+        data: resp.data,
+        headers: resp.headers,
+      })
+    })
+    .catch( resp => {
+      dispatch(
+        setFlash('Contract not Archived!','error')
+      )
+    })
+  }
+}
+
+export const updateContractInfo = ( contract ) => {
+  return (dispatch) => {
+    axios.patch(`/api/contracts/${contract.id}`, { contract } )
+    .then( resp => {
+      dispatch({
+        type: 'UPDATE_CONTRACT',
+        data: resp.data,
+        headers: resp.headers,
+      })
+    })
+    .catch( resp => {
+      dispatch(
+        setFlash('Contract not Updated!','error')
+      )
+    })
+  }
+}
+
+export const createContractInfo = ( contract ) => {
+  return (dispatch) => {
+    axios.post(`/api/contracts`, { contract } )
+    .then( resp => {
+      dispatch({
+        type: 'CREATE_CONTRACT',
+        data: resp.data,
+        headers: resp.headers,
+      })
+    })
+    .catch( resp => {
+      dispatch(
+        setFlash('Contract not Created!','error')
+      )
+    })
+  }
+}
+
+/*
+  Actions for Archived Contracts
+*/
+export const indexArchived = ( page = 1, per = 10 ) => {
+  const query = `?page=${page}&per=${per}`
+  return (dispatch) => {
+    axios.get(`/api/contracts/archived${query}`)
+    .then( resp => {
+      dispatch({
+        type: 'INDED_ARCHIVED',
+        data: resp.data,
+        headers: resp.headers,
+      })
+    })
+    .catch( resp => {
+      dispatch(
+        setFlash('Archived Contracts not Indexed!','error')
+      )
+    })
+  }
+}
