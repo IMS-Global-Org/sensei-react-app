@@ -8,6 +8,15 @@ import {
 
 class Students extends Component {
 
+  componentDidMount = () => this.loadStudents(this.props)
+  componentWillRecieveProps = (props) => this.loadStudents(props)
+  loadStudents = ( props ) => {
+    const { students, dispatch } = props
+    if( students.length <= 0 ) {
+      dispatch(indexStudents())
+    }
+  }
+
   render() {
     return (
       <Container>

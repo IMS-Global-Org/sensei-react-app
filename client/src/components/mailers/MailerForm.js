@@ -36,7 +36,7 @@ class MailerForm extends Component {
   ]
 
   componentDidMount = () => {
-    const { mailerId, mailer } = this.props
+    const { mailerId } = this.props
     if( typeof mailerId === 'boolean' )
       this.setState({ ...this.defaults })
     else if ( typeof mailerId === 'number' && mailerId > 0 )

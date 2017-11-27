@@ -44,6 +44,7 @@ class StudentRecord extends Component {
     }
   }
 
+  componentWillUnmount = () => this.props.dispatch(clearStudent())
 
   loadStudent = ( studentId ) => {
     const { student, dispatch } = this.props
@@ -89,7 +90,7 @@ class StudentRecord extends Component {
   }
 
   render() {
-    const { id, first, last, birthday, gender, belt, level, photo } = this.state
+    const { id, first, last, birthday, gender, belt, level } = this.state
     return (
       <Form onSubmit={this.handleSubmit}>
         <Form.Group widths='equal'>

@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { Container, Segment, Header, Icon, Message, Image } from 'semantic-ui-react'
 import styled from 'styled-components'
@@ -7,13 +6,6 @@ import styled from 'styled-components'
 import '../../styles/martial_arts.css'
 
 // Custom Styled Components
-const Dragons = styled.div`
-  background-image: url('BorderDragons.png');
-  background-repeat: repeat-y !important;
-  background-position: 1% 0%;
-  background-size: auto 25% !important;
-  height: 100vh;
-`
 const Videos = styled(Segment)`
   width: 50% !important;
   margin: 0 25% !important;

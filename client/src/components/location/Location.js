@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {
-  Container, Segment, Table,
+  Container, Segment,
   Header, Card, Icon, Image,
 } from 'semantic-ui-react'
 import LocationGoogleMap from './LocationGoogleMap'

@@ -36,7 +36,7 @@ const Announcement = ({ data }) => {
         </Card.Content>
         <Card.Content>
           <Grid>
-            <Row columns={2} top={true} >
+            <Row columns={2} top={true}>
               <Column width={8}>
                 Begins:&nbsp;{data.start_date}
               </Column>

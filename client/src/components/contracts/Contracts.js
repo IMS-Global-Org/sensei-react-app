@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import {
-  Container, Segment, Table,
+  Container, Table,
   Header, Icon, Button } from 'semantic-ui-react'
 import Paginator from '../Paginator'
 import ContractSearchModal from './ContractSearchModal'
@@ -54,7 +54,7 @@ class Contracts extends Component {
             <Table.Cell>${contract.amount}</Table.Cell>
             <Table.Cell>{contract.interval}</Table.Cell>
             <Table.Cell>{contract.status ? 'Active' : 'Inactive' }</Table.Cell>
-            <Table.Cell textAlign='center' verticalAlign='center'>
+            <Table.Cell textAlign='center' verticalAlign='middle'>
               <Button.Group size='mini'>
                 <Button
                   type='button'

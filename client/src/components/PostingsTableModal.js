@@ -83,7 +83,7 @@ class PostingsTableModal extends Component {
   }
 
   render() {
-    const { dimmer, open, formType, activePosting } = this.state
+    const { open, formType } = this.state
     return (
       <Modal
         open={open}

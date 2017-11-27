@@ -25,7 +25,7 @@ class HomePage extends Component {
    * Load the postings that will be displayed on the homepage
    */
   componentDidMount = () => {
-    let { postings, dispatch } = this.props
+    let { dispatch } = this.props
     let { per } = this.state
     dispatch(indexPostings(1,per))
     this.setState({ hasMore: true })

@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { Container, Segment, Grid } from 'semantic-ui-react';
+import { Container, Grid } from 'semantic-ui-react';
 import Announcements from './Announcements'
 import HomePage from './HomePage'
-import styled from 'styled-components'
 
 
 // Custom Components

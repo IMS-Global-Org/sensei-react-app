@@ -9,8 +9,8 @@ class HomePageVideos extends Component {
         <Segment>
           <Label attached='top'>{ video.title }</Label>
           <Embed
-            id={video.id}
-            source={video.source} />
+            id={video.id.toString()}
+            url={video.source} />
         </Segment>
       )
     })

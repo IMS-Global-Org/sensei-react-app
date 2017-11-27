@@ -40,7 +40,7 @@ const students = ( state = defaults, action ) => {
       }
     case 'UPDATE_STUDENT':
       const index = state.data.findIndex( student => {
-        return parseInt(student.id) === parseInt(action.data.id)
+        return parseInt(student.id,10) === parseInt(action.data.id,10)
       })
       return {
         ...state,

@@ -80,7 +80,6 @@ class Calendar extends Component {
     const { activeDate, calendar, dispatch } = this.props
     // retrieve the remote set of schedule events for the calendar
     if( !calendar.events || calendar.events.length <= 0 ) {
-      const dates = {}
       const active = activeDate ? activeDate : this.state.activeDate
       dispatch(indexCalendarEvents( this.queryDates( active ) ))
     }
@@ -155,7 +154,7 @@ class Calendar extends Component {
       // locate and adjoin each event to its proper calendar day
       calendarDays.forEach( day => {
         let todaysEvents = []
-        let good = events.every( event => {
+        events.every( event => {
           if( day.isBefore(minEvent,'date') || day.isAfter(maxEvent,'date') ) {
             // exclude outliers
             return false

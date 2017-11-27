@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Segment } from 'semantic-ui-react'
 import NoMatch from './NoMatch';
 import NavBar from './NavBar';
 import Login from './Login';
@@ -32,7 +31,7 @@ import Contracts from './contracts/Contracts'
 class App extends Component {
   render() {
     return (
-      <div>
+      <div basic>
         <Header />
         <NavBar />
         <div className='multi-bg-images'>
