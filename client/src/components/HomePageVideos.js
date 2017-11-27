@@ -6,11 +6,9 @@ class HomePageVideos extends Component {
   displayVideos = () => {
     return this.props.videos.map( video => {
       return (
-        <Segment>
+        <Segment key={video.id}>
           <Label attached='top'>{ video.title }</Label>
-          <Embed
-            id={video.id.toString()}
-            url={video.source} />
+          <Embed url={video.source} />
         </Segment>
       )
     })

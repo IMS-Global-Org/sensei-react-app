@@ -70,7 +70,7 @@ export const createAnnouncement = ( data ) => {
  * Retrieves record sets by page for displaying in Table format only
  * @param {Integer} page - page number or set to display
  * @param {Integer} per - number of announceents to return per page
- * @apram {Object} dateRange - range of dates to submit to the database
+ * @param {Object} dateRange - range of dates to submit to the database
  * @param {Function} callback - callback function
  */
 export const tableAnnouncements = ( page = 1, per = 5, dateRange = null, callback = null ) => {

@@ -47,10 +47,10 @@ class Announcements extends Component {
    * Presents the individual notices in a single group
    */
   displayAnnouncements = () => {
-    let { notices: { data } } = this.props
+    let { notices } = this.props
     // NOTE load only when 'data' exists, not just the empty object/container
-    if( data && data.length > 0 ) {
-      return data.map( notice => {
+    if( notices && notices.length > 0 ) {
+      return notices.map( notice => {
         // show presentation component
         return ( <Announcement key={notice.id} data={notice} /> )
       })
@@ -62,7 +62,7 @@ class Announcements extends Component {
    * @param {Integer} page - the next page of announcements to load
    */
   loadMore = ( page ) => {
-    let { notices: { pagination }, dispatch } = this.props
+    let { pagination, dispatch } = this.props
     let { hasMore } = this.state
     // NOTE These two conditions must be meet to load more items
     //      1) hasMore must be true, only after the initial loading
@@ -102,7 +102,10 @@ class Announcements extends Component {
 }
 
 const mapStateToProps = ( state ) => {
-  return { notices: state.announcements }
+  return {
+    notices: state.announcements.data,
+    pagination: state.announcements.pagination,
+  }
 }
 
 export default connect(mapStateToProps)(Announcements)

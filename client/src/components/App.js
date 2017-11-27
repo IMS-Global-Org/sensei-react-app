@@ -31,7 +31,7 @@ import Contracts from './contracts/Contracts'
 class App extends Component {
   render() {
     return (
-      <div basic>
+      <div>
         <Header />
         <NavBar />
         <div className='multi-bg-images'>

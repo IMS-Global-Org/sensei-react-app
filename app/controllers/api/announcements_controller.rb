@@ -10,7 +10,7 @@ class Api::AnnouncementsController < ApplicationController
     # query and return ordered by newest event
     ancts = Announcement
       .where('start_date >= ? AND end_date < ?',@start_date,@end_date)
-      .order(:start_date)
+      .order(:start_date, :end_date)
       .page(params[:page]).per_page(params[:per])
     # render json object with new set of announcements and pagination info
     render json: {
@@ -18,8 +18,7 @@ class Api::AnnouncementsController < ApplicationController
       pagination: {
         total_pages: ancts.total_pages,
         current_page: ancts.current_page,
-        next_page: ancts.next_page,
-        # prev_page: ancts.prev_page 
+        next_page: ancts.next_page
       }
     }
   end

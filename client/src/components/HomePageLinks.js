@@ -7,7 +7,7 @@ class HomePageLinks extends Component {
   displayLinks = () => {
     return this.props.links.map( link => {
       return (
-        <List.Item>
+        <List.Item key={link.id}>
           <List.Icon name='linkify' size='large' verticalAlign='middle' />
           <List.Content>
             <List.Header
