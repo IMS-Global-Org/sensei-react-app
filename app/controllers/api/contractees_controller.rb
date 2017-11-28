@@ -2,7 +2,12 @@ class Api::ContracteesController < ApplicationController
   before_action :set_contractee, only: [:show, :update, :destroy]
 
   def index
-    render json: Contractee.all.page(params[:page]).per_page(params[:per])
+    render json: Contract.find(params[:contract_id]).contractees.all
+  end
+
+  def query
+    render json: Contractee
+      .where("last ILIKE '#{params[:query]}%' ")
   end
 
   def show

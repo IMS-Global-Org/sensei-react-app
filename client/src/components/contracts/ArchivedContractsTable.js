@@ -50,7 +50,7 @@ class ArchivedContractsTable extends Component {
             <Table.Cell>${archive.amount}</Table.Cell>
             <Table.Cell>{archive.interval}</Table.Cell>
             <Table.Cell>{archive.status ? 'Active' : 'Inactive' }</Table.Cell>
-            <Table.Cell textAlign='center' verticalAlign='center'>
+            <Table.Cell textAlign='center' verticalAlign='middle'>
               <Button.Group size='mini'>
                 <Button
                   type='button'
@@ -69,7 +69,7 @@ class ArchivedContractsTable extends Component {
     const { dispatch, pagination } = this.props
     const { hasMore, query } = this.state
     let archivedContractsFunc = ''
-    if( query !== '') {
+    if( query === '') {
       archivedContractsFunc = indexArchivedContracts
     } else {
       archivedContractsFunc = queryArchivedContracts
@@ -160,14 +160,14 @@ class ArchivedContractsTable extends Component {
           </Table.Body>
           <Table.Footer>
             <Table.Row>
-              <Table.HeaderCell colSpan={6}>
+              <Table.HeaderCell colSpan={7}>
                 <Paginator
                   loadMore={this.loadMore}
                   pagination={this.props.pagination} />
               </Table.HeaderCell>
             </Table.Row>
             <Table.Row>
-              <Table.HeaderCell colSpan={6}>
+              <Table.HeaderCell colSpan={7}>
                 <Button.Group size='tiny'>
                   <Button
                     type='button'

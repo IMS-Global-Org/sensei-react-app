@@ -112,6 +112,14 @@ class Api::ContractsController < ApplicationController
     }
   end
 
+  def create_contractee
+    Contract.find(params[:id]).contractees << Contractee.find(params[:contractee])
+  end
+
+  def delete_contractee
+    Contract.find(params[:id]).contractees.delete(Contractee.find(params[:contractee]))
+  end
+
   private
 
   def set_contract
@@ -123,7 +131,8 @@ class Api::ContractsController < ApplicationController
       .permit(
         :id, :start_date, :end_date, :amount, :interval, :status,
         :archived, :created_at, :updated_at,
-        payments_attributes: %I[charged_date method amount verified]
+        payments_attributes: %I[id charged_date method amount verified],
+        contractees_attributes: %I[id first last birthdate]
       )
   end
 end

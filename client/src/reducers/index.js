@@ -10,8 +10,10 @@ import requirements from './requirements'
 import students from './students'
 import mailers from './mailers'
 import contracts from './contracts'
+import contractees from './contractees'
 
 const rootReducer = combineReducers({
+  contractees,
   contracts,
   mailers,
   students,

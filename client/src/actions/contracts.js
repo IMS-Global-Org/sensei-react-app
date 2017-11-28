@@ -71,11 +71,11 @@ export const showContract = ( contractId ) => {
 
 export const archiveContractInfo = ( contractId ) => {
   return ( dispatch ) => {
-    axios.delete(`/api/contracts/${contractId}/archive`)
+    axios.delete(`/api/contracts/${contractId}`)
     .then( resp => {
       dispatch({
         type: 'ARCHIVE_CONTRACT',
-        data: resp.data,
+        data: contractId,
         headers: resp.headers,
       })
     })

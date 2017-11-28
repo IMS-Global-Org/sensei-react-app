@@ -64,6 +64,12 @@ const contracts = ( state = defaults, action ) => {
           ...state.data,
         ],
       }
+    case 'ARCHIVE_CONTRACT':
+      const filtered = state.data.filter( c => c.id !== action.data )
+      return {
+        ...state,
+        data: filtered,
+      }
     case 'INDEX_ARCHIVED_CONTRACTS':
       return {
         ...state,

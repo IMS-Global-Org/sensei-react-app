@@ -10,7 +10,7 @@ import _ from 'lodash'
 import ShowContractInfoModal from './ShowContractInfoModal'
 import EditContractDetailsModal from './EditContractInfoModal'
 import ArchiveContractInfoModal from './ArchiveContractInfoModal'
-import ArchivedContractsTable from './ArchivedContractsTable'
+import ArchivedContractsTableModal from './ArchivedContractsTableModal'
 
 // Actions
 import {
@@ -234,7 +234,8 @@ class Contracts extends Component {
             closeModals={this.closeModals} />
         }
         { showArchivedContracts &&
-          <ArchivedContractsTable />
+          <ArchivedContractsTableModal
+            closeModals={this.closeModals} />
         }
       </Container>
     )
