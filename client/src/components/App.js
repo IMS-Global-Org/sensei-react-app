@@ -4,7 +4,6 @@ import NavBar from './NavBar';
 import Login from './Login';
 import Register from './Register';
 import Flash from './Flash';
-import Home from './Home';
 import ProtectedRoute from './ProtectedRoute';
 import { Switch, Route } from 'react-router-dom';
 import FetchUser from './FetchUser';
@@ -15,10 +14,11 @@ import 'react-datepicker/dist/react-datepicker.min.css'
 import '../styles/background.css'
 
 // Custom Components
+import Home from './homepages/Home';
 import Settings from './Settings'
 import Programs from './programs/Programs'
-import AnnouncementManager from './AnnouncementManager'
-import HomePagePostings from './HomePagePostings'
+import AnnouncementManager from './announcements/AnnouncementManager'
+import HomePagePostings from './homepages/HomePagePostings'
 import Calendar from './calendar/Calendar'
 import EventEditor from './calendar/EventEditor'
 import Header from './header/Header'

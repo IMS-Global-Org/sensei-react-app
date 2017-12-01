@@ -1,7 +1,7 @@
 import React from 'react'
 import { Segment, Header } from 'semantic-ui-react'
-import HomePageVideos from './HomePageVideos'
-import HomePageLinks from './HomePageLinks'
+import HomePageVideos from '../homepages/HomePageVideos'
+import HomePageLinks from '../homepages/HomePageLinks'
 
 /**
  * TODO Arrange the layout of the information for the individual Postings

@@ -1,17 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Grid } from 'semantic-ui-react';
-import Announcements from './Announcements'
+import Announcements from '../announcements/Announcements'
 import HomePage from './HomePage'
-
-
-// Custom Components
-// const Dragons = styled.div`
-//   background-image: url('BorderDragons.png');
-//   background-repeat: repeat-y !important;
-//   background-position: 1% 0%;
-//   background-size: auto 25% !important;
-//   height: 110vh;
-// `
 
 class Home extends Component {
   render() {

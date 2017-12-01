@@ -8,7 +8,7 @@ import {
   showPostingsTable,
   updatePostingsTable,
   createPostingsTable,
-} from '../actions/postings'
+} from '../../actions/postings'
 
 class PostingsTableModal extends Component {
   state = { open: false, dimmer: true, activePosting: null, formType: null }

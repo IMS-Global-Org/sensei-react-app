@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import Announcement from './Announcement'
 import {
   indexAnnouncements, emptyReduxAnnouncements
-} from '../actions/announcements.js'
+} from '../../actions/announcements.js'
 import InfiniteScroll from 'react-infinite-scroller'
 
 // Custom Styled Components

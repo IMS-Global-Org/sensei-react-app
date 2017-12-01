@@ -5,7 +5,10 @@ import Datetime from 'react-datetime'
 import moment from 'moment'
 
 // Redux Actions
-import { updateAnnouncement, createAnnouncement } from '../actions/announcements'
+import {
+  updateAnnouncement,
+  createAnnouncement
+} from '../../actions/announcements'
 
 /**
  * Form respresenting a single announcement that can be edited

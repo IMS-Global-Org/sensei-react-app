@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Table, Header } from 'semantic-ui-react'
 import moment from 'moment'
-import { tableAnnouncements } from '../actions/announcements'
-import Paginator from './Paginator'
-import DateRange from './DateRange'
+import { tableAnnouncements } from '../../actions/announcements'
+import Paginator from '../Paginator'
+import DateRange from '../DateRange'
 
 class AnnouncementsTable extends Component {
   state={ hasMore: false, dateRange: null }

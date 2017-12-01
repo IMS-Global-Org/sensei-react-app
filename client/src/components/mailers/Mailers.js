@@ -90,7 +90,7 @@ class Mailers extends Component {
     return (
       <Container>
         <Segment>
-          <Header as='h1' icon circular textAlign='center'>
+          <Header as='h1' icon textAlign='center'>
             <Icon name='info circle' />
             <Header.Content>
               Information

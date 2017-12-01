@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Container } from 'semantic-ui-react'
-import PostingsTable from './PostingsTable'
+import PostingsTable from '../postings/PostingsTable'
 
 /**
  * Component that provides a way to add, edit, and delete homepage postings

@@ -5,9 +5,9 @@ import styled from 'styled-components'
 import {
   indexPostingsTable,
   emptyReduxPostings
-} from '../actions/postings'
+} from '../../actions/postings'
 import moment from 'moment'
-import Paginator from './Paginator'
+import Paginator from '../Paginator'
 import PostingsTableModal from './PostingsTableModal'
 
 // Custom Styled Components
@@ -103,16 +103,18 @@ class PostingsTable extends Component {
           { this.displayTableRows() }
         </TableBody>
         <Table.Footer>
-          <Table.HeaderCell colSpan={5}>
-            <PostingsTableModal
-              open={open}
-              activePosting={activeItem}
-              formType={ activeItem ? 'edit' : 'new' } />
-            <Paginator
-              pagination={this.props.postings.pagination}
-              loadMore={this.loadMore}
-              size='mini' />
-          </Table.HeaderCell>
+          <Table.Row>
+            <Table.HeaderCell colSpan={5}>
+              <PostingsTableModal
+                open={open}
+                activePosting={activeItem}
+                formType={ activeItem ? 'edit' : 'new' } />
+              <Paginator
+                pagination={this.props.postings.pagination}
+                loadMore={this.loadMore}
+                size='mini' />
+            </Table.HeaderCell>
+          </Table.Row>
         </Table.Footer>
       </Table>
     )

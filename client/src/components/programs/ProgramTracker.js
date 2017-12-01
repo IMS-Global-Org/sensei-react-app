@@ -116,7 +116,7 @@ class ProgramTracker extends Component {
     return (
       <Container>
         <Segment>
-          <Header as='h1' icon circular textAlign='center'>
+          <Header as='h1' icon textAlign='center'>
             <Icon name='info circle' />
             Information
             <Header.Subheader style={{ textAlign: 'justify', margin: '2rem 3rem' }}>

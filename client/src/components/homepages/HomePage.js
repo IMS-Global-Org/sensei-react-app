@@ -3,9 +3,9 @@ import { connect } from 'react-redux'
 import { Segment, Loader } from 'semantic-ui-react'
 import {
   indexPostings, emptyReduxPostings,
-} from '../actions/homePage.js'
+} from '../../actions/homePage.js'
 import InfiniteScroll from 'react-infinite-scroller'
-import Posting from './Posting'
+import Posting from '../postings/Posting'
 import styled from 'styled-components'
 
 // Custom Styled components
