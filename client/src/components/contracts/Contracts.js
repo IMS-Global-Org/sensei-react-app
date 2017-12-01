@@ -8,7 +8,7 @@ import ContractSearchModal from './ContractSearchModal'
 import moment from 'moment'
 import _ from 'lodash'
 import ShowContractInfoModal from './ShowContractInfoModal'
-import EditContractDetailsModal from './EditContractInfoModal'
+import EditContractDetailsModal from './EditContractDetailsModal'
 import ArchiveContractInfoModal from './ArchiveContractInfoModal'
 import ArchivedContractsTableModal from './ArchivedContractsTableModal'
 

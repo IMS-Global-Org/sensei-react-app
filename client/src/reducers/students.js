@@ -3,6 +3,7 @@
  * @type {Object}
  * @property {Array<student_json_records>} data
  * @property {Object} pagination information for student records
+ * @property {Object} student information for a single student
  */
 const defaults = {
   data: [],
@@ -72,6 +73,8 @@ const students = ( state = defaults, action ) => {
         data: state.data.filter( student => student.id !== action.data.id ),
         student: defaults.student,
       }
+    case 'CLEAR_STUDENTS':
+      return { ...defaults }
     default:
       return state
   }

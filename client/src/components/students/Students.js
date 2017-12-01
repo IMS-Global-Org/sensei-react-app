@@ -1,37 +1,13 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import React from 'react'
 import { Container, Segment } from 'semantic-ui-react'
 import ResultsTable from './ResultsTable'
-import {
-  indexStudents,
-} from '../../actions/students'
 
-class Students extends Component {
+const Students = () => (
+  <Container>
+    <Segment>
+      <ResultsTable />
+    </Segment>
+  </Container>
+)
 
-  componentDidMount = () => this.loadStudents(this.props)
-  componentWillRecieveProps = (props) => this.loadStudents(props)
-  loadStudents = ( props ) => {
-    const { students, dispatch } = props
-    if( students.length <= 0 ) {
-      dispatch(indexStudents())
-    }
-  }
-
-  render() {
-    return (
-      <Container>
-        <Segment>
-          <ResultsTable />
-        </Segment>
-      </Container>
-    )
-  }
-}
-
-const mapStateToProps = ( state ) => {
-  return {
-    students: state.students.data,
-  }
-}
-
-export default connect(mapStateToProps)(Students)
+export default Students

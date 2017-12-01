@@ -114,13 +114,12 @@ class SearchBar extends Component {
                 size='mini'
                 style={{ margin: '1rem 25%', width: '50%' }}>
                 <Button
-                  compact={true}
-                  icon='search'
+                  compact
                   type='submit'
                   onClick={this.handleSubmit}>Search</Button>
                 <Button.Or />
                 <Button
-                  compact={true}
+                  compact
                   type='button'
                   onClick={this.handleClearForm}>Clear</Button>
               </Button.Group>

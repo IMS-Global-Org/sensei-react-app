@@ -13,6 +13,7 @@ import {
   queryStudents,
   pdfStudents,
   csvStudents,
+  clearStudents,
 } from '../../actions/students'
 
 // Custom Components
@@ -31,6 +32,7 @@ class ResultsTable extends Component {
       this.setState({ hasMore: true })
     }
   }
+  componentWillUnmount = () => this.props.dispatch(clearStudents())
 
   setQuery = ( query, studentId = '' ) => {
     this.setState({ query, studentId })

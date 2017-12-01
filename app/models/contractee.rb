@@ -11,22 +11,20 @@
 #
 
 class Contractee < ApplicationRecord
-  has_and_belongs_to_many :contracts, dependent: :destroy
+  has_and_belongs_to_many :contracts
 
   validates_presence_of :first, :last
   validates :birthdate, presence: true, allow_blank: true
 
-  has_and_belongs_to_many :addresses, dependent: :destroy
-  has_and_belongs_to_many :emails, dependent: :destroy
-  has_and_belongs_to_many :phones, dependent: :destroy
-
-  validates_associated :phones, allow_blank: true
-  validates_associated :addresses, allow_blank: true
-  validates_associated :emails, allow_blank: true
-  validates_associated :contracts, allow_blank: true
-
-  accepts_nested_attributes_for :phones, allow_destroy: true
-  accepts_nested_attributes_for :emails, allow_destroy: true
-  accepts_nested_attributes_for :addresses, allow_destroy: true
-  accepts_nested_attributes_for :contracts, allow_destroy: true
+  # has_and_belongs_to_many :addresses, dependent: :destroy
+  # has_and_belongs_to_many :emails, dependent: :destroy
+  # has_and_belongs_to_many :phones, dependent: :destroy
+  #
+  # validates_associated :phones, allow_blank: true
+  # validates_associated :addresses, allow_blank: true
+  # validates_associated :emails, allow_blank: true
+  #
+  # accepts_nested_attributes_for :phones, allow_destroy: true
+  # accepts_nested_attributes_for :emails, allow_destroy: true
+  # accepts_nested_attributes_for :addresses, allow_destroy: true
 end

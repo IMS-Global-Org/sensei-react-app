@@ -45,9 +45,9 @@ class Api::ContracteesController < ApplicationController
     params.require(:contractee)
       .permit(
         :id, :first, :last, :birthdate,
-        phones_attributes: %I[number type owner text active],
-        emails_attributes: %I[address type owner html active],
-        addresses_attributes: %I[street1 street2 city state zipcode type owner active]
+        # phones_attributes: %I[number type owner text active],
+        # emails_attributes: %I[address type owner html active],
+        # addresses_attributes: %I[street1 street2 city state zipcode type owner active]
       )
   end
 end

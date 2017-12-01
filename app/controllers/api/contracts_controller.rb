@@ -113,7 +113,12 @@ class Api::ContractsController < ApplicationController
   end
 
   def create_contractee
-    Contract.find(params[:id]).contractees << Contractee.find(params[:contractee])
+    contract = Contract.find(params[:id])
+    params[:contractees].split(',').each do |id|
+      contract.contractees << Contractee.find(id)
+    end
+    render json: contract.contractees.all
+    # Contract.find(params[:id]).contractees << Contractee.find(params[:contractees])
   end
 
   def delete_contractee
@@ -131,8 +136,8 @@ class Api::ContractsController < ApplicationController
       .permit(
         :id, :start_date, :end_date, :amount, :interval, :status,
         :archived, :created_at, :updated_at,
-        payments_attributes: %I[id charged_date method amount verified],
-        contractees_attributes: %I[id first last birthdate]
+        # payments_attributes: %I[id charged_date method amount verified],
+        # contractees_attributes: %I[id first last birthdate]
       )
   end
 end

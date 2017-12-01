@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { Segment, Form, Button, Input, Select } from 'semantic-ui-react'
 import DatePicker from 'react-datepicker'
 import moment from 'moment'
-import ContracteesList from './ContracteesList'
 
 // Actions
 import {
@@ -107,11 +106,6 @@ class EditContractInfoForm extends Component {
               onChange={this.handleEndDate} />
           </Form.Field>
         </Form.Group>
-        { id &&
-          <Segment basic>
-            <ContracteesList contractId={id} />
-          </Segment>
-        }
         <Segment basic clearing>
           <Button.Group size='mini' floated='right'>
             <Button
@@ -133,6 +127,18 @@ class EditContractInfoForm extends Component {
             </Button>
           </Button.Group>
         </Segment>
+        { id &&
+          <Segment basic clearing>
+            <Button.Group size='mini'>
+              <Button
+                type='button'
+                color='green'
+                onClick={this.props.handleShowContracteeModal}>
+                Edit Contractees
+              </Button>
+            </Button.Group>
+          </Segment>
+        }
       </Form>
     )
   }

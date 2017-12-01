@@ -2,17 +2,28 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Modal, Button } from 'semantic-ui-react'
 import EditContractInfoForm from './EditContractInfoForm'
+import ContracteeModal from './ContracteeModal'
 
 class EditContractInfoModal extends Component {
-  state = { openModal: true }
+  defaults = {
+    openModal: true,
+    showContracteeModal: false
+  }
+  state = { ...this.defaults }
 
   handleOnClose = () => {
     this.setState({ openModal: false })
     this.props.closeModals()
   }
 
+  handleCloseModals = () => this.setState({ ...this.defaults })
+  handleShowContracteeModal = () => this.setState({ showContracteeModal: true })
+
   render = () => {
-    const { openModal } = this.state
+    const {
+      openModal,
+      showContracteeModal,
+    } = this.state
     return (
       <Modal
         open={openModal}
@@ -20,7 +31,8 @@ class EditContractInfoModal extends Component {
         <Modal.Content>
           <EditContractInfoForm
             contract={this.props.contract}
-            handleOnClose={this.handleOnClose} />
+            handleOnClose={this.handleOnClose}
+            handleShowContracteeModal={this.handleShowContracteeModal} />
         </Modal.Content>
         <Modal.Actions>
           <Button
@@ -28,6 +40,11 @@ class EditContractInfoModal extends Component {
             onClick={this.handleOnClose}>
             Back
           </Button>
+          { showContracteeModal &&
+            <ContracteeModal
+              handleCloseModals={this.handleCloseModals}
+              contractId={this.props.contractId} />
+          }
         </Modal.Actions>
       </Modal>
     )

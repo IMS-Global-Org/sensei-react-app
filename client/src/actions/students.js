@@ -173,3 +173,9 @@ export const csvStudents = ( query ) => {
     })
   }
 }
+
+export const clearStudents = () => {
+  return {
+    type: 'CLEAR_STUDENTS',
+  }
+}
