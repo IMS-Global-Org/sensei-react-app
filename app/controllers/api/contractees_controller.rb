@@ -21,14 +21,10 @@ class Api::ContracteesController < ApplicationController
   end
 
   def show_complete
-    render json: Contractee
-      .select(
-        'contractees.*, '\
-        'json_agg(address) as addresses, '\
-        'json_agg(emails) as emails, '\
-        'json_agg(phones) as phones'
-      )
-      .where(id: params[:id])
+    contractee = Contractee
+      .includes(:addresses, :phones, :emails)
+      .find(params[:contractee_id])
+    render json: contractee, include: [:addresses, :phones, :emails]
   end
 
   def create

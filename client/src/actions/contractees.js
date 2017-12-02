@@ -129,16 +129,15 @@ export const showContractee = ( contracteeId, callback = null ) => {
   }
 }
 
-export const showCompleteContractee = ( contracteeId, callback = null ) => {
+export const showCompleteContractee = ( contracteeId ) => {
   return (dispatch) => {
-    axios.get(`/api/contractees/show_complete/${contracteeId}`)
+    axios.get(`/api/contractees/${contracteeId}/show_complete`)
     .then( resp => {
       dispatch({
         type: 'SHOW_COMPLETE_CONTRACTEE',
         data: resp.data,
         headers: resp.headers,
       })
-      if( callback ) { callback() }
     })
     .catch( resp => {
       dispatch(

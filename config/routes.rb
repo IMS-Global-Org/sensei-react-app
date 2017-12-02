@@ -114,12 +114,13 @@
 #                                PUT      /api/contracts/:id(.:format)                            api/contracts#update
 #                                DELETE   /api/contracts/:id(.:format)                            api/contracts#destroy
 #       paginate_api_contractees GET      /api/contractees/paginate(.:format)                     api/contractees#paginate
+#   api_contractee_show_complete GET      /api/contractees/:contractee_id/show_complete(.:format) api/contractees#show_complete
 #                 api_contractee GET      /api/contractees/:id(.:format)                          api/contractees#show
 #                                PATCH    /api/contractees/:id(.:format)                          api/contractees#update
 #                                PUT      /api/contractees/:id(.:format)                          api/contractees#update
 #                                DELETE   /api/contractees/:id(.:format)                          api/contractees#destroy
 #                                GET      /*other(.:format)                                       static#index
-#
+# 
 
 Rails.application.routes.draw do
   mount_devise_token_auth_for 'User', at: 'api/auth'
@@ -162,7 +163,7 @@ Rails.application.routes.draw do
     # Routes for the contractees information
     resources :contractees, shallow: true, except: [:index, :create] do
       get 'paginate', on: :collection
-      get 'show_complete/:id', to: 'contractees#show_complete'
+      get 'show_complete', to: 'contractees#show_complete'
     end
   end
 
