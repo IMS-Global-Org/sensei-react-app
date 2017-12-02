@@ -102,10 +102,6 @@
 # query_api_contract_contractees GET      /api/contracts/:contract_id/contractees/query(.:format) api/contractees#query
 #       api_contract_contractees GET      /api/contracts/:contract_id/contractees(.:format)       api/contractees#index
 #                                POST     /api/contracts/:contract_id/contractees(.:format)       api/contractees#create
-#                 api_contractee GET      /api/contractees/:id(.:format)                          api/contractees#show
-#                                PATCH    /api/contractees/:id(.:format)                          api/contractees#update
-#                                PUT      /api/contractees/:id(.:format)                          api/contractees#update
-#                                DELETE   /api/contractees/:id(.:format)                          api/contractees#destroy
 #            query_api_contracts POST     /api/contracts/query(.:format)                          api/contracts#query
 #           details_api_contract GET      /api/contracts/:id/details(.:format)                    api/contracts#details
 #         archived_api_contracts GET      /api/contracts/archived(.:format)                       api/contracts#archived
@@ -117,8 +113,13 @@
 #                                PATCH    /api/contracts/:id(.:format)                            api/contracts#update
 #                                PUT      /api/contracts/:id(.:format)                            api/contracts#update
 #                                DELETE   /api/contracts/:id(.:format)                            api/contracts#destroy
+#       paginate_api_contractees GET      /api/contractees/paginate(.:format)                     api/contractees#paginate
+#                 api_contractee GET      /api/contractees/:id(.:format)                          api/contractees#show
+#                                PATCH    /api/contractees/:id(.:format)                          api/contractees#update
+#                                PUT      /api/contractees/:id(.:format)                          api/contractees#update
+#                                DELETE   /api/contractees/:id(.:format)                          api/contractees#destroy
 #                                GET      /*other(.:format)                                       static#index
-# 
+#
 
 Rails.application.routes.draw do
   mount_devise_token_auth_for 'User', at: 'api/auth'
@@ -149,7 +150,7 @@ Rails.application.routes.draw do
     # Routes for the contracts information
     resources :contracts, shallow: true do
       resources :payments
-      resources :contractees, shallow: true do
+      resources :contractees, shallow: true, only: [:index, :create] do
         get 'query', on: :collection
       end
       post 'query', on: :collection
@@ -157,6 +158,11 @@ Rails.application.routes.draw do
       get 'archived', on: :collection
       patch 'create_contractee', on: :member
       patch 'delete_contractee', on: :member
+    end
+    # Routes for the contractees information
+    resources :contractees, shallow: true, except: [:index, :create] do
+      get 'paginate', on: :collection
+      get 'show_complete/:id', to: 'contractees#show_complete'
     end
   end
 

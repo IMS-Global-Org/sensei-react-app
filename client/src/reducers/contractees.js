@@ -1,6 +1,8 @@
 const defaults = {
   data: [],
+  pagination: '',
   possibles: [],
+  contractee: '',
 }
 
 const contractees = ( state = defaults, action ) => {
@@ -28,6 +30,27 @@ const contractees = ( state = defaults, action ) => {
       }
     case 'CLEAR_CONTRACT_CONTACTEES':
       return { ...defaults }
+    case 'PAGINATE_CONTRACTEES':
+      return {
+        ...state,
+        data: action.data.data,
+        pagination: action.data.pagination,
+      }
+    case 'CLEAR_CONTRACTEE':
+      return {
+        ...state,
+        contractee: defaults.contractee,
+      }
+    case 'SHOW_CONTRACTEE':
+      return {
+        ...state,
+        contractee: action.data,
+      }
+    case 'SHOW_COMPLETE_CONTRACTEE':
+      return {
+        ...state,
+        contractee: action.data,
+      }
     default:
       return state
   }

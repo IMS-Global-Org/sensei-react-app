@@ -27,6 +27,7 @@ import Location from './location/Location'
 import Students from './students/Students'
 import Mailers from './mailers/Mailers'
 import Contracts from './contracts/Contracts'
+import Contractees from './contractees/Contractees'
 
 class App extends Component {
   render() {
@@ -52,6 +53,7 @@ class App extends Component {
               <ProtectedRoute path='/students' component={Students} />
               <ProtectedRoute path='/mailers' component={Mailers} />
               <ProtectedRoute path='/contracts' component={Contracts} />
+              <ProtectedRoute path='/contractees' component={Contractees} />
               <Route component={NoMatch} />
             </Switch>
           </FetchUser>

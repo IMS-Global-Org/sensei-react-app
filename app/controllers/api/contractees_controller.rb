@@ -5,6 +5,12 @@ class Api::ContracteesController < ApplicationController
     render json: Contract.find(params[:contract_id]).contractees.all
   end
 
+  def paginate
+    contractees = Contractee.all
+      .page(params[:page]).per_page(params[:per_page])
+    render_paginated_model contractees
+  end
+
   def query
     render json: Contractee
       .where("last ILIKE '#{params[:query]}%' ")
@@ -12,6 +18,17 @@ class Api::ContracteesController < ApplicationController
 
   def show
     render json: @contractee
+  end
+
+  def show_complete
+    render json: Contractee
+      .select(
+        'contractees.*, '\
+        'json_agg(address) as addresses, '\
+        'json_agg(emails) as emails, '\
+        'json_agg(phones) as phones'
+      )
+      .where(id: params[:id])
   end
 
   def create

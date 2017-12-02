@@ -19,6 +19,25 @@ export const indexContractees = ( contractId ) => {
   }
 }
 
+export const paginateContractees = ( page = 1, per_page = 5 ) => {
+  const query = `?page=${page}&per_page=${per_page}`
+  return (dispatch) => {
+    axios.get(`/api/contractees/paginate${query}`)
+    .then( resp => {
+      dispatch({
+        type: 'PAGINATE_CONTRACTEES',
+        data: resp.data,
+        headers: resp.headers,
+      })
+    })
+    .catch( resp => {
+      dispatch(
+        setFlash('Contractees not Paginated!','error')
+      )
+    })
+  }
+}
+
 export const queryContractees = ( contractId, query ) => {
   query = `?query=${query}`
   return (dispatch) => {
@@ -81,6 +100,50 @@ export const deleteContractee = ( contractId, contracteeId ) => {
 
 export const clearContractees = () => {
   return {
-    type: 'CLEAR_CONTRACT_CONTACTEES'
+    type: 'CLEAR_CONTRACT_CONTACTEES',
+  }
+}
+
+export const clearContractee = () => {
+  return {
+    type: 'CLEAR_CONTRACTEE',
+  }
+}
+
+export const showContractee = ( contracteeId, callback = null ) => {
+  return (dispatch) => {
+    axios.get(`/api/contractees/${contracteeId}`)
+    .then( resp => {
+      dispatch({
+        type: 'SHOW_CONTRACTEE',
+        data: resp.data,
+        headers: resp.headers,
+      })
+      if( callback ) { callback() }
+    })
+    .catch( resp => {
+      dispatch(
+        setFlash('Contractee not Shown!','error')
+      )
+    })
+  }
+}
+
+export const showCompleteContractee = ( contracteeId, callback = null ) => {
+  return (dispatch) => {
+    axios.get(`/api/contractees/show_complete/${contracteeId}`)
+    .then( resp => {
+      dispatch({
+        type: 'SHOW_COMPLETE_CONTRACTEE',
+        data: resp.data,
+        headers: resp.headers,
+      })
+      if( callback ) { callback() }
+    })
+    .catch( resp => {
+      dispatch(
+        setFlash('Complete Contractee not Shown!','error')
+      )
+    })
   }
 }
