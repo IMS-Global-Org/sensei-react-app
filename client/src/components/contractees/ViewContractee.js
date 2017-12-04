@@ -1,12 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Segment, Grid, Label, List } from 'semantic-ui-react'
-import { BirthdateFormat } from '../helpers/DateFormats'
-import moment from 'moment'
+import { Segment, Grid, Label } from 'semantic-ui-react'
+import ViewPersonalInfo from './ViewPersonalInfo'
 import ViewAddresses from './ViewAddresses'
 import ViewEmails from './ViewEmails'
 import ViewPhones from './ViewPhones'
-import LabelField from './LabelField'
 
 // Actions
 import {
@@ -31,83 +29,8 @@ class ViewContractee extends Component {
     }
   }
 
-  listPersonalInfo = () => {
-    const { contractee } = this.props
-    const bday = moment(contractee.birthdate).format(BirthdateFormat)
-    return (
-      <List divided relaxed>
-        <List.Item>
-          <LabelField>Name</LabelField>
-          {`${contractee.last}, ${contractee.first}`}
-        </List.Item>
-        <List.Item>
-          <LabelField>Birthdate</LabelField>
-          {bday}
-        </List.Item>
-      </List>
-    )
-  }
-
-  // listAddresses = () => {
-  //   const { contractee: {addresses} } = this.props
-  //   if( addresses && addresses.length > 0 ) {
-  //     return addresses.map( address => {
-  //       return (
-  //         <List.Item key={address.id}>
-  //           <Grid divided>
-  //             <Grid.Row columns={16}>
-  //               <Grid.Column width={4}>
-  //                 {address.type_of}
-  //               </Grid.Column>
-  //               <Grid.Column width={12}>
-  //                 {address.street1}
-  //                 <br />
-  //                 {address.street2}
-  //                 <br />
-  //                 {`${address.city}, ${address.state}   ${address.zipcode}`}
-  //                 <br />
-  //                 {address.country || ''}
-  //               </Grid.Column>
-  //             </Grid.Row>
-  //           </Grid>
-  //         </List.Item>
-  //       )
-  //     })
-  //   }
-  // }
-
-  // listEmailAddresses = () => {
-  //   const { contractee: {emails} } = this.props
-  //   if( emails && emails.length > 0 ) {
-  //     return emails.map( email => {
-  //       return (
-  //         <List.Item key={email.id}>
-  //           <TypeOf>{email.type_of}</TypeOf>
-  //           {email.address}
-  //         </List.Item>
-  //       )
-  //     })
-  //   }
-  // }
-
-  // listPhoneNumbers = () => {
-  //   const { contractee: {phones} } = this.props
-  //   if( phones && phones.length > 0 ) {
-  //     return phones.map( phone => {
-  //       return (
-  //         <List.Item key={phone.id}>
-  //           <TypeOf>
-  //             {phone.type_of}
-  //           </TypeOf>
-  //           {phone.phone_number}
-  //         </List.Item>
-  //       )
-  //     })
-  //   }
-  // }
-
   render = () => {
-    const { contractee: {addresses, emails, phones}} = this.props
+    const { contractee } = this.props
     return (
       <Segment basic>
         <Grid columns={2} stretched>
@@ -115,13 +38,13 @@ class ViewContractee extends Component {
             <Grid.Column>
               <Segment basic>
                 <Label ribbon>Personal Information</Label>
-                { this.listPersonalInfo() }
+                <ViewPersonalInfo contractee={contractee} />
               </Segment>
             </Grid.Column>
             <Grid.Column>
               <Segment basic>
                 <Label ribbon>Addresses</Label>
-                <ViewAddresses addresses={addresses} />
+                <ViewAddresses addresses={contractee.addresses} />
               </Segment>
             </Grid.Column>
           </Grid.Row>
@@ -129,13 +52,13 @@ class ViewContractee extends Component {
             <Grid.Column>
               <Segment basic>
                 <Label ribbon>E-mail Addresses</Label>
-                <ViewEmails emails={emails} />
+                <ViewEmails emails={contractee.emails} />
               </Segment>
             </Grid.Column>
             <Grid.Column>
               <Segment basic>
                 <Label ribbon>Phone Numbers</Label>
-                <ViewPhones phones={phones} />
+                <ViewPhones phones={contractee.phones} />
               </Segment>
             </Grid.Column>
           </Grid.Row>

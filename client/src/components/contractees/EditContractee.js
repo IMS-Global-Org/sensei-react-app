@@ -1,79 +1,36 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Form, Button, Input } from 'semantic-ui-react'
-import DatePicker from 'react-datepicker'
-import moment from 'moment'
+import { Segment } from 'semantic-ui-react'
+import EditPersonalInfo from './EditPersonalInfo'
+import EditAddresses from './EditAddresses'
 
 // Actions
 import {
-  createContractee,
-  updateContractee,
+  showContractee,
+  clearContractee,
 } from '../../actions/contractees'
 
-
 class EditContractee extends Component {
-  defaults = {
-    id: '', first: '', last: '', birthdate: '',
-  }
-  state = { ...this.defaults }
+  state = { contracteeId: '' }
 
   componentDidMount = () => this.loadContractee(this.props)
   componentWillReceiveProps = ( props ) => this.loadContractee(props)
+  componentWillUnmount = () => this.props.dispatch(clearContractee())
   loadContractee = ( props ) => {
-    const { contractee } = props
-    const { id } = this.state
-    if( contractee && contractee.id && contractee.is !== id ) {
-      this.setState({ ...contractee })
-    }
-  }
-
-  onInputChange = ({target: {id,value}}) => this.setState({ [id]: value })
-  onDateChange = ( birthday ) => this.setState({ birthday })
-  onSubmit = ( event ) => {
-    event.preventDefault()
-    const { dispatch } = this.props
-    const params = this.state
-    params.birthdate = params.birthdate.format()
-    if( params.id ) {
-      dispatch(updateContractee(params))
-    } else {
-      dispatch(createContractee(params))
+    const { dispatch, contracteeId } = this.props
+    if( contracteeId !== this.state.contracteeId ) {
+      dispatch(showContractee(contracteeId))
+      this.setState({ contracteeId })
     }
   }
 
   render = () => {
-    const {
-      id, first, last, birthdate,
-    } = this.state
+    const { contractee } = this.props
     return (
-      <Form>
-        <Form.Group>
-          <Form.Field
-            control={Input}
-            label='First'
-            id='first'
-            value={first}
-            onChange={this.onInputChange} />
-          <Form.Field
-            control={Input}
-            label='Last'
-            id='last'
-            value={last}
-            onChange={this.onInputChange} />
-          <Form.Field
-            control={DatePicker}
-            label='Birthday'
-            selected={birthdate ? moment(birthdate) : moment()}
-            onChange={this.onDateChange} />
-        </Form.Group>
-        <Form.Group floated='right'>
-          <Button
-            type='submit'
-            onClick={this.onSubmit}>
-            { id ? 'Update' : 'Create' }
-          </Button>
-        </Form.Group>
-      </Form>
+      <Segment>
+        <EditPersonalInfo contractee={contractee} />
+        <EditAddresses addresses={contractee.addresses} />
+      </Segment>
     )
   }
 }
