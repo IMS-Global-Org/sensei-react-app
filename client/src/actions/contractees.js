@@ -38,10 +38,9 @@ export const paginateContractees = ( page = 1, per_page = 5 ) => {
   }
 }
 
-export const queryContractees = ( contractId, query ) => {
-  query = `?query=${query}`
+export const queryContractees = ( query ) => {
   return (dispatch) => {
-    axios.get(`/api/contracts/${contractId}/contractees/query${query}`)
+    axios.get(`/api/contractees/query?query=${query}`)
     .then( resp => {
       dispatch({
         type: 'QUERY_CONTRACTEES',
@@ -57,10 +56,28 @@ export const queryContractees = ( contractId, query ) => {
   }
 }
 
-export const createContractee = ( contractId, contracteeIds, callback = null ) => {
+export const createContractee = ( contractId, contractee ) => {
+  return (dispatch) => {
+    axios.post(`/api/contracts/${contractId}/create_contractee`, { contractee })
+    .then( resp => {
+      dispatch({
+        type: 'CREATE_CONTRACT_CONTRACTEE',
+        data: resp.data,
+        headers: resp.headers,
+      })
+    })
+    .catch( resp => {
+      dispatch(
+        setFlash('Contractee not add to Contract!','error')
+      )
+    })
+  }
+}
+
+export const addContractee = ( contractId, contracteeIds, callback = null ) => {
   const query = `?contractees=${contracteeIds.join(',')}`
   return (dispatch) => {
-    axios.patch(`/api/contracts/${contractId}/create_contractee${query}`)
+    axios.post(`/api/contracts/${contractId}/add_contractee${query}`)
     .then( resp => {
       dispatch({
         type: 'ADD_CONTRACT_CONTRACTEE',
@@ -74,6 +91,24 @@ export const createContractee = ( contractId, contracteeIds, callback = null ) =
     .catch( resp => {
       dispatch(
         setFlash('Contractee not add to Contract!','error')
+      )
+    })
+  }
+}
+
+export const updateContractee = ( contractee ) => {
+  return (dispatch) => {
+    axios.patch(`/api/contractee`, { contractee })
+    .then( resp => {
+      dispatch({
+        type: 'UPDATE_CONTRACTEE',
+        data: resp.data,
+        headers: resp.headers,
+      })
+    })
+    .catch( resp => {
+      dispatch(
+        setFlash('Contractee not updated!','error')
       )
     })
   }

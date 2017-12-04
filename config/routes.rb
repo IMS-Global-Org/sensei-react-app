@@ -99,13 +99,11 @@
 #                                PATCH    /api/payments/:id(.:format)                             api/payments#update
 #                                PUT      /api/payments/:id(.:format)                             api/payments#update
 #                                DELETE   /api/payments/:id(.:format)                             api/payments#destroy
-# query_api_contract_contractees GET      /api/contracts/:contract_id/contractees/query(.:format) api/contractees#query
 #       api_contract_contractees GET      /api/contracts/:contract_id/contractees(.:format)       api/contractees#index
-#                                POST     /api/contracts/:contract_id/contractees(.:format)       api/contractees#create
 #            query_api_contracts POST     /api/contracts/query(.:format)                          api/contracts#query
 #           details_api_contract GET      /api/contracts/:id/details(.:format)                    api/contracts#details
 #         archived_api_contracts GET      /api/contracts/archived(.:format)                       api/contracts#archived
-# create_contractee_api_contract PATCH    /api/contracts/:id/create_contractee(.:format)          api/contracts#create_contractee
+#    add_contractee_api_contract PATCH    /api/contracts/:id/add_contractee(.:format)             api/contracts#add_contractee
 # delete_contractee_api_contract PATCH    /api/contracts/:id/delete_contractee(.:format)          api/contracts#delete_contractee
 #                  api_contracts GET      /api/contracts(.:format)                                api/contracts#index
 #                                POST     /api/contracts(.:format)                                api/contracts#create
@@ -114,7 +112,9 @@
 #                                PUT      /api/contracts/:id(.:format)                            api/contracts#update
 #                                DELETE   /api/contracts/:id(.:format)                            api/contracts#destroy
 #       paginate_api_contractees GET      /api/contractees/paginate(.:format)                     api/contractees#paginate
+#          query_api_contractees GET      /api/contractees/query(.:format)                        api/contractees#query
 #   api_contractee_show_complete GET      /api/contractees/:contractee_id/show_complete(.:format) api/contractees#show_complete
+#                api_contractees POST     /api/contractees(.:format)                              api/contractees#create
 #                 api_contractee GET      /api/contractees/:id(.:format)                          api/contractees#show
 #                                PATCH    /api/contractees/:id(.:format)                          api/contractees#update
 #                                PUT      /api/contractees/:id(.:format)                          api/contractees#update
@@ -151,18 +151,17 @@ Rails.application.routes.draw do
     # Routes for the contracts information
     resources :contracts, shallow: true do
       resources :payments
-      resources :contractees, shallow: true, only: [:index, :create] do
-        get 'query', on: :collection
-      end
+      resources :contractees, shallow: true, only: [:index]
       post 'query', on: :collection
       get 'details', on: :member
       get 'archived', on: :collection
-      patch 'create_contractee', on: :member
+      patch 'add_contractee', on: :member
       patch 'delete_contractee', on: :member
     end
     # Routes for the contractees information
-    resources :contractees, shallow: true, except: [:index, :create] do
+    resources :contractees, shallow: true, except: [:index] do
       get 'paginate', on: :collection
+      get 'query', on: :collection
       get 'show_complete', to: 'contractees#show_complete'
     end
   end

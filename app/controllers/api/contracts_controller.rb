@@ -112,7 +112,7 @@ class Api::ContractsController < ApplicationController
     }
   end
 
-  def create_contractee
+  def add_contractee
     contract = Contract.find(params[:id])
     params[:contractees].split(',').each do |id|
       contract.contractees << Contractee.find(id)

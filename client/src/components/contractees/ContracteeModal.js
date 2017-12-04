@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
 import { Modal, Button } from 'semantic-ui-react'
 import ViewContractee from './ViewContractee'
+import EditContractee from './EditContractee'
 
 class ContracteeModal extends Component {
   state = { openModal: true }
   components = {
     create: '',
     view: ViewContractee,
-    edit: '',
+    edit: EditContractee,
     delete: '',
   }
 

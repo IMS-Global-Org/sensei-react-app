@@ -51,9 +51,9 @@ class ContracteesForm extends Component {
 
   filterPossibleContractees = ( event ) => {
     const { target: {value}} = event
-    const { dispatch, contractId } = this.props
+    const { dispatch } = this.props
     if( value.length >= 3 ) {
-      dispatch(queryContractees(contractId,value))
+      dispatch(queryContractees(value))
     }
   }
 
