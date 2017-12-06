@@ -8,7 +8,7 @@ namespace :contracts do |loader_namespace|
     Payment.destroy_all
     Phone.destroy_all
 
-    true_false = [true, false]
+    true_false = [1, 0]
     intervals = [6, 12]
     statuses = true_false
     methods = %w[Cash Check Visa Mastercard Discovery MoneyOrder]

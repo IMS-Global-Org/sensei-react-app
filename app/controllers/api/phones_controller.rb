@@ -2,11 +2,15 @@ class Api::PhonesController < ApplicationController
   before_action :set_phone, only: %I[show update destroy]
 
   def index
-    phone = Phone
-      .where('student_id == ?', params[:student_id])
-      .order(type_of: :asc)
-
-    render json: phone
+    if params[:contractee_id]
+      render json: Contractee
+        .find(params[:contractee_id])
+        .phones.all
+    else
+      render json: Phone
+        .where('student_id == ?', params[:student_id])
+        .order(type_of: :asc)
+    end
   end
 
   def show
@@ -22,7 +26,7 @@ class Api::PhonesController < ApplicationController
   end
 
   def create
-    phone = Phone.new(phone_params)
+    phone = Contractee.find(params[:contractee_id]).phones.build(phone_params)
     if phone.save
       render json: phone
     else

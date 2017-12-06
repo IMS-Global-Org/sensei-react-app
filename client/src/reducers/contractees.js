@@ -6,6 +6,7 @@ const defaults = {
 }
 
 const contractees = ( state = defaults, action ) => {
+  let index
   switch( action.type ) {
     case 'INDEX_CONTRACT_CONTRACTEES':
       return {
@@ -50,6 +51,84 @@ const contractees = ( state = defaults, action ) => {
       return {
         ...state,
         contractee: action.data,
+      }
+    case 'CREATE_ADDRESS':
+      return {
+        ...state,
+        contractee: {
+          ...state.contractee,
+          addresses: [
+            action.data,
+            ...state.contractee.addresses,
+          ],
+        },
+      }
+    case 'UPDATE_ADDRESS':
+      index = state.contractee.addresses.findIndex( a =>
+        a.id === action.data.id
+      )
+      return {
+        ...state,
+        contractee: {
+          ...state.contractee,
+          addresses: [
+            ...state.contractee.addresses.slice(0,index),
+            action.data,
+            ...state.contractee.addresses.slice(index + 1),
+          ],
+        },
+      }
+    case 'CREATE_EMAIL':
+      return {
+        ...state,
+        contractee: {
+          ...state.contractee,
+          emails: [
+            action.data,
+            ...state.contractee.emails,
+          ],
+        },
+      }
+    case 'UPDATE_EMAIL':
+      index = state.contractee.emails.findIndex( e =>
+        e.id === action.data.id
+      )
+      return {
+        ...state,
+        contractee: {
+          ...state.contractee,
+          emails: [
+            ...state.contractee.emails.slice(0,index),
+            action.data,
+            ...state.contractee.emails.slice(index + 1),
+          ],
+        },
+      }
+    case 'CREATE_PHONE':
+      return {
+        ...state,
+        contractee: {
+          ...state.contractee,
+          phones: [
+            action.data,
+            ...state.contractee.phones,
+          ],
+        },
+      }
+    case 'UPDATE_PHONE':
+      index = state.contractee.phones.findIndex( p =>
+        p.id === action.data.id
+      )
+      return {
+        ...state,
+        contractee: {
+          ...state.contractee,
+          phones: [
+            ...state.contractee.phones.slice(0,index),
+            action.data,
+            ...state.contractee.phones.slice(index + 1),
+          ],
+        },
       }
     default:
       return state

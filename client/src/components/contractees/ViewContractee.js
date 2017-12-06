@@ -38,7 +38,7 @@ class ViewContractee extends Component {
             <Grid.Column>
               <Segment basic>
                 <Label ribbon>Personal Information</Label>
-                <ViewPersonalInfo contractee={contractee} />
+                <ViewPersonalInfo editor contractee={contractee} />
               </Segment>
             </Grid.Column>
             <Grid.Column>
@@ -65,6 +65,7 @@ class ViewContractee extends Component {
               <Segment basic>
                 <Label ribbon>Phone Numbers</Label>
                 <ViewPhones
+                  editor
                   phones={contractee.phones}
                   contracteeId={contractee.id} />
               </Segment>

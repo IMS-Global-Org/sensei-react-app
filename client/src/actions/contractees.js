@@ -98,7 +98,7 @@ export const addContractee = ( contractId, contracteeIds, callback = null ) => {
 
 export const updateContractee = ( contractee ) => {
   return (dispatch) => {
-    axios.patch(`/api/contractee`, { contractee })
+    axios.patch(`/api/contractees/${contractee.id}`, { contractee })
     .then( resp => {
       dispatch({
         type: 'UPDATE_CONTRACTEE',
@@ -262,3 +262,43 @@ export const updateAddress = ( address ) => {
     })
    }
  }
+
+/*******************************************************************
+ * Phones - Actions relating to the Contractee's Phones
+ ******************************************************************/
+
+export const createPhone = ( contracteeId, phone ) => {
+  return (dispatch) => {
+    axios.post(`/api/contractees/${contracteeId}/phones`, {phone})
+    .then( resp => {
+      dispatch({
+        type: 'CREATE_PHONE',
+        data: resp.data,
+        headers: resp.headers,
+      })
+    })
+    .catch( resp => {
+      dispatch(
+        setFlash('Telephone Number not Created!','error')
+      )
+    })
+  }
+}
+
+export const updatePhone = ( phone ) => {
+  return (dispatch) => {
+    axios.patch(`/api/phones/${phone.id}`, {phone})
+    .then( resp => {
+      dispatch({
+        type: 'UPDATE_PHONE',
+        data: resp.data,
+        headers: resp.headers,
+      })
+    })
+    .catch( resp => {
+      dispatch(
+        setFlash('Telephone Number not Updated!','error')
+      )
+    })
+  }
+}

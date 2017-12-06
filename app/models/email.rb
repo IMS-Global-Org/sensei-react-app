@@ -14,8 +14,8 @@
 
 class Email < ApplicationRecord
   validates_presence_of :address, :type_of, :owner_of
-  validates :html, presence: true, allow_blank: true
-  validates :active, presence: true, allow_blank: true
+  validates :html, presence: true, inclusion: { in: [1,0] }
+  validates :active, presence: true, inclusion: { in: [1,0] }
 
   has_and_belongs_to_many :students
   has_and_belongs_to_many :contractees

@@ -123,6 +123,12 @@
 #                                PATCH    /api/emails/:id(.:format)                               api/emails#update
 #                                PUT      /api/emails/:id(.:format)                               api/emails#update
 #                                DELETE   /api/emails/:id(.:format)                               api/emails#destroy
+#          api_contractee_phones GET      /api/contractees/:contractee_id/phones(.:format)        api/phones#index
+#                                POST     /api/contractees/:contractee_id/phones(.:format)        api/phones#create
+#                                GET      /api/phones/:id(.:format)                               api/phones#show
+#                                PATCH    /api/phones/:id(.:format)                               api/phones#update
+#                                PUT      /api/phones/:id(.:format)                               api/phones#update
+#                                DELETE   /api/phones/:id(.:format)                               api/phones#destroy
 #       paginate_api_contractees GET      /api/contractees/paginate(.:format)                     api/contractees#paginate
 #          query_api_contractees GET      /api/contractees/query(.:format)                        api/contractees#query
 #   api_contractee_show_complete GET      /api/contractees/:contractee_id/show_complete(.:format) api/contractees#show_complete
@@ -174,6 +180,7 @@ Rails.application.routes.draw do
     resources :contractees, shallow: true, except: [:index] do
       resources :addresses
       resources :emails
+      resources :phones
       get 'paginate', on: :collection
       get 'query', on: :collection
       get 'show_complete', to: 'contractees#show_complete'

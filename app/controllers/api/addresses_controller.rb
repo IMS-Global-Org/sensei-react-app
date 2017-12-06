@@ -23,7 +23,7 @@ class Api::AddressesController < ApplicationController
 
   def create
     address = Contractee.find(params[:contractee_id])
-      .address.build(address_params)
+      .addresses.build(address_params)
     if address.save
       render json: address
     else

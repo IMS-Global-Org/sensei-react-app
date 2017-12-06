@@ -3,6 +3,7 @@ import { Modal, Button } from 'semantic-ui-react'
 import EditPersonalInfo from './EditPersonalInfo'
 import EditAddress from './EditAddress'
 import EditEmail from './EditEmail'
+import EditPhone from './EditPhone'
 
 class EditModal extends Component {
   state = { openModal: true }
@@ -10,6 +11,7 @@ class EditModal extends Component {
     personalInfo: EditPersonalInfo,
     address: EditAddress,
     email: EditEmail,
+    phone: EditPhone,
   }
 
   onClose = () => this.setState({ openModal: false },this.props.resetActiveComp)
@@ -23,7 +25,10 @@ class EditModal extends Component {
         open={openModal}
         onClose={this.onClose}>
         <Modal.Content>
-          <ActiveComp data={data} contracteeId={contracteeId} />
+          <ActiveComp
+            data={data}
+            contracteeId={contracteeId}
+            closeModal={this.onClose} />
         </Modal.Content>
         <Modal.Actions>
           <Button.Group size='mini'>

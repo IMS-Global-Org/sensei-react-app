@@ -7,24 +7,24 @@ import TrueFalse from '../helpers/TrueFalse'
 
 // Actions
 import {
-  createEmail,
-  updateEmail,
+  createPhone,
+  updatePhone,
 } from '../../actions/contractees'
 
-
-class EditEmail extends Component {
+class EditPhone extends Component {
   defaults = {
-    id: '', address: '', type_of: '', owner_of: '', html: '', active: ''
+    id: '', phone_number: '', type_of: '',
+    owner_of: '', texting: '', active: '',
   }
   state = { ...this.defaults }
-  debugger
-  componentDidMount = () => this.loadEmail(this.props)
-  componentWillReceiveProps = ( props ) => this.loadEmail(props)
-  loadEmail = ( props ) => {
-    const { data: email } = props
+
+  componentDidMount = () => this.loadPhone(this.props)
+  componentWillReceiveProps = ( props ) => this.loadPhone(props)
+  loadPhone = ( props ) => {
+    const { data: phone } = props
     const { id } = this.state
-    if( email && email.id !== id ) {
-      this.setState({ ...email })
+    if( phone && id !== phone.id ) {
+      this.setState({ ...phone })
     }
   }
 
@@ -35,28 +35,30 @@ class EditEmail extends Component {
     const { dispatch, contracteeId } = this.props
     const { id } = this.state
     if( id ) {
-      dispatch(updateEmail(this.state))
+      dispatch(updatePhone(this.state))
     } else {
-      dispatch(createEmail(contracteeId, this.state))
+      dispatch(createPhone(contracteeId,this.state))
     }
     this.props.closeModal()
   }
 
   render = () => {
-    const { id, address, type_of, owner_of, html, active } = this.state
+    const {
+      id, phone_number, type_of, owner_of, texting, active
+    } = this.state
+
     return (
       <Form>
-        <Form.Field
-          width={16}
-          control={Input}
-          label='Address'
-          id='address'
-          value={address}
-          onChange={this.onInputChange} />
         <Form.Group widths='equal'>
           <Form.Field
+            control={Input}
+            label='Phone Number'
+            id='phone_number'
+            value={phone_number}
+            onChange={this.onInputChange} />
+          <Form.Field
             control={Select}
-            options={TypeOf.emails}
+            options={TypeOf.telephones}
             label='Type'
             id='type_of'
             value={type_of}
@@ -68,12 +70,14 @@ class EditEmail extends Component {
             id='owner_of'
             value={owner_of}
             onChange={this.onSelectChange} />
+        </Form.Group>
+        <Form.Group>
           <Form.Field
             control={Select}
             options={TrueFalse.options}
-            label='HTML Enabled'
-            id='html'
-            value={html ? 1 : 0}
+            label='Texting Enable'
+            id='texting'
+            value={texting ? 1 : 0}
             onChange={this.onSelectChange} />
           <Form.Field
             control={Select}
@@ -97,4 +101,4 @@ class EditEmail extends Component {
   }
 }
 
-export default connect()(EditEmail)
+export default connect()(EditPhone)

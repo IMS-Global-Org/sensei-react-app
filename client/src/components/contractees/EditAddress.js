@@ -11,7 +11,7 @@ import {
 class EditAddress extends Component {
   defaults = {
     id: '', street1: '', street2: '', city: '',
-    state: '', zipcode: ''
+    state: '', zipcode: '',
   }
   state = { ...this.defaults }
 
@@ -31,12 +31,12 @@ class EditAddress extends Component {
     event.preventDefault()
     const { contracteeId } = this.props
     const { id } = this.state
-    debugger
     if( id ) {
       this.props.dispatch(updateAddress(this.state))
     } else {
       this.props.dispatch(createAddress(contracteeId,this.state))
     }
+    this.props.closeModal()
   }
 
   render = () => {

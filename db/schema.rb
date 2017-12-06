@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 20170926203012) do
     t.string "zipcode", null: false
     t.string "type_of", default: "Home", null: false
     t.string "owner_of", default: "Parent", null: false
-    t.boolean "active", default: true
+    t.integer "active", default: 1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -116,8 +116,8 @@ ActiveRecord::Schema.define(version: 20170926203012) do
     t.string "address", null: false
     t.string "type_of", null: false
     t.string "owner_of", null: false
-    t.boolean "html", default: true
-    t.boolean "active", default: true
+    t.integer "html", default: 1
+    t.integer "active", default: 1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -195,8 +195,8 @@ ActiveRecord::Schema.define(version: 20170926203012) do
     t.string "phone_number", null: false
     t.string "type_of", null: false
     t.string "owner_of", null: false
-    t.boolean "texting", default: true
-    t.boolean "active", default: true
+    t.integer "texting", default: 1
+    t.integer "active", default: 1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -20,7 +20,7 @@ class EditPersonalInfo extends Component {
   componentDidMount = () => this.loadContractee(this.props)
   componentWillReceiveProps = ( props ) => this.loadContractee(props)
   loadContractee = ( props ) => {
-    const { contractee } = props
+    const { data: contractee } = props
     const { id } = this.state
     if( contractee && contractee.id && contractee.is !== id ) {
       this.setState({ ...contractee })
@@ -32,13 +32,13 @@ class EditPersonalInfo extends Component {
   onSubmit = ( event ) => {
     event.preventDefault()
     const { dispatch } = this.props
-    const params = this.state
-    params.birthdate = params.birthdate.format()
-    if( params.id ) {
-      dispatch(updateContractee(params))
+    const { id } = this.state
+    if( id ) {
+      dispatch(updateContractee(this.state))
     } else {
-      dispatch(createContractee(params))
+      dispatch(createContractee(this.state))
     }
+    this.props.closeModal()
   }
 
   render = () => {
