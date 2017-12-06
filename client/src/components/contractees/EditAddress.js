@@ -2,16 +2,46 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Segment, Form, Button, Input } from 'semantic-ui-react'
 
+// Actions
+import {
+  createAddress,
+  updateAddress,
+} from '../../actions/contractees.js'
+
 class EditAddress extends Component {
   defaults = {
     id: '', street1: '', street2: '', city: '',
-    state: '', zipcode: '', country: '',
+    state: '', zipcode: ''
   }
   state = { ...this.defaults }
 
+  componentDidMount = () => this.loadData(this.props)
+  componentWillReceiveProps = ( props ) => this.loadData(props)
+  loadData = ( props ) => {
+    const { data } = props
+    const { id } = this.state
+    if( data && data.id !== id ) {
+      this.setState({ ...data })
+    }
+  }
+
+  onInputChange = ({target: {id,value}}) => this.setState({ [id]: value })
+
+  onSubmit = ( event ) => {
+    event.preventDefault()
+    const { contracteeId } = this.props
+    const { id } = this.state
+    debugger
+    if( id ) {
+      this.props.dispatch(updateAddress(this.state))
+    } else {
+      this.props.dispatch(createAddress(contracteeId,this.state))
+    }
+  }
+
   render = () => {
     const {
-      id, street1, street2, city, state, zipcode, country,
+      id, street1, street2, city, state, zipcode
     } = this.state
 
     return (
@@ -50,12 +80,6 @@ class EditAddress extends Component {
             label='ZipCode'
             id='zipcode'
             value={zipcode}
-            onChange={this.onInputChange} />
-          <Form.Field
-            control={Input}
-            label='Country'
-            id='country'
-            value={country}
             onChange={this.onInputChange} />
         </Form.Group>
         <Segment basic textAlign='right'>

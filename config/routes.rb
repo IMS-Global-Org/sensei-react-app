@@ -111,6 +111,18 @@
 #                                PATCH    /api/contracts/:id(.:format)                            api/contracts#update
 #                                PUT      /api/contracts/:id(.:format)                            api/contracts#update
 #                                DELETE   /api/contracts/:id(.:format)                            api/contracts#destroy
+#       api_contractee_addresses GET      /api/contractees/:contractee_id/addresses(.:format)     api/addresses#index
+#                                POST     /api/contractees/:contractee_id/addresses(.:format)     api/addresses#create
+#                                GET      /api/addresses/:id(.:format)                            api/addresses#show
+#                                PATCH    /api/addresses/:id(.:format)                            api/addresses#update
+#                                PUT      /api/addresses/:id(.:format)                            api/addresses#update
+#                                DELETE   /api/addresses/:id(.:format)                            api/addresses#destroy
+#          api_contractee_emails GET      /api/contractees/:contractee_id/emails(.:format)        api/emails#index
+#                                POST     /api/contractees/:contractee_id/emails(.:format)        api/emails#create
+#                                GET      /api/emails/:id(.:format)                               api/emails#show
+#                                PATCH    /api/emails/:id(.:format)                               api/emails#update
+#                                PUT      /api/emails/:id(.:format)                               api/emails#update
+#                                DELETE   /api/emails/:id(.:format)                               api/emails#destroy
 #       paginate_api_contractees GET      /api/contractees/paginate(.:format)                     api/contractees#paginate
 #          query_api_contractees GET      /api/contractees/query(.:format)                        api/contractees#query
 #   api_contractee_show_complete GET      /api/contractees/:contractee_id/show_complete(.:format) api/contractees#show_complete
@@ -160,6 +172,8 @@ Rails.application.routes.draw do
     end
     # Routes for the contractees information
     resources :contractees, shallow: true, except: [:index] do
+      resources :addresses
+      resources :emails
       get 'paginate', on: :collection
       get 'query', on: :collection
       get 'show_complete', to: 'contractees#show_complete'

@@ -22,7 +22,8 @@ class Api::EmailsController < ApplicationController
   end
 
   def create
-    email = Email.new(email_params)
+    email = Contractee.find(params[:contractee_id])
+      .emails.build(email_params)
     if email.save
       render json: email
     else
@@ -43,6 +44,9 @@ class Api::EmailsController < ApplicationController
   def email_params
     params
       .require(:email)
-      .permit(:id, :address, :type_of, :owner_of, :html, :active)
+      .permit(
+        :id, :address, :type_of, :owner_of, :html, :active,
+        :created_at, :updated_at,
+      )
   end
 end

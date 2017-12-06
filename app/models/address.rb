@@ -22,5 +22,4 @@ class Address < ApplicationRecord
   validates_presence_of :street1, :city, :state, :zipcode
   validates_presence_of :type_of, :owner_of
   validates :street2, presence: true, allow_blank: true
-
 end

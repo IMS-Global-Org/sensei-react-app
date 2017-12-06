@@ -6,7 +6,7 @@ import EditAddresses from './EditAddresses'
 
 // Actions
 import {
-  showContractee,
+  showCompleteContractee,
   clearContractee,
 } from '../../actions/contractees'
 
@@ -19,7 +19,7 @@ class EditContractee extends Component {
   loadContractee = ( props ) => {
     const { dispatch, contracteeId } = this.props
     if( contracteeId !== this.state.contracteeId ) {
-      dispatch(showContractee(contracteeId))
+      dispatch(showCompleteContractee(contracteeId))
       this.setState({ contracteeId })
     }
   }
@@ -29,7 +29,9 @@ class EditContractee extends Component {
     return (
       <Segment>
         <EditPersonalInfo contractee={contractee} />
-        <EditAddresses addresses={contractee.addresses} />
+        <EditAddresses
+          addresses={contractee.addresses}
+          contracteeId={contractee.id} />
       </Segment>
     )
   }

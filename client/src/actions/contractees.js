@@ -181,3 +181,84 @@ export const showCompleteContractee = ( contracteeId ) => {
     })
   }
 }
+
+/*******************************************************************
+ * Addresses - Actions specifically for modifying the Contractee's
+ * addresses.
+ *******************************************************************/
+
+export const createAddress = ( contractee, address ) => {
+  return (dispatch) => {
+    axios.post(`/api/contractees/${contractee}/addresses`,{address})
+    .then( resp => {
+      dispatch({
+        type: 'CREATE_ADDRESS',
+        data: resp.data,
+        headers: resp.headers,
+      })
+    })
+    .catch( resp => {
+      dispatch(
+        setFlash('Address Not Created!','error')
+      )
+    })
+  }
+}
+
+export const updateAddress = ( address ) => {
+ return (dispatch) => {
+   axios.patch(`/api/addresses/${address.id}`,{address})
+   .then( resp => {
+     dispatch({
+       type: 'UPDATE_ADDRESS',
+       data: resp.data,
+       headers: resp.headers,
+     })
+   })
+   .catch( resp => {
+     dispatch(
+       setFlash('Address not Updated!','error')
+     )
+   })
+ }
+}
+
+/**************************************************************
+ * Emails - Actions for Contractee Emails
+ *************************************************************/
+
+ export const createEmail = ( contracteeId, email ) => {
+  return (dispatch) => {
+    axios.post(`/api/contractees/${contracteeId}/emails`,{email})
+    .then( resp => {
+      dispatch({
+        type: 'CREATE_EMAIL',
+        data: resp.data,
+        headers: resp.headers,
+      })
+    })
+    .catch( resp => {
+      dispatch(
+        setFlash('Email not Created!','error')
+      )
+    })
+  }
+ }
+
+ export const updateEmail = ( email ) => {
+   return (dispatch) => {
+    axios.patch(`/api/emails/${email.id}`,{email})
+    .then( resp => {
+      dispatch({
+        type: 'UPDATE_EMAIL',
+        data: resp.data,
+        headers: resp.headers,
+      })
+    })
+    .catch( resp => {
+      dispatch(
+        setFlash('Email not Updated!','error')
+      )
+    })
+   }
+ }

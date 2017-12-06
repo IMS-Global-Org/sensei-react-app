@@ -44,7 +44,10 @@ class ViewContractee extends Component {
             <Grid.Column>
               <Segment basic>
                 <Label ribbon>Addresses</Label>
-                <ViewAddresses addresses={contractee.addresses} />
+                <ViewAddresses
+                  editor
+                  addresses={contractee.addresses}
+                  contracteeId={contractee.id} />
               </Segment>
             </Grid.Column>
           </Grid.Row>
@@ -52,13 +55,18 @@ class ViewContractee extends Component {
             <Grid.Column>
               <Segment basic>
                 <Label ribbon>E-mail Addresses</Label>
-                <ViewEmails emails={contractee.emails} />
+                <ViewEmails
+                  editor
+                  emails={contractee.emails}
+                  contracteeId={contractee.id} />
               </Segment>
             </Grid.Column>
             <Grid.Column>
               <Segment basic>
                 <Label ribbon>Phone Numbers</Label>
-                <ViewPhones phones={contractee.phones} />
+                <ViewPhones
+                  phones={contractee.phones}
+                  contracteeId={contractee.id} />
               </Segment>
             </Grid.Column>
           </Grid.Row>

@@ -14,7 +14,7 @@ namespace :contracts do |loader_namespace|
     methods = %w[Cash Check Visa Mastercard Discovery MoneyOrder]
     verifieds = true_false
     # level = %I[A B C D E F G]
-    types = %I[Home Work Mobile Satallite]
+    types = %I[Home Work Mobile Satellite]
     owner_types = %I[Student Parent Relative Gardian]
     active = true_false
     texting = true_false

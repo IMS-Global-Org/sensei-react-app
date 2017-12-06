@@ -22,7 +22,8 @@ class Api::AddressesController < ApplicationController
   end
 
   def create
-    address = Address.new(address_params)
+    address = Contractee.find(params[:contractee_id])
+      .address.build(address_params)
     if address.save
       render json: address
     else
@@ -45,7 +46,8 @@ class Api::AddressesController < ApplicationController
       .require(:address)
       .permit(
         :id, :street1, :street2, :city, :state,
-        :zipcode, :type_of, :owner_of
+        :zipcode, :active, :type_of, :owner_of,
+        :created_at, :updated_at
       )
   end
 end

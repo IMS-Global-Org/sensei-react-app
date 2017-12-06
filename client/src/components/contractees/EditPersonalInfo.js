@@ -80,10 +80,4 @@ class EditPersonalInfo extends Component {
   }
 }
 
-const mapStateToProps = ( state, props ) => {
-  return {
-    contractee: state.contractees.contractee,
-  }
-}
-
-export default connect(mapStateToProps)(EditPersonalInfo)
+export default connect()(EditPersonalInfo)
