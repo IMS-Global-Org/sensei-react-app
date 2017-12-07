@@ -70,13 +70,7 @@ class ContracteesTable extends Component {
                 <Button
                   type='button'
                   onClick={()=>this.showModal('view',cte.id)}>
-                  View
-                </Button>
-                <Button.Or />
-                <Button
-                  type='button'
-                  onClick={()=>this.showModal('edit',cte.id)}>
-                  Edit
+                  Details
                 </Button>
                 <Button.Or />
                 <Button
@@ -91,6 +85,12 @@ class ContracteesTable extends Component {
       })
     }
   }
+  // <Button.Or />
+  // <Button
+  //   type='button'
+  //   onClick={()=>this.showModal('edit',cte.id)}>
+  //   Edit
+  // </Button>
 
   render = () => {
     const { modal, contracteeId } = this.state

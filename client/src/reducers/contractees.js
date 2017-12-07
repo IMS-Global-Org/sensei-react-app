@@ -18,6 +18,22 @@ const contractees = ( state = defaults, action ) => {
         ...state,
         possibles: action.data,
       }
+    case 'UPDATE_CONTRACTEE':
+      index = state.data.findIndex( c =>
+        c.id === action.data.id
+      )
+      return {
+        ...state,
+        data: [
+          ...state.data.slice(0,index),
+          action.data,
+          ...state.data.slice(index + 1),
+        ],
+        contractee: {
+          ...state.contractee,
+          ...action.data,
+        },
+      }
     case 'ADD_CONTRACT_CONTRACTEE':
       return {
         ...state,

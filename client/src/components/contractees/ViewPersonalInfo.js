@@ -41,14 +41,18 @@ class ViewPersonalInfo extends Component {
   render = () => {
     const { showEditModal } = this.state
     const { contractee } = this.props
+    const ctee = Object.assign({},contractee)
+    delete ctee.addresses
+    delete ctee.emails
+    delete ctee.phones
     return (
       <List divided relaxed>
         { this.displayPersonalInfo() }
         { showEditModal &&
           <EditModal
             component='personalInfo'
-            data={contractee}
-            contracteeId={contractee.id}
+            data={ctee}
+            contracteeId={ctee.id}
             resetActiveComp={this.resetActiveComp} />
         }
       </List>

@@ -36,11 +36,11 @@ gem 'prawn'
 gem 'delayed_job_active_record'
 gem 'time_diff'
 gem 'text-table'
+gem 'faker'
 
 group :development, :test do
   gem 'pry'
   gem 'annotate'
-  gem 'faker'
   gem 'letter_opener'
 end
 
