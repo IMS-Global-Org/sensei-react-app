@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby '2.3.1'
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
@@ -25,23 +26,22 @@ gem 'puma', '~> 3.7'
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem 'rack-cors'
 
-gem 'omniauth'
+gem 'delayed_job_active_record'
 gem 'devise'
 gem 'devise_token_auth'
 gem 'dotenv'
-# gem 'kaminari'
-gem 'will_paginate'
-gem 'validates_timeliness'
-gem 'prawn'
-gem 'delayed_job_active_record'
-gem 'time_diff'
-gem 'text-table'
 gem 'faker'
+gem 'omniauth'
+gem 'prawn'
+gem 'text-table'
+gem 'time_diff'
+gem 'validates_timeliness'
+gem 'will_paginate'
 
 group :development, :test do
-  gem 'pry'
   gem 'annotate'
   gem 'letter_opener'
+  gem 'pry'
 end
 
 group :development do
