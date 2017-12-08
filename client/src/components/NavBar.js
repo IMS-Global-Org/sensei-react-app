@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { handleLogout } from '../actions/auth';
 import { withRouter } from 'react-router-dom';
+import User from './User'
 
 class NavBar extends Component {
   state={ activeItem: '' }
@@ -11,13 +12,14 @@ class NavBar extends Component {
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
   rightNavs = () => {
-    const { user, dispatch, history } = this.props;
+    const { dispatch, history } = this.props;
     const { activeItem } = this.state
+    const user = new User()
 
-    if(user.id) {
+    if(user.isLoggedIn()) {
       return(
         <Menu.Menu position='right'>
-          { user.permissions.split(',').includes('user') &&
+          { user.isAdmin() &&
             <Dropdown item text='Applications'>
               <Dropdown.Menu>
                 <Menu.Item

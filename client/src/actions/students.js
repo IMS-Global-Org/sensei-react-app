@@ -2,7 +2,7 @@ import axios from 'axios'
 import fileDownload from 'react-file-download'
 import { setFlash } from './flash'
 
-export const indexStudents = ( level, belt, page = 1, per_page = 5 ) => {
+export const indexStudents = ( level='', belt='', page = 1, per_page = 5 ) => {
   const query = `?page=${page}&per_page=${per_page}&level=${level}&belt=${belt}`
   return (dispatch) => {
     axios.get(`/api/students${query}`)

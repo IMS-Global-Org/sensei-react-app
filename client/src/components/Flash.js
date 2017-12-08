@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { clearFlash } from '../actions/flash';
 import '../styles/flash.css';
-import { Button } from 'semantic-ui-react';
+import { Segment, Button } from 'semantic-ui-react';
 
 const fadeFlash = (dispatch) => {
   setTimeout( () => {
@@ -13,15 +13,21 @@ const fadeFlash = (dispatch) => {
 const Flash = ({ flash, dispatch }) => {
   if(flash.message) {
     return(
-      <div
-        id='alert'
-        className={`alert alert-${flash.msgType}`}
-        style={{ width: '90%', margin: '0 auto'}}
-      >
-        { flash.message }
-        { fadeFlash(dispatch) }
-        <Button onClick={ () => dispatch(clearFlash()) }> X </Button>
-      </div>
+      <Segment basic textAlign='center'>
+        <Segment
+          id='alert'
+          className={`alert alert-${flash.msgType}`}
+          >
+          { flash.message }
+          { fadeFlash(dispatch) }
+          <Button
+            basic
+            compact
+            icon='close'
+            style={{ margin: '0 1rem' }}
+            onClick={ () => dispatch(clearFlash()) } />
+        </Segment>
+      </Segment>
     )
   } else {
     return null;

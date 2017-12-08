@@ -1,8 +1,8 @@
 .alert {
-  width: 40%;
-  margin: 0 30% !important;
-  padding: 15px;
-  margin-bottom: 20px !important;
+  width: 50%;
+  margin: 0 25% !important;
+  padding: 1rem;
+  margin-bottom: 1rem !important;
   border: 1px solid transparent;
   border-radius: 4px;
 }

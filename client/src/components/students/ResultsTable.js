@@ -32,6 +32,9 @@ class ResultsTable extends Component {
       this.setState({ hasMore: true })
     }
   }
+  componentWillReceiveProps = ( props ) => {
+    this.setState({ hasMore: true })
+  }
   componentWillUnmount = () => this.props.dispatch(clearStudents())
 
   setQuery = ( query, studentId = '' ) => {
@@ -55,7 +58,11 @@ class ResultsTable extends Component {
   }
 
   handleRowClick = ( studentId ) => this.setState({ studentId })
-  handleCancelForm = () => this.setState({ studentId: '' })
+  handleCancelForm = () => {
+    const { dispatch } = this.props
+    dispatch(indexStudents())
+    this.setState({ studentId: '', query: '', hasMore: false })
+  }
   handleNewStudent = () => this.setState({ studentId: -1 })
 
   handleCreatePdf = () => {
@@ -93,7 +100,7 @@ class ResultsTable extends Component {
   }
 
   render() {
-    const { studentId } = this.state
+    const { studentId, query } = this.state
     return (
       <div>
         <Table>
@@ -145,12 +152,14 @@ class ResultsTable extends Component {
                 <Button.Group size='mini'>
                   <Button
                     type='button'
+                    disabled={ query ? false : true }
                     onClick={this.handleCreateCSV}>
                     CVS
                   </Button>
                   <Button.Or />
                   <Button
                     type='button'
+                    disabled={ query ? false : true }
                     onClick={this.handleCreatePdf}>
                     Pdf
                   </Button>

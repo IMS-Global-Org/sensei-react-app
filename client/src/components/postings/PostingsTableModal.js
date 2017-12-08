@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router'
 import { Modal, Button } from 'semantic-ui-react'
 import PostingsTableForm from './PostingsTableForm'
+import User from '../User'
 
 // Custom Actions
 import {
@@ -83,6 +85,7 @@ class PostingsTableModal extends Component {
   }
 
   render() {
+    if(!(new User()).isAdmin()) { return (<Redirect to='/' />) }
     const { open, formType } = this.state
     return (
       <Modal

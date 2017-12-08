@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
+import { Redirect } from 'react-router'
 import { connect } from 'react-redux'
 import {
   Container, Segment, Table,
   Button, Header, Icon
 } from 'semantic-ui-react'
 import MailerModal from './MailerModal'
+import User from '../User'
 
 // Actions
 import {
@@ -86,6 +88,9 @@ class Mailers extends Component {
   resetMailer = () => this.setState({ mailerId: '' })
 
   render() {
+    if( !(new User()).isAdmin() ) {
+      return ( <Redirect to='/' /> )
+    }
     const { mailerId } = this.state
     return (
       <Container>

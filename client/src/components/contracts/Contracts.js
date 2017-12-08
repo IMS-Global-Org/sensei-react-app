@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router'
 import {
   Container, Table,
-  Header, Icon, Button } from 'semantic-ui-react'
+  Header, Icon, Button,
+} from 'semantic-ui-react'
 import Paginator from '../Paginator'
 import ContractSearchModal from './ContractSearchModal'
 import moment from 'moment'
@@ -11,6 +13,7 @@ import ShowContractInfoModal from './ShowContractInfoModal'
 import EditContractDetailsModal from './EditContractDetailsModal'
 import ArchiveContractInfoModal from './ArchiveContractInfoModal'
 import ArchivedContractsTableModal from './ArchivedContractsTableModal'
+import User from '../User'
 
 // Actions
 import {
@@ -138,6 +141,11 @@ class Contracts extends Component {
   }
 
   render() {
+    if( !(new User()).isSuper() ) {
+      return (
+        <Redirect to='/' />
+      )
+    }
     const {
       showSearchModal,
       showContractInfo,
