@@ -1,6 +1,6 @@
 module StudentCSV
   extend ActiveSupport::Concern
-  require 'CSV'
+  require 'csv'
 
   included do
     # before_action :set_pdf_handle, only: [:pdf]
