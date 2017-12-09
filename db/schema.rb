@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(version: 20170926203012) do
   create_table "contractees", force: :cascade do |t|
     t.string "first", null: false
     t.string "last", null: false
+    t.integer "active", default: 1, null: false
     t.datetime "birthdate"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

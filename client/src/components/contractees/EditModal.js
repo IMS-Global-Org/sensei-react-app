@@ -5,6 +5,7 @@ import EditAddress from './EditAddress'
 import EditEmail from './EditEmail'
 import EditPhone from './EditPhone'
 
+
 class EditModal extends Component {
   state = { openModal: true }
   editors = {

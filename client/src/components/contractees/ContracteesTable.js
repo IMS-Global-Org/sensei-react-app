@@ -75,7 +75,7 @@ class ContracteesTable extends Component {
                 <Button.Or />
                 <Button
                   type='button'
-                  onClick={()=>this.showModal('archive',cte.id)}>
+                  onClick={()=>this.showModal('delete',cte.id)}>
                   Archive
                 </Button>
               </Button.Group>

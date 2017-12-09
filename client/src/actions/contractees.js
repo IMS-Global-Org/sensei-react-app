@@ -133,6 +133,24 @@ export const deleteContractee = ( contractId, contracteeId ) => {
   }
 }
 
+export const archiveContractee = ( contracteeId ) => {
+  return (dispatch) => {
+    axios.delete(`/api/contractees/${contracteeId}`)
+    .then( resp => {
+      dispatch({
+        type: 'ARCHIVE_CONTRACTEE',
+        data: contracteeId,
+        headers: resp.headers,
+      })
+    })
+    .catch( resp => {
+      dispatch(
+        setFlash('Contractee Not Archived!','error')
+      )
+    })
+  }
+}
+
 export const clearContractees = () => {
   return {
     type: 'CLEAR_CONTRACT_CONTACTEES',

@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { Modal, Button } from 'semantic-ui-react'
 import ViewContractee from './ViewContractee'
 import EditContractee from './EditContractee'
+import ArchiveContractee from './ArchiveContractee'
+
 
 class ContracteeModal extends Component {
   state = { openModal: true }
@@ -9,7 +11,7 @@ class ContracteeModal extends Component {
     create: '',
     view: ViewContractee,
     edit: EditContractee,
-    delete: '',
+    delete: ArchiveContractee,
   }
 
   handleOnClose = () =>
@@ -23,7 +25,9 @@ class ContracteeModal extends Component {
         open={openModal}
         onClose={this.handleOnClose}>
         <Modal.Content>
-          <ComponentType contracteeId={this.props.contracteeId} />
+          <ComponentType
+            contracteeId={this.props.contracteeId}
+            handleOnClose={this.handleOnClose} />
         </Modal.Content>
         <Modal.Actions>
           <Button.Group size='mini'>

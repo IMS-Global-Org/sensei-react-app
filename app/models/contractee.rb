@@ -14,6 +14,7 @@ class Contractee < ApplicationRecord
   has_and_belongs_to_many :contracts
 
   validates_presence_of :first, :last
+  validates_presence_of :active, inclusion: { in: [1,0] }
   validates :birthdate, presence: true, allow_blank: true
 
   has_and_belongs_to_many :addresses, dependent: :destroy

@@ -2,11 +2,13 @@ class Api::ContracteesController < ApplicationController
   before_action :set_contractee, only: [:show, :update, :destroy]
 
   def index
-    render json: Contract.find(params[:contract_id]).contractees.all
+    render json: Contract.find(params[:contract_id])
+      .contractees.all
   end
 
   def paginate
-    contractees = Contractee.all
+    contractees = Contractee
+      .where(active: 1)
       .page(params[:page]).per_page(params[:per_page])
     render_paginated_model contractees
   end
@@ -45,7 +47,11 @@ class Api::ContracteesController < ApplicationController
   end
 
   def destroy
-    @contractee.destroy
+    if @contractee.update(active: 0)
+      render json: @contractee
+    else
+      render_errors @contractee
+    end
   end
 
   private

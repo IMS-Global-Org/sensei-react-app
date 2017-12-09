@@ -45,6 +45,12 @@ const contractees = ( state = defaults, action ) => {
         ...state,
         data: filtered,
       }
+    case 'ARCHIVE_CONTRACTEE':
+      const contractees = state.data.filter( c => c.id !== action.data )
+      return {
+        ...state,
+        data: [ ...contractees ],
+      }
     case 'CLEAR_CONTRACT_CONTACTEES':
       return { ...defaults }
     case 'PAGINATE_CONTRACTEES':

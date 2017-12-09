@@ -25,6 +25,7 @@ namespace :contracts do |loader_namespace|
       contractee = Contractee.create(
         first: Faker::Lorem.word,
         last: Faker::Lorem.word,
+        active: active.sample,
         birthdate: Faker::Date.birthday(20, 80)
       )
 
