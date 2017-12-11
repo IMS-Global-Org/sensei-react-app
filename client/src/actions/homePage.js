@@ -8,7 +8,7 @@ import { setFlash } from './flash'
  * @param {Function} callback - optional; callback function
  * @return {Object} the json data object
  */
-export const indexPostings = ( page, per = 5, callback = null ) => {
+export const indexPostings = ( page = 1, per = 5, callback = null ) => {
   const query = `?page=${page}&per=${per}`
   return (dispatch) => {
     axios.get(`/api/home_page_postings${query}`)

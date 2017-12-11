@@ -3,6 +3,7 @@ class Api::StudentsController < ApplicationController
   include StudentCSV
   include StudentPdf
 
+  before_action :authenticate_user!
   before_action :set_student, only: %I[show update destroy]
 
   def index

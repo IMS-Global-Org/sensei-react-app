@@ -17,7 +17,7 @@ const TableBody = styled(Table.Body)`
 `
 
 class PostingsTable extends Component {
-  state = { hasMore: false, activeItem: null, open: false }
+  state = { hasMore: false, activeItem: null }
 
   componentDidMount = () => {
     let { dispatch } = this.props
@@ -40,7 +40,7 @@ class PostingsTable extends Component {
           <Table.Row
             key={posting.id}
             id={posting.id}
-            onClick={(e) => this.displayModalForm(e,posting.id)}>
+            onClick={(e) => this.displayModalForm(posting.id)}>
             <Table.Cell>{posting.title}</Table.Cell>
             <Table.Cell>{posting.videos}</Table.Cell>
             <Table.Cell>{posting.links}</Table.Cell>
@@ -53,13 +53,7 @@ class PostingsTable extends Component {
     }
   }
 
-  displayModalForm = ( event, postingId ) => {
-    // FIXME reset the form for repeated selection of same posting is displayed
-    this.setState({
-      open: true,
-      activeItem: postingId,
-    })
-  }
+  displayModalForm = ( activeItem ) => this.setState({ activeItem })
 
   loadMore = ( page ) => {
     let { hasMore } = this.state
@@ -73,8 +67,10 @@ class PostingsTable extends Component {
     }
   }
 
+  resetActiveItem = () => this.setState({ activeItem: '' })
+
   render() {
-    const { open, activeItem } = this.state
+    const { activeItem } = this.state
     return (
       <Table celled>
         <Table.Header>
@@ -105,10 +101,12 @@ class PostingsTable extends Component {
         <Table.Footer>
           <Table.Row>
             <Table.HeaderCell colSpan={5}>
-              <PostingsTableModal
-                open={open}
-                activePosting={activeItem}
-                formType={ activeItem ? 'edit' : 'new' } />
+              { activeItem &&
+                <PostingsTableModal
+                  activePosting={activeItem}
+                  formType={ activeItem ? 'edit' : 'new' }
+                  resetActiveItem={this.resetActiveItem} />
+              }
               <Paginator
                 pagination={this.props.postings.pagination}
                 loadMore={this.loadMore}

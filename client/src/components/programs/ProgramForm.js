@@ -63,7 +63,7 @@ class ProgramForm extends Component {
         </Form.Field>
         <Form.Field>
           <label>Description</label>
-          <Form.Input
+          <Form.TextArea
             id='description'
             value={description}
             onChange={this.handleOnChange} />

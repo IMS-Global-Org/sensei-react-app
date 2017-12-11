@@ -141,7 +141,7 @@ class Contracts extends Component {
   }
 
   render() {
-    if( !(new User()).isSuper() ) {
+    if( !(new User()).isAdmin() ) {
       return (
         <Redirect to='/' />
       )

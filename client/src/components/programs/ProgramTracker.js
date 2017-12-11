@@ -26,7 +26,11 @@ const Spacer = styled.div`
 `
 
 class ProgramTracker extends Component {
-  state = { hasMore: false, activeProgram: '', programId: '' }
+  state = {
+    hasMore: false, activeProgram: '',
+    programId: '', showProgForm: false,
+    showRequirements: false,
+  }
 
   componentDidMount = () => {
     const { programs, dispatch } = this.props
@@ -48,7 +52,9 @@ class ProgramTracker extends Component {
       dispatch(clearRequirements())
       this.setState({
         programId: programId,
-        activeProgram: programs.data.find( prog => prog.id === programId )
+        activeProgram: programs.data.find( prog => prog.id === programId ),
+        showProgForm: true,
+        showRequirements: false,
       })
     }
   }
@@ -73,7 +79,7 @@ class ProgramTracker extends Component {
   }
 
   closeActiveForm = () => {
-    this.setState({ activeProgram: '', programId: '' })
+    this.setState({ activeProgram: '', programId: '', showProgForm: false })
   }
 
   loadMore = ( page ) => {
@@ -92,6 +98,16 @@ class ProgramTracker extends Component {
     this.handleRowClick( this.state.programId )
   }
 
+  showNewProgForm = () => {
+    this.props.dispatch(clearRequirements())
+    this.setState({
+      programId: '',
+      activeProgram: '',
+      showProgForm: true,
+      showRequirements: false,
+    })
+  }
+
   updatePrograms = () => {
     const { dispatch } = this.props
     dispatch(indexPrograms())
@@ -105,20 +121,22 @@ class ProgramTracker extends Component {
   handleEditRequirements = () => {
     const { programId } = this.state
     this.props.dispatch(indexRequirements(programId))
-    this.setState({ activeProgram: '' })
+    this.setState({
+      activeProgram: '', showRequirements: true, showProgForm: false
+    })
   }
   handleDeleteRequirements = () => {}
   handleCreateRequirement = () => {}
 
   render() {
-    const { activeProgram } = this.state
+    const { activeProgram, showProgForm, showRequirements } = this.state
     const { requirements } = this.props
     return (
       <Container>
         <Segment>
           <Header as='h1' icon textAlign='center'>
-            <Icon name='info circle' />
-            Information
+            <Icon name='settings' />
+            Programs
             <Header.Subheader style={{ textAlign: 'justify', margin: '2rem 3rem' }}>
               Welcome to the program tracker module.
               Programs can be either created or modified, depending on
@@ -151,7 +169,15 @@ class ProgramTracker extends Component {
           </Table.Body>
           <Table.Footer>
             <Table.Row>
-              <Table.HeaderCell colSpan={5} textAlign='right'>
+              <Table.HeaderCell colSpan={5}>
+                <Button.Group size='mini'>
+                  <Button
+                    type='button'
+                    color='green'
+                    onClick={this.showNewProgForm}>
+                    Create New Program
+                  </Button>
+                </Button.Group>
                 <Paginator
                   size='mini'
                   loadMore={this.loadMore}
@@ -160,14 +186,14 @@ class ProgramTracker extends Component {
             </Table.Row>
           </Table.Footer>
         </Table>
-          { activeProgram &&
+          { showProgForm &&
             <Segment>
               <ProgramForm
                 formDataObject={activeProgram}
                 closeActiveForm={this.closeActiveForm} />
               <Segment basic clearing>
                 <label>
-                  Program has&nbsp;{activeProgram.num_req}&nbsp;requirements.
+                  Program has&nbsp;{activeProgram.num_req || 0}&nbsp;requirements.
                 </label>
                 <Spacer />
                 <Button.Group size='mini'>
@@ -179,7 +205,7 @@ class ProgramTracker extends Component {
               </Segment>
             </Segment>
           }
-          { ( requirements && requirements.pagination.total_pages > 0 ) &&
+          { showRequirements &&
             <RequirementsTracker
               requirements={requirements}
               showActiveProgram={this.showActiveProgram}

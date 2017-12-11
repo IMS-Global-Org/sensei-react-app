@@ -1,4 +1,5 @@
 class Api::BirthdaysMailerController < ApplicationController
+  before_action :authenticate_user!
 
   def index
     BirthdaysJob.set(wait_until: Date.tomorrow.morning).perform_later({

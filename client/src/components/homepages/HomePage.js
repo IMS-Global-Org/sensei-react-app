@@ -19,16 +19,16 @@ const Postings = styled(Segment)`
  * @version 0.0.1
  */
 class HomePage extends Component {
-  state = { hasMore: false, per: 5 }
+  state = { hasMore: false }
 
   /**
    * Load the postings that will be displayed on the homepage
    */
   componentDidMount = () => {
-    let { dispatch } = this.props
-    let { per } = this.state
-    dispatch(indexPostings(1,per))
-    this.setState({ hasMore: true })
+    let { dispatch, postings: {data} } = this.props
+    if( data && data.length <= 0 ) {
+      dispatch(indexPostings(1,5,()=>this.setState({ hasMore: true })))
+    }
   }
 
   /**
@@ -44,11 +44,11 @@ class HomePage extends Component {
    * @param {Integer} page - page number that is to be retrieved
    */
   loadMore = ( page ) => {
-    let { hasMore, per } = this.state
+    let { hasMore } = this.state
     let { dispatch, postings: { pagination }} = this.props
     if( hasMore && pagination.total_pages ) {
       if( page <= pagination.total_pages ) {
-        dispatch(indexPostings(page,per))
+        dispatch(indexPostings(page))
       } else {
         this.setState({
           hasMore: false
@@ -74,7 +74,7 @@ class HomePage extends Component {
       <Postings>
         <InfiniteScroll
           hasMore={this.state.hasMore}
-          pageStart={0}
+          pageStart={1}
           loadMore={this.loadMore}
           loader={<Segment><Loader active /></Segment>}
           useWindow={false}>

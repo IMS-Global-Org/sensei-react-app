@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Confirm, Button } from 'semantic-ui-react'
+import { Confirm } from 'semantic-ui-react'
 
 
 // Actions

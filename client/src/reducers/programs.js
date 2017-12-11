@@ -2,7 +2,7 @@ const programs = ( state = { data: [], pagination: {}, requirements: [] }, actio
   switch( action.type ) {
     case 'INDEX_PROGRAMS':
       return {
-        data: action.data.programs,
+        data: action.data.data,
         pagination: action.data.pagination
       }
     case 'UPDATE_PROGRAM':

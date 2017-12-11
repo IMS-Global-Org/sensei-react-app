@@ -54,7 +54,7 @@ class Programs extends Component {
                 Create a password that you'll remember easily.
               </Message.Item>
               <Message.Item>
-                Visit
+                Visit&nbsp;
                 <a
                   href='http://www.blkdojos.com/students-2/curriculum-assistance/'
                   target='_blank'

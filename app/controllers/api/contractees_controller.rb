@@ -1,4 +1,5 @@
 class Api::ContracteesController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_contractee, only: [:show, :update, :destroy]
 
   def index

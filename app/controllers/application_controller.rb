@@ -5,7 +5,7 @@ class ApplicationController < ActionController::API
     render json: { errors: model.errors.full_messages.join(',\n')}, status: 422
   end
 
-  def render_paginated_model(model)
+  def render_paginated_model(model, **options)
     render json: {
       data: model,
       pagination: {
@@ -13,6 +13,6 @@ class ApplicationController < ActionController::API
         current_page: model.current_page,
         next_page: model.next_page
       }
-    }
+    }, **options
   end
 end

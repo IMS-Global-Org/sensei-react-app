@@ -1,19 +1,14 @@
 class Api::RequirementsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_requirement, except: %I[index create]
 
   def index
-    requirements = Requirement.all
+    requirements = Requirement
       .where('program_id = ?', params[:prog_id])
       .order(level: :asc)
       .page(params[:page]).per_page(params[:per_page])
-    render json: {
-      data: requirements,
-      pagination: {
-        total_pages: requirements.total_pages,
-        current_page: requirements.current_page,
-        next_page: requirements.next_page || 0
-      }
-    }
+
+    render_paginated_model requirements
   end
 
   def show

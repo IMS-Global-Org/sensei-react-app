@@ -1,4 +1,5 @@
 class Api::AddressesController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_address, only: %I[show update destroy]
 
   def index

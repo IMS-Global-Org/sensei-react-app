@@ -1,4 +1,5 @@
 class Api::MailersController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_mailer, only: [:show, :update, :destroy]
 
   def index

@@ -13,7 +13,7 @@ import {
 } from '../../actions/postings'
 
 class PostingsTableModal extends Component {
-  state = { open: false, dimmer: true, activePosting: null, formType: null }
+  state = { open: true, activePosting: null, formType: null }
 
   /**
    * Callback function allowing the child's form component state to be accessed
@@ -24,15 +24,13 @@ class PostingsTableModal extends Component {
    * Set passed down props before any re-rendering
    * @param {Object} nextProps - the passed down props set
    */
-  componentWillReceiveProps = ( nextProps ) => {
+  componentWillReceiveProps = ( nextProps ) => this.loadActivePosting(nextProps)
+  componentDidMount = () => this.loadActivePosting(this.props)
+  loadActivePosting = ( props ) => {
     const { activePosting: oldAp } = this.state
-    const { activePosting: newAp } = nextProps
-    if( newAp && newAp !== oldAp ) {
-      this.setState({ ...nextProps }, () => {
-        this.props.dispatch(showPostingsTable(newAp))
-      })
-    } else {
-      this.forceUpdate()
+    const { dispatch, activePosting: newAp } = props
+    if( newAp && parseInt(newAp,10) !== parseInt(oldAp,10) ) {
+      dispatch(showPostingsTable(newAp,()=>this.setState({ ...props })))
     }
   }
 
@@ -40,9 +38,8 @@ class PostingsTableModal extends Component {
    * Close the Modal and all Child components
    */
   close = () => this.setState({
-    open: false,
-    dimmer: 'dimmer',
-  })
+    open: false
+  },()=>this.props.resetActiveItem())
 
   /**
    * Sets the actual child components method that can be used to access
@@ -90,7 +87,6 @@ class PostingsTableModal extends Component {
     return (
       <Modal
         open={open}
-        dimmer={true}
         onClose={this.close}>
         <Modal.Header>Postings Form</Modal.Header>
         <Modal.Content>

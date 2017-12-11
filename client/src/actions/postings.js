@@ -34,7 +34,7 @@ export const emptyReduxPostings = () => {
   }
 }
 
-export const showPostingsTable = ( id ) => {
+export const showPostingsTable = ( id, cb = null ) => {
   return (dispatch) => {
     axios.get(`/api/postings_tables/${id}`)
     .then( resp => {
@@ -43,6 +43,7 @@ export const showPostingsTable = ( id ) => {
         data: resp.data,
         headers: resp.headers,
       })
+      if( cb ) { cb() }
     })
     .catch( resp => {
       dispatch(setFlash('Posting Not Located!','error'))

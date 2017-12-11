@@ -12,15 +12,8 @@ class Api::AnnouncementsController < ApplicationController
       .where('start_date >= ? AND end_date < ?',@start_date,@end_date)
       .order(:start_date, :end_date)
       .page(params[:page]).per_page(params[:per])
-    # render json object with new set of announcements and pagination info
-    render json: {
-      data: ancts,
-      pagination: {
-        total_pages: ancts.total_pages,
-        current_page: ancts.current_page,
-        next_page: ancts.next_page
-      }
-    }
+
+    render_paginated_model ancts
   end
 
   # Return a single announcement record for viewing
