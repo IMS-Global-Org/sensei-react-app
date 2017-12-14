@@ -6,7 +6,7 @@ import { Segment, Form, Button } from 'semantic-ui-react'
 import {
   updateRequirement,
   createRequirement,
-  clearRequirements,
+  // clearRequirements,
 } from '../../actions/requirements'
 
 class RequirementForm extends Component {
@@ -44,12 +44,12 @@ class RequirementForm extends Component {
     }
   }
 
-  handleCancel = ( event ) => {
-    event.preventDefault()
-    const { dispatch } = this.props
-    dispatch(clearRequirements())
-    this.setState({ ...this.defaults })
-  }
+  // handleCancel = ( event ) => {
+  //   event.preventDefault()
+  //   const { dispatch } = this.props
+  //   dispatch(clearRequirements())
+  //   this.setState({ ...this.defaults })
+  // }
 
   handleCreateNew = ( event ) => {
     event.preventDefault()
@@ -103,12 +103,6 @@ class RequirementForm extends Component {
                   Delete
                 </Button>
             }
-            <Button.Or />
-            <Button
-              type='submit'
-              onClick={this.handleCancel}>
-              Cancel
-            </Button>
             <Button.Or />
             <Button
               onClick={this.handleCreateNew}>

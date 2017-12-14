@@ -1,12 +1,24 @@
-const tablePostings = ( state = { data: [], pagination: {} }, action ) => {
+const defaults = {
+  data: [],
+  pagination: {},
+  activePosting: {},
+}
+
+const tablePostings = ( state = defaults, action ) => {
   switch( action.type ) {
     case 'INDEX_POSTINGS_TABLE':
       return {
+        ...state,
         data: action.data.data,
         pagination: action.data.pagination
       }
     case 'EMPTY_REDUX_POSTINGS':
-      return { data: [], pagination: {} }
+      return { ...defaults }
+    case 'CLEAR_ACTIVE_POSTING':
+      return {
+        ...state,
+        activePosting: {},
+      }
     case 'SHOW_POSTINGS_TABLE':
       return {
         ...state,

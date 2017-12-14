@@ -4,6 +4,7 @@ import styled from 'styled-components'
 const LabelField = styled.div`
   display: inline-block;
   width: 5rem;
+  font-weight: ${props => props.bold ? 'bold' : 'normal'};
   :after {
     content: ':'
   }

@@ -1,14 +1,15 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Table, Header } from 'semantic-ui-react'
+import { Table, Header, Button } from 'semantic-ui-react'
 import styled from 'styled-components'
 import {
   indexPostingsTable,
-  emptyReduxPostings
+  emptyReduxPostings,
 } from '../../actions/postings'
 import moment from 'moment'
 import Paginator from '../Paginator'
-import PostingsTableModal from './PostingsTableModal'
+// import PostingsTableModal from './PostingsTableModal'
+import ViewPostModal from './ViewPostModal'
 
 // Custom Styled Components
 const TableBody = styled(Table.Body)`
@@ -17,7 +18,7 @@ const TableBody = styled(Table.Body)`
 `
 
 class PostingsTable extends Component {
-  state = { hasMore: false, activeItem: null }
+  state = { hasMore: false, activeItem: null, showModal: false }
 
   componentDidMount = () => {
     let { dispatch } = this.props
@@ -53,7 +54,8 @@ class PostingsTable extends Component {
     }
   }
 
-  displayModalForm = ( activeItem ) => this.setState({ activeItem })
+  displayModalForm = ( activeItem ) =>
+    this.setState({ activeItem, showModal: true })
 
   loadMore = ( page ) => {
     let { hasMore } = this.state
@@ -67,16 +69,16 @@ class PostingsTable extends Component {
     }
   }
 
-  resetActiveItem = () => this.setState({ activeItem: '' })
+  resetActiveItem = () => this.setState({ activeItem: '', showModal: false })
 
   render() {
-    const { activeItem } = this.state
+    const { activeItem, showModal } = this.state
     return (
       <Table celled>
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell colSpan={4}>
-              <Header as='h1' textAlign='center'>Instructions</Header>
+              <Header as='h1' textAlign='center'>Postings</Header>
               <p style={{ textAlign: 'justify', margin: '2rem 5rem' }}>
                 To create, modify or delete a posting's content, click on the
                 table row displaying the postings content. This will open a form
@@ -101,12 +103,19 @@ class PostingsTable extends Component {
         <Table.Footer>
           <Table.Row>
             <Table.HeaderCell colSpan={5}>
-              { activeItem &&
-                <PostingsTableModal
-                  activePosting={activeItem}
-                  formType={ activeItem ? 'edit' : 'new' }
+              { showModal &&
+                <ViewPostModal
+                  postId={activeItem}
                   resetActiveItem={this.resetActiveItem} />
               }
+              <Button.Group size='mini'>
+                <Button
+                  type='button'
+                  color='green'
+                  onClick={()=>this.displayModalForm()}>
+                  Create New Posting
+                </Button>
+              </Button.Group>
               <Paginator
                 pagination={this.props.postings.pagination}
                 loadMore={this.loadMore}
@@ -118,6 +127,10 @@ class PostingsTable extends Component {
     )
   }
 }
+// <PostingsTableModal
+//   activePosting={activeItem}
+//   formType={ activeItem ? 'edit' : 'new' }
+//   resetActiveItem={this.resetActiveItem} />
 
 const mapStateToProps = ( state ) => {
   return { postings: state.tablePostings }

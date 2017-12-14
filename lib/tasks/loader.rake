@@ -20,7 +20,7 @@ namespace :loader do |loader_namespace|
         end_date: Faker::Date.between(Time.new.utc, end_date),
         link: Faker::Internet.url,
         cost: Faker::Number.decimal(2),
-        registration: Faker::Boolean.boolean
+        registration: [1,0].sample
       )
     end
   end

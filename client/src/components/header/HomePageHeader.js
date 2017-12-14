@@ -4,10 +4,7 @@ import { Grid } from 'semantic-ui-react'
 // Custom CSS
 import '../../styles/header.css'
 
-// import WhiteDragonRight from '../images/dragon2.png'
-// <Image size='mini' src={WhiteDragonRight} />
-
-class Header extends Component {
+class HomePageHeader extends Component {
   render(){
     return (
       <Grid style={{ padding: '0.5rem 0.5rem' }}>
@@ -29,4 +26,4 @@ class Header extends Component {
   }
 }
 
-export default Header
+export default HomePageHeader

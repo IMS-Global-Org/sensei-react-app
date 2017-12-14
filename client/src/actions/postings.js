@@ -34,6 +34,12 @@ export const emptyReduxPostings = () => {
   }
 }
 
+export const clearActivePosting = () => {
+  return {
+    type: 'CLEAR_ACTIVE_POSTING',
+  }
+}
+
 export const showPostingsTable = ( id, cb = null ) => {
   return (dispatch) => {
     axios.get(`/api/postings_tables/${id}`)
@@ -84,3 +90,26 @@ export const createPostingsTable = ( formData ) => {
     })
   }
 }
+
+/****************************************************
+ * Actions for handling a single post object with
+ * no adjoining links or videos
+ ***************************************************/
+
+export const createPost = ( post ) => {}
+export const updatePost = ( post ) => {}
+export const deletePost = ( postId ) => {}
+
+/****************************************************
+ * Actions for handling a single video object
+ ***************************************************/
+export const createVideo = ( video ) => {}
+export const updateVideo = ( video ) => {}
+export const deleteVideo = ( videoId ) => {}
+
+/****************************************************
+ * Actions for handling a single link object
+ ***************************************************/
+export const createLink = ( link ) => {}
+export const updateLink = ( link ) => {}
+export const deleteLink = ( link ) => {}

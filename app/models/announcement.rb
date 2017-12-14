@@ -17,8 +17,10 @@
 #
 
 class Announcement < ApplicationRecord
-  validates_presence_of :title, :category, :message, :extra, :link,
+  validates_presence_of :title, :category, :message,
                         :start_date, :end_date
-  validates :cost, numericality: true
-  validates :registration, inclusion: { in: [true, false] }
+  validates :extra, presence: true, allow_blank: true
+  validates :link, presence: true, allow_blank: true
+  validates :cost, presence: true, allow_blank: true, numericality: true
+  validates :registration, inclusion: { in: [1, 0] }
 end

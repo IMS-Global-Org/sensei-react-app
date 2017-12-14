@@ -21,7 +21,7 @@ import AnnouncementManager from './announcements/AnnouncementManager'
 import HomePagePostings from './homepages/HomePagePostings'
 import Calendar from './calendar/Calendar'
 import EventEditor from './calendar/EventEditor'
-import Header from './header/Header'
+import HomePageHeader from './header/HomePageHeader'
 import ProgramTracker from './programs/ProgramTracker'
 import Location from './location/Location'
 import Students from './students/Students'
@@ -33,7 +33,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Header />
+        <HomePageHeader />
         <NavBar />
         <div className='multi-bg-images'>
           <Flash />

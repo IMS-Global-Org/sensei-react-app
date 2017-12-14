@@ -9,7 +9,7 @@ class CreateAnnouncements < ActiveRecord::Migration[5.1]
       t.date :end_date, null: false
       t.string :link
       t.float :cost
-      t.boolean :registration
+      t.integer :registration
 
       t.timestamps
     end

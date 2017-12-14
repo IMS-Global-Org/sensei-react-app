@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(version: 20170926203012) do
     t.date "end_date", null: false
     t.string "link"
     t.float "cost"
-    t.boolean "registration"
+    t.integer "registration"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

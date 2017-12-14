@@ -72,6 +72,7 @@ class RequirementsTracker extends Component {
     const { dispatch, programId } = this.props
     dispatch(deleteRequirement(requirementId))
     dispatch(indexRequirements(programId))
+    this.setState({ hasMore: true })
     this.props.updatePrograms()
   }
 

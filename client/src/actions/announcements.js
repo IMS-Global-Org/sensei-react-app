@@ -101,7 +101,7 @@ export const tableAnnouncements = ( page = 1, per = 5, dateRange = null, callbac
  * Destroys the announcement from the database
  * @param {Integer} id - database id of the announcement to destroy
  */
-export const destroyAnnouncement = ( id ) => {
+export const deleteAnnouncement = ( id ) => {
   return (dispatch) => {
     axios.delete(`/api/announcements/${id}`)
     .then( resp => {

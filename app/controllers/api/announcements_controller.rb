@@ -43,7 +43,7 @@ class Api::AnnouncementsController < ApplicationController
 
   # perminately removes a single announcement record
   def destroy
-    @annoucement.destroy
+    @announcement.destroy
   end
 
   private

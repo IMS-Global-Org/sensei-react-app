@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { List, Popup, Icon } from 'semantic-ui-react'
-import LabelField from './LabelField'
+import LabelField from '../helpers/LabelField'
 import PopupArea from './PopupArea'
 import EditModal from './EditModal'
 

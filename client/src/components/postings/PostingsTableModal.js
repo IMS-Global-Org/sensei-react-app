@@ -10,6 +10,7 @@ import {
   showPostingsTable,
   updatePostingsTable,
   createPostingsTable,
+  clearActivePosting
 } from '../../actions/postings'
 
 class PostingsTableModal extends Component {
@@ -26,11 +27,14 @@ class PostingsTableModal extends Component {
    */
   componentWillReceiveProps = ( nextProps ) => this.loadActivePosting(nextProps)
   componentDidMount = () => this.loadActivePosting(this.props)
+  componentWillUnmount = () => this.props.dispatch(clearActivePosting())
   loadActivePosting = ( props ) => {
     const { activePosting: oldAp } = this.state
     const { dispatch, activePosting: newAp } = props
-    if( newAp && parseInt(newAp,10) !== parseInt(oldAp,10) ) {
-      dispatch(showPostingsTable(newAp,()=>this.setState({ ...props })))
+    const newApisInt = Number.isInteger(newAp)
+    if( newApisInt && parseInt(oldAp,10) !== parseInt(newAp,10) ) {
+      dispatch(showPostingsTable(newAp))
+      this.setState({ ...props })
     }
   }
 

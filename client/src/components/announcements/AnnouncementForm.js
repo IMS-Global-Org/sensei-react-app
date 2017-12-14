@@ -7,7 +7,8 @@ import moment from 'moment'
 // Redux Actions
 import {
   updateAnnouncement,
-  createAnnouncement
+  createAnnouncement,
+  deleteAnnouncement,
 } from '../../actions/announcements'
 
 /**
@@ -18,12 +19,13 @@ import {
  */
 class AnnouncementForm extends Component {
   // Default form field values
-  default = {
+  defaults = {
+    id: '',
     title: '', category: '', message: '', extra: '',
     start_date: moment.utc(), end_date: moment.utc(),
-    link: '', cost: '', registration: false,
+    link: '', cost: '', registration: 0,
   }
-  state={ ...this.default }
+  state={ ...this.defaults }
 
   /**
    * Loads announcements passed to the component after its initial mount.
@@ -33,8 +35,8 @@ class AnnouncementForm extends Component {
    */
   componentWillReceiveProps = ( nextProps ) => {
     let { activeAnnouncement } = nextProps
-    if( activeAnnouncement && activeAnnouncement.id ) {
-      this.state = activeAnnouncement
+    if( activeAnnouncement && activeAnnouncement.id > 0 ) {
+      this.setState({ ...activeAnnouncement })
     }
   }
 
@@ -46,9 +48,10 @@ class AnnouncementForm extends Component {
     event.preventDefault()
     /** @type {String} dataType - string ['edit','create'] */
     const { dispatch, formType } = this.props
-    const method = formType === 'edit' ? updateAnnouncement : createAnnouncement
-    dispatch(method(this.state))
-    // TODO submit data to the rails database
+    if( this.state.title ) {
+      const method = formType === 'edit' ? updateAnnouncement : createAnnouncement
+      dispatch(method(this.state))
+    }
   }
 
   /**
@@ -65,7 +68,7 @@ class AnnouncementForm extends Component {
    * @param {Object} data - Form data object
    */
    handleChangeCheckbox = ( event, { id, checked } ) => {
-     this.setState({ [id]: checked })
+     this.setState({ [id]: checked ? 1 : 0 })
    }
 
    /**
@@ -86,15 +89,16 @@ class AnnouncementForm extends Component {
 
   handleClearForm = () => {
     this.setState({
-      ...this.default
+      ...this.defaults
     },this.props.clearAnnouncement)
   }
 
   handleDeleteAnnouncement = () => {
-    // TODO dispatch an axios call to the database and destroy Announcement
-    //      It would be better to simply inactivate the announcement instead of
-    //      removing it.
-    debugger
+    const { dispatch } = this.props
+    const { id } = this.state
+    dispatch(deleteAnnouncement(id))
+    this.props.clearAnnouncement()
+    this.setState({ ...this.defaults })
   }
 
   /**
@@ -160,7 +164,7 @@ class AnnouncementForm extends Component {
           <Form.Checkbox
             label='Yes'
             id='registration'
-            checked={ registration === true }
+            checked={ registration > 0 }
             onChange={this.handleChangeCheckbox} />
         </Form.Group>
         <Button.Group size='mini'>
