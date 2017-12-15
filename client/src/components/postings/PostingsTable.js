@@ -10,6 +10,7 @@ import moment from 'moment'
 import Paginator from '../Paginator'
 // import PostingsTableModal from './PostingsTableModal'
 import ViewPostModal from './ViewPostModal'
+import CreatePostModal from './CreatePostModal'
 
 // Custom Styled Components
 const TableBody = styled(Table.Body)`
@@ -103,9 +104,13 @@ class PostingsTable extends Component {
         <Table.Footer>
           <Table.Row>
             <Table.HeaderCell colSpan={5}>
-              { showModal &&
+              { showModal && activeItem &&
                 <ViewPostModal
                   postId={activeItem}
+                  resetActiveItem={this.resetActiveItem} />
+              }
+              { showModal && !activeItem &&
+                <CreatePostModal
                   resetActiveItem={this.resetActiveItem} />
               }
               <Button.Group size='mini'>

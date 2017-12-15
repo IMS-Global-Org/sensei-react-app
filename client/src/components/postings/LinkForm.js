@@ -31,13 +31,14 @@ class LinkForm extends Component {
   onDelete = () => this.props.dispatch(deleteLink(this.state.id))
   onSubmit = ( event ) => {
     event.preventDefault()
-    const { dispatch } = this.props
+    const { dispatch, stepCompleted } = this.props
     const { id } = this.state
     if( id ) {
       dispatch(updateLink(this.state))
     } else {
       dispatch(createLink(this.state))
     }
+    stepCompleted(3)
   }
 
   render = () => {

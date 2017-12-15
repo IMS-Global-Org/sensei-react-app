@@ -29,13 +29,14 @@ class PostForm extends Component {
   onDelete = () => this.props.dispatch(deletePost(this.state.id))
   onSubmit = ( event ) => {
     event.preventDefault()
-    const { dispatch } = this.props
+    const { dispatch, stepCompleted } = this.props
     const { id } = this.state
     if( id ) {
       dispatch(updatePost(this.state))
     } else {
       dispatch(createPost(this.state))
     }
+    stepCompleted(1)
   }
 
   render = () => {
@@ -45,11 +46,13 @@ class PostForm extends Component {
         <Form.Input
           label='Title'
           id='title'
+          required
           value={title}
           onChange={this.onInputChange} />
         <Form.Input
           label='Message'
           id='message'
+          required
           value={message}
           onChange={this.onInputChange} />
         <Segment basic textAlign='right'>
@@ -62,12 +65,14 @@ class PostForm extends Component {
             <Button.Or />
             <Button
               type='button'
+              disabled={ title ? false : true }
               onClick={this.onClear}>
               Clear Form
             </Button>
             <Button.Or />
             <Button
               type='button'
+              disabled={ id ? false : true }
               onClick={this.onDelete}>
               Delete
             </Button>
@@ -78,10 +83,10 @@ class PostForm extends Component {
   }
 }
 
-const mapStateToProps = ( state, props ) => {
-  return {
-    post: state.tablePostings.activePosting,
-  }
-}
+// const mapStateToProps = ( state, props ) => {
+//   return {
+//     post: state.tablePostings.activePosting,
+//   }
+// }
 
-export default connect(mapStateToProps)(PostForm)
+export default connect()(PostForm)
