@@ -11,7 +11,7 @@
 #  end_date     :date             not null
 #  link         :string
 #  cost         :float
-#  registration :boolean
+#  registration :integer
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #

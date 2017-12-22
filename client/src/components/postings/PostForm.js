@@ -29,14 +29,15 @@ class PostForm extends Component {
   onDelete = () => this.props.dispatch(deletePost(this.state.id))
   onSubmit = ( event ) => {
     event.preventDefault()
-    const { dispatch, stepCompleted } = this.props
+    const { dispatch, stepCompleted, closeModal } = this.props
     const { id } = this.state
     if( id ) {
       dispatch(updatePost(this.state))
     } else {
       dispatch(createPost(this.state))
     }
-    stepCompleted(1)
+    if( stepCompleted ) { stepCompleted(1) }
+    if( closeModal ) { closeModal() }
   }
 
   render = () => {

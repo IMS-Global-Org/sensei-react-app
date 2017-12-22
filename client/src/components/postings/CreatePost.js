@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import { Segment } from 'semantic-ui-react'
 import CreatePostSteps from './CreatePostSteps'
 import PostForm from './PostForm'
-import VideoForm from './VideoForm'
-import LinkForm from './LinkForm'
+import VideoFormMulti from './VideoFormMulti'
+import LinkFormMulti from './LinkFormMulti'
 
 class CreatePost extends Component {
   defaults = { step: 1, completedSteps: [] }
@@ -34,11 +34,11 @@ class CreatePost extends Component {
           step={step}
           completedSteps={completedSteps}
           resetStepTo={this.resetStepTo} />
-        <Segment attached>
+        <Segment>
           {{
             0: <PostForm stepCompleted={this.stepCompleted} />,
-            1: <VideoForm stepCompleted={this.stepCompleted} />,
-            2: <LinkForm stepCompleted={this.stepCompleted} />,
+            1: <VideoFormMulti stepCompleted={this.stepCompleted} />,
+            2: <LinkFormMulti stepCompleted={this.stepCompleted} />,
           }[step - 1]}
         </Segment>
         <CreatePostSteps

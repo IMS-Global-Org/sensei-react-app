@@ -10,7 +10,7 @@
 #  zipcode    :string           not null
 #  type_of    :string           default("Home"), not null
 #  owner_of   :string           default("Parent"), not null
-#  active     :boolean          default(TRUE)
+#  active     :integer          default(1)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #

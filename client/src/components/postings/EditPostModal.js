@@ -58,7 +58,8 @@ class EditPostModal extends Component {
         <Modal.Content>
           <Modal.Description>
             <Editor
-              data={data} />
+              data={data}
+              closeModal={this.onClose} />
           </Modal.Description>
         </Modal.Content>
         <Modal.Actions>

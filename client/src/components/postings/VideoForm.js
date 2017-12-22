@@ -31,14 +31,14 @@ class VideoForm extends Component {
   onDelete = () => this.props.dispatch(deleteVideo(this.state.id))
   onSubmit = ( event ) => {
     event.preventDefault()
-    const { dispatch, stepCompleted } = this.props
+    const { dispatch, closeModal } = this.props
     const { id } = this.state
     if( id ) {
       dispatch(updateVideo(this.state))
     } else {
       dispatch(createVideo(this.state))
     }
-    stepCompleted(2)
+    if( closeModal ) { closeModal() }
   }
 
   render = () => {

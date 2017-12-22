@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Step } from 'semantic-ui-react'
+import { Step, Icon } from 'semantic-ui-react'
 
 class CreatePostSteps extends Component {
   state = { step: '', completedSteps: [] }
@@ -20,20 +20,20 @@ class CreatePostSteps extends Component {
       this.setState({ step },
         ()=>this.props.resetStepTo(step)
       )
-    } 
+    }
   }
 
   render = () => {
     const { step, completedSteps } = this.state
-    const { attached = false } = this.props
     return (
-      <Step.Group ordered attached={ attached }>
+      <Step.Group>
 
         <Step
           link
           onClick={()=>this.setStep(1)}
           completed={ completedSteps.includes(1) }
           active={ step === 1 ? true : false }>
+          <Icon name='file text outline' />
           <Step.Content>
             <Step.Title>Create the Post</Step.Title>
             <Step.Description>
@@ -47,6 +47,7 @@ class CreatePostSteps extends Component {
           onClick={()=>this.setStep(2)}
           completed={ completedSteps.includes(2) }
           active={ step === 2 ? true : false }>
+          <Icon name='video' />
           <Step.Content>
             <Step.Title>Add Videos</Step.Title>
             <Step.Description>Include videos </Step.Description>
@@ -58,6 +59,7 @@ class CreatePostSteps extends Component {
           onClick={()=>this.setStep(3)}
           completed={ completedSteps.includes(3) }
           active={ step === 3 ? true : false }>
+          <Icon name='linkify' />
           <Step.Content>
             <Step.Title>Add Links</Step.Title>
             <Step.Description>Include links</Step.Description>

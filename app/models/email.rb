@@ -6,8 +6,8 @@
 #  address    :string           not null
 #  type_of    :string           not null
 #  owner_of   :string           not null
-#  html       :boolean          default(TRUE)
-#  active     :boolean          default(TRUE)
+#  html       :integer          default(1)
+#  active     :integer          default(1)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
