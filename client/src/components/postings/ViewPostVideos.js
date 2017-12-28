@@ -52,13 +52,15 @@ class ViewPostVideos extends Component {
     return (
       <List divided relaxed>
         { this.displayVideos() }
-        <List.Item>
-          <IconArea>
-            <Icon
-              name='plus square outline'
-              onClick={()=>this.editVideo()} />
-          </IconArea>
-        </List.Item>
+        { !this.props.removeAddIcon &&
+          <List.Item>
+            <IconArea>
+              <Icon
+                name='plus square outline'
+                onClick={()=>this.editVideo()} />
+            </IconArea>
+          </List.Item>
+        }
         { editor &&
           <EditPostModal
             editor={editor}

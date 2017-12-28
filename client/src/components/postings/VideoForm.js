@@ -34,14 +34,15 @@ class VideoForm extends Component {
   }
   onSubmit = ( event ) => {
     event.preventDefault()
-    const { dispatch, closeModal } = this.props
+    const { dispatch, closeModal, postId } = this.props
     const { id } = this.state
     if( id ) {
       dispatch(updateVideo(this.state))
     } else {
-      dispatch(createVideo(this.state))
+      dispatch(createVideo(postId, this.state))
     }
     if( closeModal ) { closeModal() }
+    this.onClear()
   }
 
   render = () => {
@@ -81,7 +82,7 @@ class VideoForm extends Component {
             <Button.Or />
             <Button
               type='button'
-              disabled={ id ? false : true }
+              disabled={ title ? false : true }
               onClick={this.onClear}>
               Clear Form
             </Button>

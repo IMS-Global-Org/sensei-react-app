@@ -13,7 +13,8 @@
 #
 
 class HomePageVideo < ApplicationRecord
-  validates_presence_of :title, :identifier, :source, :notes
+  validates_presence_of :title, :identifier, :source
+  validates :notes, presence: true, allow_blank: true
 
   belongs_to :home_page_posting
 end

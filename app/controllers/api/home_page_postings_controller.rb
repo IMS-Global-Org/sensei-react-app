@@ -47,7 +47,10 @@ class Api::HomePagePostingsController < ApplicationController
       .permit(
         :title,
         :message,
-        home_page_videos_attributes: [ :title, :identifier, :source ],
+        home_page_videos_attributes: [
+          :id, :title, :identifier, :source,
+          :created_at, :updated_at,
+        ],
         home_page_links_attributes: [ :title, :url, :abbreviation, :description]
       )
   end

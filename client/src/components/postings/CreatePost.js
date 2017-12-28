@@ -23,6 +23,7 @@ class CreatePost extends Component {
       this.setState({ step: step + 1 })
     }
   }
+  
   resetStepTo = ( step ) => this.setState({ step })
 
   render = () => {

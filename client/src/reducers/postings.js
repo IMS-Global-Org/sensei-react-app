@@ -1,7 +1,10 @@
 const defaults = {
   data: [],
   pagination: {},
-  activePosting: {},
+  activePosting: {
+    videos: [],
+    links: [],
+  },
 }
 
 const tablePostings = ( state = defaults, action ) => {
@@ -59,7 +62,10 @@ const tablePostings = ( state = defaults, action ) => {
           action.data,
           ...state.data,
         ],
-        activePosting: action.data,
+        activePosting: {
+          ...state.activePosting,
+          ...action.data,
+        },
       }
     case 'DELETE_POST':
       const filtered = state.data.filter( p => p.id !== action.data )

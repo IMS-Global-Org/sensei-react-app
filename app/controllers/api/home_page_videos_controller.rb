@@ -13,8 +13,10 @@ class Api::HomePageVideosController < ApplicationController
   end
 
   def create
-    video = HomePagePosting.find(params[:home_page_posting_id])
-      .build_video(video_params)
+    video = HomePagePosting
+      .find(params[:home_page_posting_id])
+      .home_page_videos
+      .build(video_params)
     if video.save
       render json: video
     else
