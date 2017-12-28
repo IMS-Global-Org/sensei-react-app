@@ -18,7 +18,8 @@ class CreatePostModal extends Component {
         open={openModal}
         onClose={this.onClose}>
         <Modal.Content scrolling>
-          <CreatePost />
+          <CreatePost
+            closeModal={this.onClose} />
         </Modal.Content>
         <Modal.Actions>
           <Button.Group size='mini'>

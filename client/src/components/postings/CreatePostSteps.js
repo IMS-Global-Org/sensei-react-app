@@ -50,7 +50,7 @@ class CreatePostSteps extends Component {
           <Icon name='video' />
           <Step.Content>
             <Step.Title>Add Videos</Step.Title>
-            <Step.Description>Include videos </Step.Description>
+            <Step.Description>Include videos</Step.Description>
           </Step.Content>
         </Step>
 
@@ -65,6 +65,7 @@ class CreatePostSteps extends Component {
             <Step.Description>Include links</Step.Description>
           </Step.Content>
         </Step>
+
       </Step.Group>
     )
   }

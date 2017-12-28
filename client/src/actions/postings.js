@@ -264,7 +264,7 @@ export const deleteLink = ( linkId ) => {
     .then( resp => {
       dispatch({
         type: 'DELETE_LINK',
-        data: resp.data,
+        data: linkId,
         headers: resp.headers,
       })
     })

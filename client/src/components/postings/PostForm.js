@@ -26,7 +26,10 @@ class PostForm extends Component {
 
   onInputChange = ({target: {id,value}}) => this.setState({ [id]: value })
   onClear = () => this.setState({ ...this.defaults })
-  onDelete = () => this.props.dispatch(deletePost(this.state.id))
+  onDelete = () => {
+    this.props.dispatch(deletePost(this.state.id))
+    this.props.closeModal(true)
+  }
   onSubmit = ( event ) => {
     event.preventDefault()
     const { dispatch, stepCompleted, closeModal } = this.props

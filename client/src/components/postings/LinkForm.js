@@ -28,7 +28,10 @@ class LinkForm extends Component {
 
   onInputChange = ({target: {id,value}}) => this.setState({ [id]: value })
   onClear = () => this.setState({ ...this.defaults })
-  onDelete = () => this.props.dispatch(deleteLink(this.state.id))
+  onDelete = () => {
+     this.props.dispatch(deleteLink(this.state.id))
+     this.props.closeModal()
+  }
   onSubmit = ( event ) => {
     event.preventDefault()
     const { dispatch, closeModal } = this.props

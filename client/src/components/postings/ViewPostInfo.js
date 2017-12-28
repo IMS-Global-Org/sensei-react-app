@@ -11,7 +11,9 @@ class ViewPostInfo extends Component {
   state = { ...this.defaults }
 
   editPost = () => this.setState({ editor: 'post' })
-  resetEditor = () => this.setState({ ...this.defaults })
+  resetEditor = () => {
+    this.setState({ ...this.defaults })
+  }
 
   render = () => {
     const { post } = this.props
@@ -33,7 +35,8 @@ class ViewPostInfo extends Component {
         { editor &&
           <EditPostModal
             editor={editor}
-            resetEditor={this.resetEditor} />
+            resetEditor={this.resetEditor}
+            closeModal={this.props.closeModal} />
         }
       </List>
     )

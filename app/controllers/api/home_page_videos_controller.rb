@@ -1,6 +1,6 @@
 class Api::HomePageVideosController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_video, only: [:show, :update, :delete]
+  before_action :set_video, only: [:show, :update, :destroy]
 
   def index
     videos = HomePagePosting.find(params[:home_page_posting_id])
@@ -30,7 +30,7 @@ class Api::HomePageVideosController < ApplicationController
     end
   end
 
-  def delete
+  def destroy
     @video.destroy
   end
 

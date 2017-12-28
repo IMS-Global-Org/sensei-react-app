@@ -16,9 +16,13 @@ class EditPostModal extends Component {
     link: LinkForm,
   }
 
-  onClose = () =>
+  onClose = ( closeParent = false ) => {
     this.setState({ openModal: false },
       this.props.resetEditor())
+    if( typeof(closeParent) === 'boolean' && closeParent === true ) {
+      this.props.closeModal()
+    }
+  }
 
   dataFactory = ( editor ) => {
     const { post, id } = this.props

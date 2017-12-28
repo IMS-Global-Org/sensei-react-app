@@ -107,8 +107,42 @@ const tablePostings = ( state = defaults, action ) => {
         },
       }
     case 'CREATE_LINK':
+      return {
+        ...state,
+        activePosting: {
+          ...state.activePosting,
+          links: [
+            action.data,
+            ...state.activePosting.links
+          ],
+        },
+      }
     case 'UPDATE_LINK':
+      index = state.activePosting.links.find(
+        l => l.id === action.data.id
+      )
+      return {
+        ...state,
+        activePosting: {
+          ...state.activePosting,
+          links: [
+            ...state.activePosting.links.slice(0,index),
+            action.data,
+            ...state.activePosting.links.slice(index + 1),
+          ],
+        },
+      }
     case 'DELETE_LINK':
+      const links = state.activePosting.links.filter(
+        l => l.id !== action.data
+      )
+      return {
+        ...state,
+        activePosting: {
+          ...state.activePosting,
+          links: links,
+        }
+      }
     default:
       return state
   }

@@ -41,7 +41,9 @@ class ViewPost extends Component {
           <Grid.Column width={16}>
             <Seg basic>
               <Label ribbon>Post Information</Label>
-              <ViewPostInfo post={post} />
+              <ViewPostInfo
+                post={post}
+                closeModal={this.props.closeModal} />
             </Seg>
           </Grid.Column>
         </Grid.Row>
@@ -49,13 +51,17 @@ class ViewPost extends Component {
           <Grid.Column width={8}>
             <Seg basic>
               <Label ribbon>Videos</Label>
-              <ViewPostVideos videos={post.videos} />
+              <ViewPostVideos
+                videos={post.videos}
+                closeModal={this.props.closeModal} />
             </Seg>
           </Grid.Column>
           <Grid.Column width={8}>
             <Seg basic>
               <Label ribbon>Links</Label>
-              <ViewPostLinks links={post.links} />
+              <ViewPostLinks
+                links={post.links}
+                closeModal={this.props.closeModal} />
             </Seg>
           </Grid.Column>
         </Grid.Row>
