@@ -56,7 +56,7 @@ export const queryContractees = ( query ) => {
   }
 }
 
-export const createContractee = ( contractId, contractee ) => {
+export const createContractee = ( contractId, contractee, callback = null ) => {
   return (dispatch) => {
     axios.post(`/api/contracts/${contractId}/create_contractee`, { contractee })
     .then( resp => {
@@ -65,6 +65,7 @@ export const createContractee = ( contractId, contractee ) => {
         data: resp.data,
         headers: resp.headers,
       })
+      if( callback ) { callback() }
     })
     .catch( resp => {
       dispatch(
@@ -77,7 +78,7 @@ export const createContractee = ( contractId, contractee ) => {
 export const addContractee = ( contractId, contracteeIds, callback = null ) => {
   const query = `?contractees=${contracteeIds.join(',')}`
   return (dispatch) => {
-    axios.post(`/api/contracts/${contractId}/add_contractee${query}`)
+    axios.patch(`/api/contracts/${contractId}/add_contractee${query}`)
     .then( resp => {
       dispatch({
         type: 'ADD_CONTRACT_CONTRACTEE',

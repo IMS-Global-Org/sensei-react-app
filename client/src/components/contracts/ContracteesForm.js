@@ -7,7 +7,7 @@ import ContracteeList from './ContracteeList'
 import {
   indexContractees,
   queryContractees,
-  createContractee,
+  addContractee,
   clearContractees,
 } from '../../actions/contractees.js'
 
@@ -61,7 +61,7 @@ class ContracteesForm extends Component {
     const { dispatch, contractId } = this.props
     const { selected } = this.state
     if( selected.length > 0 ) {
-      dispatch(createContractee(contractId,selected,
+      dispatch(addContractee(contractId,selected,
         ()=>this.setState({ selected: '' })))
     }
   }
@@ -95,7 +95,7 @@ class ContracteesForm extends Component {
             selection
             options={this.listPossibleContractees()}
             onSearchChange={this.filterPossibleContractees}
-            onChange={this.handleContracteeUpdate}/>
+            onChange={this.handleContracteeUpdate} />
           <Form.Field>
             <Segment basic textAlign='center' vertical>
               <Button
