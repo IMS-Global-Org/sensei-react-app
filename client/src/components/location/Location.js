@@ -6,6 +6,11 @@ import {
 import LocationGoogleMap from './LocationGoogleMap'
 import styled from 'styled-components'
 
+// Images
+import Motivation from '../../images/motivation.jpg'
+
+import '../../styles/martial_arts.css'
+
 // Custom Styled Components
 const Map = styled(Card)`
   width: 100% !important;
@@ -117,7 +122,7 @@ class Location extends Component {
           </Map>
         </Segment>
         <Segment basic padded={false}>
-          <Image src='../../images/motivation.jpg' className='motivation' />
+          <Image src={Motivation} className='motivation' />
         </Segment>
       </Container>
     )

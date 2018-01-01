@@ -34,14 +34,15 @@ class LinkForm extends Component {
   }
   onSubmit = ( event ) => {
     event.preventDefault()
-    const { dispatch, closeModal } = this.props
+    const { dispatch, closeModal, postId } = this.props
     const { id } = this.state
     if( id ) {
       dispatch(updateLink(this.state))
     } else {
-      dispatch(createLink(this.state))
+      dispatch(createLink(postId, this.state))
     }
-    closeModal()
+    if( closeModal ){ closeModal() }
+    this.onClear()
   }
 
   render = () => {

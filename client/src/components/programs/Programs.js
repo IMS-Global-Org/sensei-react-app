@@ -5,6 +5,9 @@ import { Container, Segment, Header, Icon, Message, Image } from 'semantic-ui-re
 import styled from 'styled-components'
 import User from '../User'
 
+// Images
+import FormsAll  from '../../images/FormsAll.png'
+
 import '../../styles/martial_arts.css'
 
 // Custom Styled Components
@@ -66,7 +69,7 @@ class Programs extends Component {
           </Message>
         </Videos>
         <Segment basic padded={false}>
-          <Image src='../../images/FormsAll.png' className='forms-all' />
+          <Image src={FormsAll}  className='forms-all' />
         </Segment>
       </Container>
     )

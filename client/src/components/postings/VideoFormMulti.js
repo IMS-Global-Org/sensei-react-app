@@ -12,7 +12,7 @@ class VideoFormMulti extends Component {
   loadVideos = ( props ) => {
     const { videos: newVideos } = props
     const { videos: oldVideos } = this.state
-    if( newVideos.length !== oldVideos.length ){
+    if( typeof oldVideos !== 'object' || newVideos.length !== oldVideos.length ){
       this.setState({ videos: newVideos })
     }
   }

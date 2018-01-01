@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { Segment } from 'semantic-ui-react'
 import CreatePostSteps from './CreatePostSteps'
 import PostForm from './PostForm'
 import VideoFormMulti from './VideoFormMulti'
 import LinkFormMulti from './LinkFormMulti'
+import ViewPost from './ViewPost'
 
 class CreatePost extends Component {
   defaults = { step: 1, completedSteps: [] }
@@ -23,7 +25,7 @@ class CreatePost extends Component {
       this.setState({ step: step + 1 })
     }
   }
-  
+
   resetStepTo = ( step ) => this.setState({ step })
 
   render = () => {
@@ -40,6 +42,9 @@ class CreatePost extends Component {
             0: <PostForm stepCompleted={this.stepCompleted} />,
             1: <VideoFormMulti stepCompleted={this.stepCompleted} />,
             2: <LinkFormMulti stepCompleted={this.stepCompleted} />,
+            3: <ViewPost
+                  postId={this.props.activePosting.id}
+                  post={this.props.activePosting} />
           }[step - 1]}
         </Segment>
         <CreatePostSteps
@@ -52,4 +57,10 @@ class CreatePost extends Component {
   }
 }
 
-export default CreatePost
+const mapStateToProps = ( state, props ) => {
+  return {
+    activePosting: state.tablePostings.activePosting,
+  }
+}
+
+export default connect(mapStateToProps)(CreatePost)

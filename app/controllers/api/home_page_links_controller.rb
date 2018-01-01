@@ -11,7 +11,10 @@ class Api::HomePageLinksController < ApplicationController
   end
 
   def create
-    home_page_link = HomePageLink.build(home_page_link_params)
+    home_page_link = HomePagePosting
+      .find(params[:home_page_posting_id])
+      .home_page_links
+      .build(home_page_link_params)
     if home_page_link.save
       render json: home_page_link
     else

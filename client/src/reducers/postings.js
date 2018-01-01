@@ -21,7 +21,7 @@ const tablePostings = ( state = defaults, action ) => {
     case 'CLEAR_ACTIVE_POSTING':
       return {
         ...state,
-        activePosting: {},
+        activePosting: {...defaults.activePosting},
       }
     case 'SHOW_POSTINGS_TABLE':
       return {
@@ -124,7 +124,7 @@ const tablePostings = ( state = defaults, action ) => {
         },
       }
     case 'UPDATE_LINK':
-      index = state.activePosting.links.find(
+      index = state.activePosting.links.findIndex(
         l => l.id === action.data.id
       )
       return {

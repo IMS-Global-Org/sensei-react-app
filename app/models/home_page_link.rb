@@ -13,7 +13,8 @@
 #
 
 class HomePageLink < ApplicationRecord
-  validates_presence_of :title, :url, :abbreviation
-  
+  validates_presence_of :title, :url
+  validates :abbreviation, presence: true, allow_blank: true
+
   belongs_to :home_page_posting
 end

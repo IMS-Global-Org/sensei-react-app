@@ -7,6 +7,9 @@ import {
 import styled from 'styled-components'
 import moment from 'moment'
 
+// Images
+import SevenFiveThree from '../../images/7-5-3.jpg'
+
 // Custom CSS
 import '../../styles/martial_arts.css'
 
@@ -384,7 +387,7 @@ class Calendar extends Component {
         </CalendarHeader>
         { this.generateCalendar() }
         <Segment basic padded={false}>
-          <Image src='../../images/7-5-3.jpg' className='image-7-5-3' />
+          <Image src={SevenFiveThree} className='image-7-5-3' rounded />
         </Segment>
       </Container>
     )

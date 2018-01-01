@@ -52,19 +52,21 @@ class ViewPostLinks extends Component {
     return (
       <List divided relaxed>
         { this.displayLinks() }
-        <List.Item>
-          <IconArea>
-            <Icon
-              name='plus square outline'
-              onClick={()=>this.editLink()} />
-          </IconArea>
-          { editor &&
-            <EditPostModal
-              editor={editor}
-              id={linkId}
-              resetEditor={this.resetEditor} />
-          }
-        </List.Item>
+        { !this.props.removeAddIcon &&
+          <List.Item>
+            <IconArea>
+              <Icon
+                name='plus square outline'
+                onClick={()=>this.editLink()} />
+            </IconArea>
+          </List.Item>
+        }
+        { editor &&
+          <EditPostModal
+            editor={editor}
+            id={linkId}
+            resetEditor={this.resetEditor} />
+        }
       </List>
     )
   }
