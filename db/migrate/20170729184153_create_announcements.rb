@@ -5,8 +5,8 @@ class CreateAnnouncements < ActiveRecord::Migration[5.1]
       t.string :category, null: false
       t.string :message, null: false
       t.text :extra
-      t.date :start_date, null: false
-      t.date :end_date, null: false
+      t.timestamp :start_date, null: false
+      t.timestamp :end_date, null: false
       t.string :link
       t.float :cost
       t.integer :registration
