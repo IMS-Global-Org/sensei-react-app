@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Redirect } from 'react-router'
 import { Container, Segment, Header, Icon, Message, Image } from 'semantic-ui-react'
 import styled from 'styled-components'
-import User from '../User'
 
 // Images
 import FormsAll  from '../../images/FormsAll.png'
@@ -24,7 +22,6 @@ const Videos = styled(Segment)`
 class Programs extends Component {
 
   render() {
-    if(!(new User()).isAdmin()) { return ( <Redirect to='/' /> ) }
     return (
       <Container>
         <Videos>
