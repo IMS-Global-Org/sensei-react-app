@@ -4,7 +4,7 @@ namespace :contracts do |loader_namespace|
     Contractee.destroy_all
     Address.destroy_all
     Email.destroy_all
-    # Contract.destroy_all
+    Contract.destroy_all
     Payment.destroy_all
     Phone.destroy_all
 
