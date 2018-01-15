@@ -22,7 +22,9 @@ class CalendarEvent extends Component {
   render() {
     const { event } = this.props
     return (
-      <Popup trigger={<Event><Icon name='calendar outline' />{event.category}</Event>}>
+      <Popup trigger={
+          <Event><Icon name='calendar outline' />{event.category}</Event>
+      }>
         <Popup.Content>
           <Segment basic>
             <Header as='h3' icon textAlign='center'>

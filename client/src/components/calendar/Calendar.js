@@ -387,7 +387,7 @@ class Calendar extends Component {
         </CalendarHeader>
         { this.generateCalendar() }
         <Segment basic padded={false}>
-          <Image src={SevenFiveThree} className='image-7-5-3' rounded />
+          <Image src={SevenFiveThree} className='image-7-5-3' />
         </Segment>
       </Container>
     )

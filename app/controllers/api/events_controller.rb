@@ -1,5 +1,5 @@
 class Api::EventsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:index, :show]
   before_action :set_event, only: %i[show update destroy]
 
   def index
