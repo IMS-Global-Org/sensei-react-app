@@ -9,8 +9,8 @@ class Api::AnnouncementsController < ApplicationController
   def index
     # query and return ordered by newest event
     ancts = Announcement
-      .where('start_date >= ? AND end_date < ?',@start_date,@end_date)
-      .order(:start_date, :end_date)
+      .where('start_date >= ?', @start_date)
+      .order(start_date: :desc)
       .page(params[:page]).per_page(params[:per])
 
     render_paginated_model ancts
@@ -61,20 +61,7 @@ class Api::AnnouncementsController < ApplicationController
 
   # Set the time period for retrieving announcements
   def set_dates
-    # Both dates are provided
-    if params[:start_date] && params[:end_date]
-      @start_date = params[:start_date] if params[:start_date]
-      @end_date = params[:end_date] if params[:end_date]
-
-    # only a starting date has been provided
-    elsif params[:start_date] && !params[:end_date]
-      @start_date = params[:start_date] if params[:start_date]
-      @end_date = Time.new.utc + 1.day
-
-    # No dates were submitted
-    else
-      @start_date = 2.weeks.ago
-      @end_date = 1.week.from_now
-    end
+    @start_date = Time.new.utc - 1.hour
+    @end_date = 1.week.from_now
   end
 end

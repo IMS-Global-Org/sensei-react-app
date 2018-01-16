@@ -114,16 +114,19 @@ class AnnouncementForm extends Component {
     return (
       <Form onSubmit={this.handleSubmit}>
         <Form.Input
+          required
           label='Title'
           id='title'
           value={ title }
           onChange={this.handleChange} />
         <Form.Input
+          required
           label='Category'
           id='category'
           value={ category }
           onChange={this.handleChange} />
         <Form.Input
+          required
           label='Message'
           id='message'
           value={ message }

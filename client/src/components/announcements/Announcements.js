@@ -11,7 +11,10 @@ import InfiniteScroll from 'react-infinite-scroller'
 // Custom Styled Components
 const AnnouncementsArea = styled(Segment)`
   overflow: auto;
-  height: 600px;
+  display: flex;
+  flex: 0 1 auto;
+  flex-flow: column;
+  height: 80vh !important;
 `
 
 /**
@@ -84,7 +87,7 @@ class Announcements extends Component {
    */
   render() {
     return (
-      <AnnouncementsArea>
+      <AnnouncementsArea basic>
         <InfiniteScroll
           pageStart={0}
           loadMore={this.loadMore}

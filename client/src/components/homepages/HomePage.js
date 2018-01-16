@@ -71,7 +71,7 @@ class HomePage extends Component {
 
   render(){
     return (
-      <Postings>
+      <Postings basic>
         <InfiniteScroll
           hasMore={this.state.hasMore}
           pageStart={1}

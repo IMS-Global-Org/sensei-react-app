@@ -10,7 +10,7 @@ import HomePageLinks from '../homepages/HomePageLinks'
  */
 const Posting = ({ id, title, message, home_page_videos, home_page_links }) => {
   return (
-    <Segment>
+    <Segment basic>
       <Header as='h3' textAlign='center'>
         { title }
       </Header>

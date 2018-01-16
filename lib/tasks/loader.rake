@@ -6,8 +6,8 @@ namespace :loader do |loader_namespace|
     Announcement.destroy_all
 
     # set working dates
-    start_date = 1.week.ago
-    end_date = 1.week.from_now
+    start_date = Time.new - 1.hour
+    end_date = 2.week.from_now
 
     # load some examples
     50.times do
