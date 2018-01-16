@@ -2,6 +2,7 @@ import React from 'react';
 import { Grid, Segment, Header } from 'semantic-ui-react';
 import Announcements from '../announcements/Announcements'
 import HomePage from './HomePage'
+import Welcome from './Welcome'
 import styled from 'styled-components'
 
 // Custom Styled Components
@@ -15,7 +16,7 @@ const Home = () => (
     <Grid>
       <Grid.Row columns={1}>
         <Grid.Column width={16}>
-          Welcome Message
+          <Welcome />
         </Grid.Column>
       </Grid.Row>
       <Grid.Row columns={2}>
