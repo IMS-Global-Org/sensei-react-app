@@ -1,0 +1,35 @@
+.parallax {
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100%;
+}
+
+.form01 {
+  background-image: url('../images/7-5-3.jpg');
+}
+.form02 {
+  background-image: url('../images/FormsAll.png');
+}
+.form03 {
+  background-image: url('../images/motivation.jpg');
+}
+.form04 {
+  background-image: url('../images/7-5-3.jpg')
+}
+
+.parallax-text {
+  margin: 0 2rem;
+}
+.parallax-text .parallax-header {
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  padding: 2rem 0;
+}
+.parallax-text .parallax-body {
+  line-height: 1.5rem;
+  text-align: justify;
+  padding: 1rem;
+}

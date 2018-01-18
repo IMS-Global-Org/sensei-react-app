@@ -139,6 +139,18 @@ class NavBar extends Component {
           name='location'
           active={activeItem === 'location'}
           onClick={this.handleItemClick} />
+        <Menu.Item
+          as={ Link }
+          to='/blog'
+          name='blog'
+          active={activeItem === 'blog'}
+          onClick={this.handleItemClick} />
+        <Menu.Item
+          as={ Link }
+          to='/news'
+          name='news'
+          active={activeItem === 'news'}
+          onClick={this.handleItemClick} />
         { this.rightNavs() }
       </Menu>
     )

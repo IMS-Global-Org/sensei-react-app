@@ -28,6 +28,8 @@ import Students from './students/Students'
 import Mailers from './mailers/Mailers'
 import Contracts from './contracts/Contracts'
 import Contractees from './contractees/Contractees'
+import HomePage from './homepages/HomePage'
+import Announcements from './announcements/Announcements'
 
 class App extends Component {
   render() {
@@ -37,7 +39,6 @@ class App extends Component {
         <NavBar />
         <div className='multi-bg-images'>
           <Flash />
-          <FetchUser>
             <Switch>
               <Route exact path='/' component={Home} />
               <Route exact path='/login' component={Login} />
@@ -45,18 +46,21 @@ class App extends Component {
               <Route exact path='/calendar' component={Calendar} />
               <Route exact path='/programs' component={Programs} />
               <Route exact path='/location' component={Location} />
-              <ProtectedRoute exact path='/calendar/events' component={EventEditor} />
-              <ProtectedRoute exact path='/program/tracker' component={ProgramTracker} />
-              <ProtectedRoute exact path='/settings' component={Settings} />
-              <ProtectedRoute path='/announcements' component={AnnouncementManager} />
-              <ProtectedRoute path='/postings' component={HomePagePostings} />
-              <ProtectedRoute path='/students' component={Students} />
-              <ProtectedRoute path='/mailers' component={Mailers} />
-              <ProtectedRoute path='/contracts' component={Contracts} />
-              <ProtectedRoute path='/contractees' component={Contractees} />
+              <Route exact path='/blog' component={HomePage} />
+              <Route exact path='/news' component={Announcements} />
+              <FetchUser>
+                <ProtectedRoute exact path='/calendar/events' component={EventEditor} />
+                <ProtectedRoute exact path='/program/tracker' component={ProgramTracker} />
+                <ProtectedRoute exact path='/settings' component={Settings} />
+                <ProtectedRoute path='/announcements' component={AnnouncementManager} />
+                <ProtectedRoute path='/postings' component={HomePagePostings} />
+                <ProtectedRoute path='/students' component={Students} />
+                <ProtectedRoute path='/mailers' component={Mailers} />
+                <ProtectedRoute path='/contracts' component={Contracts} />
+                <ProtectedRoute path='/contractees' component={Contractees} />
+              </FetchUser>
               <Route component={NoMatch} />
             </Switch>
-          </FetchUser>
         </div>
       </div>
     );
