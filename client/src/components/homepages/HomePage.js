@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Segment, Loader } from 'semantic-ui-react'
+import { Container, Segment, Loader } from 'semantic-ui-react'
 import {
   indexPostings, emptyReduxPostings,
 } from '../../actions/homePage.js'
@@ -71,18 +71,20 @@ class HomePage extends Component {
 
   render(){
     return (
-      <Postings basic>
-        <InfiniteScroll
-          hasMore={this.state.hasMore}
-          pageStart={1}
-          loadMore={this.loadMore}
-          loader={<Segment><Loader active /></Segment>}
-          useWindow={false}>
-          <div>
-            { this.displayPostings() }
-          </div>
-        </InfiniteScroll>
-      </Postings>
+      <Container>
+        <Postings basic>
+          <InfiniteScroll
+            hasMore={this.state.hasMore}
+            pageStart={1}
+            loadMore={this.loadMore}
+            loader={<Segment><Loader active /></Segment>}
+            useWindow={false}>
+            <div>
+              { this.displayPostings() }
+            </div>
+          </InfiniteScroll>
+        </Postings>
+      </Container>
     )
   }
 }

@@ -31,6 +31,9 @@ import Contractees from './contractees/Contractees'
 import HomePage from './homepages/HomePage'
 import Announcements from './announcements/Announcements'
 
+// Fonts
+import '../styles/yozakura.css'
+
 class App extends Component {
   render() {
     return (

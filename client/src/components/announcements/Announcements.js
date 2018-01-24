@@ -13,9 +13,16 @@ const AnnouncementsArea = styled(Segment)`
   overflow: auto;
   display: flex;
   flex: 0 1 auto;
-  flex-flow: column;
+  flex-wrap: wrap;
   height: 80vh !important;
 `
+const WrapingBox = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  width: 50%;
+  margin: 0 25%;
+`
+
 
 /**
  * Presentation of individual announcements
@@ -95,9 +102,9 @@ class Announcements extends Component {
           loader={<Segment><Loader active /></Segment>}
           useWindow={false} >
           {/* additional 'div' elements are required by InfiniteScroll */}
-          <div>
+          <WrapingBox>
             { this.displayAnnouncements() }
-          </div>
+          </WrapingBox>
         </InfiniteScroll>
       </AnnouncementsArea>
     )

@@ -21,7 +21,7 @@ const Column = styled(Grid.Column)`
 const Announcement = ({ data }) => {
   if( data ) {
     return (
-      <Card>
+      <Card style={{ margin: '0.25rem' }}>
         <Card.Content extra >
           <Card.Header style={{textAlign: 'center', padding: '1rem 0'}}>
             {data.title}

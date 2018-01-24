@@ -2,7 +2,8 @@ import React from 'react'
 import '../../styles/parallax.css'
 
 const Welcome = () => (
-  <div style={{ height: '1000px', overflow: 'auto' }}>
+  <div className='parallax-container'>
+    <div className='parallax-image form02' ></div>
     <div className='parallax-text'>
       <div className='parallax-header'>
         Physical Fitness
@@ -12,7 +13,7 @@ const Welcome = () => (
         Many traditional dōjō follow a prescribed pattern with shomen ("front") and various entrances that are used based on student and instructor rank laid out precisely. Typically students will enter in the lower-left corner of the dōjō (in reference to the shomen) with instructors in the upper right corner. Shomen typically contains a Shintō shrine with a sculpture, flower arrangement, or other artifacts. The term kamiza means "place of honor" and a related term, kamidana refers to the shrine itself. Other artifacts may be displayed throughout the dōjō, such as kanban that authorize the school in a style or strategy, and items such as taiko drums or armor (yoroi). It is not uncommon to find the name of the dōjō and the dōjō kun (roughly "dōjō rules") displayed prominently at shomen as well. Visitors may have a special place reserved, depending on their rank and station. Weapons and other training gear will normally be found on the back wall.
       </p>
     </div>
-    <div className='parallax form02' ></div>
+    <div className='parallax-image form03' ></div>
     <div className='parallax-text'>
       <div className='parallax-header'>
         Mental Strength
@@ -22,7 +23,7 @@ const Welcome = () => (
         Many traditional dōjō follow a prescribed pattern with shomen ("front") and various entrances that are used based on student and instructor rank laid out precisely. Typically students will enter in the lower-left corner of the dōjō (in reference to the shomen) with instructors in the upper right corner. Shomen typically contains a Shintō shrine with a sculpture, flower arrangement, or other artifacts. The term kamiza means "place of honor" and a related term, kamidana refers to the shrine itself. Other artifacts may be displayed throughout the dōjō, such as kanban that authorize the school in a style or strategy, and items such as taiko drums or armor (yoroi). It is not uncommon to find the name of the dōjō and the dōjō kun (roughly "dōjō rules") displayed prominently at shomen as well. Visitors may have a special place reserved, depending on their rank and station. Weapons and other training gear will normally be found on the back wall.
       </p>
     </div>
-    <div className='parallax form03' ></div>
+    <div className='parallax-image form04' ></div>
     <div className='parallax-text'>
       <div className='parallax-header'>
         Courage
@@ -32,7 +33,6 @@ const Welcome = () => (
         Many traditional dōjō follow a prescribed pattern with shomen ("front") and various entrances that are used based on student and instructor rank laid out precisely. Typically students will enter in the lower-left corner of the dōjō (in reference to the shomen) with instructors in the upper right corner. Shomen typically contains a Shintō shrine with a sculpture, flower arrangement, or other artifacts. The term kamiza means "place of honor" and a related term, kamidana refers to the shrine itself. Other artifacts may be displayed throughout the dōjō, such as kanban that authorize the school in a style or strategy, and items such as taiko drums or armor (yoroi). It is not uncommon to find the name of the dōjō and the dōjō kun (roughly "dōjō rules") displayed prominently at shomen as well. Visitors may have a special place reserved, depending on their rank and station. Weapons and other training gear will normally be found on the back wall.
       </p>
     </div>
-    <div className='parallax form04' ></div>
   </div>
 )
 

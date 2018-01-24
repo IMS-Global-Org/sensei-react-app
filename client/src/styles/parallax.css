@@ -1,34 +1,45 @@
-.parallax {
+.parallax-image {
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 100%;
+  height: 50%;
+  border-radius: 20px;
 }
 
 .form01 {
-  background-image: url('../images/7-5-3.jpg');
+  background-image: url('../images/irving_lubis001.jpg');
 }
 .form02 {
-  background-image: url('../images/FormsAll.png');
+  background-image: url('../images/irving_lubis02.jpg');
 }
 .form03 {
-  background-image: url('../images/motivation.jpg');
+  background-image: url('../images/irving_lubis03.jpg');
 }
 .form04 {
-  background-image: url('../images/7-5-3.jpg')
+  background-image: url('../images/irving_lubis001.jpg')
+}
+
+.parallax-container {
+  overflow: auto;
+  height: 1000px;
 }
 
 .parallax-text {
-  margin: 0 2rem;
+  width: 80%;
+  margin: 0 10%;
 }
 .parallax-text .parallax-header {
-  font-size: 2rem;
+  font-family: 'yozakura';
+  letter-spacing: 0.25rem;
+  color: #fff;
+  font-size: 6rem;
   font-weight: bold;
   text-align: center;
-  padding: 2rem 0;
+  padding: 3rem 0;
 }
 .parallax-text .parallax-body {
+  color: #fff;
   line-height: 1.5rem;
   text-align: justify;
   padding: 1rem;

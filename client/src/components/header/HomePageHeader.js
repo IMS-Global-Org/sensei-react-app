@@ -10,15 +10,16 @@ import RightForm from '../../images/form03.png'
 import '../../styles/header.css'
 
 const Title = styled(Header)`
+  font-family: "yozakura" !important;
   color: #fff !important;
   margin: 2rem 0 !important;
-  font-size: 4rem !important;
+  font-size: 8rem !important;
   font-style: italic;
   letter-spacing: 1rem;
 `
 const SubTitle = styled(Header.Subheader)`
   color: #fff !important;
-  font-size: 2rem !important;
+  font-size: 4rem !important;
   font-style: oblique;
   margin: 1rem 0 !important;
   letter-spacing: 0.5rem;

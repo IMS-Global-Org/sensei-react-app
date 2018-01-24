@@ -1,12 +1,3 @@
 .mainBackgroundColor {
   background-color: #8f0222;
 }
-/*.BackgroundDragons {
-  this works in styled-components, place images in the public folder
-  background-image: url('BorderDragons.png');
-  background-repeat: repeat-y !important;
-  background-position: left;
-  background-size: auto 25% !important;
-  background-color: green;
-  height: 50vh;
-}*/
