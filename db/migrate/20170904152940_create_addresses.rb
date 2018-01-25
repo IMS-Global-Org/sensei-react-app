@@ -8,7 +8,7 @@ class CreateAddresses < ActiveRecord::Migration[5.1]
       t.string :zipcode, null: false
       t.string :type_of, null: false, default: 'Home'
       t.string :owner_of, null: false, default: 'Parent'
-      t.integer :active, default: true
+      t.integer :active, default: 1
 
       t.timestamps
     end

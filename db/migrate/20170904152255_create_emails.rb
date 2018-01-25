@@ -5,7 +5,7 @@ class CreateEmails < ActiveRecord::Migration[5.1]
       t.string :type_of, null: false
       t.string :owner_of, null: false
       t.integer :html, default: true
-      t.integer :active, default: true
+      t.integer :active, default: 1
 
       t.timestamps
     end

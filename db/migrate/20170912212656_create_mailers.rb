@@ -7,7 +7,7 @@ class CreateMailers < ActiveRecord::Migration[5.1]
       t.boolean :active, null: false, default: true
       t.string :recipients, null: false
       t.string :subject
-      t.boolean :notify, null: false, default: false
+      t.integer :notify, null: false, default: 0
       t.string :job
 
       t.timestamps

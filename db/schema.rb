@@ -45,8 +45,8 @@ ActiveRecord::Schema.define(version: 20170926203012) do
     t.string "category", null: false
     t.string "message", null: false
     t.text "extra"
-    t.date "start_date", null: false
-    t.date "end_date", null: false
+    t.datetime "start_date", null: false
+    t.datetime "end_date", null: false
     t.string "link"
     t.float "cost"
     t.integer "registration"
@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(version: 20170926203012) do
   create_table "contractees", force: :cascade do |t|
     t.string "first", null: false
     t.string "last", null: false
-    t.integer "active", default: 1, null: false
+    t.integer "active", default: 1
     t.datetime "birthdate"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -175,7 +175,7 @@ ActiveRecord::Schema.define(version: 20170926203012) do
     t.boolean "active", default: true, null: false
     t.string "recipients", null: false
     t.string "subject"
-    t.boolean "notify", default: false, null: false
+    t.integer "notify", default: 0, null: false
     t.string "job"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -185,7 +185,7 @@ ActiveRecord::Schema.define(version: 20170926203012) do
     t.datetime "charged", null: false
     t.string "method", null: false
     t.float "amount", null: false
-    t.boolean "verified", null: false
+    t.integer "verified", default: 0, null: false
     t.bigint "contract_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -234,7 +234,7 @@ ActiveRecord::Schema.define(version: 20170926203012) do
     t.string "photo"
     t.string "belt"
     t.string "level"
-    t.boolean "active", default: true, null: false
+    t.integer "active", default: 1, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

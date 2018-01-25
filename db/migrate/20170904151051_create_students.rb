@@ -8,7 +8,7 @@ class CreateStudents < ActiveRecord::Migration[5.1]
       t.string :photo
       t.string :belt
       t.string :level
-      t.boolean :active, null: false, default: true
+      t.integer :active, null: false, default: 1
 
       t.timestamps
     end
