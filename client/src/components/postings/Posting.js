@@ -1,7 +1,19 @@
 import React from 'react'
-import { Segment, Header } from 'semantic-ui-react'
+import { Segment, Header, Image, Icon } from 'semantic-ui-react'
 import HomePageVideos from '../homepages/HomePageVideos'
 import HomePageLinks from '../homepages/HomePageLinks'
+import styled from 'styled-components'
+
+import ThrowingStar from '../../images/throwing_star.jpeg'
+
+// Custom Styled Components
+const Title = styled(Header)`
+  font-family: 'yozakura' !important;
+  font-size: 5rem !important;
+  font-weight: bolder !important;
+  letter-spacing: 0.25rem;
+  color: #cd000a !important;
+`
 
 /**
  * TODO Arrange the layout of the information for the individual Postings
@@ -10,10 +22,17 @@ import HomePageLinks from '../homepages/HomePageLinks'
  */
 const Posting = ({ id, title, message, home_page_videos, home_page_links }) => {
   return (
-    <Segment basic>
-      <Header as='h3' textAlign='center'>
+    <Segment>
+      <Segment basic textAlign='center'>
+        <Image
+          circular
+          size='small'
+          src={ThrowingStar}
+          verticalAlign='middle' />
+      </Segment>
+      <Title as='h1' textAlign='center'>
         { title }
-      </Header>
+      </Title>
       <p>{ message }</p>
       <HomePageVideos videos={home_page_videos} />
       <HomePageLinks links={home_page_links} />

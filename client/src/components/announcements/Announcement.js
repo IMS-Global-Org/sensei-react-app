@@ -14,6 +14,15 @@ const Row = styled(Grid.Row)`
 const Column = styled(Grid.Column)`
   padding: 0 3% !important;
 `
+const CardHeader = styled(Card.Header)`
+  text-align: center;
+  padding: 1rem 0;
+  color: #cd000a !important;
+  font-family: 'yozakura' !important;
+  font-size: 1.5rem !important;
+  font-weight: bold;
+  letter-spacing: 0.25rem;
+`
 
 /**
  * Presentation of a single Announcement
@@ -21,11 +30,11 @@ const Column = styled(Grid.Column)`
 const Announcement = ({ data }) => {
   if( data ) {
     return (
-      <Card style={{ margin: '0.25rem' }}>
+      <Card style={{ margin: '0.25rem', borderColor: '#cd000a' }}>
         <Card.Content extra >
-          <Card.Header style={{textAlign: 'center', padding: '1rem 0'}}>
+          <CardHeader>
             {data.title}
-          </Card.Header>
+          </CardHeader>
           <Card.Meta>
             Event Type:&nbsp;{data.category}
             { data.link &&

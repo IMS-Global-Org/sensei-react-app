@@ -3,8 +3,9 @@ import { Grid, Header, Image } from 'semantic-ui-react'
 import styled from 'styled-components'
 
 // Images
-import LeftForm from '../../images/form04.png'
+// import LeftForm from '../../images/form04.png'
 import RightForm from '../../images/form03.png'
+import BLK_DOJO from '../../images/blkdojo_official_alpha.png'
 
 // Custom CSS
 import '../../styles/header.css'
@@ -12,16 +13,15 @@ import '../../styles/header.css'
 const Title = styled(Header)`
   font-family: "yozakura" !important;
   color: #fff !important;
-  margin: 2rem 0 !important;
   font-size: 8rem !important;
-  font-style: italic;
-  letter-spacing: 1rem;
+  margin: 0.5rem 0 !important;
+  letter-spacing: 1.5rem;
 `
 const SubTitle = styled(Header.Subheader)`
   color: #fff !important;
   font-size: 4rem !important;
   font-style: oblique;
-  margin: 1rem 0 !important;
+  margin: 0.5rem 0 !important;
   letter-spacing: 0.5rem;
 `
 
@@ -31,15 +31,13 @@ class HomePageHeader extends Component {
       <Grid style={{ padding: '0.5rem 0.5rem' }}>
         <Grid.Row columns={3}>
           <Grid.Column
-            width={1}
+            width={2}
             textAlign='center'
             verticalAlign='middle'>
             <Image
-              src={LeftForm}
-              floated='right'
-              size='tiny' />
+              src={BLK_DOJO} />
           </Grid.Column>
-          <Grid.Column width={14}>
+          <Grid.Column width={13}>
             <Title
               as='h1'
               textAlign='center'>

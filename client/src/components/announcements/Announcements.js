@@ -60,9 +60,9 @@ class Announcements extends Component {
     let { notices } = this.props
     // NOTE load only when 'data' exists, not just the empty object/container
     if( notices && notices.length > 0 ) {
-      return notices.map( notice => {
+      return notices.map( (notice, index) => {
         // show presentation component
-        return ( <Announcement key={notice.id} data={notice} /> )
+        return ( <Announcement key={index} data={notice} /> )
       })
     }
   }

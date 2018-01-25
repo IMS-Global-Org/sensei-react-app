@@ -122,12 +122,19 @@ class NavBar extends Component {
       <Menu
         pointing
         secondary
-        stackable>
+        stackable
+        style={{ borderBottom: '1px solid #ffffff'}}>
         <MenuItem
-          name='sensei'
+          name='home'
           as={ Link }
           to='/'
           active={activeItem === 'sensei'}
+          onClick={this.handleItemClick} />
+        <MenuItem
+          name='about us'
+          as={ Link }
+          to='/'
+          active={activeItem === 'about us'}
           onClick={this.handleItemClick} />
         <MenuItem
           name='programs'
@@ -138,14 +145,8 @@ class NavBar extends Component {
         <MenuItem
           as={ Link }
           to='/calendar'
-          name='calendar'
-          active={activeItem === 'calendar'}
-          onClick={this.handleItemClick} />
-        <MenuItem
-          as={ Link }
-          to='/location'
-          name='location'
-          active={activeItem === 'location'}
+          name='class schedule'
+          active={activeItem === 'class schedule'}
           onClick={this.handleItemClick} />
         <MenuItem
           as={ Link }
@@ -156,8 +157,20 @@ class NavBar extends Component {
         <MenuItem
           as={ Link }
           to='/news'
-          name='news'
-          active={activeItem === 'news'}
+          name='upcoming events'
+          active={activeItem === 'upcoming events'}
+          onClick={this.handleItemClick} />
+        <MenuItem
+          name='contact us'
+          as={ Link }
+          to='/'
+          active={activeItem === 'contact us'}
+          onClick={this.handleItemClick} />
+        <MenuItem
+          as={ Link }
+          to='/location'
+          name='location'
+          active={activeItem === 'location'}
           onClick={this.handleItemClick} />
         { this.rightNavs() }
       </Menu>
