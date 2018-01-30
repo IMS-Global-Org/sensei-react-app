@@ -42,6 +42,7 @@ class App extends Component {
         <NavBar />
         <div className='multi-bg-images'>
           <Flash />
+          <FetchUser>
             <Switch>
               <Route exact path='/' component={Home} />
               <Route exact path='/login' component={Login} />
@@ -51,19 +52,18 @@ class App extends Component {
               <Route exact path='/location' component={Location} />
               <Route exact path='/blog' component={HomePage} />
               <Route exact path='/news' component={Announcements} />
-              <FetchUser>
-                <ProtectedRoute exact path='/calendar/events' component={EventEditor} />
-                <ProtectedRoute exact path='/program/tracker' component={ProgramTracker} />
-                <ProtectedRoute exact path='/settings' component={Settings} />
-                <ProtectedRoute path='/announcements' component={AnnouncementManager} />
-                <ProtectedRoute path='/postings' component={HomePagePostings} />
-                <ProtectedRoute path='/students' component={Students} />
-                <ProtectedRoute path='/mailers' component={Mailers} />
-                <ProtectedRoute path='/contracts' component={Contracts} />
-                <ProtectedRoute path='/contractees' component={Contractees} />
-              </FetchUser>
+              <ProtectedRoute exact path='/calendar/events' component={EventEditor} />
+              <ProtectedRoute exact path='/program/tracker' component={ProgramTracker} />
+              <ProtectedRoute exact path='/settings' component={Settings} />
+              <ProtectedRoute path='/announcements' component={AnnouncementManager} />
+              <ProtectedRoute path='/postings' component={HomePagePostings} />
+              <ProtectedRoute path='/students' component={Students} />
+              <ProtectedRoute path='/mailers' component={Mailers} />
+              <ProtectedRoute path='/contracts' component={Contracts} />
+              <ProtectedRoute path='/contractees' component={Contractees} />
               <Route component={NoMatch} />
             </Switch>
+          </FetchUser>
         </div>
       </div>
     );
