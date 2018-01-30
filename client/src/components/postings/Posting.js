@@ -25,7 +25,6 @@ const Posting = ({ id, title, message, home_page_videos, home_page_links }) => {
     <Segment>
       <Segment basic textAlign='center'>
         <Image
-          circular
           size='small'
           src={ThrowingStar}
           verticalAlign='middle' />
