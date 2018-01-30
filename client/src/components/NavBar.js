@@ -15,6 +15,19 @@ const MenuItem = styled(Menu.Item)`
   padding-top: 0.25rem !important;
   padding-bottom: 0.5rem !important;
 `
+const DropDown = styled(Dropdown)`
+  font-family: 'yozakura' !important;
+  font-size: 1.5rem !important;
+  letter-spacing: 0.25rem !important;
+  color: #FFF !important;
+`
+const DropDownMenu = styled(Dropdown.Menu)`
+  background-color: #9B0013 !important;
+  border: 1px solid #FFF !important;
+`
+const DropDownItem = styled(Dropdown.Item)`
+  color: #FFF !important;
+`
 
 
 class NavBar extends Component {
@@ -31,58 +44,58 @@ class NavBar extends Component {
       return(
         <Menu.Menu position='right'>
           { user.isAdmin() &&
-            <Dropdown item text='Applications'>
-              <Dropdown.Menu>
-                <MenuItem
-                  name='notices'
+            <DropDown item text='Applications'>
+              <DropDownMenu>
+                <DropDownItem
+                  content='notices'
                   as={ Link }
                   to='/announcements/edit'
                   active={activeItem === 'notices'}
                   onClick={this.handleItemClick} />
-                <MenuItem
-                  name='postings'
+                <DropDownItem
+                  content='postings'
                   as={ Link }
                   to='/postings'
                   active={activeItem === 'postings'}
                   onClick={this.handleItemClick} />
-                <MenuItem
-                  name='Calendar Events'
+                <DropDownItem
+                  content='Calendar Events'
                   as={ Link }
                   to='/calendar/events'
                   active={activeItem === 'Calendar Events'}
                   onClick={this.handleItemClick} />
-                <MenuItem
-                  name='Program Tracker'
+                <DropDownItem
+                  content='Program Tracker'
                   as={ Link }
                   to='/program/tracker'
                   active={activeItem === 'Program Tracker'}
                   onClick={this.handleItemClick} />
-                <MenuItem
-                  name='students'
+                <DropDownItem
+                  content='students'
                   as={ Link }
                   to='/students'
                   active={activeItem === 'students'}
                   onClick={this.handleItemClick} />
-                <MenuItem
-                  name='mailers'
+                <DropDownItem
+                  content='mailers'
                   as={ Link }
                   to='/mailers'
                   active={activeItem === 'mailers'}
                   onClick={this.handleItemClick} />
-                <MenuItem
-                  name='contracts'
+                <DropDownItem
+                  content='contracts'
                   as={ Link }
                   to='/contracts'
                   active={activeItem === 'contracts'}
                   onClick={this.handleItemClick} />
-                <MenuItem
-                  name='contractees'
+                <DropDownItem
+                  content='contractees'
                   as={ Link }
                   to='/contractees'
                   active={activeItem === 'contractees'}
                   onClick={this.handleItemClick} />
-              </Dropdown.Menu>
-            </Dropdown>
+              </DropDownMenu>
+            </DropDown>
           }
           <MenuItem
             name='settings'

@@ -5,7 +5,7 @@ import { validateToken } from '../actions/auth';
 class FetchUser extends React.Component {
   state = { loaded: false };
 
-  componentDidMount() {
+  componentDidMount = () => {
     let { isAuthenticated, dispatch } = this.props;
     if(isAuthenticated)
       this.loaded();
@@ -14,7 +14,7 @@ class FetchUser extends React.Component {
     }
   }
 
-  componentWillReceiveProps() {
+  componentWillReceiveProps = () => {
     if (!this.state.loaded)
       this.loaded()
   }
@@ -23,7 +23,7 @@ class FetchUser extends React.Component {
     this.setState({ loaded: true });
   }
 
-  render() {
+  render = () => {
     return this.state.loaded ? this.props.children : null
   }
 }

@@ -112,8 +112,8 @@ namespace :loader do |loader_namespace|
     types = %I[Home Work Mobile Satallite]
     owner_types = %I[Student Parent Relative Gardian]
     belt = %I[black green yellow red purple]
-    active = %I[true false]
-    texting = %I[true false]
+    active = %I[1 0]
+    texting = %I[1 0]
 
     50.times do
       student = Student.create(
@@ -170,10 +170,10 @@ namespace :loader do |loader_namespace|
         title: Faker::Lorem.sentence,
         interval: intervals.sample,
         type_of: types.sample,
-        active: [true, false].sample,
+        active: [1, 0].sample,
         recipients: recipients.sample,
         subject: Faker::Lorem.sentence,
-        notify: [true, false].sample
+        notify: [1, 0].sample
       )
     end
   end

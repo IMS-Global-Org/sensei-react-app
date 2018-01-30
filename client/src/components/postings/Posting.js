@@ -1,5 +1,5 @@
 import React from 'react'
-import { Segment, Header, Image, Icon } from 'semantic-ui-react'
+import { Segment, Header, Image } from 'semantic-ui-react'
 import HomePageVideos from '../homepages/HomePageVideos'
 import HomePageLinks from '../homepages/HomePageLinks'
 import styled from 'styled-components'
