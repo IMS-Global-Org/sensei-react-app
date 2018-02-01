@@ -167,7 +167,7 @@ class AnnouncementForm extends Component {
           <Form.Checkbox
             label='Yes'
             id='registration'
-            checked={ registration > 0 }
+            checked={ registration === 1 }
             onChange={this.handleChangeCheckbox} />
         </Form.Group>
         <Button.Group size='mini'>
