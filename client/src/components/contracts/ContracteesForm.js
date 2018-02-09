@@ -11,6 +11,8 @@ import {
   clearContractees,
 } from '../../actions/contractees.js'
 
+import { indexContracts } from '../../actions/contracts'
+
 
 class ContracteesForm extends Component {
   state = { contractId: '', selected: '' }
@@ -62,7 +64,11 @@ class ContracteesForm extends Component {
     const { selected } = this.state
     if( selected.length > 0 ) {
       dispatch(addContractee(contractId,selected,
-        ()=>this.setState({ selected: '' })))
+        ()=>{
+          this.setState({ selected: '' })
+          dispatch(indexContracts())
+        })
+      )
     }
   }
 

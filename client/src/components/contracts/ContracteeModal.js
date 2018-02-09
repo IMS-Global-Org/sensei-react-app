@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Segment, Modal, Button, Header, Icon } from 'semantic-ui-react'
-import ContracteeForm from './ContracteesForm'
+import ContracteesForm from './ContracteesForm'
 
 class ContracteeModal extends Component {
   state = { openModal: true }
@@ -34,7 +34,7 @@ class ContracteeModal extends Component {
               with different last names until all contractees are located and
               linked to the current contract.
             </Segment>
-            <ContracteeForm {...this.props} />
+            <ContracteesForm {...this.props} />
           </Segment>
         </Modal.Content>
         <Modal.Actions>
