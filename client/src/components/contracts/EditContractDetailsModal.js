@@ -16,8 +16,10 @@ class EditContractInfoModal extends Component {
     this.props.closeModals()
   }
 
-  handleCloseModals = () => this.setState({ ...this.defaults })
-  handleShowContracteeModal = () => this.setState({ showContracteeModal: true })
+  handleCloseModals = () => this.setState({ ...this.defaults },this.props.closeModals)
+  handleShowContracteeModal = () => {
+    this.setState({ showContracteeModal: true })
+  }
 
   render = () => {
     const {

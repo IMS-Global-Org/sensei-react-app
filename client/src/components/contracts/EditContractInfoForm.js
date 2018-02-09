@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Segment, Form, Button, Input, Select } from 'semantic-ui-react'
+import { Segment, Form, Button, Input, Select, List } from 'semantic-ui-react'
 import DatePicker from 'react-datepicker'
+import LabelField from '../helpers/LabelField'
 import moment from 'moment'
 
 // Actions
@@ -61,6 +62,7 @@ class EditContractInfoForm extends Component {
       id, start_date, end_date,
       amount, interval, status,
     } = this.state
+    const { contractees } = this.props.contract
 
     return (
       <Form onSubmit={this.handleOnSubmit}>
@@ -129,6 +131,18 @@ class EditContractInfoForm extends Component {
         </Segment>
         { id &&
           <Segment basic clearing>
+            { contractees.length > 0 &&
+              <div>
+                <LabelField bold>Current Contractees</LabelField>
+                <br />
+                <List ordered>
+                  { contractees.map( contractee => (
+                    <List.Item>{`${contractee.last}, ${contractee.first}`}</List.Item>
+                  ))}
+                </List>
+              </div>
+            }
+            <br />
             <Button.Group size='mini'>
               <Button
                 type='button'

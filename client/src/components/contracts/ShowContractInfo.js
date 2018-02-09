@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Segment, Dimmer, Loader, Label, Grid } from 'semantic-ui-react'
+import { Segment, Dimmer, Loader, Label, Grid, List } from 'semantic-ui-react'
 import moment from 'moment'
 import styled from 'styled-components'
 
@@ -28,6 +28,7 @@ class ShowContractInfo extends Component {
     amount: '',
     interval: '',
     status: '',
+    holders: '',
   }
   state = { ...this.defaults }
 
@@ -45,7 +46,11 @@ class ShowContractInfo extends Component {
   }
 
   render = () => {
-    const {start_date, end_date, amount, interval, status } = this.state
+    const {
+      start_date, end_date, amount,
+      interval, status, holders
+    } = this.state
+
     return (
       <Segment raised>
         <Label ribbon>Overview</Label>
@@ -81,6 +86,16 @@ class ShowContractInfo extends Component {
               <Grid.Column>
                 <Header>Amount</Header>
                 <Text>${amount}</Text>
+              </Grid.Column>
+            </Grid.Row>
+            <Grid.Row columns={1}>
+              <Grid.Column>
+                <Header>Contractees</Header>
+                <List ordered>
+                  { holders && holders.map( holder => (
+                    <List.Item>{holder.last},&nbsp;{holder.first}</List.Item>
+                  ))}
+                </List>
               </Grid.Column>
             </Grid.Row>
           </Grid>

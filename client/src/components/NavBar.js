@@ -13,7 +13,6 @@ const MenuItem = styled(Menu.Item)`
   letter-spacing: 0.25rem !important;
   color: #FFF !important;
   padding-top: 0.25rem !important;
-  padding-bottom: 0.5rem !important;
 `
 const DropDown = styled(Dropdown)`
   font-family: 'yozakura' !important;
@@ -25,8 +24,8 @@ const DropDownMenu = styled(Dropdown.Menu)`
   background-color: #9B0013 !important;
   border: 1px solid #FFF !important;
 `
-const DropDownItem = styled(Dropdown.Item)`
-  color: #FFF !important;
+const Content = styled.span`
+  color: #FFFFFF !important;
 `
 
 
@@ -46,54 +45,62 @@ class NavBar extends Component {
           { user.isAdmin() &&
             <DropDown item text='Applications'>
               <DropDownMenu>
-                <DropDownItem
-                  content='notices'
+                <Dropdown.Item
                   as={ Link }
                   to='/announcements/edit'
                   active={activeItem === 'notices'}
-                  onClick={this.handleItemClick} />
-                <DropDownItem
-                  content='postings'
+                  onClick={this.handleItemClick}>
+                    <Content>Notices</Content>
+                  </Dropdown.Item>
+                <Dropdown.Item
                   as={ Link }
                   to='/postings'
                   active={activeItem === 'postings'}
-                  onClick={this.handleItemClick} />
-                <DropDownItem
-                  content='Calendar Events'
+                  onClick={this.handleItemClick}>
+                  <Content>Postings</Content>
+                </Dropdown.Item>
+                <Dropdown.Item
                   as={ Link }
                   to='/calendar/events'
                   active={activeItem === 'Calendar Events'}
-                  onClick={this.handleItemClick} />
-                <DropDownItem
-                  content='Program Tracker'
+                  onClick={this.handleItemClick}>
+                  <Content>Calendar Events</Content>
+                </Dropdown.Item>
+                <Dropdown.Item
                   as={ Link }
                   to='/program/tracker'
                   active={activeItem === 'Program Tracker'}
-                  onClick={this.handleItemClick} />
-                <DropDownItem
-                  content='students'
+                  onClick={this.handleItemClick}>
+                  <Content>Program Tracker</Content>
+                </Dropdown.Item>
+                <Dropdown.Item
                   as={ Link }
                   to='/students'
                   active={activeItem === 'students'}
-                  onClick={this.handleItemClick} />
-                <DropDownItem
-                  content='mailers'
+                  onClick={this.handleItemClick}>
+                  <Content>Students</Content>
+                </Dropdown.Item>
+                <Dropdown.Item
                   as={ Link }
                   to='/mailers'
                   active={activeItem === 'mailers'}
-                  onClick={this.handleItemClick} />
-                <DropDownItem
-                  content='contracts'
+                  onClick={this.handleItemClick}>
+                  <Content>Mailers</Content>
+                </Dropdown.Item>
+                <Dropdown.Item
                   as={ Link }
                   to='/contracts'
                   active={activeItem === 'contracts'}
-                  onClick={this.handleItemClick} />
-                <DropDownItem
-                  content='contractees'
+                  onClick={this.handleItemClick}>
+                  <Content>Contracts</Content>
+                </Dropdown.Item>
+                <Dropdown.Item
                   as={ Link }
                   to='/contractees'
                   active={activeItem === 'contractees'}
-                  onClick={this.handleItemClick} />
+                  onClick={this.handleItemClick}>
+                  <Content>Contractees</Content>
+                </Dropdown.Item>
               </DropDownMenu>
             </DropDown>
           }

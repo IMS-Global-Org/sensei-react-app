@@ -1,19 +1,30 @@
 class Api::ContractsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_contract, only: [:show, :update, :destroy]
+  before_action :set_contract, only: [:update, :destroy]
 
   def index
-    contracts = Contract.all
+    contracts = Contract
+      .includes(:contractees)
       .order(created_at: :desc, updated_at: :desc)
       .page(params[:page]).per_page(params[:per])
-    render json: {
-      data: contracts,
-      pagination: {
-        total_pages: contracts.total_pages,
-        current_page: contracts.current_page,
-        next_page: contracts.next_page
-      }
+
+    pagination = {
+      total_pages: contracts.total_pages,
+      current_page: contracts.current_page,
+      next_page: contracts.next_page
     }
+
+    contracts_data = {}
+    contracts_data['pagination'] = pagination
+    contracts_data['data'] = contracts.as_json(
+      include: {
+        contractees: {
+          only: [:first, :last]
+        }
+      }
+    )
+
+    render json: contracts_data # calls to_json automatically
   end
 
   def query

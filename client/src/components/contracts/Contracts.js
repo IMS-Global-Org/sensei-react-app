@@ -13,6 +13,7 @@ import ShowContractInfoModal from './ShowContractInfoModal'
 import EditContractDetailsModal from './EditContractDetailsModal'
 import ArchiveContractInfoModal from './ArchiveContractInfoModal'
 import ArchivedContractsTableModal from './ArchivedContractsTableModal'
+import ContracteesPopup from './ContracteesPopup'
 import User from '../User'
 
 // Actions
@@ -46,39 +47,44 @@ class Contracts extends Component {
     if( contracts && contracts.length > 0 ) {
       return contracts.map( contract => {
         return (
-          <Table.Row
+          <Table.Body
             key={contract.id}>
-            <Table.Cell>
-              {moment(contract.start_date).format(this.dateFormat)}
-            </Table.Cell>
-            <Table.Cell>
-              {moment(contract.end_date).format(this.dateFormat)}
-            </Table.Cell>
-            <Table.Cell>${contract.amount}</Table.Cell>
-            <Table.Cell>{contract.interval}</Table.Cell>
-            <Table.Cell>{contract.status ? 'Active' : 'Inactive' }</Table.Cell>
-            <Table.Cell textAlign='center' verticalAlign='middle'>
-              <Button.Group size='mini'>
-                <Button
-                  type='button'
-                  onClick={()=>this.displayContractInfo(contract.id)} >
-                  View
-                </Button>
-                <Button.Or />
-                <Button
-                  type='button'
-                  onClick={()=>this.editContractDetails(contract.id)} >
-                  Edit
-                </Button>
-                <Button.Or />
-                <Button
-                  type='button'
-                  onClick={()=>this.archiveContractInfo(contract.id)} >
-                  Archive
-                </Button>
-              </Button.Group>
-            </Table.Cell>
-          </Table.Row>
+            <Table.Row>
+              <Table.Cell>
+                {moment(contract.start_date).format(this.dateFormat)}
+              </Table.Cell>
+              <Table.Cell>
+                {moment(contract.end_date).format(this.dateFormat)}
+              </Table.Cell>
+              <Table.Cell>${contract.amount}</Table.Cell>
+              <Table.Cell>{contract.interval}</Table.Cell>
+              <Table.Cell>{contract.status ? 'Active' : 'Inactive' }</Table.Cell>
+              <Table.Cell textAlign='center'>
+                <ContracteesPopup contractees={contract.contractees} />
+              </Table.Cell>
+              <Table.Cell textAlign='center' verticalAlign='middle'>
+                <Button.Group size='mini'>
+                  <Button
+                    type='button'
+                    onClick={()=>this.displayContractInfo(contract.id)} >
+                    View
+                  </Button>
+                  <Button.Or />
+                  <Button
+                    type='button'
+                    onClick={()=>this.editContractDetails(contract.id)} >
+                    Edit
+                  </Button>
+                  <Button.Or />
+                  <Button
+                    type='button'
+                    onClick={()=>this.archiveContractInfo(contract.id)} >
+                    Archive
+                  </Button>
+                </Button.Group>
+              </Table.Cell>
+            </Table.Row>
+          </Table.Body>
         )
       })
     }
@@ -160,7 +166,7 @@ class Contracts extends Component {
         <Table celled>
           <Table.Header>
             <Table.Row>
-              <Table.HeaderCell colSpan={6}>
+              <Table.HeaderCell colSpan={7}>
                 <Header as='h1' icon textAlign='center'>
                   <Icon name='law' />
                   <Header.Content>
@@ -184,21 +190,20 @@ class Contracts extends Component {
               <Table.HeaderCell>Interval</Table.HeaderCell>
               <Table.HeaderCell>Status</Table.HeaderCell>
               <Table.HeaderCell>&nbsp;</Table.HeaderCell>
+              <Table.HeaderCell>&nbsp;</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
-          <Table.Body>
-            { this.displayTableBody() }
-          </Table.Body>
+          { this.displayTableBody() }
           <Table.Footer>
             <Table.Row>
-              <Table.HeaderCell colSpan={6}>
+              <Table.HeaderCell colSpan={7}>
                 <Paginator
                   loadMore={this.loadMore}
                   pagination={this.props.pagination} />
               </Table.HeaderCell>
             </Table.Row>
             <Table.Row>
-              <Table.HeaderCell colSpan={6}>
+              <Table.HeaderCell colSpan={7}>
                 <Button.Group size='tiny'>
                   <Button
                     onClick={this.showSearchModal}>
