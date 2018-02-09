@@ -6,8 +6,8 @@ namespace :loader do |loader_namespace|
     Announcement.destroy_all
 
     # set working dates
-    start_date = Time.new - 2.weeks
-    end_date = 2.week.from_now
+    start_date = Time.new - 1.day
+    end_date = 2.months.from_now
 
     # load some examples
     50.times do
@@ -16,8 +16,8 @@ namespace :loader do |loader_namespace|
         category: Faker::Lorem.words(1)[0],
         message: Faker::Lorem.sentence(1),
         extra: Faker::Lorem.paragraph(1),
-        start_date: Faker::Date.between(start_date, Time.new.utc),
-        end_date: Faker::Date.between(Time.new.utc, end_date),
+        start_date: Faker::Date.between(start_date, Time.new.utc + 1.month),
+        end_date: Faker::Date.between(Time.new.utc + 1.month, end_date),
         link: Faker::Internet.url,
         cost: Faker::Number.decimal(2),
         registration: [1,0].sample

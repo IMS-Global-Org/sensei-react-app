@@ -10,7 +10,7 @@ class Api::AnnouncementsController < ApplicationController
     # query and return ordered by newest event
     ancts = Announcement
       .where('start_date >= ?', @start_date)
-      .order(start_date: :desc)
+      .order(start_date: :asc)
       .page(params[:page]).per_page(params[:per])
 
     render_paginated_model ancts
