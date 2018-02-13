@@ -47,7 +47,7 @@ const contracts = ( state = defaults, action ) => {
         }
       }
     case 'UPDATE_CONTRACT':
-      const index = state.data.findIndex( c => c.id === action.data.id )
+      let index = state.data.findIndex( c => c.id === action.data.id )
       return {
         ...state,
         data: [
@@ -82,6 +82,23 @@ const contracts = ( state = defaults, action ) => {
       return {
         ...state,
         archived: { ...defaults.archived },
+      }
+    case 'FILTER_CONTRACT_CONTRACTEE':
+      index = state.data.findIndex( c =>
+        parseInt(c.id,10) === parseInt(action.data.contractId,10)
+      )
+      const contract = state.data[index]
+      const contractees = contract.contractees.filter( c =>
+        parseInt(c.id,10) !== parseInt(action.data.contracteeId,10)
+      )
+      contract.contractees = contractees
+      return {
+        ...state,
+        data: [
+          ...state.data.slice(0,index),
+          contract,
+          ...state.data.slice(index + 1),
+        ]
       }
     default:
       return state

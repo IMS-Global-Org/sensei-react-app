@@ -169,3 +169,13 @@ export const queryArchivedContracts = ( query = '', page = 1, per = 10 ) => {
     })
   }
 }
+
+export const filterContractContractee = ( contractId, contracteeId ) => {
+  return {
+    type: 'FILTER_CONTRACT_CONTRACTEE',
+    data: {
+      contractId,
+      contracteeId,
+    }
+  }
+}

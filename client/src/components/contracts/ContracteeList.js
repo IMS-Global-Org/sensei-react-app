@@ -8,6 +8,9 @@ import {
   deleteContractee,
   clearContractees,
 } from '../../actions/contractees'
+import {
+  filterContractContractee,
+} from '../../actions/contracts'
 
 class ContracteeList extends Component {
   state = { contractId: '' }
@@ -28,6 +31,7 @@ class ContracteeList extends Component {
   handleRemoveContractee = ( contracteeId ) => {
     const { dispatch, contractId } = this.props
     dispatch(deleteContractee(contractId,contracteeId))
+    dispatch(filterContractContractee(contractId,contracteeId))
   }
 
   displayContractees = () => {

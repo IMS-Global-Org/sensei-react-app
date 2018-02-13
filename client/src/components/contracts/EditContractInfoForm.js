@@ -137,7 +137,9 @@ class EditContractInfoForm extends Component {
                 <br />
                 <List ordered>
                   { contractees.map( contractee => (
-                    <List.Item>{`${contractee.last}, ${contractee.first}`}</List.Item>
+                    <List.Item key={contractee.id}>
+                      {`${contractee.last}, ${contractee.first}`}
+                    </List.Item>
                   ))}
                 </List>
               </div>

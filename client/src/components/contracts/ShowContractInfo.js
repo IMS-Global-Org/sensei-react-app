@@ -93,7 +93,9 @@ class ShowContractInfo extends Component {
                 <Header>Contractees</Header>
                 <List ordered>
                   { holders && holders.map( holder => (
-                    <List.Item>{holder.last},&nbsp;{holder.first}</List.Item>
+                    <List.Item key={holder.id}>
+                      {holder.last},&nbsp;{holder.first}
+                    </List.Item>
                   ))}
                 </List>
               </Grid.Column>

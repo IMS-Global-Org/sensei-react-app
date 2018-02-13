@@ -19,7 +19,7 @@ class Api::ContractsController < ApplicationController
     contracts_data['data'] = contracts.as_json(
       include: {
         contractees: {
-          only: [:first, :last]
+          only: [:id, :first, :last]
         }
       }
     )
