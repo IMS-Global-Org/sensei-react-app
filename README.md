@@ -22,3 +22,4 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+[![Coverage Status](https://coveralls.io/repos/github/IMS-Global-Org/sensei-react-app/badge.svg?branch=master)](https://coveralls.io/github/IMS-Global-Org/sensei-react-app?branch=master)
