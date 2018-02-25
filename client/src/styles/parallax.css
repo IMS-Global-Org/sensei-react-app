@@ -33,14 +33,14 @@
   font-family: 'yozakura';
   letter-spacing: 0.25rem;
   color: #fff;
-  font-size: 6rem;
+  font-size: 4rem;
   font-weight: bold;
   text-align: center;
-  padding: 3rem 0;
+  padding-top: 3rem;
 }
 .parallax-text .parallax-body {
   color: #fff;
-  line-height: 1.5rem;
+  line-height: 1.75rem;
   text-align: justify;
   padding: 1rem;
 }

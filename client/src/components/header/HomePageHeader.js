@@ -4,8 +4,8 @@ import styled from 'styled-components'
 
 // Images
 // import LeftForm from '../../images/form04.png'
-import RightForm from '../../images/form03.png'
-import BLK_DOJO from '../../images/blkdojo_official_alpha.png'
+import RightForm from '../../images/BLK-Logo-8f0222.png'
+import BLK_DOJO from '../../images/BLK-Logo-8f0222-L.png'
 
 // Custom CSS
 import '../../styles/header.css'
@@ -13,15 +13,15 @@ import '../../styles/header.css'
 const Title = styled(Header)`
   font-family: "yozakura" !important;
   color: #fff !important;
-  font-size: 8rem !important;
+  font-size: 5rem !important;
   margin: 0.5rem 0 !important;
   letter-spacing: 1.5rem;
 `
 const SubTitle = styled(Header.Subheader)`
   color: #fff !important;
-  font-size: 4rem !important;
+  font-size: 2rem !important;
   font-style: oblique;
-  margin: 0.5rem 0 !important;
+  margin: 0.3rem 0 !important;
   letter-spacing: 0.5rem;
 `
 
@@ -37,7 +37,7 @@ class HomePageHeader extends Component {
             <Image
               src={BLK_DOJO} />
           </Grid.Column>
-          <Grid.Column width={13}>
+          <Grid.Column width={12}>
             <Title
               as='h1'
               textAlign='center'>
@@ -50,13 +50,11 @@ class HomePageHeader extends Component {
             </Title>
           </Grid.Column>
           <Grid.Column
-            width={1}
+            width={2}
             textAlign='center'
             verticalAlign='middle'>
             <Image
-              src={RightForm}
-              floated='left'
-              size='tiny' />
+              src={RightForm} />
           </Grid.Column>
         </Grid.Row>
       </Grid>
