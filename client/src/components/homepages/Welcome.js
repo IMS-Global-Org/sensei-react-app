@@ -3,6 +3,15 @@ import '../../styles/parallax.css'
 
 const Welcome = () => (
   <div className='parallax-container'>
+    <div className='parallax-image form04' ></div>
+    <div className='parallax-text'>
+      <div className='parallax-header'>
+        WELCOME...
+      </div>
+      <p className='parallax-body'>
+        Bobby Lawrence Karate is the largest karate organization in the state. Our focus is to help each individual develop themselves as a whole and achieve their personal best.  Bobby Lawrence Karate blends the discipline associated with classical karate with kicking, punching and self-defense for enjoyable, fun, age appropriate programs for all. We have programs for Pre-school age children up to Adults. No previous experience needed.
+      </p>
+    </div>
     <div className='parallax-image form02' ></div>
     <div className='parallax-text'>
       <div className='parallax-header'>
