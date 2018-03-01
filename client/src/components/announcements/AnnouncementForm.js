@@ -22,7 +22,7 @@ class AnnouncementForm extends Component {
   defaults = {
     id: '',
     title: '', category: '', message: '', extra: '',
-    start_date: moment.utc(), end_date: moment.utc(),
+    start_date: moment(), end_date: moment(),
     link: '', cost: '', registration: 0,
   }
   state={ ...this.defaults }
@@ -140,13 +140,13 @@ class AnnouncementForm extends Component {
           <Form.Field>
             <label>Start Date</label>
             <Datetime
-              value={moment.isMoment(start_date) ? start_date : moment.utc(start_date)}
+              value={moment.isMoment(start_date) ? start_date : moment(start_date)}
               onChange={this.handleStartDatetime} />
           </Form.Field>
           <Form.Field>
             <label>End Date</label>
             <Datetime
-              value={moment.isMoment(end_date) ? end_date : moment.utc(end_date)}
+              value={moment.isMoment(end_date) ? end_date : moment(end_date)}
               onChange={this.handleEndDatetime} />
           </Form.Field>
         </Form.Group>

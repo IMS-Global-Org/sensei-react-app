@@ -61,7 +61,7 @@ class Api::AnnouncementsController < ApplicationController
 
   # Set the time period for retrieving announcements
   def set_dates
-    @start_date = Time.new.utc - 2.weeks
+    @start_date = Time.new - 1.day
     @end_date = 1.week.from_now
   end
 end

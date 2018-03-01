@@ -50,7 +50,7 @@ class NavBar extends Component {
                   to='/announcements/edit'
                   active={activeItem === 'notices'}
                   onClick={this.handleItemClick}>
-                    <Content>Notices</Content>
+                    <Content>Upcomming Events</Content>
                   </Dropdown.Item>
                 <Dropdown.Item
                   as={ Link }
@@ -183,7 +183,7 @@ class NavBar extends Component {
         <MenuItem
           name='contact us'
           as={ Link }
-          to='/'
+          to='/contactus'
           active={activeItem === 'contact us'}
           onClick={this.handleItemClick} />
         <MenuItem

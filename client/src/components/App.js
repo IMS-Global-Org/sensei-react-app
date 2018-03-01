@@ -30,6 +30,7 @@ import Contracts from './contracts/Contracts'
 import Contractees from './contractees/Contractees'
 import HomePage from './homepages/HomePage'
 import Announcements from './announcements/Announcements'
+import ContactUs from './contactus/ContactUs'
 
 // Fonts
 import '../styles/yozakura.css'
@@ -52,6 +53,7 @@ class App extends Component {
               <Route exact path='/location' component={Location} />
               <Route exact path='/blog' component={HomePage} />
               <Route exact path='/news' component={Announcements} />
+              <Route exact path='/contactus' component={ContactUs} />
               <ProtectedRoute exact path='/calendar/events' component={EventEditor} />
               <ProtectedRoute exact path='/program/tracker' component={ProgramTracker} />
               <ProtectedRoute exact path='/settings' component={Settings} />
