@@ -32,10 +32,10 @@ class AnnouncementsTable extends Component {
               {notice.title}
             </Table.Cell>
             <Table.Cell>
-              { moment(notice.start_date).local().format('dd, MMM Do YYYY, h:mm a') }
+              { moment(notice.start_date).format('dd, MMM Do YYYY, h:mm a') }
             </Table.Cell>
             <Table.Cell>
-              { moment(notice.end_date).local().format('dd, MMM Do YYYY, h:mm a') }
+              { moment(notice.end_date).format('dd, MMM Do YYYY, h:mm a') }
             </Table.Cell>
             <Table.Cell>{ notice.registration ? 'Yes' : 'No' }</Table.Cell>
           </Table.Row>
