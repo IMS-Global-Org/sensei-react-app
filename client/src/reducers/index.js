@@ -12,8 +12,12 @@ import mailers from './mailers'
 import contracts from './contracts'
 import contractees from './contractees'
 
+// Form Validation and Error Messaging reducer
+import { reducer as formReducer } from 'redux-form'
+
 
 const rootReducer = combineReducers({
+  form: formReducer, // Just for Form Validation and Error Messaging
   contractees,
   contracts,
   mailers,

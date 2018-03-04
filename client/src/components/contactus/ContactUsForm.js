@@ -1,119 +1,147 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 import {
   Segment,
-  Form, Button, Label
+  Form, Button
 } from 'semantic-ui-react'
+import styled from 'styled-components'
+import { reduxForm, Field } from 'redux-form'
 
-// CSS Styles
-import '../../styles/input_forms.css'
+// Custom Components
+const Error = styled.div`
+  width: 100% !important;
+  text-align: center !important;
+  color: '#9B0013' !important;
+  font-size: 0.8rem !important;
+  font-weight: bold;
+`
+const Warn = styled.div`
+  width: 100% !important;
+  text-align: center !important;
+  color: '#FF761A' !important;
+  font-size: 0.8rem !important;
+  font-weight: bold;
+`
 
+// Form Field Validations, required Params
+const validate = ( formFields ) => {
+  const errors = {}
+  if( !formFields.address ) {
+    errors.address = 'Ooops! Forgot Your E-mail Address!'
+  }
+  if( !formFields.first_name ){
+    errors.first_name = 'Full Name is Required!'
+  }
+  if( !formFields.last_name ) {
+    errors.last_name = 'Full Name is Required!'
+  }
+  if( !formFields.subject ){
+    errors.subject = 'A Ssubject is Required!'
+  }
+  if( !formFields.body ){
+    errors.body = 'Please include a message!'
+  }
+  return errors
+}
+
+// Form Field Warnings
+const warn = ( formFields ) => {
+  const warnings = {}
+  if( formFields.phone.match(/^\(\d{3}\)\s\d{3}\s-\s\d{4}$/) === null ) {
+    warnings.phone = 'Incorrect format! Must be (XXX) XXX - XXXX'
+  }
+  if( formFields.last_name.match(/\d/) !== null ) {
+    warnings.last_name = 'Must Not Contain Numbers!'
+  }
+  if( formFields.first_name.match(/\d/) !== null ) {
+    warnings.first_name = 'Must Not Contain Numbers!'
+  }
+  return warnings
+}
+
+// Input field Helper
+const renderInputField = ({input, label, type, required, meta: {touched, error, warning}}) => (
+  <div>
+    <Form.Input
+      {...input}
+      required={required ? true : false}
+      type={type}
+      label={label} />
+    { touched &&
+      (
+        (error && <Error style={{ color: '#9B0013'}}>{error}</Error>) ||
+        (warning && <Warn style={{ color: '#FF761A'}}>{warning}</Warn>)
+      )
+    }
+  </div>
+)
+
+// TextArea Field Helper
+const renderTextAreaField = ({input, label, meta: {touched, error, warning}}) => (
+  <div>
+    <Form.TextArea
+      {...input}
+      label={label}
+      rows={10} />
+      { touched &&
+        (
+          (error && <Error style={{ color: '#9B0013'}}>{error}</Error>) ||
+          (warning && <Warn style={{ color: '#FF761A'}}>{warning}</Warn>)
+        )
+      }
+  </div>
+)
 
 class ContactUsForm extends Component {
-  defaults = {
-    last_name: '', first_name: '', phone: '',
-    address: '', subject: '', body: '', attachments: ''
-  }
-  state = { ...this.defaults }
-
-  handleOnSubmit = ( event ) => {
-    event.preventDefault()
-    debugger
-  }
-
-  checkForErrors = () => {
-    this.errors = {}
-    Object.keys(this.state).forEach( field =>
-      this.errors[field] = this.state[field].length === 0
-    )
-    this.errors.phone = this.state['phone']
-      .match(/^\(\d{3}\)\s\d{3}\s\-\s\d{4}$/) === null
-    return this.errors
-  }
-
-  formIsValid = () => {
-    // FIXME: check for attachments
-    return Object.keys(this.errors).every( field => this.errors[field] === false )
-  }
-
-  handleInputChange = ({target: {id,value}}) => { this.setState({ [id]: value })}
-
   render() {
-    const {
-      first_name, last_name, phone,
-      address, subject, body, attachments
-    } = this.state
-
-    // TODO: Add input selector for adding files, attachments
-    // TODO: Check for errors
-    const errors = this.checkForErrors()
-    debugger
+    const { handleSubmit, pristine, reset, submitting} = this.props
     return (
-      <Form>
+      <Form onSubmit={handleSubmit} >
         <Form.Group inline width='equal'>
-          <Form.Input
-            className={errors.first_name ? 'error' : ''}
+          <Field
+            component={renderInputField}
             type='text'
-            required
             label='First Name'
-            name='first_name'
-            id='first_name'
-            value={first_name}
-            onChange={this.handleInputChange} />
-          <Form.Input
+            name='first_name' />
+          <Field
+            component={renderInputField}
+            required
             type='text'
-            className={errors.last_name ? 'error' : ''}
-            required
             label='Last Name'
-            name='last_name'
-            id='last_name'
-            value={last_name}
-            onChange={this.handleInputChange} />
-          <Form.Input
+            name='last_name' />
+          <Field
+            component={renderInputField}
             type='tel'
-            className={errors.phone ? 'error' : ''}
-            required
             placeholder='(XXX) XXX - XXXXX'
             label='Phone Number'
-            name='phone'
-            id='phone'
-            value={phone}
-            onChange={this.handleInputChange} />
+            name='phone' />
         </Form.Group>
-        <Form.Input
+        <Field
+          component={renderInputField}
           type='email'
-          className={errors.address ? 'error' : ''}
           label="E-Mail Address"
-          required
-          name='address'
-          id='address'
-          value={address}
-          onChange={this.handleInputChange} />
-        <Form.Input
+          name='address' />
+        <Field
+          component={renderInputField}
           type='text'
-          className={errors.subject ? 'error' : ''}
           label='Subject'
-          required
-          name='subject'
-          id='subject'
-          value={subject}
-          onChange={this.handleInputChange} />
-        <Form.TextArea
-          required
-          className={errors.body ? 'error' : ''}
+          name='subject' />
+        <Field
+          component={renderTextAreaField}
           label='Message'
-          name='body'
-          id='body'
-          value={body}
-          onChange={this.handleInputChange} />
+          name='body' />
         <Segment basic textAlign='right'>
           <Button.Group size='mini'>
             <Button
               type='submit'
-              disabled={!this.formIsValid()}
-              onClick={this.handleOnSubmit}>
-                Send to Sensei
-              </Button>
+              disabled={submitting}>
+              Send to Sensei
+            </Button>
+            <Button
+              type='button'
+              disabled={pristine || submitting}
+              onClick={reset}>
+              Clear
+            </Button>
           </Button.Group>
         </Segment>
       </Form>
@@ -121,4 +149,9 @@ class ContactUsForm extends Component {
   }
 }
 
-export default connect()(ContactUsForm)
+// Connect Redux Form Validation State
+export default reduxForm({
+  form: 'ContactUsForm',
+  validate,
+  warn,
+})(ContactUsForm)
