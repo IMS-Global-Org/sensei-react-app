@@ -14,6 +14,17 @@ const InstructionsArea = styled(Segment)`
 class ContactUs extends Component {
   defaults = {}
   state = { ...this.defaults }
+  initialFormValues = {
+    first_name: '',
+    last_name: '',
+    phone: '',
+    subject: '',
+    body: '',
+  }
+
+  handleOnSubmit = ( json ) => {
+    debugger
+  }
 
   render(){
     return (
@@ -37,7 +48,9 @@ class ContactUs extends Component {
           </Segment>
         </InstructionsArea>
         <Segment>
-          <ContactUsForm />
+          <ContactUsForm
+            onSubmit={this.handleOnSubmit}
+            initialValues={this.initialFormValues} />
         </Segment>
       </Container>
     )

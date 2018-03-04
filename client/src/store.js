@@ -4,6 +4,7 @@ import apiMiddleware from 'redux-devise-axios';
 import rootReducer from './reducers/index';
 import axios from 'axios';
 
+
 const options = { axios }
 
 const enhancers = compose(
