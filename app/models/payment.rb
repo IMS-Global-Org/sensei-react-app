@@ -6,7 +6,7 @@
 #  charged     :datetime         not null
 #  method      :string           not null
 #  amount      :float            not null
-#  verified    :boolean          not null
+#  verified    :integer          default(0), not null
 #  contract_id :integer
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null

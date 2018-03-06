@@ -9,7 +9,7 @@
 #  active     :boolean          default(TRUE), not null
 #  recipients :string           not null
 #  subject    :string
-#  notify     :boolean          default(FALSE), not null
+#  notify     :integer          default(0), not null
 #  job        :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null

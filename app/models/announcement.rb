@@ -7,8 +7,8 @@
 #  category     :string           not null
 #  message      :string           not null
 #  extra        :text
-#  start_date   :date             not null
-#  end_date     :date             not null
+#  start_date   :datetime         not null
+#  end_date     :datetime         not null
 #  link         :string
 #  cost         :float
 #  registration :integer

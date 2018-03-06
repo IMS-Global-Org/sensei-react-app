@@ -1,9 +1,14 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import {
   Container, Segment, Header, Icon,
 } from 'semantic-ui-react'
 import styled from 'styled-components'
 import ContactUsForm from './ContactUsForm'
+import ContactUsSentMessage from './ContactUsSentMessage'
+
+// Actions
+import { createContactUs } from '../../actions/contactus'
 
 // Custom Styled Components
 const InstructionsArea = styled(Segment)`
@@ -12,7 +17,9 @@ const InstructionsArea = styled(Segment)`
 `
 
 class ContactUs extends Component {
-  defaults = {}
+  defaults = {
+    showSentMessage: false,
+  }
   state = { ...this.defaults }
   initialFormValues = {
     first_name: '',
@@ -23,10 +30,17 @@ class ContactUs extends Component {
   }
 
   handleOnSubmit = ( json ) => {
-    debugger
+    const { dispatch } = this.props
+    dispatch(
+      createContactUs(json,()=>{
+        this.setState({ showSentMessage: true })
+      })
+    )
   }
 
   render(){
+    const { showSentMessage } = this.state
+
     return (
       <Container>
         <InstructionsArea>
@@ -48,13 +62,16 @@ class ContactUs extends Component {
           </Segment>
         </InstructionsArea>
         <Segment>
-          <ContactUsForm
-            onSubmit={this.handleOnSubmit}
-            initialValues={this.initialFormValues} />
+          { showSentMessage
+            ? <ContactUsSentMessage />
+            : <ContactUsForm
+                onSubmit={this.handleOnSubmit}
+                initialValues={this.initialFormValues} />
+          }
         </Segment>
       </Container>
     )
   }
 }
 
-export default ContactUs
+export default connect()(ContactUs)

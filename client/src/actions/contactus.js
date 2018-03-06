@@ -1,9 +1,9 @@
 import axios from 'axios'
 import { setFlash } from './flash'
 
-export const createContactUs = ( contactus, cb = '' ) => {
+export const createContactUs = ( contactUs, cb = '' ) => {
   return dispatch => {
-    axios.post(`/api/contactus`, { contactus } )
+    axios.post(`/api/contact_us`, { contact_us: contactUs } )
     .then( resp => {
       dispatch({
         type: 'CREATE_CONTACT_US',

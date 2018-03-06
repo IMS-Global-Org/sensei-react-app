@@ -5,7 +5,7 @@
 #  id         :integer          not null, primary key
 #  first      :string           not null
 #  last       :string           not null
-#  active     :integer          default(1), not null
+#  active     :integer          default(1)
 #  birthdate  :datetime
 #  created_at :datetime         not null
 #  updated_at :datetime         not null

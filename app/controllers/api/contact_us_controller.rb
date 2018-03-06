@@ -6,6 +6,8 @@ class Api::ContactUsController < ApplicationController
     render json: ContactUs.all.page(params[:page]).per_page(params[:per_page])
   end
 
+  def query; end
+
   def show
     render json: @contact_us
   end
@@ -38,7 +40,7 @@ class Api::ContactUsController < ApplicationController
   end
 
   def contact_us_params
-    @params.require(:contact_us)
+    params.require(:contact_us)
       .permit(
         :first_name, :last_name, :address, :subject, :body, :phone
       )
