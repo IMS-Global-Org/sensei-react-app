@@ -101,6 +101,13 @@ class NavBar extends Component {
                   onClick={this.handleItemClick}>
                   <Content>Contractees</Content>
                 </Dropdown.Item>
+                <Dropdown.Item
+                  as={ Link }
+                  to='/contactus/manager'
+                  active={activeItem === 'contactus'}
+                  onClick={this.handleItemClick}>
+                  <Content>Contact Us E-mails</Content>
+                </Dropdown.Item>
               </DropDownMenu>
             </DropDown>
           }

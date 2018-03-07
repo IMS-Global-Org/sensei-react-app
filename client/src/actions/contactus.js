@@ -7,7 +7,7 @@ export const createContactUs = ( contactUs, cb = '' ) => {
     .then( resp => {
       dispatch({
         type: 'CREATE_CONTACT_US',
-        data: resp.data,
+        email: resp.data,
         headers: resp.headers,
       })
       if( cb ) { cb() }

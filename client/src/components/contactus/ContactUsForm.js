@@ -60,7 +60,7 @@ const warn = ( formFields ) => {
 
 // Input field Helper
 const renderInputField = ({input, label, type, required, meta: {touched, error, warning}}) => (
-  <div>
+  <Form.Field>
     <Form.Input
       {...input}
       required={required ? true : false}
@@ -72,14 +72,15 @@ const renderInputField = ({input, label, type, required, meta: {touched, error, 
         (warning && <Warn style={{ color: '#FF761A'}}>{warning}</Warn>)
       )
     }
-  </div>
+  </Form.Field>
 )
 
 // TextArea Field Helper
-const renderTextAreaField = ({input, label, meta: {touched, error, warning}}) => (
-  <div>
+const renderTextAreaField = ({input, label, required, meta: {touched, error, warning}}) => (
+  <Form.Field>
     <Form.TextArea
       {...input}
+      required={required ? true : false}
       label={label}
       rows={10} />
       { touched &&
@@ -88,7 +89,7 @@ const renderTextAreaField = ({input, label, meta: {touched, error, warning}}) =>
           (warning && <Warn style={{ color: '#FF761A'}}>{warning}</Warn>)
         )
       }
-  </div>
+  </Form.Field>
 )
 
 class ContactUsForm extends Component {
@@ -99,6 +100,7 @@ class ContactUsForm extends Component {
         <Form.Group inline width='equal'>
           <Field
             component={renderInputField}
+            required
             type='text'
             label='First Name'
             name='first_name' />
@@ -117,16 +119,19 @@ class ContactUsForm extends Component {
         </Form.Group>
         <Field
           component={renderInputField}
+          required
           type='email'
           label="E-Mail Address"
           name='address' />
         <Field
           component={renderInputField}
+          required
           type='text'
           label='Subject'
           name='subject' />
         <Field
           component={renderTextAreaField}
+          required
           label='Message'
           name='body' />
         <Segment basic textAlign='right'>

@@ -31,6 +31,7 @@ import Contractees from './contractees/Contractees'
 import HomePage from './homepages/HomePage'
 import Announcements from './announcements/Announcements'
 import ContactUs from './contactus/ContactUs'
+import ContactUsManager from './contactus/ContactUsManager'
 
 // Fonts
 import '../styles/yozakura.css'
@@ -63,6 +64,7 @@ class App extends Component {
               <ProtectedRoute path='/mailers' component={Mailers} />
               <ProtectedRoute path='/contracts' component={Contracts} />
               <ProtectedRoute path='/contractees' component={Contractees} />
+              <ProtectedRoute path='/contactus/manager' component={ContactUsManager} />
               <Route component={NoMatch} />
             </Switch>
           </FetchUser>
