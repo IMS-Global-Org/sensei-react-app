@@ -1,3 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'blkdojos_ou_unit@sensei-react-app.com'
+  default from: 'brennick.sci@gmail.com'
+  layout 'mailer'
 end

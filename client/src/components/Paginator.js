@@ -133,12 +133,14 @@ class Paginator extends Component {
    */
   calculatePages = () => {
     const { pagination: {current_page, total_pages} } = this.props
-    // For mutating purposes in paginated menu
-    const cp = parseInt(current_page,10)
-    const tp = parseInt(total_pages,10)
-    // set the page number range to display
-    let pages = this.positions(cp,tp).map( pageNum => pageNum.toString())
-    return pages
+    if( current_page && total_pages ) {
+      // For mutating purposes in paginated menu
+      const cp = parseInt(current_page,10)
+      const tp = parseInt(total_pages,10)
+      // set the page number range to display
+      return this.positions(cp,tp).map( pageNum => pageNum.toString())
+    }
+    return 0
   }
 
   /**

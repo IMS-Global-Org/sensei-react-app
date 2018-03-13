@@ -149,13 +149,13 @@
 #                                        PATCH    /api/contractees/:id(.:format)                                           api/contractees#update
 #                                        PUT      /api/contractees/:id(.:format)                                           api/contractees#update
 #                                        DELETE   /api/contractees/:id(.:format)                                           api/contractees#destroy
-#                   query_api_contact_us POST     /api/contact_us/query(.:format)                                          api/contact_us#query
-#                         api_contact_us GET      /api/contact_us(.:format)                                                api/contact_us#index
-#                                        POST     /api/contact_us(.:format)                                                api/contact_us#create
-#                          api_contact_u GET      /api/contact_us/:id(.:format)                                            api/contact_us#show
-#                                        PATCH    /api/contact_us/:id(.:format)                                            api/contact_us#update
-#                                        PUT      /api/contact_us/:id(.:format)                                            api/contact_us#update
-#                                        DELETE   /api/contact_us/:id(.:format)                                            api/contact_us#destroy
+#               query_api_contact_emails POST     /api/contact_emails/query(.:format)                                      api/contact_emails#query
+#                     api_contact_emails GET      /api/contact_emails(.:format)                                            api/contact_emails#index
+#                                        POST     /api/contact_emails(.:format)                                            api/contact_emails#create
+#                      api_contact_email GET      /api/contact_emails/:id(.:format)                                        api/contact_emails#show
+#                                        PATCH    /api/contact_emails/:id(.:format)                                        api/contact_emails#update
+#                                        PUT      /api/contact_emails/:id(.:format)                                        api/contact_emails#update
+#                                        DELETE   /api/contact_emails/:id(.:format)                                        api/contact_emails#destroy
 #                                        GET      /*other(.:format)                                                        static#index
 # 
 
@@ -209,8 +209,8 @@ Rails.application.routes.draw do
       get 'query', on: :collection
       get 'show_complete', to: 'contractees#show_complete'
     end
-    # Routes for the contact_us emails
-    resources :contact_us, shallow: true do
+    # Routes for the contact_emails
+    resources :contact_emails, shallow: true do
       post :query, on: :collection
     end
   end

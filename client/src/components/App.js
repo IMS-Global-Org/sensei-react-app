@@ -30,8 +30,8 @@ import Contracts from './contracts/Contracts'
 import Contractees from './contractees/Contractees'
 import HomePage from './homepages/HomePage'
 import Announcements from './announcements/Announcements'
-import ContactUs from './contactus/ContactUs'
-import ContactUsManager from './contactus/ContactUsManager'
+import ContactEmail from './contact_emails/ContactEmail'
+import ContactEmailsManager from './contact_emails/ContactEmailsManager'
 
 // Fonts
 import '../styles/yozakura.css'
@@ -54,7 +54,7 @@ class App extends Component {
               <Route exact path='/location' component={Location} />
               <Route exact path='/blog' component={HomePage} />
               <Route exact path='/news' component={Announcements} />
-              <Route exact path='/contactus' component={ContactUs} />
+              <Route exact path='/contact_email' component={ContactEmail} />
               <ProtectedRoute exact path='/calendar/events' component={EventEditor} />
               <ProtectedRoute exact path='/program/tracker' component={ProgramTracker} />
               <ProtectedRoute exact path='/settings' component={Settings} />
@@ -64,7 +64,7 @@ class App extends Component {
               <ProtectedRoute path='/mailers' component={Mailers} />
               <ProtectedRoute path='/contracts' component={Contracts} />
               <ProtectedRoute path='/contractees' component={Contractees} />
-              <ProtectedRoute path='/contactus/manager' component={ContactUsManager} />
+              <ProtectedRoute path='/contact_emails/manager' component={ContactEmailsManager} />
               <Route component={NoMatch} />
             </Switch>
           </FetchUser>

@@ -92,7 +92,7 @@ const renderTextAreaField = ({input, label, required, meta: {touched, error, war
   </Form.Field>
 )
 
-class ContactUsForm extends Component {
+class ContactEmailForm extends Component {
   render() {
     const { handleSubmit, pristine, reset, submitting} = this.props
     return (
@@ -156,7 +156,7 @@ class ContactUsForm extends Component {
 
 // Connect Redux Form Validation State
 export default reduxForm({
-  form: 'ContactUsForm',
+  form: 'ContactEmailForm',
   validate,
   warn,
-})(ContactUsForm)
+})(ContactEmailForm)

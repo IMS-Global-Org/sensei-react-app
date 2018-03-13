@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Segment, Grid, Header } from 'semantic-ui-react'
 import LabelField from '../helpers/LabelField'
 
-class ContactUsSentMessage extends Component {
+class ContactEmailSentMessage extends Component {
 
   render = () => {
     const { first_name, last_name, phone, subject, body } = this.props.email
@@ -46,7 +46,7 @@ class ContactUsSentMessage extends Component {
 
           <Grid.Row columns={1}>
             <Grid.Column>
-              <LabelField bold>Body</LabelField>
+              <LabelField bold>Message</LabelField>
               <p>{ body }</p>
             </Grid.Column>
           </Grid.Row>
@@ -58,8 +58,8 @@ class ContactUsSentMessage extends Component {
 
 const mapStateToProps = ( state, props ) => {
   return {
-    email: state.contactus.email,
+    email: state.contact_emails.email,
   }
 }
 
-export default connect(mapStateToProps)(ContactUsSentMessage)
+export default connect(mapStateToProps)(ContactEmailSentMessage)

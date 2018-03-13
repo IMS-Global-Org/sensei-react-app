@@ -4,11 +4,11 @@ import {
   Container, Segment, Header, Icon,
 } from 'semantic-ui-react'
 import styled from 'styled-components'
-import ContactUsForm from './ContactUsForm'
-import ContactUsSentMessage from './ContactUsSentMessage'
+import ContactEmailForm from './ContactEmailForm'
+import ContactEmailSentMessage from './ContactEmailSentMessage'
 
 // Actions
-import { createContactUs } from '../../actions/contactus'
+import { createContactEmail } from '../../actions/contact_emails'
 
 // Custom Styled Components
 const InstructionsArea = styled(Segment)`
@@ -16,7 +16,7 @@ const InstructionsArea = styled(Segment)`
   margin: 0 25% !important;
 `
 
-class ContactUs extends Component {
+class ContactEmail extends Component {
   defaults = {
     showSentMessage: false,
   }
@@ -32,7 +32,7 @@ class ContactUs extends Component {
   handleOnSubmit = ( json ) => {
     const { dispatch } = this.props
     dispatch(
-      createContactUs(json,()=>{
+      createContactEmail(json,()=>{
         this.setState({ showSentMessage: true })
       })
     )
@@ -63,8 +63,8 @@ class ContactUs extends Component {
         </InstructionsArea>
         <Segment>
           { showSentMessage
-            ? <ContactUsSentMessage />
-            : <ContactUsForm
+            ? <ContactEmailSentMessage />
+            : <ContactEmailForm
                 onSubmit={this.handleOnSubmit}
                 initialValues={this.initialFormValues} />
           }
@@ -74,4 +74,4 @@ class ContactUs extends Component {
   }
 }
 
-export default connect()(ContactUs)
+export default connect()(ContactEmail)

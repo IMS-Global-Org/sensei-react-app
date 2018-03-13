@@ -54,13 +54,14 @@ ActiveRecord::Schema.define(version: 20180306102722) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "contact_us", force: :cascade do |t|
+  create_table "contact_emails", force: :cascade do |t|
     t.string "first_name", null: false
     t.string "last_name", null: false
     t.string "address", null: false
     t.string "subject", null: false
     t.text "body", null: false
     t.string "phone"
+    t.integer "correspondance", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

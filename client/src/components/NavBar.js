@@ -103,10 +103,10 @@ class NavBar extends Component {
                 </Dropdown.Item>
                 <Dropdown.Item
                   as={ Link }
-                  to='/contactus/manager'
-                  active={activeItem === 'contactus'}
+                  to='/contact_emails/manager'
+                  active={activeItem === 'contact_emails'}
                   onClick={this.handleItemClick}>
-                  <Content>Contact Us E-mails</Content>
+                  <Content>Contact E-mails</Content>
                 </Dropdown.Item>
               </DropDownMenu>
             </DropDown>
@@ -190,8 +190,8 @@ class NavBar extends Component {
         <MenuItem
           name='contact us'
           as={ Link }
-          to='/contactus'
-          active={activeItem === 'contact us'}
+          to='/contact_email'
+          active={activeItem === 'contact_email'}
           onClick={this.handleItemClick} />
         <MenuItem
           as={ Link }

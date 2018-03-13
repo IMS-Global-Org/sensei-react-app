@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <div style='margin: 2rem 0'>
+      The following E-mail Correspondance was sent to you from the
+      <a href='<%= @blkcv_url %>'><%= @blkcv_url %></a> website:
+    </div>
+    Contact:&nbsp;
+    <span style='font-size: 1rem; font-weight: bold'>
+      <%= @params[:last_name] %>,&nbsp;<%= @params[:first_name] %>
+    </span>
+    <p>Message:&nbsp;<%= @params[:body] %></p>
+    Telephone:&nbsp;<span style='font-weight: bold'><%= @params[:phone] %></span>
+  </body>
+</html>
