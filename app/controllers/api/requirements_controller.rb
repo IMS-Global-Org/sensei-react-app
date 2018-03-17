@@ -3,6 +3,7 @@ class Api::RequirementsController < ApplicationController
   before_action :set_requirement, except: %I[index create]
 
   def index
+    authorize! :read, Requirement
     requirements = Requirement
       .where('program_id = ?', params[:prog_id])
       .order(level: :asc)
@@ -12,10 +13,12 @@ class Api::RequirementsController < ApplicationController
   end
 
   def show
+    authorize! :read, Requirement
     render json: @requirement
   end
 
   def update
+    authorize! :update, Requirement
     if @requirement.update(requirement_params)
       render json: @requirement
     else
@@ -24,6 +27,7 @@ class Api::RequirementsController < ApplicationController
   end
 
   def create
+    authorize! :create, Requirement
     requirement = Requirement.new(requirement_params)
     if requirement.save
       render json: requirement
@@ -33,6 +37,7 @@ class Api::RequirementsController < ApplicationController
   end
 
   def destroy
+    authorize! :destroy, Requirement
     @requirement.destroy
   end
 

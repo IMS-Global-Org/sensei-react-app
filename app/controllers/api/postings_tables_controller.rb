@@ -2,6 +2,7 @@ class Api::PostingsTablesController < ApplicationController
   before_action :set_posting, except: [ :index, :create ]
 
   def index
+    authorize! :read, HomePagePosting
     # query the database while making the necessary adjustments to format
     postings = HomePagePosting
       .select(
@@ -17,6 +18,7 @@ class Api::PostingsTablesController < ApplicationController
   end
 
   def show
+    authorize! :read, HomePagePosting
     if @posting
       videos = HomePageVideo
         .all.where('home_page_posting_id = ?', @posting.id).order(updated_at: :desc)
@@ -35,6 +37,7 @@ class Api::PostingsTablesController < ApplicationController
   end
 
   def create
+    authorize! :create, HomePagePosting
     posting = HomePagePosting.new(posting_params)
     if posting.save
       render json: posting
@@ -44,6 +47,7 @@ class Api::PostingsTablesController < ApplicationController
   end
 
   def update
+    authorize! :update, HomePagePosting
     if @posting.update(posting_params)
       videos = HomePageVideo
         .all.where('home_page_posting_id = ?', @posting.id).order(updated_at: :desc)
@@ -63,6 +67,7 @@ class Api::PostingsTablesController < ApplicationController
   end
 
   def destroy
+    authorize! :destroy, HomePagePosting
     @posting.destroy
   end
 

@@ -3,6 +3,7 @@ class Api::PhonesController < ApplicationController
   before_action :set_phone, only: %I[show update destroy]
 
   def index
+    authorize! :read, Phone
     if params[:contractee_id]
       render json: Contractee
         .find(params[:contractee_id])
@@ -15,10 +16,12 @@ class Api::PhonesController < ApplicationController
   end
 
   def show
+    authorize! :read, Phone
     render json: @phone
   end
 
   def update
+    authorize! :update, Phone
     if @phone.update(phone_params)
       render json: @phone
     else
@@ -27,6 +30,7 @@ class Api::PhonesController < ApplicationController
   end
 
   def create
+    authorize! :create, Phone
     phone = Contractee.find(params[:contractee_id]).phones.build(phone_params)
     if phone.save
       render json: phone
@@ -36,6 +40,7 @@ class Api::PhonesController < ApplicationController
   end
 
   def destroy
+    authorize! :destroy, Phone
     @phone.destroy
   end
 

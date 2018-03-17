@@ -92,7 +92,7 @@ class AnnouncementsTable extends Component {
           <Table.Row>
             <Table.HeaderCell colSpan={4}>
               <Header as='h1' textAlign='center'>
-                Instructions
+                Up Comming Events
               </Header>
               <p style={{ textAlign: 'justify', margin: '2rem 5rem' }}>
                 Below you will find a table listing the notices that are

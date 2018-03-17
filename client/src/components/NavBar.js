@@ -111,6 +111,19 @@ class NavBar extends Component {
               </DropDownMenu>
             </DropDown>
           }
+          { !user.isAdmin() && user.isStudent() &&
+            <DropDown item text='Applications'>
+              <DropDownMenu>
+                <Dropdown.Item
+                  as={ Link }
+                  to='/student_videos'
+                  active={activeItem === 'student_videos'}
+                  onClick={this.handleItemClick}>
+                  <Content>Student Videos</Content>
+                </Dropdown.Item>
+              </DropDownMenu>
+            </DropDown>
+          }
           <MenuItem
             name='settings'
             as={ Link }

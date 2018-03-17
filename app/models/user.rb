@@ -34,4 +34,13 @@ class User < ActiveRecord::Base
           :recoverable, :rememberable, :trackable, :validatable,
           :omniauthable
   include DeviseTokenAuth::Concerns::User
+
+  # Helper for determining if a user has been assigned a certain permission
+  # level. This is primarily used by AccessGranted gem Policies.
+  # @param level [#to_s] anything that can be converted to a string, i.e. symbol
+  # @return [true,false] boolean
+  def has_permission?(level)
+    permissions.include? level.to_s
+  end
+
 end

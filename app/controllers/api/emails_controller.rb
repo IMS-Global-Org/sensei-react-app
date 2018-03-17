@@ -3,6 +3,7 @@ class Api::EmailsController < ApplicationController
   before_action :set_email, only: %I[show update destroy]
 
   def index
+    authorize! :read, Email
     emails = Email
       .where('student_id == ?', params[:student_id])
       .order(type_of: :asc)
@@ -11,10 +12,12 @@ class Api::EmailsController < ApplicationController
   end
 
   def show
+    authorize! :read, Email
     render json: @email
   end
 
   def update
+    authorize! :update, Email
     if @email.update(email_params)
       render json: @email
     else
@@ -23,6 +26,7 @@ class Api::EmailsController < ApplicationController
   end
 
   def create
+    authorize! :create, Email
     email = Contractee.find(params[:contractee_id])
       .emails.build(email_params)
     if email.save
@@ -33,6 +37,7 @@ class Api::EmailsController < ApplicationController
   end
 
   def destroy
+    authorize! :destroy, Email
     @email.destroy
   end
 

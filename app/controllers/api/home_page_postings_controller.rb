@@ -3,6 +3,7 @@ class Api::HomePagePostingsController < ApplicationController
   before_action :set_posting, except: [ :index, :create ]
 
   def index
+    authorize! :read, HomePagePosting
     # total_entries = HomePagePosting.all.count
     postings = HomePagePosting
       .includes(:home_page_videos, :home_page_links)
@@ -15,10 +16,12 @@ class Api::HomePagePostingsController < ApplicationController
 
 
   def show
+    authorize! :read, HomePagePosting
     render json: @posting
   end
 
   def create
+    authorize! :create, HomePagePosting
     posting = HomePagePosting.new(posting_params)
     if posting.save
       render json: posting
@@ -28,6 +31,7 @@ class Api::HomePagePostingsController < ApplicationController
   end
 
   def update
+    authorize! :update, HomePagePosting
     if @posting.update(posting_params)
       render json: @posting
     else
@@ -36,6 +40,7 @@ class Api::HomePagePostingsController < ApplicationController
   end
 
   def destroy
+    authorize! :destroy, HomePagePosting
     @posting.destroy
   end
 

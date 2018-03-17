@@ -52,7 +52,6 @@ class App extends Component {
               <Route exact path='/calendar' component={Calendar} />
               <Route exact path='/programs' component={Programs} />
               <Route exact path='/location' component={Location} />
-              <Route exact path='/blog' component={HomePage} />
               <Route exact path='/news' component={Announcements} />
               <Route exact path='/contact_email' component={ContactEmail} />
               <ProtectedRoute exact path='/calendar/events' component={EventEditor} />
@@ -65,6 +64,7 @@ class App extends Component {
               <ProtectedRoute path='/contracts' component={Contracts} />
               <ProtectedRoute path='/contractees' component={Contractees} />
               <ProtectedRoute path='/contact_emails/manager' component={ContactEmailsManager} />
+              <ProtectedRoute exact path='/student_videos' component={HomePage} />
               <Route component={NoMatch} />
             </Switch>
           </FetchUser>

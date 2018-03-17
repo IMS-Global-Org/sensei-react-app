@@ -3,6 +3,7 @@ class Api::ContactEmailsController < ApplicationController
   before_action :set_contact_email, only: [ :show, :update, :delete ]
 
   def index
+    authorize! :read, ContactEmail
     emails = ContactEmail.all
       .order(created_at: :asc)
       .page(params[:page]).per_page(params[:per_page])
@@ -12,6 +13,7 @@ class Api::ContactEmailsController < ApplicationController
   def query; end
 
   def show
+    authorize! :read, @contact_email
     render json: @contact_email
   end
 
@@ -26,6 +28,7 @@ class Api::ContactEmailsController < ApplicationController
   end
 
   def update
+    authorize! :update, @contact_email
     if @contact_email.update(contact_email_params)
       render json: @contact_email
     else
@@ -34,6 +37,7 @@ class Api::ContactEmailsController < ApplicationController
   end
 
   def delete
+    authorize! :destroy, @contact_email
     @contact_email.destroy
   end
 

@@ -7,6 +7,7 @@ class Api::StudentsController < ApplicationController
   before_action :set_student, only: %I[show update destroy]
 
   def index
+    authorize! :read, Student
     students = Student
       .where(
         'level like ? AND  belt like ?',
@@ -26,6 +27,7 @@ class Api::StudentsController < ApplicationController
   end
 
   def query
+    authorize! :read, Student
     min_age = params[:query][:min_age]
     max_age = params[:query][:max_age]
     students = Student
@@ -52,10 +54,12 @@ class Api::StudentsController < ApplicationController
   end
 
   def show
+    authorize! :read, Student
     render json: @student
   end
 
   def update
+    authorize! :update, Student
     if @student.update(student_params)
       render json: @student
     else
@@ -64,6 +68,7 @@ class Api::StudentsController < ApplicationController
   end
 
   def create
+    authorize! :create, Student
     student = Student.new(student_params)
     if student.save
       render json: student
@@ -73,10 +78,12 @@ class Api::StudentsController < ApplicationController
   end
 
   def destroy
+    authorize! :destroy, Student
     @student.destroy
   end
 
   def pdf
+    authorize! :read, Student
     min_age = params[:min_age]
     max_age = params[:max_age]
     students = Student
@@ -95,6 +102,7 @@ class Api::StudentsController < ApplicationController
   end
 
   def csv
+    authorize! :read, Student
     min_age = params[:query][:min_age]
     max_age = params[:query][:max_age]
     students = Student

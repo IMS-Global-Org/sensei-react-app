@@ -272,7 +272,7 @@ ActiveRecord::Schema.define(version: 20180306102722) do
     t.string "image"
     t.string "email"
     t.json "tokens"
-    t.string "permissions", default: "user"
+    t.string "permissions", default: "guest,user"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true

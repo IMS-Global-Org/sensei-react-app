@@ -2,15 +2,18 @@ class Api::HomePageLinksController < ApplicationController
   before_action :set_home_page_link, only: [:show, :update, :destroy]
 
   def index
+    authorize! :read, HomePageLink
     render json: HomePagePosting
       .find(params[:home_page_posting_id]).home_page_links
   end
 
   def show
+    authorize! :read, HomePageLink
     render json: @home_page_link
   end
 
   def create
+    authorize! :create, HomePageLink
     home_page_link = HomePagePosting
       .find(params[:home_page_posting_id])
       .home_page_links
@@ -23,6 +26,7 @@ class Api::HomePageLinksController < ApplicationController
   end
 
   def update
+    authorize! :update, HomePageLink
     if @home_page_link.update(home_page_link_params)
       render json: @home_page_link
     else
@@ -31,6 +35,7 @@ class Api::HomePageLinksController < ApplicationController
   end
 
   def destroy
+    authorize! :destroy, HomePageLink
     @home_page_link.destroy
   end
 

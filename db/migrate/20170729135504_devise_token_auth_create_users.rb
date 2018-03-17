@@ -45,8 +45,8 @@ class DeviseTokenAuthCreateUsers < ActiveRecord::Migration[5.1]
       ## Permissions
       # User specific permissions for site access to applications
       # Priviledges are greater going left to right
-      # Options: [ 'guest', 'user', 'admin', 'super']
-      t.string :permissions, default: 'user'
+      # Options: [ 'guest', 'user', 'student', 'admin', 'super']
+      t.string :permissions, default: 'guest,user'
 
       t.timestamps
     end

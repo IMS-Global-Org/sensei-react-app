@@ -3,6 +3,7 @@ class Api::EventsController < ApplicationController
   before_action :set_event, only: %i[show update destroy]
 
   def index
+    authorize! :read, Event
     events = Event.all
     .where('(start, finish) OVERLAPS (?,?)', params[:start], params[:finish])
     .order(start: :asc)
@@ -11,6 +12,7 @@ class Api::EventsController < ApplicationController
   end
 
   def paginate
+    authorize! :read, Event
     # get the events to display per page
     events = Event
       .where('start >= ? AND finish <= ?', params[:start], params[:finish])
@@ -28,10 +30,12 @@ class Api::EventsController < ApplicationController
   end
 
   def show
+    authorize! :read, Event
     render json: @event
   end
 
   def update
+    authorize! :update, Event
     if @event.update(event_params)
       render json: @event
     else
@@ -40,6 +44,7 @@ class Api::EventsController < ApplicationController
   end
 
   def create
+    authorize! :create, Event
     event = Event.new(event_params)
     if event.save
       render json: event
@@ -49,6 +54,7 @@ class Api::EventsController < ApplicationController
   end
 
   def destroy
+    authorize! :destroy, Event
     @event.destroy
   end
 

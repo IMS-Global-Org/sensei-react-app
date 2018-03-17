@@ -3,6 +3,7 @@ class Api::ContractsController < ApplicationController
   before_action :set_contract, only: [:update, :destroy]
 
   def index
+    authorize! :read, Contract
     contracts = Contract
       .includes(:contractees)
       .order(created_at: :desc, updated_at: :desc)
@@ -28,6 +29,7 @@ class Api::ContractsController < ApplicationController
   end
 
   def query
+    authorize! :read, Contract
     p = params[:query]
 
     interval = p[:interval].is_a?(Fixnum) ? p[:interval] : '6,12'
@@ -62,10 +64,12 @@ class Api::ContractsController < ApplicationController
   end
 
   def show
+    authorize! :read, Contract
     render json: @contract
   end
 
   def details
+    authorize! :read, Contract
     contract = Contract
       .select(
         'contracts.*, json_agg(contractees.*) as holders '
@@ -85,6 +89,7 @@ class Api::ContractsController < ApplicationController
   end
 
   def create
+    authorize! :create, Contract
     contract = Contract.new(contract_params)
     if contract.save
       render json: contract
@@ -94,6 +99,7 @@ class Api::ContractsController < ApplicationController
   end
 
   def update
+    authorize! :update, Contract
     if @contract.update(contract_params)
       render json: @contract
     else
@@ -102,6 +108,7 @@ class Api::ContractsController < ApplicationController
   end
 
   def destroy
+    authorize! :destroy, Contract
     if @contract.update(archived: 1)
       render json: @contract
     else
@@ -110,6 +117,7 @@ class Api::ContractsController < ApplicationController
   end
 
   def archived
+    authorize! :read, Contract
     archived = Contract
       .where(archived: 1)
       .order(created_at: :desc, updated_at: :desc)
@@ -125,6 +133,7 @@ class Api::ContractsController < ApplicationController
   end
 
   def add_contractee
+    authorize! :read, Contract
     contract = Contract.find(params[:id])
     params[:contractees].split(',').each do |id|
       contract.contractees << Contractee.find(id)
@@ -134,6 +143,7 @@ class Api::ContractsController < ApplicationController
   end
 
   def delete_contractee
+    authorize! :destroy, Contractee
     Contract.find(params[:id]).contractees.delete(Contractee.find(params[:contractee]))
   end
 

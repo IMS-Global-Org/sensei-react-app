@@ -157,7 +157,7 @@
 #                                        PUT      /api/contact_emails/:id(.:format)                                        api/contact_emails#update
 #                                        DELETE   /api/contact_emails/:id(.:format)                                        api/contact_emails#destroy
 #                                        GET      /*other(.:format)                                                        static#index
-# 
+#
 
 Rails.application.routes.draw do
   mount_devise_token_auth_for 'User', at: 'api/auth'

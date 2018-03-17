@@ -7,6 +7,7 @@ class Api::ProgramsController < ApplicationController
 
   # Returns a page of programs
   def index
+    authorize! :read, Program
     programs = Program
       .select('programs.*, count(requirements.*) as num_req')
       .joins(:requirements)
@@ -19,12 +20,14 @@ class Api::ProgramsController < ApplicationController
 
   # Returns a single program record
   def show
+    authorize! :read, Program
     render json: @program
   end
 
   # Updates a single program with new attributes
   # Accepts attributes for requirements
   def update
+    authorize! :update, Program
     if @program.update(program_params)
       render json: @program
     else
@@ -35,6 +38,7 @@ class Api::ProgramsController < ApplicationController
   # Creates a single program
   # Accepts attributes for requirements
   def create
+    authorize! :create, Program
     program = Program.new(program_params)
     if program.save
       render json: program
@@ -45,6 +49,7 @@ class Api::ProgramsController < ApplicationController
 
   # Deletes a single program record with adjoined requirements
   def destroy
+    authorize! :destroy, Program
     @program.destroy
   end
 

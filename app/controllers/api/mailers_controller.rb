@@ -3,14 +3,17 @@ class Api::MailersController < ApplicationController
   before_action :set_mailer, only: [:show, :update, :destroy]
 
   def index
+    authorize! :read, Mailer
     render json: Mailer.all
   end
 
   def show
+    authorize! :read, Mailer
     render json: @mailer
   end
 
   def create
+    authorize! :create, Mailer
     mailer = Mailer.new(mailer_params)
     if mailer.save
       job = enqueue_type_of mailer
@@ -25,6 +28,7 @@ class Api::MailersController < ApplicationController
   end
 
   def update
+    authorize! :update, Mailer
     if @mailer.update(mailer_params)
       dequeue_type_of @mailer
       job = enqueue_type_of @mailer
@@ -39,6 +43,7 @@ class Api::MailersController < ApplicationController
   end
 
   def destroy
+    authorize! :destroy, Mailer
     dequeue_type_of @mailer
     @mailer.destroy
   end

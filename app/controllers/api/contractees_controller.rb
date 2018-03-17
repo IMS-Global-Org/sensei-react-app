@@ -3,11 +3,13 @@ class Api::ContracteesController < ApplicationController
   before_action :set_contractee, only: [:show, :update, :destroy]
 
   def index
+    authorize! :read, Contract
     render json: Contract.find(params[:contract_id])
       .contractees.all
   end
 
   def paginate
+    authorize! :read, Contractee
     contractees = Contractee
       .where(active: 1)
       .page(params[:page]).per_page(params[:per_page])
@@ -15,15 +17,18 @@ class Api::ContracteesController < ApplicationController
   end
 
   def query
+    authorize! :read, Contractee
     render json: Contractee
       .where("last ILIKE '#{params[:query]}%' ")
   end
 
   def show
+    authorize! :read, Contractee
     render json: @contractee
   end
 
   def show_complete
+    authorize! :read, Contractee
     contractee = Contractee
       .includes(:addresses, :phones, :emails)
       .find(params[:contractee_id])
@@ -40,6 +45,7 @@ class Api::ContracteesController < ApplicationController
   end
 
   def update
+    authorize! :update, Contractee
     if @contractee.update(contractee_params)
       render json: @contractee
     else
@@ -48,6 +54,7 @@ class Api::ContracteesController < ApplicationController
   end
 
   def destroy
+    authorize! :destroy, Contractee
     if @contractee.update(active: 0)
       render json: @contractee
     else

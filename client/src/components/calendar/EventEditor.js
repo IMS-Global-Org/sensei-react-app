@@ -130,7 +130,7 @@ class EventEditor extends Component {
         <Segment>
           <Header as='h1' icon textAlign='center'>
             <Icon name='info circle' />
-            Information
+            Calendar Events
             <Header.Subheader style={{ textAlign: 'justify', margin: '2rem 3rem' }}>
               A calendar event can be either created or modified, depending on
               whether or not the event already exists. If a new event needs to

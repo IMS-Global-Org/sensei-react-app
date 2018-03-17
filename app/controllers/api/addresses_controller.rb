@@ -3,6 +3,7 @@ class Api::AddressesController < ApplicationController
   before_action :set_address, only: %I[show update destroy]
 
   def index
+    authorize! :read, Address
     addresses = Address.all
       .where('student_id == ?', params[:student_id])
       .order(type_of: :asc)
@@ -11,10 +12,12 @@ class Api::AddressesController < ApplicationController
   end
 
   def show
+    authorize! :read, Address
     render json: @address
   end
 
   def update
+    authorize! :update, Address
     if @address.update(address_params)
       render json: @address
     else
@@ -23,6 +26,7 @@ class Api::AddressesController < ApplicationController
   end
 
   def create
+    authorize! :create, Address
     address = Contractee.find(params[:contractee_id])
       .addresses.build(address_params)
     if address.save
@@ -33,6 +37,7 @@ class Api::AddressesController < ApplicationController
   end
 
   def destroy
+    authorize! :destroy, Address
     @address.destroy
   end
 

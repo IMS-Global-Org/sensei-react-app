@@ -7,6 +7,7 @@ class Api::AnnouncementsController < ApplicationController
 
   # Returns a paginated set of announcements. Ordered newest to oldest
   def index
+    authorize! :read, Announcement
     # query and return ordered by newest event
     ancts = Announcement
       .where('start_date >= ?', @start_date)
@@ -18,12 +19,14 @@ class Api::AnnouncementsController < ApplicationController
 
   # Return a single announcement record for viewing
   def show
+    authorize! :read, Announcement
     render json: @announcement
   end
 
   # Create a new announcement record in the database, based on the information
   # obtained from the client/user
   def create
+    authorize! :create, Announcement
     announcement = Announcement.new(announcement_params)
     if announcement.save
       render json: announcement
@@ -34,6 +37,7 @@ class Api::AnnouncementsController < ApplicationController
 
   # Updates the information for an existing announcement record
   def update
+    authorize! :update, Announcement
     if @announcement.update(announcement_params)
       render json: @announcement
     else
@@ -43,6 +47,7 @@ class Api::AnnouncementsController < ApplicationController
 
   # perminately removes a single announcement record
   def destroy
+    authorize! :destroy, Announcement
     @announcement.destroy
   end
 

@@ -50,6 +50,7 @@ function User () {
    */
   this.isGuest = () => this.includes('guest')
   this.isUser = () => this.includes('user')
+  this.isStudent = () => this.includes('student')
   this.isAdmin = () => this.includes('admin')
   this.isSuper = () => this.includes('super')
 
