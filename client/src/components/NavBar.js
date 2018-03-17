@@ -111,7 +111,7 @@ class NavBar extends Component {
               </DropDownMenu>
             </DropDown>
           }
-          { !user.isAdmin() && user.isStudent() &&
+          { user.isStudent() &&
             <DropDown item text='Applications'>
               <DropDownMenu>
                 <Dropdown.Item

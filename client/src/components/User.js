@@ -61,6 +61,21 @@ function User () {
    */
   this.includes = ( type = 'admin' ) => {
     if( this.hasPermissions() ) {
+      const maxIndex = this.permissions.length - 1
+      const maxPermissionLevel = this.permissions[maxIndex]
+      return maxPermissionLevel === type
+    }
+  }
+
+  /**
+   * Determines if the current user has been given additional privileges that
+   * below their original privilege level. Just a Helper function for detecting
+   * if additional aspects of the application can become available to the client
+   * @param {String} type - the type of privilege to be detected
+   * @return {Boolean}
+   */
+  this.canBeA = ( type = 'guest' ) => {
+    if( this.hasPermissions() ) {
       return this.permissions.includes(type)
     }
   }
