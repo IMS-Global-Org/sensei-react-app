@@ -43,19 +43,6 @@ class NavBar extends Component {
       return(
         <Menu.Menu position='right'>
           { user.isAdmin() &&
-            <DropDown item text='Vlog'>
-              <DropDownMenu>
-                <Dropdown.Item
-                  as={ Link }
-                  to='/student_videos'
-                  active={activeItem === 'student_videos'}
-                  onClick={this.handleItemClick}>
-                  <Content>Student Videos</Content>
-                </Dropdown.Item>
-              </DropDownMenu>
-            </DropDown>
-          }
-          { user.isAdmin() &&
             <DropDown item text='Applications'>
               <DropDownMenu>
                 <Dropdown.Item
@@ -120,6 +107,19 @@ class NavBar extends Component {
                   active={activeItem === 'contact_emails'}
                   onClick={this.handleItemClick}>
                   <Content>Contact E-mails</Content>
+                </Dropdown.Item>
+              </DropDownMenu>
+            </DropDown>
+          }
+          { user.canBeA('student') &&
+            <DropDown item text='Vlog'>
+              <DropDownMenu>
+                <Dropdown.Item
+                  as={ Link }
+                  to='/student_videos'
+                  active={activeItem === 'student_videos'}
+                  onClick={this.handleItemClick}>
+                  <Content>Student Videos</Content>
                 </Dropdown.Item>
               </DropDownMenu>
             </DropDown>

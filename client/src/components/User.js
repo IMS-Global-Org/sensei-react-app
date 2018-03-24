@@ -75,11 +75,11 @@ function User () {
    * @param {String} type - the type of privilege to be detected
    * @return {Boolean}
    */
-  // this.canBeA = ( type = 'guest' ) => {
-  //   if( this.hasPermissions() ) {
-  //     return this.permissions.includes(type)
-  //   }
-  // }
+  this.canBeA = ( type = 'guest' ) => {
+    if( this.hasPermissions() ) {
+      return this.permissions.includes(type)
+    }
+  }
 }
 
 export default User
