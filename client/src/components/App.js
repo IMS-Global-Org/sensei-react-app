@@ -32,6 +32,7 @@ import HomePage from './homepages/HomePage'
 import Announcements from './announcements/Announcements'
 import ContactEmail from './contact_emails/ContactEmail'
 import ContactEmailsManager from './contact_emails/ContactEmailsManager'
+import About from './about/About'
 
 // Fonts
 import '../styles/yozakura.css'
@@ -49,6 +50,7 @@ class App extends Component {
               <Route exact path='/' component={Home} />
               <Route exact path='/login' component={Login} />
               <Route exact path='/register' component={Register} />
+              <Route exact path='/about' component={About} />
               <Route exact path='/calendar' component={Calendar} />
               <Route exact path='/programs' component={Programs} />
               <Route exact path='/location' component={Location} />

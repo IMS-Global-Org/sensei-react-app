@@ -173,7 +173,7 @@ class NavBar extends Component {
         <MenuItem
           name='about us'
           as={ Link }
-          to='/'
+          to='/about'
           active={activeItem === 'about us'}
           onClick={this.handleItemClick} />
         <MenuItem

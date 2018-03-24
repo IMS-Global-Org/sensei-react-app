@@ -3,13 +3,14 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import {
   Container, Segment, Header,
-  Icon, Button, Image
+  Icon, Button, Image, Grid,
 } from 'semantic-ui-react'
 import styled from 'styled-components'
 import moment from 'moment'
 
 // Images
 import SevenFiveThree from '../../images/7-5-3.jpg'
+import Motivation from '../../images/motivation.jpg'
 
 // Custom CSS
 import '../../styles/martial_arts.css'
@@ -388,7 +389,16 @@ class Calendar extends Component {
         </CalendarHeader>
         { this.generateCalendar() }
         <Segment basic padded={false}>
-          <Image src={SevenFiveThree} className='image-7-5-3' />
+          <Grid>
+            <Grid.Row columns={2}>
+              <Grid.Column width={8}>
+                <Image src={SevenFiveThree} className='image-7-5-3' />
+              </Grid.Column>
+              <Grid.Column width={8}>
+                <Image src={Motivation} className='motivation' />
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
         </Segment>
       </Container>
     )

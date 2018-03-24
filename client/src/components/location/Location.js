@@ -6,9 +6,6 @@ import {
 import LocationGoogleMap from './LocationGoogleMap'
 import styled from 'styled-components'
 
-// Images
-import Motivation from '../../images/motivation.jpg'
-
 import '../../styles/martial_arts.css'
 
 // Custom Styled Components
@@ -121,9 +118,6 @@ class Location extends Component {
               </div>
             </Card.Content>
           </Map>
-        </Segment>
-        <Segment basic padded={false}>
-          <Image src={Motivation} className='motivation' />
         </Segment>
       </Container>
     )

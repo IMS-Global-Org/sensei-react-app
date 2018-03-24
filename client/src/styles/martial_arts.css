@@ -10,20 +10,20 @@
 
 .image-7-5-3 {
   background-repeat: no-repeat;
-  background-size: 100% 900px;
+  background-size: 100% 500px;
   background-position: center;
-  min-height: 900px;
-  width: 90%;
+  min-height: 500px;
+  width: 100%;
   margin: 5% 5%;
   padding: 0;
 }
 
 .motivation {
   background-repeat: no-repeat;
-  background-size: 100% 900px;
+  background-size: 100% 500px;
   background-position: center;
-  min-height: 900px;
-  width: 70%;
+  min-height: 500px;
+  width: 80%;
   margin: 5% 15%;
   padding: 0;
 }
