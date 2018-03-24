@@ -42,7 +42,7 @@ class NavBar extends Component {
     if(user.isLoggedIn()) {
       return(
         <Menu.Menu position='right'>
-          { ( user.isStudent() || user.isAdmin() ) &&
+          { ( user.isStudent() || user.canBeA('admin') ) &&
             <DropDown item text='Vlog'>
               <DropDownMenu>
                 <Dropdown.Item

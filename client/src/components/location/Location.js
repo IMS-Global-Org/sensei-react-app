@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {
   Container, Segment,
-  Header, Card, Icon, Image,
+  Header, Card, Icon,
 } from 'semantic-ui-react'
 import LocationGoogleMap from './LocationGoogleMap'
 import styled from 'styled-components'
