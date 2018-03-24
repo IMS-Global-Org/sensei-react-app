@@ -50,7 +50,7 @@ function User () {
    */
   this.isGuest = () => this.includes('guest')
   this.isUser = () => this.includes('user')
-  this.isStudent = () => this.includes('student')
+  // this.isStudent = () => this.includes('student')
   this.isAdmin = () => this.includes('admin')
   this.isSuper = () => this.includes('super')
 
@@ -65,6 +65,7 @@ function User () {
       const maxPermissionLevel = this.permissions[maxIndex]
       return maxPermissionLevel === type
     }
+    return false
   }
 
   /**
@@ -74,11 +75,11 @@ function User () {
    * @param {String} type - the type of privilege to be detected
    * @return {Boolean}
    */
-  this.canBeA = ( type = 'guest' ) => {
-    if( this.hasPermissions() ) {
-      return this.permissions.includes(type)
-    }
-  }
+  // this.canBeA = ( type = 'guest' ) => {
+  //   if( this.hasPermissions() ) {
+  //     return this.permissions.includes(type)
+  //   }
+  // }
 }
 
 export default User
