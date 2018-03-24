@@ -21,7 +21,7 @@ const DropDown = styled(Dropdown)`
   color: #FFF !important;
 `
 const DropDownMenu = styled(Dropdown.Menu)`
-  background-color: #9B0013 !important;
+  background-color: #a6a6a6 !important;
   border: 1px solid #FFF !important;
 `
 const Content = styled.span`
@@ -42,6 +42,19 @@ class NavBar extends Component {
     if(user.isLoggedIn()) {
       return(
         <Menu.Menu position='right'>
+          { ( user.isStudent() || user.isAdmin() ) &&
+            <DropDown item text='Vlog'>
+              <DropDownMenu>
+                <Dropdown.Item
+                  as={ Link }
+                  to='/student_videos'
+                  active={activeItem === 'student_videos'}
+                  onClick={this.handleItemClick}>
+                  <Content>Student Videos</Content>
+                </Dropdown.Item>
+              </DropDownMenu>
+            </DropDown>
+          }
           { user.isAdmin() &&
             <DropDown item text='Applications'>
               <DropDownMenu>
@@ -111,19 +124,6 @@ class NavBar extends Component {
               </DropDownMenu>
             </DropDown>
           }
-          { user.isStudent() &&
-            <DropDown item text='Applications'>
-              <DropDownMenu>
-                <Dropdown.Item
-                  as={ Link }
-                  to='/student_videos'
-                  active={activeItem === 'student_videos'}
-                  onClick={this.handleItemClick}>
-                  <Content>Student Videos</Content>
-                </Dropdown.Item>
-              </DropDownMenu>
-            </DropDown>
-          }
           <MenuItem
             name='settings'
             as={ Link }
@@ -187,12 +187,6 @@ class NavBar extends Component {
           to='/calendar'
           name='class schedule'
           active={activeItem === 'class schedule'}
-          onClick={this.handleItemClick} />
-        <MenuItem
-          as={ Link }
-          to='/blog'
-          name='blog'
-          active={activeItem === 'blog'}
           onClick={this.handleItemClick} />
         <MenuItem
           as={ Link }

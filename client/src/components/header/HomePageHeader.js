@@ -4,8 +4,8 @@ import styled from 'styled-components'
 
 // Images
 // import LeftForm from '../../images/form04.png'
-import RightForm from '../../images/BLK-Logo-8f0222.png'
-import BLK_DOJO from '../../images/BLK-Logo-8f0222-L.png'
+import RightForm from '../../images/BLK-Logo-000000-R.png'
+import BLK_DOJO from '../../images/BLK-Logo-000000-L.png'
 
 // Custom CSS
 import '../../styles/header.css'

@@ -12,7 +12,6 @@ const Title = styled(Header)`
   font-size: 5rem !important;
   font-weight: bolder !important;
   letter-spacing: 0.25rem;
-  color: #cd000a !important;
 `
 
 /**

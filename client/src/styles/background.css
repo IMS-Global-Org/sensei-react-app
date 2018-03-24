@@ -1,5 +1,5 @@
 .multi-bg-images {
-  background-image: url('../images/BorderDragons.png'), url('../images/BorderDragons.png');
+  background-image: url('../images/BorderDragons.png'), url('../images/BorderDragonsRed.png');
   background-repeat: repeat-y, repeat-y;
   background-position: 2% 0%, 98% 0%;
   background-size: 5%, 5%;

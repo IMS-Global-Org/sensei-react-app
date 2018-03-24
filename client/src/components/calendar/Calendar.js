@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import {
   Container, Segment, Header,
   Icon, Button, Image
@@ -368,7 +369,7 @@ class Calendar extends Component {
             respective event. The details you are seeking will present
             themselves in a popup. If further details regarding a specific
             event are needed, please feel free to contact the units&nbsp;
-            <a href='mailto:sensei_ou_unit@blkdojos.com'>Sensei</a>.
+            <Link to='/contact_email'>Sensei</Link>.
             </p>
         </Segment>
         <CalendarNavBar>

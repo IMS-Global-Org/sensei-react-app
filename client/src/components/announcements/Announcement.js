@@ -17,7 +17,6 @@ const Column = styled(Grid.Column)`
 const CardHeader = styled(Card.Header)`
   text-align: center;
   padding: 1rem 0;
-  color: #cd000a !important;
   font-family: 'yozakura' !important;
   font-size: 1.5rem !important;
   font-weight: bold;
