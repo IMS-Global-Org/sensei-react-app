@@ -8,7 +8,8 @@ class About extends Component {
       <Container as={Segment} style={{ padding: '6rem 0' }}>
         <Container text textAlign='justified'>
           <Header as='h2' textAlign='center'>
-            Bobby Lawrence Karate
+            Master Bobby Lawrence
+            <Header.Subheader>先生</Header.Subheader>
           </Header>
           <p>
             Master Lawrence started his karate training 40 years ago in 1970, in Las
@@ -36,6 +37,41 @@ class About extends Component {
             karate training wasn’t just the kicking and punching and sparring that
             Master Lawrence enjoyed so much. What was really valuable was the respect
             and discipline inherent in karate training.
+          </p>
+          <Header as='h3' textAlign='center'>
+            BLK
+            <Header.Subheader>
+              Bobby Lawrence Karate (空手)
+            </Header.Subheader>
+          </Header>
+          <p>
+            Bobby Lawrence Karate, sometimes referred to simply as BLK, is a unique
+            eclectic system of karate developed by Master Bobby Lawrence. Bobby
+            Lawrence Karate has been training and instructing students since 1991.
+            Headed by Bobby Lawrence and his staff of expert instructors,
+            Bobby Lawrence Karate offers a number of programs for physical
+            fitness and karate instruction.
+          </p>
+          <Header as='h3' textAlign='center'>
+            BLK CV
+            <Header.Subheader>
+              Bobby Lawrence Karate of Castle Valley (しろ谷)
+            </Header.Subheader>
+          </Header>
+          <p>
+            BLKCV is a new school that opened in the fall of 2016. This school
+            is directed by Heather Orgill. Heather began her love for physical
+            activity and sports as a young girl. She has participated in organized,
+            competitive sports in volleyball, basketball, softball, and track.
+            She has always had an interest in Martial Arts but the opportunity
+            to participate in this art didn't present itself until 2011. Her
+            oldest daughter expressed an interest in taking a Martial Arts class
+            at the age of 5 but needed a buddy to go with her. So, Heather being
+            the sport fanatic that she is, eagerly volunteered for the job. Her
+            Martial Arts studies began with Tang Soo Do, where she achieved the rank of Black Belt.
+            Shortly thereafter, she began training with Master Bobby Lawrence, in his
+            eclectic system. She currently holds the rank of second degree
+            black belt. Heather continues her training with Master Lawrence.
           </p>
         </Container>
       </Container>
