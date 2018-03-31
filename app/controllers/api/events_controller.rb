@@ -63,7 +63,7 @@ class Api::EventsController < ApplicationController
   def event_params
     params.require(:event)
       .permit(:start, :finish, :title, :category, :description,
-        :created_at, :updated_at, :id )
+        :created_at, :updated_at, :id, :weekdays )
   end
 
   def set_event

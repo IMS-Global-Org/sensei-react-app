@@ -198,7 +198,7 @@ class NavBar extends Component {
           name='contact us'
           as={ Link }
           to='/contact_email'
-          active={activeItem === 'contact_email'}
+          active={activeItem === 'contact us'}
           onClick={this.handleItemClick} />
         <MenuItem
           as={ Link }

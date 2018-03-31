@@ -7,9 +7,9 @@ import {
 } from 'semantic-ui-react'
 import styled from 'styled-components'
 import moment from 'moment'
+import Weekdays from '../helpers/Weekdays'
 
 // Images
-import SevenFiveThree from '../../images/7-5-3.jpg'
 import Motivation from '../../images/motivation.jpg'
 
 // Custom CSS
@@ -76,6 +76,7 @@ class Calendar extends Component {
   state = {
     activeDate: moment.utc()
   }
+  weekdays = new Weekdays()
 
   /**
    * Initialize the calendar data and attributes
@@ -146,6 +147,7 @@ class Calendar extends Component {
    * @param {Array} calendarDays - All the days displayed in the calendar view
    */
   addEventsToDates = ( calendarDays ) => {
+    const self = this
     let { calendar: { events } } = this.props
     // TODO sort the events in asc order when pulling from the database
     // for every day, find its events
@@ -160,11 +162,14 @@ class Calendar extends Component {
       calendarDays.forEach( day => {
         let todaysEvents = []
         events.every( event => {
+
           if( day.isBefore(minEvent,'date') || day.isAfter(maxEvent,'date') ) {
             // exclude outliers
             return false
-          } else if( day.isBetween(event.start,event.finish,'date','[]') ) {
-            // if the event range matches the day then show or attach
+          } else if(
+            self.isInDuration(event, day) &&
+            self.isOnWeekday(event, day)
+          ) {
             todaysEvents.push(event)
           }
           return true // required to keep the loop going
@@ -173,6 +178,35 @@ class Calendar extends Component {
           day.events = todaysEvents
       })
     }
+  }
+
+  /**
+   * Determines if the day lands on one of the events weekdays
+   * @param {Object} event - simple event data object
+   * @param {Object} day - moment object representing the day being worked with
+   */
+  isOnWeekday = ( event, day ) => {
+    return event.weekdays.includes(
+      this.weekdays.mapNumToAbb( day.weekday() )
+    )
+  }
+
+  /**
+   * Determines if the current day is in between the events start and
+   * finish dates.
+   * @param {Object} event - simple event data object
+   * @param {Object} day - moment object representing the day being worked with
+   */
+  isInDuration = ( event, day ) => {
+    return day.isBetween(event.start,event.finish,'date','[]')
+  }
+
+  /**
+   * Helper method for converting weekdays into a searchable array
+   * @param {Object} event - whose weekdays will be converted
+   */
+  weekdaysToArray = ( event ) => {
+    event.weekdays = event.weekdays.split(',')
   }
 
   /**
@@ -390,13 +424,12 @@ class Calendar extends Component {
         { this.generateCalendar() }
         <Segment basic padded={false}>
           <Grid>
-            <Grid.Row columns={2}>
-              <Grid.Column width={8}>
-                <Image src={SevenFiveThree} className='image-7-5-3' />
-              </Grid.Column>
-              <Grid.Column width={8}>
+            <Grid.Row columns={3}>
+              <Grid.Column width={3}></Grid.Column>
+              <Grid.Column width={10}>
                 <Image src={Motivation} className='motivation' />
               </Grid.Column>
+              <Grid.Column width={3}></Grid.Column>
             </Grid.Row>
           </Grid>
         </Segment>

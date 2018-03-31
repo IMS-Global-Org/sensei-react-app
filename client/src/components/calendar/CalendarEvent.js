@@ -8,13 +8,11 @@ const Event = styled.div`
 `
 const Title = styled(Header)`
   width: 25rem;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 `
 const Date = styled.p`
   text-align: center;
 `
+const Weekday = Date
 
 class CalendarEvent extends Component {
   dateFormat = 'dddd, MMMM Do YYYY, h:mm:ss a'
@@ -38,6 +36,8 @@ class CalendarEvent extends Component {
             <Date>{ event.start.format(this.dateFormat) }</Date>
             <Header as='h5' textAlign='center'>Finish</Header>
             <Date>{ event.finish.format(this.dateFormat) }</Date>
+            <Header as='h5' textAlign='center'>Weekdays</Header>
+            <Weekday>{ event.weekdays.split(',').join(' - ') }</Weekday>
             <Divider />
             <Segment basic>
               { event.description }

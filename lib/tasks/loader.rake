@@ -72,7 +72,8 @@ namespace :loader do |loader_namespace|
         finish: Faker::Time.between(now, finish),
         title: Faker::Lorem.sentence,
         description: Faker::Lorem.paragraph(4),
-        category: categories.sample
+        category: categories.sample,
+        weekdays: 'Mon,Wed,Fri'
       )
     end
   end

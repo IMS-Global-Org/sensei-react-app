@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Segment, Form, Button } from 'semantic-ui-react'
 import moment from 'moment'
 import Datetime from 'react-datetime'
+import WeekdaysSelector from './WeekdaysSelector'
 
 // Actions
 import {
@@ -16,6 +17,7 @@ class EventEditorForm extends Component {
   defaults = {
     start: '', finish: '',
     title: '', category: '',
+    weekdays: '',
     description: '', id: null,
   }
   state = { ...this.defaults }
@@ -58,16 +60,21 @@ class EventEditorForm extends Component {
   handleOnSubmit = ( event ) => {
     event.preventDefault()
     const { dispatch } = this.props
-    if( this.state.id ) {
-      dispatch(updateCalendarEvent(this.state))
+    const calEvent = this.state
+    calEvent.weekdays = this.weekdaysRef.checkedWeekdays()
+    if( calEvent.id ) {
+      dispatch(updateCalendarEvent(calEvent))
     } else {
-      dispatch(createCalendarEvent(this.state))
+      dispatch(createCalendarEvent(calEvent))
     }
     this.setState({ ...this.defaults, id: this.state.id })
   }
 
   render() {
-    const { id, start, finish, title, category, description } = this.state
+    const {
+      id, start, finish, title,
+      category, description, weekdays
+    } = this.state
     return (
       <Segment>
         <Form>
@@ -92,6 +99,9 @@ class EventEditorForm extends Component {
                 onChange={this.handleInputChange} />
             </Form.Field>
           </Form.Group>
+          <WeekdaysSelector
+            weekdays={weekdays}
+            ref={ node => this.weekdaysRef = node } />
           <Form.Field>
             <label>Title</label>
             <Form.Input
