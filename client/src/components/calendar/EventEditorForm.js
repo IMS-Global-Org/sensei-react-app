@@ -67,7 +67,7 @@ class EventEditorForm extends Component {
     } else {
       dispatch(createCalendarEvent(calEvent))
     }
-    this.setState({ ...this.defaults, id: this.state.id })
+    this.setState({ id: this.state.id })
   }
 
   render() {

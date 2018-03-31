@@ -18,6 +18,9 @@ class WeekdaysSelector extends Component {
       weekdays.split(',').forEach( weekday => weekdayObj[weekday] = true )
       this.setState({ ...this.defaults, ...weekdayObj })
       this.weekdays = weekdays
+    } else if( !weekdays ) {
+      this.setState({ ...this.defaults })
+      this.weekdays = ''
     }
   }
 
