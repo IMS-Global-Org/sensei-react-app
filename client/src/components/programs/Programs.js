@@ -2,15 +2,10 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import {
-  Container, Segment, Header,
-  Icon, Message, Image
+  Container, Segment, Header, Message,
 } from 'semantic-ui-react'
 import styled from 'styled-components'
 
-// Images
-import FormsAll  from '../../images/FormsAll.png'
-
-import '../../styles/martial_arts.css'
 
 // Custom Styled Components
 const Videos = styled(Segment)`
@@ -29,16 +24,12 @@ class Programs extends Component {
     return (
       <Container>
         <Videos>
-          <Header as='h2' icon textAlign='center'>
-            <Icon name='' size='massive' />
+          <Header as='h2' textAlign='center'>
             <Header.Content>
-              Bobby Lawrence Karate Programs
-            </Header.Content>
-            <Header.Subheader>
               Martial Arts Develops Concentration, Confidence, and Self Discipline
-            </Header.Subheader>
+            </Header.Content>
           </Header>
-          <p style={{ textAlign: 'justify' }}>
+          <p style={{ textAlign: 'justify', width: '70%', margin: '0 15%' }}>
             Bobby Lawrence Karate has a program for everyone and every age. Our
             programs help develop physical fitness and weight-loss, discipline
             and self control and safety and self-defense. Click here to view our
@@ -117,8 +108,7 @@ class Programs extends Component {
               and calming meditations.
             </p>
           </Message>
-          <Header as='h2' icon textAlign='center'>
-            <Icon name='' size='massive' />
+          <Header as='h2' textAlign='center'>
             <Header.Content>
               Interested In A Program
             </Header.Content>
@@ -146,9 +136,6 @@ class Programs extends Component {
             </Message.List>
           </Message>
         </Videos>
-        <Segment basic padded={false}>
-          <Image src={FormsAll}  className='forms-all' />
-        </Segment>
       </Container>
     )
   }

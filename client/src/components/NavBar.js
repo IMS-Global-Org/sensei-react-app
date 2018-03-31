@@ -163,7 +163,7 @@ class NavBar extends Component {
         pointing
         secondary
         stackable
-        style={{ borderBottom: '1px solid #ffffff'}}>
+        style={{ borderBottom: '1px solid #E1142F' }}>
         <MenuItem
           name='home'
           as={ Link }
