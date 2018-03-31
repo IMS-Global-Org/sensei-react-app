@@ -9,15 +9,15 @@ import styled from 'styled-components'
 
 const MenuItem = styled(Menu.Item)`
   font-family: 'yozakura' !important;
-  font-size: 1.25rem !important;
+  font-size: 1.35rem !important;
   letter-spacing: 0.25rem !important;
   color: #FFF !important;
   padding-top: 0.25rem !important;
 `
 const DropDown = styled(Dropdown)`
   font-family: 'yozakura' !important;
-  font-size: 1.25rem !important;
-  letter-spacing: 0.25rem !important;
+  font-size: 1.35rem !important;
+  letter-spacing: 0.30rem !important;
   color: #FFF !important;
 `
 const DropDownMenu = styled(Dropdown.Menu)`
@@ -183,16 +183,16 @@ class NavBar extends Component {
           active={activeItem === 'programs'}
           onClick={this.handleItemClick} />
         <MenuItem
+          name='schedule'
           as={ Link }
           to='/calendar'
-          name='class schedule'
-          active={activeItem === 'class schedule'}
+          active={activeItem === 'schedule'}
           onClick={this.handleItemClick} />
         <MenuItem
           as={ Link }
           to='/news'
-          name='upcoming events'
-          active={activeItem === 'upcoming events'}
+          name='events'
+          active={activeItem === 'events'}
           onClick={this.handleItemClick} />
         <MenuItem
           name='contact us'
