@@ -4,8 +4,8 @@ import styled from 'styled-components'
 
 // Images
 // import LeftForm from '../../images/form04.png'
-import RightForm from '../../images/BLK-Logo-000000-R.png'
-import BLK_DOJO from '../../images/BLK-Logo-000000-L.png'
+import RightForm from '../../images/KickingDudeRight.png'
+import LeftForm from '../../images/KickingDudeLeft.png'
 
 // Custom CSS
 import '../../styles/header.css'
@@ -29,32 +29,30 @@ class HomePageHeader extends Component {
   render(){
     return (
       <Grid style={{ padding: '0.5rem 0.5rem' }}>
-        <Grid.Row columns={3}>
-          <Grid.Column
-            width={2}
-            textAlign='center'
-            verticalAlign='middle'>
-            <Image
-              src={BLK_DOJO} />
-          </Grid.Column>
-          <Grid.Column width={12}>
+        <Grid.Row columns={1}>
+          <Grid.Column width={16}>
             <Title
               as='h1'
               textAlign='center'>
               <Header.Content>
                 Bobby Lawrence Karate
               </Header.Content>
+            </Title>
+          </Grid.Column>
+        </Grid.Row>
+        <Grid.Row columns={3}>
+          <Grid.Column width={5}>
+            <Image src={LeftForm} size='mini' floated='right' />
+          </Grid.Column>
+          <Grid.Column width={6}>
+            <Title as='h1' textAlign='center'>
               <SubTitle>
                 Castle Valley, Utah
               </SubTitle>
             </Title>
           </Grid.Column>
-          <Grid.Column
-            width={2}
-            textAlign='center'
-            verticalAlign='middle'>
-            <Image
-              src={RightForm} />
+          <Grid.Column width={5}>
+            <Image src={RightForm} size='mini' floated='left' />
           </Grid.Column>
         </Grid.Row>
       </Grid>
