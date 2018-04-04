@@ -186,9 +186,8 @@ class Calendar extends Component {
    * @param {Object} day - moment object representing the day being worked with
    */
   isOnWeekday = ( event, day ) => {
-    return event.weekdays.includes(
-      this.weekdays.mapNumToAbb( day.weekday() )
-    )
+    const abbreviation = this.weekdays.mapNumToAbb( day.weekday() )
+    return event.weekday[ abbreviation ]
   }
 
   /**
@@ -206,7 +205,7 @@ class Calendar extends Component {
    * @param {Object} event - whose weekdays will be converted
    */
   weekdaysToArray = ( event ) => {
-    event.weekdays = event.weekdays.split(',')
+    // event.weekdays = event.weekdays.split(',')
   }
 
   /**

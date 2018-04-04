@@ -7,7 +7,11 @@ class Api::EventsController < ApplicationController
     events = Event.all
       .where('(start, finish) OVERLAPS (?,?)', params[:start], params[:finish])
       .order(start: :asc)
-    render json: events
+    render json: events.as_json( include: {
+      weekday: {
+        except: [:event_id, :created_at, :updated_at] }
+      }
+    )
   end
 
   def paginate

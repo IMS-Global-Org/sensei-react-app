@@ -1,7 +1,21 @@
 import React, { Component } from 'react'
 import { Form, Checkbox } from 'semantic-ui-react'
 
+/**
+ * Checkbox group. One checkbox for each day of the week.
+ * @version 0.1.0
+ */
 class WeekdaysSelector extends Component {
+  /**
+   * @type {Object}
+   * @property {String} defaults.Sun
+   * @property {String} defaults.Mon
+   * @property {String} defaults.Tue
+   * @property {String} defaults.Wed
+   * @property {String} defaults.Thu
+   * @property {String} defaults.Fri
+   * @property {String} defaults.Sat
+   */
   defaults = {
     Sun: 0, Mon: 0, Tue: 0, Wed: 0,
     Thu: 0, Fri: 0, Sat: 0,

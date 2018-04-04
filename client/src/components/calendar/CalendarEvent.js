@@ -17,6 +17,17 @@ const Weekday = Date
 class CalendarEvent extends Component {
   dateFormat = 'dddd, MMMM Do YYYY, h:mm:ss a'
 
+  renderWeekdays = () => {
+    const { event } = this.props
+    const weekdays = []
+    Object.keys(event.weekday).forEach( day => {
+      if( event.weekday[day] === 1 ) {
+        weekdays.push(day)
+      }
+    })
+    return weekdays.join(' - ')
+  }
+
   render() {
     const { event } = this.props
     return (
@@ -37,7 +48,7 @@ class CalendarEvent extends Component {
             <Header as='h5' textAlign='center'>Finish</Header>
             <Date>{ event.finish.format(this.dateFormat) }</Date>
             <Header as='h5' textAlign='center'>Weekdays</Header>
-            <Weekday>{ event.weekdays.split(',').join(' - ') }</Weekday>
+            <Weekday>{ this.renderWeekdays() }</Weekday>
             <Divider />
             <Segment basic>
               { event.description }
