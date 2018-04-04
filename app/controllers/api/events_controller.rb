@@ -9,7 +9,7 @@ class Api::EventsController < ApplicationController
       .order(start: :asc)
     render json: events.as_json( include: {
       weekday: {
-        except: [:event_id, :created_at, :updated_at] }
+        except: [:id, :event_id, :created_at, :updated_at] }
       }
     )
   end
