@@ -3,52 +3,45 @@ import { Form, Checkbox } from 'semantic-ui-react'
 
 class WeekdaysSelector extends Component {
   defaults = {
-    Sun: false, Mon: false, Tue: false, Wed: false,
-    Thu: false, Fri: false, Sat: false,
+    Sun: 0, Mon: 0, Tue: 0, Wed: 0,
+    Thu: 0, Fri: 0, Sat: 0,
   }
   state = { ...this.defaults }
-  weekdays = ''
 
   componentDidMount = () => this.loadWeekdays(this.props)
   componentWillReceiveProps = ( props ) => this.loadWeekdays(props)
   loadWeekdays = ( props ) => {
-    const { weekdays } = this.props
-    if( weekdays && weekdays !== this.weekdays ) {
-      const weekdayObj = {}
-      weekdays.split(',').forEach( weekday => weekdayObj[weekday] = true )
-      this.setState({ ...this.defaults, ...weekdayObj })
-      this.weekdays = weekdays
-    } else if( !weekdays ) {
+    const { weekday } = props
+    if( weekday ) {
+      this.setState({ ...weekday })
+    } else {
       this.setState({ ...this.defaults })
-      this.weekdays = ''
     }
   }
 
   checkboxChange = (e,{id,checked}) => {
-    this.setState({ [id]: checked })
+    this.setState({ [id]: checked ? 1 : 0 })
   }
 
-  checkedWeekdays = () => {
-    let weekdays = []
-    Object.entries(this.state).forEach( weekday => {
-      if( weekday[1] ) {
-        weekdays.push( weekday[0] )
-      }
-    })
-    return weekdays.join(',')
-  }
+  checkedWeekday = () => { return this.state }
 
   renderWeekdays = () => {
-    return Object.entries(this.state).map( weekday => (
-      <Form.Field key={weekday[0]}>
-        <Checkbox
-          name={weekday[0]}
-          id={weekday[0]}
-          checked={weekday[1]}
-          label={weekday[0]}
-          onChange={this.checkboxChange} />
-      </Form.Field>
-    ))
+    let weekdays = []
+    Object.entries(this.state).forEach( weekday => {
+      if( weekday[0] !== 'id' ) {
+        weekdays.push(
+          <Form.Field key={weekday[0]}>
+            <Checkbox
+              name={weekday[0]}
+              id={weekday[0]}
+              checked={weekday[1] ? true : false}
+              label={weekday[0]}
+              onChange={this.checkboxChange} />
+          </Form.Field>
+        )
+      }
+    })
+    return weekdays
   }
 
   render = () => {

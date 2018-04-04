@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180325121629) do
+ActiveRecord::Schema.define(version: 20180402103219) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -149,7 +149,6 @@ ActiveRecord::Schema.define(version: 20180325121629) do
     t.string "category", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "weekdays"
   end
 
   create_table "home_page_links", force: :cascade do |t|
@@ -282,8 +281,23 @@ ActiveRecord::Schema.define(version: 20180325121629) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  create_table "weekdays", force: :cascade do |t|
+    t.integer "Sun", default: 0
+    t.integer "Mon", default: 0
+    t.integer "Tue", default: 0
+    t.integer "Wed", default: 0
+    t.integer "Thu", default: 0
+    t.integer "Fri", default: 0
+    t.integer "Sat", default: 0
+    t.bigint "event_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_weekdays_on_event_id"
+  end
+
   add_foreign_key "home_page_links", "home_page_postings"
   add_foreign_key "home_page_videos", "home_page_postings"
   add_foreign_key "payments", "contracts"
   add_foreign_key "requirements", "programs"
+  add_foreign_key "weekdays", "events"
 end

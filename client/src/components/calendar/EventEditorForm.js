@@ -17,17 +17,16 @@ class EventEditorForm extends Component {
   defaults = {
     start: '', finish: '',
     title: '', category: '',
-    weekdays: '',
+    weekday: '',
     description: '', id: null,
   }
   state = { ...this.defaults }
 
   componentDidMount = () => {
-    const { dispatch, activeEvent, eventId } = this.props
-    if( eventId && !activeEvent ) {
+    const { dispatch, eventId } = this.props
+    const { id } = this.state
+    if( eventId && eventId !== id  ) {
       dispatch(showCalendarEvent(eventId))
-    } else {
-      this.setState({ ...activeEvent })
     }
   }
 
@@ -35,11 +34,12 @@ class EventEditorForm extends Component {
     const { activeEvent, eventId: newId, dispatch } = nextProps
     const { id } = this.state
     if( newId !== id ) {
-      dispatch(showCalendarEvent(newId))
-      if( activeEvent ){
-        activeEvent.start = moment.utc(activeEvent.start)
-        activeEvent.finish = moment.utc(activeEvent.finish)
-      }
+      this.setState({ id: newId },()=>{
+        dispatch(showCalendarEvent(newId))
+      })
+    } else if( activeEvent ){
+      activeEvent.start = moment.utc(activeEvent.start)
+      activeEvent.finish = moment.utc(activeEvent.finish)
       this.setState({ ...activeEvent })
     }
   }
@@ -61,19 +61,19 @@ class EventEditorForm extends Component {
     event.preventDefault()
     const { dispatch } = this.props
     const calEvent = this.state
-    calEvent.weekdays = this.weekdaysRef.checkedWeekdays()
+    delete calEvent.weekday
+    calEvent.weekday_attributes = this.weekdayRef.checkedWeekday()
     if( calEvent.id ) {
       dispatch(updateCalendarEvent(calEvent))
     } else {
       dispatch(createCalendarEvent(calEvent))
     }
-    this.setState({ id: this.state.id })
   }
 
   render() {
     const {
       id, start, finish, title,
-      category, description, weekdays
+      category, description, weekday,
     } = this.state
     return (
       <Segment>
@@ -100,8 +100,8 @@ class EventEditorForm extends Component {
             </Form.Field>
           </Form.Group>
           <WeekdaysSelector
-            weekdays={weekdays}
-            ref={ node => this.weekdaysRef = node } />
+            weekday={weekday}
+            ref={ node => this.weekdayRef = node } />
           <Form.Field>
             <label>Title</label>
             <Form.Input

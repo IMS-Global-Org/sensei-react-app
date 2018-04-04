@@ -23,7 +23,7 @@
 #  image                  :string
 #  email                  :string
 #  tokens                 :json
-#  permissions            :string           default("user")
+#  permissions            :string           default("guest,user")
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #

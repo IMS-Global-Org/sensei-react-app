@@ -24,6 +24,7 @@ const calendar = ( state = { events: [], activeEvent: null, paginate: {} }, acti
           action.data,
           ...state.events.slice(index+1),
         ],
+        activeEvent: action.data,
       }
     case 'CREATE_CALENDAR_EVENT':
       return {

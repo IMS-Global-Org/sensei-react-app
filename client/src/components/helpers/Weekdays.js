@@ -41,6 +41,20 @@ class Weekdays {
     const abb = this.mapDayToAbb(day)
     return Object.entries(this.numMap).find( keyVal => keyVal[1] === abb )[0]
   }
+
+  /**
+   * @param {String} string - comma separated string of weekdays
+   */
+  contains = ( string ) => {
+    const strArray = string.split(',')
+    const abb = Object.keys(this.abbMap)
+    return strArray.every( day => abb.includes(day) )
+  }
+
+  listAbbreviations = () => {
+    return Object.keys(this.abbMap)
+  }
+
 }
 
 export default Weekdays
