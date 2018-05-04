@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import {
   Container, Segment, Header,
-  Icon, Button, Image, Grid,
+  Icon, Button, Image, Grid, List,
 } from 'semantic-ui-react'
 import styled from 'styled-components'
 import moment from 'moment'
@@ -405,6 +405,49 @@ class Calendar extends Component {
             event are needed, please feel free to contact the units&nbsp;
             <Link to='/contact_email'>Sensei</Link>.
             </p>
+            <List>
+              <List.Item>
+                <List.Content>
+                  Classes are held Tuesday and Thursday
+                </List.Content>
+              </List.Item>
+              <List.Item>
+                <List.Content style={{ marginLeft: '2rem' }}>
+                  <List.List>
+                    <List.Item>
+                      <List.Icon name='calendar' />
+                      <List.Content>
+                        5:30AM-6:15 AM-Early bird class
+                      </List.Content>
+                    </List.Item>
+                    <List.Item>
+                      <List.Icon name='calendar' />
+                      <List.Content>
+                        3:30-4:00 Little Ninjas ages 4 and 5
+                      </List.Content>
+                    </List.Item>
+                    <List.Item>
+                      <List.Icon name='calendar' />
+                      <List.Content>
+                        4:15-4:45 Kid Champs ages 6 and 7
+                      </List.Content>
+                    </List.Item>
+                    <List.Item>
+                      <List.Icon name='calendar' />
+                      <List.Content>
+                        4:45-5:30 Jr's ages 8-12
+                      </List.Content>
+                    </List.Item>
+                    <List.Item>
+                      <List.Icon name='calendar' />
+                      <List.Content>
+                        5:45-6:30 Teens/Adults ages 13-????
+                      </List.Content>
+                    </List.Item>
+                  </List.List>
+                </List.Content>
+              </List.Item>
+            </List>
         </Segment>
         <CalendarNavBar>
           <Controls>

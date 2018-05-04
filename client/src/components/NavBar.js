@@ -9,15 +9,15 @@ import styled from 'styled-components'
 
 const MenuItem = styled(Menu.Item)`
   font-family: 'yozakura' !important;
-  font-size: 1.35rem !important;
-  letter-spacing: 0.25rem !important;
+  font-size: 1.75rem !important;
+  letter-spacing: 0.35rem !important;
   color: #FFF !important;
   padding-top: 0.25rem !important;
 `
 const DropDown = styled(Dropdown)`
   font-family: 'yozakura' !important;
-  font-size: 1.35rem !important;
-  letter-spacing: 0.30rem !important;
+  font-size: 1.75rem !important;
+  letter-spacing: 0.40rem !important;
   color: #FFF !important;
 `
 const DropDownMenu = styled(Dropdown.Menu)`
@@ -112,7 +112,7 @@ class NavBar extends Component {
             </DropDown>
           }
           { user.canBeA('student') &&
-            <DropDown item text='Vlog'>
+            <DropDown item text='Students'>
               <DropDownMenu>
                 <Dropdown.Item
                   as={ Link }

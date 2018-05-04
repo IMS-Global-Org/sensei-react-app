@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import {
-  Container, Segment, Header, Icon,
+  Container, Segment, Header, Icon, List,
 } from 'semantic-ui-react'
 import styled from 'styled-components'
 import ContactEmailForm from './ContactEmailForm'
@@ -52,12 +52,20 @@ class ContactEmail extends Component {
           </Header>
           <Segment>
             <p style={{ textAlign: 'justify' }}>
-              Contact us with all your question and comments about Bobby Lawrence Karate and it's programs,
-              by completing the form below and submiting it to the Sensei. The
-              Sensei will then contact you as soon as possible with a response
-              to your questions. We encourage the use of the form below as it provides
-              a way to ensure the security of your message and also the privacy of
-              both parties.
+              Contact us with all your questions and comments about Bobby
+              Lawrence Karate and it's programs, by completing the form below.
+            </p>
+              <List style={{ marginLeft: '3rem' }}>
+                <List.Item>You may also contact us at:</List.Item>
+                <List.Item>
+                  <List.Icon name='text telephone' />
+                  <List.Content>
+                    435-748-5735
+                  </List.Content>
+                </List.Item>
+              </List>
+            <p>
+              We hope to have you join us at our school soon!
             </p>
           </Segment>
         </InstructionsArea>

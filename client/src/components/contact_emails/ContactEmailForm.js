@@ -139,7 +139,7 @@ class ContactEmailForm extends Component {
             <Button
               type='submit'
               disabled={submitting}>
-              Send to Sensei
+              Send
             </Button>
             <Button
               type='button'
