@@ -37,7 +37,7 @@ class VideoFormMulti extends Component {
             <Button
               type='button'
               onClick={this.moveToNextStep}>
-              Go to Link
+              Go to Photos
             </Button>
           </Button.Group>
         </Segment>

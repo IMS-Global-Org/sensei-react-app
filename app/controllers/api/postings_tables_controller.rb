@@ -8,9 +8,10 @@ class Api::PostingsTablesController < ApplicationController
       .select(
         'home_page_postings.*, ' \
         'count(distinct home_page_videos.*) as videos, ' \
-        'count(distinct home_page_links.*) as links '
+        'count(distinct home_page_links.*) as links, ' \
+        'count(distinct home_page_photos.*) as photos '
       )
-      .joins(:home_page_videos, :home_page_links)
+      .joins(:home_page_videos, :home_page_links, :home_page_photos)
       .group(:id)
       .page(params[:page]).per_page(params[:per])
 
@@ -24,12 +25,15 @@ class Api::PostingsTablesController < ApplicationController
         .all.where('home_page_posting_id = ?', @posting.id).order(updated_at: :desc)
       links = HomePageLink
         .all.where('home_page_posting_id = ?', @posting.id).order(updated_at: :desc)
+      photos = HomePagePhoto
+        .all.where('home_page_posting_id = ?', @posting.id).order(updated_at: :desc)
       render json: {
         id: @posting.id,
         title: @posting.title,
         message: @posting.message,
         videos: videos,
-        links: links
+        links: links,
+        photos: photos.as_json(methods: :photo_url)
       }
     else
       render_error @posting
@@ -53,12 +57,15 @@ class Api::PostingsTablesController < ApplicationController
         .all.where('home_page_posting_id = ?', @posting.id).order(updated_at: :desc)
       links = HomePageLink
         .all.where('home_page_posting_id = ?', @posting.id).order(updated_at: :desc)
+      photos = HomePagePhoto
+        .all.where('home_page_posting_id = ?', @posting.id).order(updated_at: :desc)
       render json: {
         id: @posting.id,
         title: @posting.title,
         # message: @posting.message,
         videos: videos.count,
         links: links.count,
+        photos: photos.count,
         created_at: @posting.created_at
       }
     else
@@ -80,12 +87,19 @@ class Api::PostingsTablesController < ApplicationController
   def posting_params
     params.require(:home_page_posting)
       .permit(:id, :title, :message, :created_at, :updated_at,
-        home_page_videos_attributes:
-          [ :id, :title, :identifier, :source,
-            :notes, :home_page_posting_id, :_destroy ],
-        home_page_links_attributes:
-          [ :id, :title, :url, :abbreviation,
-            :description, :home_page_posting_id, :_destroy ]
+        home_page_videos_attributes: [
+          :id, :title, :identifier, :source,
+          :notes, :home_page_posting_id, :_destroy
+        ],
+        home_page_links_attributes: [
+          :id, :title, :url, :abbreviation,
+          :description, :home_page_posting_id, :_destroy
+        ],
+        home_page_photos_attributes: [
+          :id, :title, :description, :active, :viewable,
+          :created_at, :updated_at,
+          base_photo: [:name, :base64, :type, :size],
+        ]
       )
   end
 end

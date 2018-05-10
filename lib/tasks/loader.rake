@@ -29,6 +29,12 @@ namespace :loader do |loader_namespace|
     HomePagePosting.destroy_all
     # HomePageVideo.destroy_all
     # HomePageLink.destroy_all
+    base_photo = {
+      base64: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4gQSAiQb4MHV2QAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAAAp0lEQVR42u3RAQ0AMAjAsHNbN3JviAUbhHQS1vj56mhM1wIgAgJEQIAICBABASIgAgJEQIAICBABASIgAgJEQIAICBABASIgAgJEQIAICBABASIgAgJEQIAICBABASIgAgJEQIAICBABASIgAgJEQIAICBABASIgAgJEQIAICBABASIgAgJEQIAICBABASIgAgJEQIAICBABASIgQAREQIAICBAB2V4DrtsC9ZpRCYEAAAAASUVORK5CYII=",
+      name: "green_square.png",
+      size: "0 kB",
+      type: "image/png"
+    }
 
     20.times do
       home_page_posting = HomePagePosting.create(
@@ -53,6 +59,16 @@ namespace :loader do |loader_namespace|
           home_page_posting: home_page_posting
         )
       end
+      3.times do
+        HomePagePhoto.create(
+          title: Faker::Lorem.sentence,
+          description: Faker::Lorem.paragraph(2),
+          base_photo: base_photo,
+          active: [1,0].sample,
+          viewable: [1,0].sample,
+          home_page_posting: home_page_posting
+        )
+      end
     end
   end
 
@@ -67,13 +83,13 @@ namespace :loader do |loader_namespace|
     # Generic categories
     categories = %w( aerobics weights cardio arms defense offense testing )
     weekday_attributes = {
-      'Sun': false,
-      'Mon': false,
-      'Tue': false,
-      'Wed': false,
-      'Thu': false,
-      'Fri': false,
-      'Sat': false,
+      'Sun': 0,
+      'Mon': 0,
+      'Tue': 0,
+      'Wed': 0,
+      'Thu': 0,
+      'Fri': 0,
+      'Sat': 0,
     }
     # load the database with lots of random events
     10.times do

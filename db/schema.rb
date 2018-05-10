@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180402103219) do
+ActiveRecord::Schema.define(version: 20180505102428) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -162,6 +162,21 @@ ActiveRecord::Schema.define(version: 20180402103219) do
     t.index ["home_page_posting_id"], name: "index_home_page_links_on_home_page_posting_id"
   end
 
+  create_table "home_page_photos", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "description"
+    t.string "photo_file_name", null: false
+    t.string "photo_content_type", null: false
+    t.integer "photo_file_size", null: false
+    t.datetime "photo_updated_at", null: false
+    t.integer "active", null: false
+    t.integer "viewable", null: false
+    t.bigint "home_page_posting_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["home_page_posting_id"], name: "index_home_page_photos_on_home_page_posting_id"
+  end
+
   create_table "home_page_postings", force: :cascade do |t|
     t.string "title", null: false
     t.text "message", null: false
@@ -296,6 +311,7 @@ ActiveRecord::Schema.define(version: 20180402103219) do
   end
 
   add_foreign_key "home_page_links", "home_page_postings"
+  add_foreign_key "home_page_photos", "home_page_postings"
   add_foreign_key "home_page_videos", "home_page_postings"
   add_foreign_key "payments", "contracts"
   add_foreign_key "requirements", "programs"

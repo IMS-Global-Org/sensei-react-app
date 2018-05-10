@@ -5,6 +5,7 @@ import CreatePostSteps from './CreatePostSteps'
 import PostForm from './PostForm'
 import VideoFormMulti from './VideoFormMulti'
 import LinkFormMulti from './LinkFormMulti'
+import PhotoFormMulti from './PhotoFormMulti'
 import ViewPost from './ViewPost'
 
 class CreatePost extends Component {
@@ -41,8 +42,9 @@ class CreatePost extends Component {
           {{
             0: <PostForm stepCompleted={this.stepCompleted} />,
             1: <VideoFormMulti stepCompleted={this.stepCompleted} />,
-            2: <LinkFormMulti stepCompleted={this.stepCompleted} />,
-            3: <ViewPost
+            2: <PhotoFormMulti stepCompleted={this.stepCompleted} />,
+            3: <LinkFormMulti stepCompleted={this.stepCompleted} />,
+            4: <ViewPost
                   postId={this.props.activePosting.id}
                   post={this.props.activePosting} />
           }[step - 1]}

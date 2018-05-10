@@ -40,6 +40,12 @@
 #                                        PATCH    /api/home_page_links/:id(.:format)                                       api/home_page_links#update
 #                                        PUT      /api/home_page_links/:id(.:format)                                       api/home_page_links#update
 #                                        DELETE   /api/home_page_links/:id(.:format)                                       api/home_page_links#destroy
+# api_home_page_posting_home_page_photos GET      /api/home_page_postings/:home_page_posting_id/home_page_photos(.:format) api/home_page_photos#index
+#                                        POST     /api/home_page_postings/:home_page_posting_id/home_page_photos(.:format) api/home_page_photos#create
+#                    api_home_page_photo GET      /api/home_page_photos/:id(.:format)                                      api/home_page_photos#show
+#                                        PATCH    /api/home_page_photos/:id(.:format)                                      api/home_page_photos#update
+#                                        PUT      /api/home_page_photos/:id(.:format)                                      api/home_page_photos#update
+#                                        DELETE   /api/home_page_photos/:id(.:format)                                      api/home_page_photos#destroy
 #                 api_home_page_postings GET      /api/home_page_postings(.:format)                                        api/home_page_postings#index
 #                                        POST     /api/home_page_postings(.:format)                                        api/home_page_postings#create
 #                  api_home_page_posting GET      /api/home_page_postings/:id(.:format)                                    api/home_page_postings#show
@@ -157,7 +163,6 @@
 #                                        PUT      /api/contact_emails/:id(.:format)                                        api/contact_emails#update
 #                                        DELETE   /api/contact_emails/:id(.:format)                                        api/contact_emails#destroy
 #                                        GET      /*other(.:format)                                                        static#index
-#
 
 Rails.application.routes.draw do
   mount_devise_token_auth_for 'User', at: 'api/auth'
@@ -166,10 +171,11 @@ Rails.application.routes.draw do
     # Routes for announcements
     resources :announcements
     resources :home_page_postings, shallow: true do
-      # TODO: Routes for single changes to the videos and links
+      # TODO: Routes for single changes to the videos, links and photos
       #       by themselves.
       resources :home_page_videos
       resources :home_page_links
+      resources :home_page_photos
     end
     resources :postings_tables
     # Routes for calendar events

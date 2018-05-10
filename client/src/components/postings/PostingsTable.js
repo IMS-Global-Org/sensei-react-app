@@ -43,9 +43,10 @@ class PostingsTable extends Component {
             key={posting.id}
             id={posting.id}
             onClick={(e) => this.displayModalForm(posting.id)}>
-            <Table.Cell>{posting.title}</Table.Cell>
+            <Table.Cell>{posting.title.substr(0,40)+'...'}</Table.Cell>
             <Table.Cell>{posting.videos}</Table.Cell>
             <Table.Cell>{posting.links}</Table.Cell>
+            <Table.Cell>{posting.photos}</Table.Cell>
             <Table.Cell>
               {moment.utc(posting.created_at).format(this.dateFormat)}
             </Table.Cell>
@@ -78,7 +79,7 @@ class PostingsTable extends Component {
       <Table celled>
         <Table.Header>
           <Table.Row>
-            <Table.HeaderCell colSpan={4}>
+            <Table.HeaderCell colSpan={5}>
               <Header as='h1' textAlign='center'>Postings</Header>
               <p style={{ textAlign: 'justify', margin: '2rem 5rem' }}>
                 To create, modify or delete a posting's content, click on the
@@ -95,6 +96,7 @@ class PostingsTable extends Component {
             <Table.HeaderCell>Title</Table.HeaderCell>
             <Table.HeaderCell># of Videos</Table.HeaderCell>
             <Table.HeaderCell># of Links</Table.HeaderCell>
+            <Table.HeaderCell># of Photos</Table.HeaderCell>
             <Table.HeaderCell>Date</Table.HeaderCell>
           </Table.Row>
         </Table.Header>

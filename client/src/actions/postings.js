@@ -275,3 +275,30 @@ export const deleteLink = ( linkId ) => {
     })
   }
 }
+
+/*************************************************************************
+ * Actions for handling a single photo upload
+ ************************************************************************/
+export const indexPhotos = () => {}
+export const updatePhoto = () => {}
+export const createPhoto = (postId, home_page_photo) => {
+  return dispatch => {
+    axios.post(
+      `/api/home_page_postings/${postId}/home_page_photos/`,
+      { home_page_photo }
+    )
+    .then( resp => {
+      dispatch({
+        type: 'CREATE_PHOTO',
+        data: resp.data,
+        headers: resp.headers,
+      })
+    })
+    .catch( resp => {
+      dispatch(
+        setFlash('Home Page Photo not Created!','error')
+      )
+    })
+  }
+}
+export const deletePhoto = () => {}

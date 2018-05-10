@@ -37,7 +37,7 @@ class CreatePostSteps extends Component {
           <Step.Content>
             <Step.Title>Create the Post</Step.Title>
             <Step.Description>
-              Create the main aspects of the post.
+              Start the post
             </Step.Description>
           </Step.Content>
         </Step>
@@ -59,6 +59,18 @@ class CreatePostSteps extends Component {
           onClick={()=>this.setStep(3)}
           completed={ completedSteps.includes(3) }
           active={ step === 3 ? true : false }>
+          <Icon name='file image outline' />
+          <Step.Content>
+            <Step.Title>Add Photos</Step.Title>
+            <Step.Description>Include Photos</Step.Description>
+          </Step.Content>
+        </Step>
+
+        <Step
+          link
+          onClick={()=>this.setStep(4)}
+          completed={ completedSteps.includes(4) }
+          active={ step === 4 ? true : false }>
           <Icon name='linkify' />
           <Step.Content>
             <Step.Title>Add Links</Step.Title>

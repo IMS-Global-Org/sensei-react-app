@@ -6,12 +6,16 @@ class Api::HomePagePostingsController < ApplicationController
     authorize! :read, HomePagePosting
     # total_entries = HomePagePosting.all.count
     postings = HomePagePosting
-      .includes(:home_page_videos, :home_page_links)
+      .includes(:home_page_videos, :home_page_links, :home_page_photos)
       .group(:id)
       .order(:created_at)
       .page(params[:page]).per_page(params[:per])
 
-    render_paginated_model postings, include: [:home_page_videos, :home_page_links]
+    render_paginated_model postings, include: [
+      :home_page_videos,
+      :home_page_links,
+      :home_page_photos,
+    ]
   end
 
 
@@ -47,6 +51,9 @@ class Api::HomePagePostingsController < ApplicationController
   private
 
   def posting_params
+    unless params[:home_page_posting][:home_page_photo].nil?
+      params[:home_page_posting][:home_page_photo_attributes][:base_photo].delete(:file)
+    end
     params
       .required(:home_page_posting)
       .permit(
@@ -56,7 +63,16 @@ class Api::HomePagePostingsController < ApplicationController
           :id, :title, :identifier, :source,
           :created_at, :updated_at,
         ],
-        home_page_links_attributes: [ :title, :url, :abbreviation, :description]
+        home_page_links_attributes: [
+          :title, :url, :abbreviation, :description
+        ],
+        home_page_photo_attributes: [
+          :id, :created_at, :updated_at,
+          :title, :description, :active, :viewable,
+          base_photo: [
+            :name, :base64, :type, :size,
+          ]
+        ],
       )
   end
 

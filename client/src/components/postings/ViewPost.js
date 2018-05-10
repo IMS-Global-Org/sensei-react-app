@@ -4,6 +4,7 @@ import { Segment, Grid, Label } from 'semantic-ui-react'
 import ViewPostInfo from './ViewPostInfo'
 import ViewPostVideos from './ViewPostVideos'
 import ViewPostLinks from './ViewPostLinks'
+import ViewPostPhotos from './ViewPostPhotos'
 import styled from 'styled-components'
 
 // Actions
@@ -64,6 +65,17 @@ class ViewPost extends Component {
                 closeModal={this.props.closeModal} />
             </Seg>
           </Grid.Column>
+        </Grid.Row>
+        <Grid.Row columns={2}>
+          <Grid.Column width={8}>
+            <Seg basic>
+              <Label ribbon>Photos</Label>
+              <ViewPostPhotos
+                photos={post.photos}
+                closeModal={this.props.closeModal} />
+            </Seg>
+          </Grid.Column>
+          <Grid.Column width={8}></Grid.Column>
         </Grid.Row>
       </Grid>
     )

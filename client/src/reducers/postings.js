@@ -4,6 +4,7 @@ const defaults = {
   activePosting: {
     videos: [],
     links: [],
+    photos: [],
   },
 }
 
@@ -148,6 +149,18 @@ const tablePostings = ( state = defaults, action ) => {
           ...state.activePosting,
           links: links,
         }
+      }
+    case 'CREATE_PHOTO':
+      const photos = state.activePosting.photos
+      return {
+        ...state,
+        activePosting: {
+          ...state.activePosting,
+          photos: [
+            action.data,
+            ...photos,
+          ]
+        },
       }
     default:
       return state
