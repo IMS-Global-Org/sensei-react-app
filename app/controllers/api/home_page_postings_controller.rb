@@ -14,7 +14,7 @@ class Api::HomePagePostingsController < ApplicationController
     render_paginated_model postings, include: [
       :home_page_videos,
       :home_page_links,
-      :home_page_photos,
+      home_page_photos: {methods: :photo_url},
     ]
   end
 

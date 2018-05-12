@@ -58,7 +58,7 @@ class EditPostModal extends Component {
   }
 
   render = () => {
-    const { editor } = this.props
+    const { editor, post } = this.props
     const Editor = this.editors[editor]
     const data = this.dataFactory(editor)
     const { openModal } = this.state
@@ -69,6 +69,7 @@ class EditPostModal extends Component {
         <Modal.Content>
           <Modal.Description>
             <Editor
+              postId={post.id}
               data={data}
               closeModal={this.onClose} />
           </Modal.Description>

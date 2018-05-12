@@ -27,12 +27,8 @@ class HomePageLinks extends Component {
   render() {
     return (
       <Segment basic>
-        <Header as='h2' icon textAlign='center'>
-          <Icon name='world' />
-          More Reading
-          <Header.Subheader>
-            Continue to Progress and Learn
-          </Header.Subheader>
+        <Header as='h2' textAlign='center'>
+          Reading Articles
         </Header>
         <List divided relaxed>
           { this.displayLinks() }

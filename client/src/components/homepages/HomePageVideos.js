@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Segment, Label, Embed } from 'semantic-ui-react'
+import { Segment, Label, Embed, Header } from 'semantic-ui-react'
 
 class HomePageVideos extends Component {
 
@@ -17,6 +17,9 @@ class HomePageVideos extends Component {
   render() {
     return (
       <Segment basic>
+        <Header as='h2' textAlign='center'>
+          Videos
+        </Header>
         { this.displayVideos() }
       </Segment>
     )
