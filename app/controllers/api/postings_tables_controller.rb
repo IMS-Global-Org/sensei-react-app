@@ -12,7 +12,7 @@ class Api::PostingsTablesController < ApplicationController
         'count(distinct home_page_photos.*) as photos '
       )
       .joins(:home_page_videos, :home_page_links, :home_page_photos)
-      .group(:id)
+      .group('home_page_postings.id')
       .page(params[:page]).per_page(params[:per])
 
     render_paginated_model postings

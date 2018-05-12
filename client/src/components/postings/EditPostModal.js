@@ -6,6 +6,7 @@ import { Modal, Button } from 'semantic-ui-react'
 import PostForm from './PostForm'
 import VideoForm from './VideoForm'
 import LinkForm from './LinkForm'
+import PhotoForm from './PhotoForm'
 
 
 class EditPostModal extends Component {
@@ -14,6 +15,7 @@ class EditPostModal extends Component {
     post: PostForm,
     video: VideoForm,
     link: LinkForm,
+    photo: PhotoForm,
   }
 
   onClose = ( closeParent = false ) => {
@@ -43,6 +45,11 @@ class EditPostModal extends Component {
       case 'link':
         if( id && post.links ) {
           return post.links.find( l => l.id === id )
+        }
+        break;
+      case 'photo':
+        if( id && post.photos ) {
+          return post.photos.find( p => p.id === id )
         }
         break;
       default:

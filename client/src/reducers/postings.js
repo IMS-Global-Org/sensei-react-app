@@ -10,6 +10,7 @@ const defaults = {
 
 const tablePostings = ( state = defaults, action ) => {
   let index = ''
+  let photos = ''
   switch( action.type ) {
     case 'INDEX_POSTINGS_TABLE':
       return {
@@ -151,7 +152,7 @@ const tablePostings = ( state = defaults, action ) => {
         }
       }
     case 'CREATE_PHOTO':
-      const photos = state.activePosting.photos
+      photos = state.activePosting.photos
       return {
         ...state,
         activePosting: {
@@ -161,6 +162,31 @@ const tablePostings = ( state = defaults, action ) => {
             ...photos,
           ]
         },
+      }
+    case 'UPDATE_PHOTO':
+      photos = state.activePosting.photos
+      index = photos.findIndex( photo => photo.id === action.data.id )
+      return {
+        ...state,
+        activePosting: {
+          ...state.activePosting,
+          photos: [
+            ...photos.slice(0, index),
+            action.data,
+            ...photos.slice(index + 1)
+          ]
+        }
+      }
+    case 'DELETE_PHOTO':
+      photos = state.activePosting.photos.filter( p => p.id !== action.data )
+      return {
+        ...state,
+        activePosting: {
+          ...state.activePosting,
+          photos: [
+            ...photos,
+          ],
+        }
       }
     default:
       return state

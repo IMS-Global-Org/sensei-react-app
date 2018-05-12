@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Segment, Form, Input, Button } from 'semantic-ui-react'
+import { Segment, Form, Input, Button, List } from 'semantic-ui-react'
 import FileBase64 from 'react-file-base64'
 
 // Actions
@@ -13,7 +13,9 @@ import {
 
 class PhotoForm extends Component {
   defaults = {
-    id: '', title: '', description: '', photo: '', active: 0, viewable: 0,
+    id: '', title: '', description: '',
+    photo: '',
+    active: 0, viewable: 0,
   }
   state = { ...this.defaults }
 
@@ -23,7 +25,14 @@ class PhotoForm extends Component {
     const { data: photo } = props
     const { id } = this.state
     if( photo && photo.id !== id ) {
-      this.setState({ ...photo })
+      this.setState({
+        id: photo.id,
+        title: photo.title,
+        description: photo.description,
+        photo: photo.photo_file_name,
+        active: photo.active,
+        viewable: photo.viewable,
+      })
     }
   }
 
@@ -53,7 +62,11 @@ class PhotoForm extends Component {
   }
 
   render = () => {
-    const { id, title, description, photo, active, viewable } = this.state
+    const {
+      id, title, description,
+      photo,
+      active, viewable,
+    } = this.state
     return (
       <Form>
         <Form.Input
@@ -67,15 +80,17 @@ class PhotoForm extends Component {
           id='description'
           value={description}
           onChange={this.onInputChange} />
-        <Form.Field
-          control={FileBase64}
-          multiple={false}
-          type='file'
-          required
-          label='Photo'
-          id='photo'
-          value={photo}
-          onDone={this.onFileChange.bind(this)} />
+        <Form.Field required>
+          <label>Photo</label>
+          <List>
+            <List.Item>
+              {typeof photo == 'string' && photo}
+            </List.Item>
+          </List>
+          <FileBase64
+            multiple={false}
+            onDone={this.onFileChange.bind(this)} />
+        </Form.Field>
         <Form.Checkbox
           label='Active'
           id='active'

@@ -280,7 +280,27 @@ export const deleteLink = ( linkId ) => {
  * Actions for handling a single photo upload
  ************************************************************************/
 export const indexPhotos = () => {}
-export const updatePhoto = () => {}
+export const updatePhoto = (home_page_photo) => {
+  return dispatch => {
+    axios.patch(
+      `/api/home_page_photos/${home_page_photo.id}`,
+      { home_page_photo }
+    )
+    .then( resp => {
+      dispatch({
+        type: 'UPDATE_PHOTO',
+        data: resp.data,
+        headers: resp.headers,
+      })
+    })
+    .catch( resp => {
+      dispatch(
+        setFlash('Home Page Photo not updated!','error')
+      )
+    })
+  }
+}
+
 export const createPhoto = (postId, home_page_photo) => {
   return dispatch => {
     axios.post(
@@ -301,4 +321,21 @@ export const createPhoto = (postId, home_page_photo) => {
     })
   }
 }
-export const deletePhoto = () => {}
+
+export const deletePhoto = (home_page_photo_id) => {
+  return dispatch => {
+    axios.delete(`/api/home_page_photos/${home_page_photo_id}`)
+    .then( resp => {
+      dispatch({
+        type: 'DELETE_PHOTO',
+        data: home_page_photo_id,
+        headers: resp.headers,
+      })
+    })
+    .catch( resp => {
+      dispatch(
+        setFlash('Home Page Photo not deleted!', 'error')
+      )
+    })
+  }
+}

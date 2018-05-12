@@ -30,6 +30,7 @@ class HomePagePhoto < ApplicationRecord
   end
 
   def process_base64_photo
+    return if base_photo.nil?
     photo = Paperclip.io_adapters.for(base_photo[:base64])
     photo.original_filename = base_photo[:name]
     self.photo = photo

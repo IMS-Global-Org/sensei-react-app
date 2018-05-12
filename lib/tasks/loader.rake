@@ -36,7 +36,7 @@ namespace :loader do |loader_namespace|
       type: "image/png"
     }
 
-    20.times do
+    23.times do
       home_page_posting = HomePagePosting.create(
         title: Faker::Lorem.sentence,
         message: Faker::Lorem.paragraph(10)

@@ -1,6 +1,6 @@
 class Api::HomePagePhotosController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_home_page_photo, except: [:index, :create, :destroy]
+  before_action :set_home_page_photo, except: [:index, :create]
 
   def index
     render json: HomePagePhoto.all
@@ -16,7 +16,7 @@ class Api::HomePagePhotosController < ApplicationController
     home_page_photo = HomePagePosting.find(params[:home_page_posting_id])
       .home_page_photos.new(home_page_photo_params)
     if home_page_photo.save
-      render json: home_page_photo
+      render json: home_page_photo, methods: :photo_url
     else
       render_errors home_page_photo
     end
@@ -24,14 +24,14 @@ class Api::HomePagePhotosController < ApplicationController
 
   def update
     if @home_page_photo.update(home_page_photo_params)
-      render json: @home_page_photo
+      render json: @home_page_photo, methods: :photo_url
     else
       render_errors @home_page_photo
     end
   end
 
   def destroy
-    @home_page_photo.update(active: 0)
+    @home_page_photo.destroy
   end
 
   private

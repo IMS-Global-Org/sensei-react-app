@@ -17,7 +17,7 @@ class LinkFormMulti extends Component {
     }
   }
 
-  moveToNextStep = () => this.props.stepCompleted(3)
+  moveToNextStep = () => this.props.stepCompleted(4)
 
   render = () => {
     const { links } = this.state
