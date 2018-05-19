@@ -33,6 +33,7 @@ import Announcements from './announcements/Announcements'
 import ContactEmail from './contact_emails/ContactEmail'
 import ContactEmailsManager from './contact_emails/ContactEmailsManager'
 import About from './about/About'
+import AccessManager from './access/AccessManager'
 
 // Fonts
 import '../styles/yozakura.css'
@@ -67,6 +68,7 @@ class App extends Component {
               <ProtectedRoute path='/contractees' component={Contractees} />
               <ProtectedRoute path='/contact_emails/manager' component={ContactEmailsManager} />
               <ProtectedRoute exact path='/student_videos' component={HomePage} />
+              <ProtectedRoute exect path='/access_manager' component={AccessManager} />
               <Route component={NoMatch} />
             </Switch>
           </FetchUser>

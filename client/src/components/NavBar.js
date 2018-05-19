@@ -46,6 +46,13 @@ class NavBar extends Component {
             <DropDown item text='Applications'>
               <DropDownMenu>
                 <Dropdown.Item
+                  as={Link}
+                  to='/access_manager'
+                  active={activeItem === 'access_manager'}
+                  onClick={this.handleItemClick}>
+                  <Content>Access Manager</Content>
+                </Dropdown.Item>
+                <Dropdown.Item
                   as={ Link }
                   to='/announcements/edit'
                   active={activeItem === 'notices'}

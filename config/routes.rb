@@ -162,6 +162,9 @@
 #                                        PATCH    /api/contact_emails/:id(.:format)                                        api/contact_emails#update
 #                                        PUT      /api/contact_emails/:id(.:format)                                        api/contact_emails#update
 #                                        DELETE   /api/contact_emails/:id(.:format)                                        api/contact_emails#destroy
+#                       api_client_lists GET      /api/client_lists(.:format)                                              api/client_lists#index
+#                        api_client_list PATCH    /api/client_lists/:id(.:format)                                          api/client_lists#update
+#                                        PUT      /api/client_lists/:id(.:format)                                          api/client_lists#update
 #                                        GET      /*other(.:format)                                                        static#index
 
 Rails.application.routes.draw do
@@ -219,6 +222,8 @@ Rails.application.routes.draw do
     resources :contact_emails, shallow: true do
       post :query, on: :collection
     end
+
+    resources :client_lists, shallow: true, only: [:index,:update]
   end
 
   # Do not place any routes below this one

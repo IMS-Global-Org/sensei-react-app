@@ -20,7 +20,7 @@ class AccessPolicy
     end
 
     role :admin, proc { |user| user.has_permission? :admin } do
-      can :update, User
+      can [:read,:update], User
       can :manage, ContactEmail
       can :manage, Address
       can :manage, Announcement

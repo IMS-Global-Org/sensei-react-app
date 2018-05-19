@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Segment, Header, Icon, List } from 'semantic-ui-react'
+import { Segment, Header, List } from 'semantic-ui-react'
 
 // FIXME add description to the database table and include in the layout
 class HomePageLinks extends Component {

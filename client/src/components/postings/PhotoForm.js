@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Segment, Form, Input, Button, List } from 'semantic-ui-react'
+import { Segment, Form, Button, List } from 'semantic-ui-react'
 import FileBase64 from 'react-file-base64'
 
 // Actions
@@ -84,7 +84,7 @@ class PhotoForm extends Component {
           <label>Photo</label>
           <List>
             <List.Item>
-              {typeof photo == 'string' && photo}
+              {typeof photo === 'string' && photo}
             </List.Item>
           </List>
           <FileBase64

@@ -12,6 +12,7 @@ import mailers from './mailers'
 import contracts from './contracts'
 import contractees from './contractees'
 import contact_emails from './contact_emails'
+import clientList from './access'
 
 // Form Validation and Error Messaging reducer
 import { reducer as formReducer } from 'redux-form'
@@ -19,6 +20,7 @@ import { reducer as formReducer } from 'redux-form'
 
 const rootReducer = combineReducers({
   form: formReducer, // Just for Form Validation and Error Messaging
+  clientList,
   contact_emails,
   contractees,
   contracts,

@@ -37,6 +37,10 @@ class User < ActiveRecord::Base
 
   # Helper for determining if a user has been assigned a certain permission
   # level. This is primarily used by AccessGranted gem Policies.
+  # NOTE Permissions
+  # User specific permissions for site access to applications
+  # Priviledges are greater going left to right
+  # Options: [ 'guest', 'user', 'student', 'admin', 'super']
   # @param level [#to_s] anything that can be converted to a string, i.e. symbol
   # @return [true,false] boolean
   def has_permission?(level)

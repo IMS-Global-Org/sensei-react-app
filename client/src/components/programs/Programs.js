@@ -9,12 +9,10 @@ import styled from 'styled-components'
 // Images
 import BlackBeltTraining from '../../images/black_belt_training.png'
 import TeenAdult from '../../images/teen_adult.png'
-import TeenAdult2 from '../../images/teen_adult2.png'
 import Juniors from '../../images/juniors.png'
 import BasicProgram from '../../images/basic_program.png'
 import KidChamps from '../../images/kid_champs.png'
 import LittleNinjas from '../../images/little_ninjas.png'
-import LittleNinjas2 from '../../images/little_ninjas02.png'
 
 // Custom Styled Components
 const InnerContainer = styled(Segment)`
