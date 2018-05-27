@@ -21,6 +21,7 @@ class Api::ClientListsController < ApplicationController
   def query
     authorize! :read, User
     render json: User.all
+      .where("permissions NOT ILIKE '%super%'")
       .where("name ILIKE '%#{params[:name]}%'")
       .where("email ILIKE '%#{params[:email]}%'")
   end
