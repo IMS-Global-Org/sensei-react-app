@@ -12,7 +12,7 @@
 #
 
 class Contractee < ApplicationRecord
-  has_and_belongs_to_many :contracts
+  has_and_belongs_to_many :contracts, join_table: :contractees_contracts
 
   validates_presence_of :first, :last
   validates :active, presence: true, inclusion: { in: [1,0] }

@@ -32,16 +32,17 @@ class Api::ContractsController < ApplicationController
     authorize! :read, Contract
     p = params[:query]
 
-    interval = p[:interval].is_a?(Fixnum) ? p[:interval] : '6,12'
-    status = p[:status].is_a?(Fixnum) ? p[:status] : '1,0'
-    start_date = p[:start_date].empty? ? 2.years.ago : p[:start_date]
-    end_date = p[:end_date].empty? ? DateTime.current() : p[:end_date]
+    interval = p[:interval].blank? ? '6,12' : p[:interval].to_i
+    status = p[:status].blank? ? '1,0' : p[:status].to_i
+    start_date = p[:start_date].blank? ? 2.years.ago : p[:start_date]
+    end_date = p[:end_date].blank? ? DateTime.current() : p[:end_date]
 
     contracts = Contract
       .joins(
         '  LEFT JOIN contractees_contracts ON contractees_contracts.contract_id = contracts.id ' \
         '  LEFT JOIN contractees ON contractees.id = contractees_contracts.contractee_id ' \
       )
+      .includes(:contractees)
       .where(
         " contractees.first LIKE '#{p[:first]}%'" \
         " AND contractees.last LIKE '#{p[:last]}%'" \
@@ -50,17 +51,24 @@ class Api::ContractsController < ApplicationController
         " AND contracts.start_date > '#{start_date}'" \
         " AND contracts.end_date < '#{end_date}'"
       )
+      .group('contracts.id')
       .order(created_at: :desc, updated_at: :desc)
       .page(params[:page]).per_page(params[:per])
 
-    render json: {
-      data: contracts,
-      pagination: {
-        total_pages: contracts.total_pages,
-        current_page: contracts.current_page,
-        next_page: contracts.next_page
-      }
+    contracts_data = {}
+    contracts_data[:pagination] = {
+      total_pages: contracts.total_pages,
+      current_page: contracts.current_page,
+      next_page: contracts.next_page
     }
+    contracts_data[:data] = contracts.as_json(
+      include: {
+        contractees: {
+          only: [:id, :first, :last]
+        }
+      }
+    )
+    render json: contracts_data
   end
 
   def show

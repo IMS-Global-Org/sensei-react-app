@@ -4,7 +4,7 @@ class Api::ClientListsController < ApplicationController
 
   def index
     authorize! :read, User
-    render json: User.all
+    render_paginated_model User.all
       .where("permissions NOT ILIKE '%super%'")
       .page(params[:page]).per_page(params[:per_page])
   end
@@ -18,6 +18,13 @@ class Api::ClientListsController < ApplicationController
     end
   end
 
+  def query
+    authorize! :read, User
+    render json: User.all
+      .where("name ILIKE '%#{params[:name]}%'")
+      .where("email ILIKE '%#{params[:email]}%'")
+  end
+
   private
 
   def set_client
@@ -25,7 +32,7 @@ class Api::ClientListsController < ApplicationController
   end
 
   def client_params
-    params.permit(:permissions)
+    params.permit(:permissions, :name, :email)
   end
 
 end

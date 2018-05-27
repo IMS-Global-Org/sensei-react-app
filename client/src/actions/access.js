@@ -37,3 +37,22 @@ export const updateClientList = ( clientId, permissions, callback = null ) => {
     })
   }
 }
+
+export const queryClientList = ( search ) => {
+  const query = `?name=${search.name}&email=${search.email}`
+  return dispatch => {
+    axios.get(`/api/client_lists/query${query}`)
+    .then( resp => {
+      dispatch({
+        type: 'QUERY_CLIENT_LIST',
+        clients: resp.data,
+        headers: resp.headers,
+      })
+    })
+    .catch( resp => {
+      dispatch(
+        setFlash('Client List Not Queried!','error')
+      )
+    })
+  }
+}

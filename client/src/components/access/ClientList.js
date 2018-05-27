@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Table } from 'semantic-ui-react'
 import ClientAccessForm from './ClientAccessForm'
+import Paginator from '../Paginator'
+import ClientSearchForm from './ClientSearchForm'
 
 // Actions
 import {
@@ -9,7 +11,7 @@ import {
 } from '../../actions/access'
 
 class ClientList extends Component {
-  defaults = { clientList: '' }
+  defaults = { clientList: '', hasMore: false }
   state = { ...this.defaults }
 
   componentDidMount = () => {
@@ -17,13 +19,19 @@ class ClientList extends Component {
     const { clientList: local } = this.state
     if( !local && remote.length <= 0 ) {
       dispatch(indexClientList())
+      this.setState({ hasMore: true })
     } else if( remote.length > 0 ) {
-      this.setState({ clientList: remote })
+      this.setState({ clientList: remote, hasMore: true })
     }
   }
 
   renderTableHeader = () => (
     <Table.Header>
+      <Table.Row>
+        <Table.HeaderCell colSpan={3}>
+          <ClientSearchForm />
+        </Table.HeaderCell>
+      </Table.Row>
       <Table.Row>
         <Table.HeaderCell>
           Client's Name
@@ -42,7 +50,11 @@ class ClientList extends Component {
     <Table.Footer>
       <Table.Row>
         <Table.HeaderCell colSpan={3}>
-          Paginator
+          { this.props.pagination.total_pages &&
+            <Paginator
+              pagination={this.props.pagination}
+              loadMore={this.loadMore} />
+          }
         </Table.HeaderCell>
       </Table.Row>
     </Table.Footer>
@@ -65,6 +77,18 @@ class ClientList extends Component {
     }
   }
 
+  loadMore = ( page ) => {
+    const { pagination, dispatch } = this.props
+    const { hasMore } = this.state
+    if( hasMore && pagination.total_pages ) {
+      if( page <= pagination.total_pages ) {
+        dispatch(indexClientList(page))
+      } else {
+        this.setState({ hasMore: false })
+      }
+    }
+  }
+
   render = () => {
     return (
       <Table celled >
@@ -79,6 +103,7 @@ class ClientList extends Component {
 const mapStateToProps = ( state, props ) => {
   return {
     clientList: state.clientList.clients,
+    pagination: state.clientList.pagination,
   }
 }
 

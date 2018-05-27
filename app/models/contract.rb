@@ -14,7 +14,7 @@
 #
 
 class Contract < ApplicationRecord
-  has_and_belongs_to_many :contractees, dependent: :destroy
+  has_and_belongs_to_many :contractees, dependent: :destroy, join_table: :contractees_contracts
   validates_associated :contractees, allow_blank: true
   accepts_nested_attributes_for :contractees, allow_destroy: true
 

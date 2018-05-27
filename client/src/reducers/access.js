@@ -1,5 +1,10 @@
 const defaults = {
   clients: [],
+  pagination: {
+    total_pages: '',
+    current_page: '',
+    next_page: '',
+  }
 }
 
 const clientList = ( state = defaults, action ) => {
@@ -8,7 +13,8 @@ const clientList = ( state = defaults, action ) => {
     case 'INDEX_CLIENT_LIST':
       return {
         ...state,
-        clients: action.clients,
+        clients: action.clients.data,
+        pagination: action.clients.pagination,
       }
     case 'UPDATE_CLIENT_LIST':
       index = state.clients.findIndex( client =>
@@ -21,6 +27,12 @@ const clientList = ( state = defaults, action ) => {
           action.client,
           ...state.clients.slice(index+1),
         ],
+      }
+    case 'QUERY_CLIENT_LIST':
+      return {
+        ...state,
+        clients: action.clients,
+        pagination: { ...defaults.pagination },
       }
     default:
       return state

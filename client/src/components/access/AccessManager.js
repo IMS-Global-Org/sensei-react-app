@@ -10,7 +10,6 @@ class AccessManager extends Component {
   render = () => {
     return (
       <Container>
-        <div>SearchForm</div>
         <ClientList />
       </Container>
     )
