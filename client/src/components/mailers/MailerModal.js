@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Modal } from 'semantic-ui-react'
 import MailerForm from './MailerForm'
-import { ModalFix } from '../helpers/ModalFix'
 
 class MailerModal extends Component {
   state = { modalOpen: false }
@@ -25,7 +24,6 @@ class MailerModal extends Component {
     return (
       <Modal
         basic
-        style={ModalFix.override}
         open={this.state.modalOpen}
         onClose={this.closeModal}>
         <Modal.Content>

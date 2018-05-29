@@ -2,13 +2,3 @@
   /* background-color: #8f0222; */
   background-color: #70777c
 }
-
-/**
- * Temporary Fix For a really bad semantic upgrade BUG
- */
-.ui.page.modals.transition.visible {
-  display: flex !important;
-}
-.ui.modal {
-  margin-top: 0 !important;
-}
