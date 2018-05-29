@@ -6165,7 +6165,7 @@ selfsigned@^1.9.1:
   dependencies:
     node-forge "0.7.5"
 
-semantic-ui-css@0.79.1:
+semantic-ui-css@2.2.14:
   version "2.2.14"
   resolved "https://registry.yarnpkg.com/semantic-ui-css/-/semantic-ui-css-2.2.14.tgz#1888c386c74e5c0abfa00508a94940e93a55465b"
   dependencies:
