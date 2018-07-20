@@ -40,7 +40,14 @@ export const handleLogin = (email, password, history) => {
         history.push('/');
       })
       .catch( res => {
-        const message = res.response.data.errors.join(',');
+        let message = ''
+        if( res.response.data.errors ) {
+          message = res.response.data.errors.join(',');
+        } else if( typeof res === 'string' ) {
+          message = res
+        } else {
+          message = 'Check rails server error log!'
+        }
         dispatch(setFlash(message, 'error'));
       })
   }
