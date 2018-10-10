@@ -60,12 +60,12 @@ class ContactEmail extends Component {
                 <List.Item>
                   <List.Icon name='text telephone' />
                   <List.Content>
-                    435-748-5735
+                    435-748-2020
                   </List.Content>
                 </List.Item>
               </List>
             <p>
-              We hope to have you join us at our school soon!
+              We can't wait to have you join us.
             </p>
           </Segment>
         </InstructionsArea>

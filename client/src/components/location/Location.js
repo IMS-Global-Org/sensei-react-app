@@ -84,12 +84,8 @@ class Location extends Component {
             </Header.Subheader>
           </Header>
           <p style={{ textAlign: 'justify' }}>
-            We are located directly above Orangeville's very own local
-            supermarket, Food Ranch. We look forward to having you come by and
-            observe one of our regularly scheduled classes. Please visit our
-            Class Schedule to find the age group class you are interested
-            in joining. You may also contact us at 435-748-2020 for additional
-            information you may need.
+            We are located directly above Orangeville's very own local supermarket,
+            Food Ranch.  Please contact us at 435-748-2020 for class information.
           </p>
         </Segment>
         <Segment>

@@ -38,3 +38,10 @@
   margin: 5% 15%;
   padding: 0;
 }
+
+.login-image {
+  width: 70%;
+  margin: auto 15%;
+  border: 1px solid #F30003;
+  border-radius: 5px;
+}

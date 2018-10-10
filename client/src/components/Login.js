@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { handleLogin } from '../actions/auth';
 
 // Images
-import LoginImage from '../images/login.jpg'
+import LoginImage from '../images/black_belt_training.png'
 
 import '../styles/martial_arts.css'
 
@@ -63,7 +63,7 @@ class Login extends Component {
           </Form>
         </Segment>
         <Segment basic>
-          <Image src={LoginImage} className='login' />
+          <Image src={LoginImage} className='login-image' />
         </Segment>
       </Container>
     );
