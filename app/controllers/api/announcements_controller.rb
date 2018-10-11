@@ -13,7 +13,6 @@ class Api::AnnouncementsController < ApplicationController
       .where('start_date >= ?', @start_date)
       .order(start_date: :asc)
       .page(params[:page]).per_page(params[:per])
-
     render_paginated_model ancts
   end
 

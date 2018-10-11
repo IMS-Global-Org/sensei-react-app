@@ -15,12 +15,11 @@ const AnnouncementsArea = styled(Segment)`
   flex: 0 1 auto;
   flex-wrap: wrap;
   height: 80vh !important;
+  margin: auto 20rem !important;
 `
 const WrapingBox = styled.div`
   display: flex;
   flex-wrap: wrap;
-  width: 50%;
-  margin: 0 25%;
 `
 
 
@@ -60,9 +59,9 @@ class Announcements extends Component {
     let { notices } = this.props
     // NOTE load only when 'data' exists, not just the empty object/container
     if( notices && notices.length > 0 ) {
-      return notices.map( (notice, index) => {
+      return notices.map( (notice) => {
         // show presentation component
-        return ( <Announcement key={index} data={notice} /> )
+        return ( <Announcement key={notice.id} data={notice} /> )
       })
     }
   }
@@ -99,7 +98,7 @@ class Announcements extends Component {
           pageStart={0}
           loadMore={this.loadMore}
           hasMore={this.state.hasMore}
-          loader={<Segment><Loader active /></Segment>}
+          loader={<Segment key={0}><Loader active /></Segment>}
           useWindow={false} >
           {/* additional 'div' elements are required by InfiniteScroll */}
           <WrapingBox>

@@ -36,7 +36,14 @@ class AnnouncementForm extends Component {
   componentWillReceiveProps = ( nextProps ) => {
     let { activeAnnouncement } = nextProps
     if( activeAnnouncement && activeAnnouncement.id > 0 ) {
-      this.setState({ ...activeAnnouncement })
+      // remove any nul valued attributes
+      const formValues = {}
+      for( let attributeName in activeAnnouncement ) {
+        if( activeAnnouncement[attributeName] ) {
+          formValues[attributeName] = activeAnnouncement[attributeName]
+        }
+      }
+      this.setState({ ...this.defaults, ...formValues })
     }
   }
 

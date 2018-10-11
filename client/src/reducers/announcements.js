@@ -3,7 +3,6 @@ const announcements = ( state = { data: [], pagination: {} }, action ) => {
     case 'INDEX_ANNOUNCEMENTS':
       return {
         data: [
-          ...state.data,
           ...action.data.data
         ],
         pagination: action.data.pagination,
@@ -12,7 +11,7 @@ const announcements = ( state = { data: [], pagination: {} }, action ) => {
       return {
         ...state,
         data: [
-          ...action.data,
+          action.data,
           ...state.data,
         ],
       }
