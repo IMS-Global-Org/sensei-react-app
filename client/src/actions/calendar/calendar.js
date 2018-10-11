@@ -96,6 +96,7 @@ export const updateCalendarEvent = ( event ) => {
         data: resp.data,
         headers: resp.headers,
       })
+      dispatch(setFlash('Calendar Event Updated Successfully!','success'))
     })
     .catch( resp => {
       dispatch(setFlash('Calendar Event not Updated!','error'))

@@ -10,6 +10,7 @@ import EventEditorForm from './EventEditorForm'
 // Actions
 import {
   paginateCalendarEvents,
+  showCalendarEvent,
 } from '../../actions/calendar/calendar'
 
 /**
@@ -102,7 +103,13 @@ class EventEditor extends Component {
     }
   }
 
-  handleRowClick = ( eventId ) => this.setState({ eventId })
+  handleRowClick = ( eventId ) => {
+    this.setState({ eventId },() => {
+      const { dispatch } = this.props
+      const { eventId: activeEventId } = this.state
+      dispatch(showCalendarEvent(activeEventId))
+    })
+  }
 
   /**
    * Loader for the calendar events. Loads by page number.

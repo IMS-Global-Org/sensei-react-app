@@ -70,6 +70,8 @@ class EventEditorForm extends Component {
     }
   }
 
+  updateWeekday = ( weekday ) => this.setState({ weekday })
+
   render() {
     const {
       id, start, finish, title,
@@ -101,6 +103,7 @@ class EventEditorForm extends Component {
           </Form.Group>
           <WeekdaysSelector
             weekday={weekday}
+            updateWeekday={this.updateWeekday}
             ref={ node => this.weekdayRef = node } />
           <Form.Field>
             <label>Title</label>

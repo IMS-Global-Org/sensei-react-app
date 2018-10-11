@@ -18,7 +18,7 @@ class WeekdaysSelector extends Component {
    */
   defaults = {
     Sun: 0, Mon: 0, Tue: 0, Wed: 0,
-    Thu: 0, Fri: 0, Sat: 0,
+    Thu: 0, Fri: 0, Sat: 0, id: '',
   }
   state = { ...this.defaults }
 
@@ -34,7 +34,10 @@ class WeekdaysSelector extends Component {
   }
 
   checkboxChange = (e,{id,checked}) => {
-    this.setState({ [id]: checked ? 1 : 0 })
+    this.setState({ [id]: checked ? 1 : 0 },() => {
+      const { updateWeekday } = this.props
+      updateWeekday(this.state)
+    })
   }
 
   checkedWeekday = () => { return this.state }
