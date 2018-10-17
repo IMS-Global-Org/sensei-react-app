@@ -15,7 +15,7 @@ const Date = styled.p`
 const Weekday = Date
 
 class CalendarEvent extends Component {
-  dateFormat = 'dddd, MMMM Do YYYY, h:mm:ss a'
+  dateFormat = 'dddd, MMMM Do YYYY, h:mm a'
 
   renderWeekdays = () => {
     const { event } = this.props

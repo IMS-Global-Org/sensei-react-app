@@ -89,10 +89,10 @@ class EventEditor extends Component {
         return (
           <Table.Row key={index} onClick={() => this.handleRowClick(event.id)}>
             <Table.Cell>
-              {moment(event.start).format('DD MMM YYYY, HH:mm a')}
+              {moment.utc(event.start).format('DD MMM YYYY, HH:mm a')}
             </Table.Cell>
             <Table.Cell>
-              {moment(event.finish).format('DD MMM YYYY, HH:mm a')}
+              {moment.utc(event.finish).format('DD MMM YYYY, HH:mm a')}
             </Table.Cell>
             <Table.Cell>{event.title}</Table.Cell>
             <Table.Cell>{event.category}</Table.Cell>

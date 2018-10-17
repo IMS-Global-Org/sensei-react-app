@@ -2,10 +2,11 @@ class Api::EventsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_event, only: %i[show update destroy]
 
+  # show only the active event or the events that are current
   def index
     authorize! :read, Event
     events = Event.all
-      .where('(start, finish) OVERLAPS (?,?)', params[:start], params[:finish])
+      .where('finish > ?', Time.zone.now.beginning_of_day)
       .order(start: :asc)
     render json: events.as_json( include: {
       weekday: {
@@ -13,17 +14,18 @@ class Api::EventsController < ApplicationController
       }
     )
   end
+  # .where('(start, finish) OVERLAPS (?,?)', params[:start], params[:finish])
 
   def paginate
     authorize! :read, Event
     # get the events to display per page
     events = Event.all
-      .where('start >= ? AND finish <= ?', params[:start], params[:finish])
+      .where('finish >= ?',Time.zone.now.beginning_of_day)
       .order(start: :asc)
       .page(params[:page]).per_page(params[:per])
+
     # return the events and page information as a json package
     # json_events = events.as_json( include: :weekday )
-
     render json: {
       paginate: {
         total_pages: events.total_pages,
@@ -33,6 +35,7 @@ class Api::EventsController < ApplicationController
       events: events
     }
   end
+  # .where('start >= ? AND finish <= ?', params[:start], params[:finish])
 
   def show
     authorize! :read, Event

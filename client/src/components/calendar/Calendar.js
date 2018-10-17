@@ -417,31 +417,31 @@ class Calendar extends Component {
                     <List.Item>
                       <List.Icon name='calendar' />
                       <List.Content>
-                        5:30AM-6:15 AM-Early bird class
+                        5:30-6:15am Early Bird Class all ages, all levels
                       </List.Content>
                     </List.Item>
                     <List.Item>
                       <List.Icon name='calendar' />
                       <List.Content>
-                        3:30-4:00 Little Ninjas ages 4 and 5
+                        4:00-4:30 Kid Champs and Little Ninjas ages 4-7
                       </List.Content>
                     </List.Item>
                     <List.Item>
                       <List.Icon name='calendar' />
                       <List.Content>
-                        4:15-4:45 Kid Champs ages 6 and 7
+                        4:30-5:15 Jr's ages 8-9
                       </List.Content>
                     </List.Item>
                     <List.Item>
                       <List.Icon name='calendar' />
                       <List.Content>
-                        4:45-5:30 Jr's ages 8-12
+                        5:30-6:15 Jr's ages 10-12
                       </List.Content>
                     </List.Item>
                     <List.Item>
                       <List.Icon name='calendar' />
                       <List.Content>
-                        5:45-6:30 Teens/Adults ages 13-????
+                        6:15-7:00 Teens/Adults ages 13-?
                       </List.Content>
                     </List.Item>
                   </List.List>
