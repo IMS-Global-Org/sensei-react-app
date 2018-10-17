@@ -4,7 +4,6 @@ class Api::EventsController < ApplicationController
 
   # show only the active event or the events that are current
   def index
-    authorize! :read, Event
     events = Event.all
       .where('finish > ?', Time.zone.now.beginning_of_day)
       .order(start: :asc)

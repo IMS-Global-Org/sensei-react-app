@@ -51,6 +51,7 @@ class AccessPolicy
     role :student, proc { |user| user.has_permission? :student } do
       can [:create], ContactEmail
       can :read, Announcement
+      can :read, Event
     end
 
     # The base role with no additional conditions.
@@ -61,10 +62,11 @@ class AccessPolicy
     #  can :read, Comment
     # end
     role :user, proc { |user| user.has_permission? :user } do
-
+      can :read, Event
     end
 
     role :guest, proc { |user| user.has_permission? :guest } do
+      can :read, Event
     end
 
   end
